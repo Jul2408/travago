@@ -1,0 +1,12 @@
+django>=5.0,<6.0
+djangorestframework
+django-cors-headers
+djangorestframework-simplejwt
+python-dotenv
+psycopg2-binary
+pillow
+drf-spectacular
+django-filter
+django-anymail[resend]
+celery
+redis

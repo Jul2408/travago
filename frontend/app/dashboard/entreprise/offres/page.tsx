@@ -1,0 +1,230 @@
+'use client';
+
+import {
+    Briefcase,
+    Plus,
+    Search,
+    Filter,
+    ChevronRight,
+    Clock,
+    CheckCircle2,
+    Eye,
+    Users,
+    Zap,
+    MapPin,
+    AlertCircle,
+    MoreVertical,
+    Loader2,
+    TrendingUp
+} from 'lucide-react';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import axiosInstance from '@/lib/axios';
+
+interface JobOffer {
+    id: number;
+    title: string;
+    slug: string;
+    description: string;
+    location: string;
+    contract_type: string;
+    salary_range: string | null;
+    is_active: boolean;
+    created_at: string;
+    is_ia_boosted?: boolean;
+    views_count?: number;
+    applications_count?: number;
+}
+
+export default function OffersPage() {
+    const [offers, setOffers] = useState<JobOffer[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        fetchOffers();
+    }, []);
+
+    const fetchOffers = async () => {
+        try {
+            setError(null);
+            const response = await axiosInstance.get('jobs/offers/');
+            // Handle pagination
+            const results = response.data.results || response.data;
+            setOffers(results);
+        } catch (err: any) {
+            console.error('Failed to fetch offers', err);
+            setError("Impossible de charger les offres. Vérifiez votre connexion ou vos permissions.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const toggleOfferStatus = async (offerId: number, currentStatus: boolean) => {
+        try {
+            await axiosInstance.patch(`jobs/offers/${offerId}/`, { is_active: !currentStatus });
+            setOffers(prev => prev.map(o => o.id === offerId ? { ...o, is_active: !currentStatus } : o));
+        } catch (err) {
+            console.error('Failed to toggle offer status', err);
+            alert("Erreur lors de la modification du statut.");
+        }
+    };
+
+    return (
+        <div className="space-y-10">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">Mes Offres & Besoins</h1>
+                    <p className="text-slate-500 font-medium">Gérez vos annonces et suivez les performances de vos recrutements.</p>
+                </div>
+                <Link
+                    href="/dashboard/entreprise/offres/nouvelle"
+                    className="px-8 py-4 bg-blue-600 text-white rounded-[1.5rem] font-black text-sm flex items-center hover:bg-blue-700 transition-all shadow-xl shadow-blue-100"
+                >
+                    <Plus size={18} className="mr-2" /> Créer une offre
+                </Link>
+            </div>
+
+            {/* Quick Summary Filters */}
+            <div className="flex flex-wrap gap-4">
+                {[
+                    { label: "Toutes", count: offers.length, active: true },
+                    { label: "Actives", count: offers.filter(o => o.is_active).length, active: false },
+                    { label: "En pause", count: offers.filter(o => !o.is_active).length, active: false },
+                ].map((f, i) => (
+                    <button key={i} className={`px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest border transition-all ${f.active ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-100' : 'bg-white text-slate-400 border-slate-100 hover:border-blue-200 hover:text-blue-600'}`}>
+                        {f.label} ({f.count})
+                    </button>
+                ))}
+            </div>
+
+            {/* Offers List */}
+            <div className="space-y-6">
+                {isLoading ? (
+                    <div className="flex items-center justify-center py-20">
+                        <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
+                    </div>
+                ) : error ? (
+                    <div className="text-center py-20 bg-white rounded-[2.5rem] border border-red-50 shadow-sm">
+                        <p className="text-red-500 font-bold">{error}</p>
+                        <button onClick={() => window.location.reload()} className="text-blue-600 font-black text-xs uppercase underline mt-2">Réessayer</button>
+                    </div>
+                ) : offers.length === 0 ? (
+                    <div className="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-blue-100">
+                        <div className="w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center text-blue-200 mx-auto mb-6">
+                            <Briefcase size={40} />
+                        </div>
+                        <h3 className="text-2xl font-black text-slate-900 mb-3 tracking-tight">Aucune offre active</h3>
+                        <p className="text-slate-500 font-medium max-w-sm mx-auto mb-10 leading-relaxed">
+                            Publiez votre premier besoin en moins de 2 minutes et laissez notre IA trouver les meilleurs talents.
+                        </p>
+                        <Link href="/dashboard/entreprise/offres/nouvelle" className="px-12 py-5 bg-blue-600 text-white rounded-[2rem] font-black text-xs uppercase tracking-widest hover:shadow-2xl transition-all shadow-lg shadow-blue-100 inline-block">
+                            Créer ma première offre
+                        </Link>
+                    </div>
+                ) : (
+                    offers.map((offer) => (
+                        <div key={offer.id} className="group bg-white rounded-[2.5rem] p-10 border border-blue-50 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all relative overflow-hidden">
+                            <div className="flex flex-col lg:flex-row lg:items-center gap-10">
+                                {/* Offer Core Info */}
+                                <div className="flex items-start space-x-6 lg:w-1/3">
+                                    <div className="w-20 h-20 bg-blue-50 rounded-[2rem] flex items-center justify-center text-blue-400 border border-blue-100 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                        <Briefcase size={32} />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <div className="flex items-center space-x-3 mb-2">
+                                            <button
+                                                onClick={() => toggleOfferStatus(offer.id, offer.is_active)}
+                                                className={`px-2.5 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest hover:opacity-80 transition-opacity ${offer.is_active ? 'bg-green-50 text-green-600' : 'bg-orange-50 text-orange-600'}`}
+                                            >
+                                                {offer.is_active ? 'Actif (Clic pour pause)' : 'Pause (Clic pour activer)'}
+                                            </button>
+                                            {offer.is_ia_boosted && (
+                                                <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-2.5 py-1 rounded-lg">
+                                                    IA Assisté
+                                                </span>
+                                            )}
+                                        </div>
+                                        <h3 className="text-2xl font-black text-slate-900 mb-2 truncate group-hover:text-blue-600 transition-colors uppercase tracking-tighter">{offer.title}</h3>
+                                        <div className="flex items-center space-x-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                            <span className="flex items-center"><MapPin size={12} className="mr-1" /> {offer.location}</span>
+                                            <span className="flex items-center"><Clock size={12} className="mr-1" /> {new Date(offer.created_at).toLocaleDateString()}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Stats & Matches */}
+                                <div className="flex items-center justify-around flex-1 gap-8 border-y lg:border-y-0 lg:border-x border-slate-50 py-8 lg:py-0 text-center">
+                                    <div>
+                                        <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Vues IA</div>
+                                        <div className="text-3xl font-black text-slate-900">{offer.views_count || 0}</div>
+                                    </div>
+                                    <div>
+                                        <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Candidatures</div>
+                                        <div className="text-3xl font-black text-blue-600 flex items-center justify-center">
+                                            {(offer.applications_count || 0) > 0 ? (
+                                                <>{offer.applications_count} <Zap size={18} className="ml-2 text-orange-400 fill-orange-400" /></>
+                                            ) : (
+                                                <span className="text-slate-300 text-xl italic uppercase font-medium">En attente</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="hidden sm:block">
+                                        <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Type</div>
+                                        <div className="text-sm font-black text-slate-700 uppercase">{offer.contract_type}</div>
+                                    </div>
+                                </div>
+
+                                {/* Actions */}
+                                <div className="flex items-center justify-between lg:justify-end gap-6 lg:w-1/4">
+                                    <Link
+                                        href={`/dashboard/entreprise/offres/${offer.slug}`}
+                                        className="p-4 bg-slate-50 text-slate-400 rounded-2xl hover:bg-blue-50 hover:text-blue-600 transition-all border border-transparent hover:border-blue-100"
+                                    >
+                                        <Eye size={20} />
+                                    </Link>
+                                    <button
+                                        onClick={() => {
+                                            if (confirm("Voulez-vous vraiment supprimer cette offre ?")) {
+                                                axiosInstance.delete(`jobs/offers/${offer.id}/`).then(() => fetchOffers());
+                                            }
+                                        }}
+                                        className="p-4 bg-slate-50 text-slate-400 rounded-2xl hover:bg-red-50 hover:text-red-600 transition-all border border-transparent hover:border-red-100"
+                                    >
+                                        <MoreVertical size={20} />
+                                    </button>
+                                    <Link
+                                        href={`/dashboard/entreprise/offres/${offer.slug}`}
+                                        className="bg-slate-900 text-white px-8 py-5 rounded-[1.5rem] font-black text-xs uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-slate-100 flex items-center shrink-0"
+                                    >
+                                        Voir Matches <ChevronRight size={16} className="ml-2" />
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                )}
+            </div>
+
+            {/* Performance Banner */}
+            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[2.5rem] p-10 text-white flex flex-col md:flex-row items-center justify-between gap-10 shadow-2xl shadow-blue-200">
+                <div className="flex items-center space-x-6 text-center md:text-left">
+                    <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-[1.5rem] flex items-center justify-center border border-white/20">
+                        <TrendingUp size={40} className="text-blue-300" />
+                    </div>
+                    <div>
+                        <h3 className="text-2xl font-black mb-1">Boostez vos annonces</h3>
+                        <p className="text-blue-100 font-medium text-lg">
+                            Les offres avec le badge <span className="font-black italic underline underline-offset-4">IA Assisté</span> reçoivent en moyenne <span className="text-white font-black">4x plus</span> de candidats qualifiés.
+                        </p>
+                    </div>
+                </div>
+                <button className="px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-500 transition-all flex items-center shrink-0">
+                    Découvrir les formules <Zap size={16} className="ml-2" />
+                </button>
+            </div>
+        </div>
+    );
+}
