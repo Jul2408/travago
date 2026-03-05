@@ -18,11 +18,11 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-zdipvgpc47o%#*%uk68)uz69^2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost,*.onrender.com').split(',')
+ALLOWED_HOSTS = ['*'] # Temporary allow all for debugging Render proxy
 
 # Essential for Render / Vercel to handle HTTPS correctly behind a proxy
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = os.getenv('DEBUG', 'True') == 'False'
+SECURE_SSL_REDIRECT = False # Let Render handle the SSL redirect to avoid 400/loops
 
 
 
