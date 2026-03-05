@@ -45,11 +45,9 @@ INSTALLED_APPS = [
     'chat',
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
-
+# CORS & CSRF Configuration
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,https://travago-eta.vercel.app,https://*.onrender.com").split(',')
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,http://localhost:8000,http://127.0.0.1:8000,https://travago-eta.vercel.app").split(',')
 CORS_ALLOW_CREDENTIALS = True
 
 MIDDLEWARE = [
@@ -183,12 +181,7 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
-# CORS Configuration
-CORS_ALLOW_ALL_ORIGINS = False # Must be False when credentials are allowed
-CORS_ALLOW_CREDENTIALS = True
-
-CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,https://travago-eta.vercel.app,https://*.onrender.com").split(',')
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,http://localhost:8000,http://127.0.0.1:8000,https://travago-eta.vercel.app").split(',')
+# Anymail (Resend) Configuration
 ANYMAIL = {
     "RESEND_API_KEY": os.getenv("RESEND_API_KEY", ""),
 }
