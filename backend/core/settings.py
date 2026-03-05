@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'placements',
     'notifications',
     'chat',
+    'skills_tests',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 # CORS & CSRF Configuration
