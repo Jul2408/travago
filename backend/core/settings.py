@@ -187,8 +187,8 @@ SPECTACULAR_SETTINGS = {
 CORS_ALLOW_ALL_ORIGINS = False # Must be False when credentials are allowed
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,*.onrender.com,*.vercel.app").split(',')
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,http://localhost:8000,http://127.0.0.1:8000,*.vercel.app").split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,https://travago-eta.vercel.app,*.onrender.com").split(',')
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,http://localhost:8000,http://127.0.0.1:8000,https://travago-eta.vercel.app").split(',')
 ANYMAIL = {
     "RESEND_API_KEY": os.getenv("RESEND_API_KEY", ""),
 }
