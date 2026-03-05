@@ -3,13 +3,29 @@ import "./globals.css";
 import PWARegistration from "@/components/pwa-registration";
 
 export const metadata: Metadata = {
-  title: "Travago - Excellence du Placement IA",
-  description: "La plateforme de recrutement de nouvelle génération au Cameroun. Sourcing intelligent et certification de talents.",
+  title: 'Travago - Recrutement Intelligent au Cameroun',
+  description: 'La première plateforme de placement IA au Cameroun. Trouvez des candidats qualifiés ou décrochez l\'emploi de vos rêves en quelques secondes.',
+  keywords: ['emploi', 'recrutement', 'Cameroun', 'travail', 'placement', 'IA', 'douala', 'yaoundé'],
   manifest: "/manifest.json",
   icons: {
     icon: "/logo.jpeg",
     shortcut: "/logo.jpeg",
     apple: "/logo.jpeg",
+  },
+  openGraph: {
+    title: 'Travago - Recrutement Intelligent au Cameroun',
+    description: 'Trouvez votre prochain emploi ou recrutez les meilleurs talents avec l\'IA.',
+    url: 'https://travago-eta.vercel.app',
+    siteName: 'Travago',
+    images: [
+      {
+        url: '/logo.jpeg',
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: 'fr_FR',
+    type: 'website',
   },
 };
 

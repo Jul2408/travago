@@ -83,7 +83,7 @@ export default function Home() {
               <Image src="/logo.jpeg" alt="Travago Logo" fill className="object-cover" />
             </div>
             <div>
-              <h1 className="text-xl font-black tracking-tighter text-slate-900 leading-none uppercase">TRAVAGO</h1>
+              <div className="text-xl font-black tracking-tighter text-slate-900 leading-none uppercase">TRAVAGO</div>
               <p className="text-[8px] uppercase tracking-[0.3em] text-blue-600 font-black mt-1">Smart AI Placement</p>
             </div>
           </div>
