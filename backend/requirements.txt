@@ -10,3 +10,6 @@ django-filter
 django-anymail[resend]
 celery
 redis
+gunicorn
+whitenoise
+dj-database-url
