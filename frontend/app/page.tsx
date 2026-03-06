@@ -184,22 +184,10 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Mobile Menu Footer */}
-            <div className="p-8 border-t border-slate-100 space-y-4">
-              <Link
-                href="/register/entreprise"
-                className="block text-center bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-6 rounded-[2rem] text-lg font-black uppercase tracking-widest shadow-lg shadow-blue-500/20"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Je Recrute
-              </Link>
-              <Link
-                href="/register/candidat"
-                className="block text-center border-2 border-slate-900 text-slate-900 py-6 rounded-[2rem] text-lg font-black uppercase tracking-widest"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Je suis candidat
-              </Link>
+            {/* Mobile Menu Footer - Version info instead of redundant buttons */}
+            <div className="p-8 border-t border-slate-100 flex flex-col items-center">
+              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest text-center">Travago v1.0.2</p>
+              <p className="text-[8px] text-gray-300 uppercase tracking-[0.2em] mt-1 text-center font-black">Powered by Smart AI Placement</p>
             </div>
           </motion.div>
         )}
