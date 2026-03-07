@@ -75,40 +75,40 @@ export default function TalentsBasePage() {
 
     return (
         <div className="space-y-10">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">Base de Talents IA</h1>
-                    <p className="text-slate-500 font-medium">Accédez uniquement aux profils <span className="text-blue-600 font-black italic">Vérifiés et Certifiés</span> par Travago.</p>
+                    <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Base de Talents IA</h1>
+                    <p className="text-sm sm:text-base text-slate-500 font-medium mt-1">Accédez uniquement aux profils <span className="text-blue-600 font-black italic">Vérifiés et Certifiés</span> par Travago.</p>
                 </div>
                 <div className="flex space-x-2">
-                    <div className="bg-blue-600 text-white px-6 py-3 rounded-2xl flex items-center space-x-3 shadow-lg shadow-blue-100">
-                        <ShieldCheck size={20} />
-                        <span className="text-sm font-black uppercase tracking-widest leading-none">Confiance : Totale</span>
+                    <div className="bg-blue-600 text-white px-4 sm:px-6 py-3 rounded-2xl flex items-center space-x-2 sm:space-x-3 shadow-lg shadow-blue-100">
+                        <ShieldCheck size={20} className="shrink-0" />
+                        <span className="text-[10px] sm:text-sm font-black uppercase tracking-widest leading-none">Confiance : Totale</span>
                     </div>
                 </div>
             </div>
 
             {/* Premium Filters - Blue Theme */}
-            <div className="bg-white p-6 rounded-[2.5rem] border border-blue-50 shadow-sm space-y-6">
+            <div className="bg-white p-5 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] border border-blue-50 shadow-sm space-y-4 sm:space-y-6">
                 <div className="flex flex-col lg:flex-row gap-4">
                     <div className="flex-1 relative">
-                        <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                        <Search className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                         <input
                             type="text"
                             placeholder="Domaine technique, métier ou ville..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-14 pr-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-black focus:ring-2 focus:ring-blue-500 transition-all placeholder:text-slate-400"
+                            className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-4 bg-slate-50 border-none rounded-2xl text-[10px] sm:text-sm font-black focus:ring-2 focus:ring-blue-500 transition-all placeholder:text-slate-400"
                         />
                     </div>
-                    <div className="flex gap-4">
+                    <div className="flex gap-2 sm:gap-4 overflow-x-auto pb-1 sm:pb-0 custom-scrollbar">
                         <button
                             onClick={() => setShowFilters(!showFilters)}
-                            className={`px-8 py-4 ${showFilters ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-700'} rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-all flex items-center shrink-0`}
+                            className={`px-6 sm:px-8 py-4 ${showFilters ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-700'} rounded-2xl font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-slate-200 transition-all flex items-center shrink-0`}
                         >
-                            <Filter size={16} className="mr-2" /> {showFilters ? 'Masquer Filtres' : 'Filtres Avancés'}
+                            <Filter size={16} className="mr-1 sm:mr-2" /> <span className="hidden sm:inline">{showFilters ? 'Masquer Filtres' : 'Filtres Avancés'}</span><span className="sm:hidden">Filtres</span>
                         </button>
-                        <button className="px-10 py-4 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 shrink-0">
+                        <button className="px-6 sm:px-10 py-4 bg-blue-600 text-white rounded-2xl font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 shrink-0">
                             Rechercher
                         </button>
                     </div>
@@ -158,35 +158,35 @@ export default function TalentsBasePage() {
             </div>
 
             {/* Verified Talents List */}
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
                 {loading ? (
-                    <div className="flex flex-col items-center justify-center py-20 bg-white rounded-[2.5rem] border border-blue-50 shadow-sm">
+                    <div className="flex flex-col items-center justify-center py-10 sm:py-20 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-blue-50 shadow-sm">
                         <Loader2 className="animate-spin text-blue-600 mb-4" size={48} />
                         <p className="text-slate-500 font-black uppercase tracking-widest text-[10px]">Chargement des talents...</p>
                     </div>
                 ) : error ? (
-                    <div className="text-center py-20 bg-white rounded-[2.5rem] border border-red-50 shadow-sm">
-                        <p className="text-red-500 font-bold">{error}</p>
-                        <button onClick={() => window.location.reload()} className="text-blue-600 font-black text-xs uppercase underline mt-2">Réessayer</button>
+                    <div className="text-center py-10 sm:py-20 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-red-50 shadow-sm">
+                        <p className="text-red-500 font-bold px-4">{error}</p>
+                        <button onClick={() => window.location.reload()} className="text-blue-600 font-black text-[10px] sm:text-xs uppercase underline mt-2">Réessayer</button>
                     </div>
                 ) : filteredTalents.length === 0 ? (
-                    <div className="text-center py-20 bg-white rounded-[2.5rem] border border-blue-50 shadow-sm">
+                    <div className="text-center py-10 sm:py-20 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-blue-50 shadow-sm px-4">
                         <p className="text-slate-400 font-bold">Aucun talent trouvé pour cette recherche.</p>
-                        <button onClick={() => setSearchTerm('')} className="text-blue-600 font-black text-xs uppercase underline mt-2">Effacer les filtres</button>
+                        <button onClick={() => setSearchTerm('')} className="text-blue-600 font-black text-[10px] sm:text-xs uppercase underline mt-2">Effacer les filtres</button>
                     </div>
                 ) : (
                     filteredTalents.map((talent) => (
-                        <div key={talent.id} className="group bg-white rounded-[2.5rem] p-10 border border-blue-50 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all relative overflow-hidden">
+                        <div key={talent.id} className="group bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 border border-blue-50 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all relative overflow-hidden">
                             {talent.verified && (
-                                <div className="absolute top-0 right-10 bg-blue-600 text-white px-6 py-2 rounded-b-2xl font-black text-[10px] uppercase tracking-widest flex items-center">
-                                    <ShieldCheck size={12} className="mr-2" /> IA Verified
+                                <div className="absolute top-0 right-4 sm:right-10 bg-blue-600 text-white px-4 sm:px-6 py-2 rounded-b-2xl font-black text-[8px] sm:text-[10px] uppercase tracking-widest flex items-center">
+                                    <ShieldCheck size={12} className="mr-1 sm:mr-2" /> IA Verified
                                 </div>
                             )}
 
-                            <div className="flex flex-col lg:flex-row lg:items-center gap-10">
+                            <div className="flex flex-col lg:flex-row lg:items-center gap-6 sm:gap-10">
                                 {/* Profile Info */}
-                                <div className="flex items-start space-x-6 lg:w-1/3">
-                                    <div className="w-24 h-24 bg-blue-50 rounded-[2.5rem] flex items-center justify-center font-black text-3xl text-blue-200 group-hover:shadow-lg transition-all overflow-hidden flex-shrink-0 border border-blue-100 shadow-sm relative">
+                                <div className="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 lg:w-1/3">
+                                    <div className="w-16 h-16 sm:w-24 sm:h-24 bg-blue-50 rounded-2xl sm:rounded-[2.5rem] flex items-center justify-center font-black text-xl sm:text-3xl text-blue-200 group-hover:shadow-lg transition-all overflow-hidden flex-shrink-0 border border-blue-100 shadow-sm relative">
                                         {talent.photo ? (
                                             <Image
                                                 src={getImageUrl(talent.photo) || ''}
@@ -199,8 +199,8 @@ export default function TalentsBasePage() {
                                         )}
                                     </div>
                                     <div className="min-w-0">
-                                        <h3 className="text-2xl font-black text-slate-900 mb-1 group-hover:text-blue-600 transition-colors truncate">{talent.name}</h3>
-                                        <p className="text-blue-600 font-bold text-sm mb-4">{talent.position}</p>
+                                        <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-1 group-hover:text-blue-600 transition-colors truncate">{talent.name}</h3>
+                                        <p className="text-blue-600 font-bold text-xs sm:text-sm mb-3 sm:mb-4">{talent.position}</p>
                                         <div className="flex flex-wrap gap-2">
                                             {talent.skills.map((skill: string) => (
                                                 <span key={skill} className="px-3 py-1.5 bg-slate-50 text-slate-500 rounded-lg text-[10px] font-black uppercase tracking-widest border border-slate-100">
@@ -212,32 +212,32 @@ export default function TalentsBasePage() {
                                 </div>
 
                                 {/* IA Certification Metrics */}
-                                <div className="flex items-center justify-around flex-1 gap-8 border-y lg:border-y-0 lg:border-x border-slate-50 py-8 lg:py-0 text-center">
-                                    <div>
-                                        <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">IA Match Score</div>
-                                        <div className="text-3xl font-black text-blue-700">{talent.score}</div>
+                                <div className="flex items-center justify-between sm:justify-around flex-wrap gap-4 sm:gap-8 border-y lg:border-y-0 lg:border-x border-slate-50 py-6 sm:py-8 lg:py-0 text-center flex-1">
+                                    <div className="w-[45%] sm:w-auto">
+                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 sm:mb-2">IA Match Score</div>
+                                        <div className="text-2xl sm:text-3xl font-black text-blue-700">{talent.score}</div>
                                     </div>
-                                    <div>
-                                        <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Reliability</div>
-                                        <div className="text-xl font-black text-green-600 flex items-center justify-center italic">
+                                    <div className="w-[45%] sm:w-auto">
+                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 sm:mb-2">Reliability</div>
+                                        <div className="text-lg sm:text-xl font-black text-green-600 flex items-center justify-center italic">
                                             {talent.reliability}
                                         </div>
                                     </div>
                                     <div className="hidden sm:block">
-                                        <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Diplôme Vérifié</div>
+                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 sm:mb-2">Diplôme Vérifié</div>
                                         <CheckCircle2 className="mx-auto text-blue-600" size={24} />
                                     </div>
                                 </div>
 
                                 {/* Cost & Contact */}
-                                <div className="flex items-center justify-between lg:justify-end gap-8 lg:w-1/4">
-                                    <div className="text-right">
-                                        <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Débloquer (Crédits)</div>
-                                        <div className="flex items-center justify-end text-blue-700 font-black text-xl">
+                                <div className="flex flex-wrap sm:flex-nowrap items-center justify-between lg:justify-end gap-4 sm:gap-8 lg:w-1/4 mt-4 lg:mt-0">
+                                    <div className="text-left sm:text-right">
+                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Débloquer (Crédits)</div>
+                                        <div className="flex items-center sm:justify-end text-blue-700 font-black text-lg sm:text-xl">
                                             <Coins size={18} className="mr-2 text-orange-500" /> {talent.credits}
                                         </div>
                                     </div>
-                                    <Link href={`/dashboard/entreprise/candidats/${talent.id}`} className="bg-slate-900 text-white px-10 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-slate-100 flex items-center">
+                                    <Link href={`/dashboard/entreprise/candidats/${talent.id}`} className="w-full sm:w-auto bg-slate-900 text-white px-6 sm:px-10 py-4 sm:py-5 rounded-[1.5rem] sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-slate-100 flex items-center justify-center shrink-0">
                                         Voir profil <ChevronRight size={16} className="ml-2" />
                                     </Link>
                                 </div>
@@ -248,14 +248,14 @@ export default function TalentsBasePage() {
             </div>
 
             {/* Empty Context Notice */}
-            <div className="p-8 bg-blue-50 border border-blue-100 rounded-[2.5rem] flex items-center justify-between text-blue-900">
-                <div className="flex items-center space-x-4">
-                    <Star className="text-blue-600 animate-pulse" />
-                    <p className="font-medium text-sm">
+            <div className="p-6 sm:p-8 bg-blue-50 border border-blue-100 rounded-[2rem] sm:rounded-[2.5rem] flex flex-col sm:flex-row items-center justify-between text-blue-900 gap-4 sm:gap-0">
+                <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4 text-center sm:text-left">
+                    <Star className="text-blue-600 animate-pulse shrink-0" size={24} />
+                    <p className="font-medium text-xs sm:text-sm">
                         Vous ne voyez pas le profil qu'il vous faut ? Lancez un <span className="font-black underline italic">Placement IA Assisté</span> et nous chasserons pour vous.
                     </p>
                 </div>
-                <Link href="/dashboard/entreprise/placement" className="text-blue-600 font-black text-xs uppercase tracking-widest hover:underline whitespace-nowrap">Démarrer une chasse</Link>
+                <Link href="/dashboard/entreprise/placement" className="w-full sm:w-auto text-center px-6 py-3 bg-white sm:bg-transparent rounded-xl sm:rounded-none border sm:border-none border-blue-200 text-blue-600 font-black text-[10px] sm:text-xs uppercase tracking-widest hover:underline whitespace-nowrap">Démarrer une chasse</Link>
             </div>
         </div >
     );

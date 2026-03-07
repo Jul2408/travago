@@ -69,29 +69,29 @@ export default function PlacementIAPage() {
 
     return (
         <div className="space-y-10">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">Pilotage des Placements IA</h1>
-                    <p className="text-slate-500 font-medium">Suivez l'avancement de vos chasses automatisées en temps réel.</p>
+                    <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Pilotage des Placements IA</h1>
+                    <p className="text-sm sm:text-base text-slate-500 font-medium mt-1">Suivez l'avancement de vos chasses automatisées en temps réel.</p>
                 </div>
                 <button
                     onClick={() => setShowModal(true)}
-                    className="px-8 py-4 bg-blue-600 text-white rounded-[1.5rem] font-black text-sm flex items-center hover:bg-blue-700 transition-all shadow-xl shadow-blue-100"
+                    className="w-full sm:w-auto px-6 sm:px-8 py-4 bg-blue-600 text-white rounded-[1.5rem] font-black text-xs sm:text-sm flex items-center justify-center hover:bg-blue-700 transition-all shadow-xl shadow-blue-100"
                 >
                     <Plus size={18} className="mr-2 text-white" /> Lancer une nouvelle chasse
                 </button>
             </div>
 
             {/* AI Status Card - Deep Blue */}
-            <div className="bg-gradient-to-br from-blue-900 to-blue-700 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-2xl shadow-blue-200">
+            <div className="bg-gradient-to-br from-blue-900 to-blue-700 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 text-white relative overflow-hidden shadow-2xl shadow-blue-200">
                 <div className="absolute right-0 top-0 w-96 h-96 bg-white/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
-                <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
-                    <div className="w-24 h-24 bg-white/10 backdrop-blur-md rounded-[2rem] border border-white/20 flex items-center justify-center">
-                        <Cpu size={48} className="text-blue-200 animate-pulse" />
+                <div className="relative z-10 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 sm:gap-10">
+                    <div className="w-16 h-16 sm:w-24 sm:h-24 bg-white/10 backdrop-blur-md rounded-2xl sm:rounded-[2rem] border border-white/20 flex items-center justify-center shrink-0">
+                        <Cpu size={32} className="text-blue-200 animate-pulse sm:w-12 sm:h-12" />
                     </div>
-                    <div className="flex-1 text-center md:text-left">
-                        <h3 className="text-2xl font-black mb-2 tracking-tight">Algorithme Travago v2.5</h3>
-                        <p className="text-blue-100/80 font-medium max-w-xl">
+                    <div className="flex-1">
+                        <h3 className="text-xl sm:text-2xl font-black mb-2 tracking-tight">Algorithme Travago v2.5</h3>
+                        <p className="text-blue-100/80 text-sm sm:text-base font-medium max-w-xl">
                             Le moteur de placement analyse actuellement <span className="text-white font-black underline">5,842 profils certifiés</span>.
                             Précision de matching garantie : <span className="text-white font-black">98.4%</span>.
                         </p>
@@ -112,10 +112,10 @@ export default function PlacementIAPage() {
                     </div>
                 ) : (
                     activePlacements.map((placement) => (
-                        <div key={placement.id} className="group bg-white rounded-[2.5rem] p-8 border border-blue-50 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all">
-                            <div className="flex items-center justify-between mb-8">
+                        <div key={placement.id} className="group bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 border border-blue-50 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all">
+                            <div className="flex items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
                                 <div>
-                                    <h3 className="text-xl font-black text-slate-900 mb-2 group-hover:text-blue-600 transition-colors uppercase tracking-tight">{placement.title}</h3>
+                                    <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 group-hover:text-blue-600 transition-colors uppercase tracking-tight line-clamp-2">{placement.title}</h3>
                                     <div className="flex items-center space-x-3">
                                         <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-black uppercase tracking-widest border border-blue-100">
                                             {placement.status}
@@ -145,14 +145,14 @@ export default function PlacementIAPage() {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="p-5 bg-blue-50 rounded-2xl border border-blue-100">
-                                        <div className="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Dossiers Matchés</div>
-                                        <div className="text-2xl font-black text-blue-700">{placement.matches?.length || 0}</div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                                    <div className="p-4 sm:p-5 bg-blue-50 rounded-2xl border border-blue-100">
+                                        <div className="text-[9px] sm:text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Dossiers Matchés</div>
+                                        <div className="text-xl sm:text-2xl font-black text-blue-700">{placement.matches?.length || 0}</div>
                                     </div>
-                                    <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100">
-                                        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Budget Engagé</div>
-                                        <div className="text-sm font-black text-slate-900 truncate">{placement.budget_credits} Crédits</div>
+                                    <div className="p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-100">
+                                        <div className="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Budget Engagé</div>
+                                        <div className="text-xs sm:text-sm font-black text-slate-900 truncate">{placement.budget_credits} Crédits</div>
                                     </div>
                                 </div>
 
@@ -167,16 +167,16 @@ export default function PlacementIAPage() {
                 {/* Grid placeholder/Trigger */}
                 <button
                     onClick={() => setShowModal(true)}
-                    className="bg-white rounded-[2.5rem] border-2 border-dashed border-blue-100 p-10 flex flex-col items-center justify-center text-center group cursor-pointer hover:bg-blue-50/10 hover:border-blue-400 transition-all"
+                    className="bg-white rounded-[2rem] sm:rounded-[2.5rem] border-2 border-dashed border-blue-100 p-6 sm:p-10 flex flex-col items-center justify-center text-center group cursor-pointer hover:bg-blue-50/10 hover:border-blue-400 transition-all"
                 >
-                    <div className="w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center text-blue-200 mb-6 group-hover:text-blue-600 group-hover:bg-blue-100 transition-all">
-                        <Plus size={40} />
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-50 rounded-[1.5rem] sm:rounded-3xl flex items-center justify-center text-blue-200 mb-6 group-hover:text-blue-600 group-hover:bg-blue-100 transition-all shrink-0">
+                        <Plus size={32} className="sm:w-10 sm:h-10" />
                     </div>
-                    <h3 className="text-2xl font-black text-slate-900 mb-3 tracking-tight">Lancer une nouvelle recherche</h3>
-                    <p className="text-sm font-medium text-slate-500 max-w-xs mb-10 leading-relaxed italic">
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-3 tracking-tight">Lancer une nouvelle recherche</h3>
+                    <p className="text-xs sm:text-sm font-medium text-slate-500 max-w-xs mb-8 sm:mb-10 leading-relaxed italic">
                         Notre IA définit les critères, valide les diplômes et vous présente le <span className="text-blue-600 font-bold">Top 3</span>.
                     </p>
-                    <span className="px-10 py-5 bg-white border border-blue-100 text-blue-600 rounded-2xl font-black text-xs uppercase tracking-widest group-hover:border-blue-600 group-hover:shadow-xl transition-all">
+                    <span className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white border border-blue-100 text-blue-600 rounded-2xl font-black text-[10px] sm:text-xs uppercase tracking-widest group-hover:border-blue-600 group-hover:shadow-xl transition-all">
                         Lancer l'Agent IA
                     </span>
                 </button>
@@ -190,19 +190,19 @@ export default function PlacementIAPage() {
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
-                            className="bg-white rounded-[3rem] w-full max-w-2xl overflow-hidden shadow-2xl"
+                            className="bg-white rounded-[2rem] sm:rounded-[3rem] w-full max-w-2xl overflow-hidden shadow-2xl"
                         >
-                            <div className="p-10 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                            <div className="p-6 sm:p-10 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                                 <div>
-                                    <h2 className="text-2xl font-black italic text-slate-800 uppercase tracking-tight">Nouvelle Mission IA</h2>
-                                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Lancement du protocole de chasse automatisée</p>
+                                    <h2 className="text-xl sm:text-2xl font-black italic text-slate-800 uppercase tracking-tight">Nouvelle Mission IA</h2>
+                                    <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Protocole automatisé</p>
                                 </div>
-                                <button onClick={() => setShowModal(false)} className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors shadow-sm">
-                                    <X size={24} />
+                                <button onClick={() => setShowModal(false)} className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors shadow-sm shrink-0">
+                                    <X size={20} className="sm:w-6 sm:h-6" />
                                 </button>
                             </div>
 
-                            <form onSubmit={handleCreate} className="p-10 space-y-8">
+                            <form onSubmit={handleCreate} className="p-6 sm:p-10 space-y-6 sm:space-y-8">
                                 <div className="space-y-6">
                                     <div>
                                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Titre du poste recherché</label>
@@ -226,18 +226,18 @@ export default function PlacementIAPage() {
                                             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                         />
                                     </div>
-                                    <div className="p-6 bg-blue-50 rounded-[2rem] border border-blue-100 flex items-center justify-between">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-blue-600 shadow-sm">
-                                                <Zap size={24} />
+                                    <div className="p-4 sm:p-6 bg-blue-50 rounded-[1.5rem] sm:rounded-[2rem] border border-blue-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
+                                        <div className="flex items-center gap-3 sm:gap-4">
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center text-blue-600 shadow-sm shrink-0">
+                                                <Zap size={20} className="sm:w-6 sm:h-6" />
                                             </div>
                                             <div>
-                                                <div className="text-[10px] font-black text-blue-900 uppercase tracking-widest">Coût Mission</div>
-                                                <div className="text-xl font-black text-blue-600">250 Crédits</div>
+                                                <div className="text-[9px] sm:text-[10px] font-black text-blue-900 uppercase tracking-widest">Coût Mission</div>
+                                                <div className="text-lg sm:text-xl font-black text-blue-600">250 Crédits</div>
                                             </div>
                                         </div>
-                                        <p className="text-[10px] font-bold text-blue-400 uppercase italic text-right max-w-[150px]">
-                                            Inclut la vérification KYC et le matching algorithmique v2.5
+                                        <p className="text-[9px] sm:text-[10px] font-bold text-blue-400 uppercase italic text-left sm:text-right max-w-[200px] sm:max-w-[150px]">
+                                            Inclut KYC et matching algorithmique v2.5
                                         </p>
                                     </div>
                                 </div>
@@ -245,7 +245,7 @@ export default function PlacementIAPage() {
                                 <button
                                     disabled={isCreating}
                                     type="submit"
-                                    className="w-full py-6 bg-slate-900 text-white rounded-[2rem] font-black text-sm uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-blue-900/10 flex items-center justify-center gap-3"
+                                    className="w-full py-5 sm:py-6 bg-slate-900 text-white rounded-[1.5rem] sm:rounded-[2rem] font-black text-[10px] sm:text-sm uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-blue-900/10 flex items-center justify-center gap-2 sm:gap-3"
                                 >
                                     {isCreating ? <Loader2 className="animate-spin" /> : <Target size={20} />}
                                     Confirmer et Lancer la Recherche
@@ -257,9 +257,9 @@ export default function PlacementIAPage() {
             </AnimatePresence>
 
             {/* Help/Notice */}
-            <div className="p-8 bg-blue-50 border border-blue-100 rounded-[2.5rem] flex items-center space-x-6 text-blue-900">
-                <ShieldCheck size={32} className="text-blue-600 shrink-0" />
-                <p className="text-sm font-medium leading-relaxed italic">
+            <div className="p-6 sm:p-8 bg-blue-50 border border-blue-100 rounded-[2rem] sm:rounded-[2.5rem] flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 text-blue-900">
+                <ShieldCheck size={28} className="text-blue-600 shrink-0 sm:w-8 sm:h-8" />
+                <p className="text-xs sm:text-sm font-medium leading-relaxed italic">
                     <strong>Garantie Travago :</strong> Tous les candidats présentés dans la section "Matches IA" ont un profil certifié, des documents d'identité validés et une fiabilité vérifiée à 100%.
                 </p>
             </div>

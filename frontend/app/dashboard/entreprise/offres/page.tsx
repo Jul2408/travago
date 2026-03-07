@@ -74,14 +74,14 @@ export default function OffersPage() {
 
     return (
         <div className="space-y-10">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">Mes Offres & Besoins</h1>
-                    <p className="text-slate-500 font-medium">Gérez vos annonces et suivez les performances de vos recrutements.</p>
+                    <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Mes Offres & Besoins</h1>
+                    <p className="text-sm sm:text-base text-slate-500 font-medium mt-1">Gérez vos annonces et suivez les performances de vos recrutements.</p>
                 </div>
                 <Link
                     href="/dashboard/entreprise/offres/nouvelle"
-                    className="px-8 py-4 bg-blue-600 text-white rounded-[1.5rem] font-black text-sm flex items-center hover:bg-blue-700 transition-all shadow-xl shadow-blue-100"
+                    className="w-full sm:w-auto px-6 sm:px-8 py-4 bg-blue-600 text-white rounded-[1.5rem] font-black text-xs sm:text-sm flex items-center justify-center hover:bg-blue-700 transition-all shadow-xl shadow-blue-100"
                 >
                     <Plus size={18} className="mr-2" /> Créer une offre
                 </Link>
@@ -107,12 +107,12 @@ export default function OffersPage() {
                         <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
                     </div>
                 ) : error ? (
-                    <div className="text-center py-20 bg-white rounded-[2.5rem] border border-red-50 shadow-sm">
-                        <p className="text-red-500 font-bold">{error}</p>
-                        <button onClick={() => window.location.reload()} className="text-blue-600 font-black text-xs uppercase underline mt-2">Réessayer</button>
+                    <div className="text-center py-10 sm:py-20 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-red-50 shadow-sm">
+                        <p className="text-red-500 font-bold px-4">{error}</p>
+                        <button onClick={() => window.location.reload()} className="text-blue-600 font-black text-xs uppercase underline mt-4">Réessayer</button>
                     </div>
                 ) : offers.length === 0 ? (
-                    <div className="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-blue-100">
+                    <div className="text-center py-12 sm:py-20 bg-white rounded-[2rem] sm:rounded-[3rem] border-2 border-dashed border-blue-100 px-4">
                         <div className="w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center text-blue-200 mx-auto mb-6">
                             <Briefcase size={40} />
                         </div>
@@ -126,18 +126,18 @@ export default function OffersPage() {
                     </div>
                 ) : (
                     offers.map((offer) => (
-                        <div key={offer.id} className="group bg-white rounded-[2.5rem] p-10 border border-blue-50 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all relative overflow-hidden">
-                            <div className="flex flex-col lg:flex-row lg:items-center gap-10">
+                        <div key={offer.id} className="group bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 border border-blue-50 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all relative overflow-hidden">
+                            <div className="flex flex-col lg:flex-row lg:items-center gap-6 sm:gap-10">
                                 {/* Offer Core Info */}
-                                <div className="flex items-start space-x-6 lg:w-1/3">
+                                <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 lg:w-1/3">
                                     <div className="w-20 h-20 bg-blue-50 rounded-[2rem] flex items-center justify-center text-blue-400 border border-blue-100 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all">
                                         <Briefcase size={32} />
                                     </div>
                                     <div className="min-w-0">
-                                        <div className="flex items-center space-x-3 mb-2">
+                                        <div className="flex flex-wrap items-center gap-2 sm:space-x-3 mb-2">
                                             <button
                                                 onClick={() => toggleOfferStatus(offer.id, offer.is_active)}
-                                                className={`px-2.5 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest hover:opacity-80 transition-opacity ${offer.is_active ? 'bg-green-50 text-green-600' : 'bg-orange-50 text-orange-600'}`}
+                                                className={`px-2.5 py-1.5 rounded-lg text-[8px] sm:text-[9px] font-black uppercase tracking-widest hover:opacity-80 transition-opacity ${offer.is_active ? 'bg-green-50 text-green-600' : 'bg-orange-50 text-orange-600'}`}
                                             >
                                                 {offer.is_active ? 'Actif (Clic pour pause)' : 'Pause (Clic pour activer)'}
                                             </button>
@@ -156,14 +156,14 @@ export default function OffersPage() {
                                 </div>
 
                                 {/* Stats & Matches */}
-                                <div className="flex items-center justify-around flex-1 gap-8 border-y lg:border-y-0 lg:border-x border-slate-50 py-8 lg:py-0 text-center">
-                                    <div>
+                                <div className="flex items-center justify-between sm:justify-around flex-wrap gap-4 sm:gap-8 border-y lg:border-y-0 lg:border-x border-slate-50 py-6 sm:py-8 lg:py-0 text-center flex-1">
+                                    <div className="w-1/3 sm:w-auto">
                                         <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Vues IA</div>
                                         <div className="text-3xl font-black text-slate-900">{offer.views_count || 0}</div>
                                     </div>
-                                    <div>
-                                        <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Candidatures</div>
-                                        <div className="text-3xl font-black text-blue-600 flex items-center justify-center">
+                                    <div className="w-1/3 sm:w-auto">
+                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Candidats</div>
+                                        <div className="text-2xl sm:text-3xl font-black text-blue-600 flex items-center justify-center">
                                             {(offer.applications_count || 0) > 0 ? (
                                                 <>{offer.applications_count} <Zap size={18} className="ml-2 text-orange-400 fill-orange-400" /></>
                                             ) : (
@@ -172,34 +172,36 @@ export default function OffersPage() {
                                         </div>
                                     </div>
                                     <div className="hidden sm:block">
-                                        <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Type</div>
-                                        <div className="text-sm font-black text-slate-700 uppercase">{offer.contract_type}</div>
+                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Type</div>
+                                        <div className="text-xs sm:text-sm font-black text-slate-700 uppercase">{offer.contract_type}</div>
                                     </div>
                                 </div>
 
                                 {/* Actions */}
-                                <div className="flex items-center justify-between lg:justify-end gap-6 lg:w-1/4">
+                                <div className="flex flex-wrap sm:flex-nowrap items-center justify-between lg:justify-end gap-3 sm:gap-6 lg:w-1/4">
+                                    <div className="flex gap-3">
+                                        <Link
+                                            href={`/dashboard/entreprise/offres/${offer.slug}`}
+                                            className="p-3 sm:p-4 bg-slate-50 text-slate-400 rounded-2xl hover:bg-blue-50 hover:text-blue-600 transition-all border border-transparent hover:border-blue-100"
+                                        >
+                                            <Eye size={20} />
+                                        </Link>
+                                        <button
+                                            onClick={() => {
+                                                if (confirm("Voulez-vous vraiment supprimer cette offre ?")) {
+                                                    axiosInstance.delete(`jobs/offers/${offer.id}/`).then(() => fetchOffers());
+                                                }
+                                            }}
+                                            className="p-3 sm:p-4 bg-slate-50 text-slate-400 rounded-2xl hover:bg-red-50 hover:text-red-600 transition-all border border-transparent hover:border-red-100"
+                                        >
+                                            <MoreVertical size={20} />
+                                        </button>
+                                    </div>
                                     <Link
                                         href={`/dashboard/entreprise/offres/${offer.slug}`}
-                                        className="p-4 bg-slate-50 text-slate-400 rounded-2xl hover:bg-blue-50 hover:text-blue-600 transition-all border border-transparent hover:border-blue-100"
+                                        className="w-full sm:w-auto bg-slate-900 text-white px-6 sm:px-8 py-4 sm:py-5 rounded-[1.5rem] font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-slate-100 flex items-center justify-center shrink-0"
                                     >
-                                        <Eye size={20} />
-                                    </Link>
-                                    <button
-                                        onClick={() => {
-                                            if (confirm("Voulez-vous vraiment supprimer cette offre ?")) {
-                                                axiosInstance.delete(`jobs/offers/${offer.id}/`).then(() => fetchOffers());
-                                            }
-                                        }}
-                                        className="p-4 bg-slate-50 text-slate-400 rounded-2xl hover:bg-red-50 hover:text-red-600 transition-all border border-transparent hover:border-red-100"
-                                    >
-                                        <MoreVertical size={20} />
-                                    </button>
-                                    <Link
-                                        href={`/dashboard/entreprise/offres/${offer.slug}`}
-                                        className="bg-slate-900 text-white px-8 py-5 rounded-[1.5rem] font-black text-xs uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-slate-100 flex items-center shrink-0"
-                                    >
-                                        Voir Matches <ChevronRight size={16} className="ml-2" />
+                                        Matches <ChevronRight size={16} className="ml-2" />
                                     </Link>
                                 </div>
                             </div>
@@ -209,19 +211,19 @@ export default function OffersPage() {
             </div>
 
             {/* Performance Banner */}
-            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[2.5rem] p-10 text-white flex flex-col md:flex-row items-center justify-between gap-10 shadow-2xl shadow-blue-200">
-                <div className="flex items-center space-x-6 text-center md:text-left">
-                    <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-[1.5rem] flex items-center justify-center border border-white/20">
-                        <TrendingUp size={40} className="text-blue-300" />
+            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-10 shadow-2xl shadow-blue-200">
+                <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/10 backdrop-blur-md rounded-[1.5rem] flex items-center justify-center border border-white/20 shrink-0">
+                        <TrendingUp size={32} className="text-blue-300 sm:w-10 sm:h-10" />
                     </div>
                     <div>
-                        <h3 className="text-2xl font-black mb-1">Boostez vos annonces</h3>
-                        <p className="text-blue-100 font-medium text-lg">
+                        <h3 className="text-xl sm:text-2xl font-black mb-1">Boostez vos annonces</h3>
+                        <p className="text-blue-100 font-medium text-sm sm:text-lg">
                             Les offres avec le badge <span className="font-black italic underline underline-offset-4">IA Assisté</span> reçoivent en moyenne <span className="text-white font-black">4x plus</span> de candidats qualifiés.
                         </p>
                     </div>
                 </div>
-                <button className="px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-500 transition-all flex items-center shrink-0">
+                <button className="w-full sm:w-auto px-8 sm:px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-500 transition-all flex items-center justify-center shrink-0">
                     Découvrir les formules <Zap size={16} className="ml-2" />
                 </button>
             </div>
