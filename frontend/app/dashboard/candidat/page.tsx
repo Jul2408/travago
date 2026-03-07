@@ -116,11 +116,11 @@ export default function DashboardCandidatPage() {
     }
 
     return (
-        <div className="space-y-10">
+        <div className="space-y-6 sm:space-y-10">
             {/* Top Section: Placability & Roadmap */}
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* 1. Score de Placabilité (The HERO metric) */}
-                <div className="bg-gradient-to-br from-blue-700 to-blue-500 rounded-[2.5rem] p-10 text-white shadow-xl shadow-blue-200 relative overflow-hidden flex flex-col items-center justify-center">
+                <div className="bg-gradient-to-br from-blue-700 to-blue-500 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 text-white shadow-xl shadow-blue-200 relative overflow-hidden flex flex-col items-center justify-center">
                     <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2"></div>
                     <div className="relative z-10 text-center flex flex-col items-center">
                         <h3 className="text-sm font-black uppercase tracking-[0.2em] text-blue-100 mb-8">Indice de Placabilité</h3>
@@ -155,7 +155,7 @@ export default function DashboardCandidatPage() {
                 </div>
 
                 {/* 2. Roadmap / Chemin vers l'emploi */}
-                <div className="lg:col-span-2 bg-white rounded-[2.5rem] p-10 shadow-sm border border-blue-50">
+                <div className="lg:col-span-2 bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 shadow-sm border border-blue-50">
                     <h3 className="text-xl font-black text-slate-900 mb-8 flex items-center">
                         <TrendingUp className="mr-3 text-blue-600" />
                         Votre chemin vers le placement
@@ -196,15 +196,15 @@ export default function DashboardCandidatPage() {
             </div>
 
             {/* Middle Section: Critical Actions */}
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                 {criticalActions.map((action, idx) => (
-                    <div key={idx} className="bg-white rounded-[2rem] p-8 border border-blue-50 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 transition-all">
-                        <div className="flex items-start space-x-6">
-                            <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center shrink-0">
+                    <div key={idx} className="bg-white rounded-[2rem] p-5 sm:p-8 border border-blue-50 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 transition-all">
+                        <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 sm:space-x-0">
+                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-slate-50 rounded-2xl flex items-center justify-center shrink-0">
                                 {action.icon}
                             </div>
                             <div className="flex-1">
-                                <h4 className="text-xl font-black text-slate-900 mb-2 leading-tight">{action.title}</h4>
+                                <h4 className="text-lg sm:text-xl font-black text-slate-900 mb-2 leading-tight">{action.title}</h4>
                                 <p className="text-sm font-medium text-slate-500 mb-6">{action.desc}</p>
                                 <Link
                                     href={action.href}
@@ -219,9 +219,9 @@ export default function DashboardCandidatPage() {
             </div>
 
             {/* Bottom Section: Specific Modules Portfolio */}
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* 1. Document Verification Status */}
-                <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-blue-50 flex flex-col">
+                <div className="bg-white rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 flex flex-col">
                     <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center">
                         <FolderCheck className="mr-3 text-blue-600" />
                         Documents KYC
@@ -260,7 +260,7 @@ export default function DashboardCandidatPage() {
                 </div>
 
                 {/* 2. Certification Status */}
-                <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-blue-50 flex flex-col">
+                <div className="bg-white rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 flex flex-col">
                     <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center">
                         <Award className="mr-3 text-purple-600" />
                         Badge de Confiance
@@ -286,7 +286,7 @@ export default function DashboardCandidatPage() {
                 </div>
 
                 {/* 3. Messages / Conversations */}
-                <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-blue-50 flex flex-col">
+                <div className="bg-white rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 flex flex-col">
                     <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center">
                         <MessageSquare className="mr-3 text-green-600" />
                         Messages Récents
@@ -314,7 +314,7 @@ export default function DashboardCandidatPage() {
                 </div>
 
                 {/* 4. Placement History / Requests (Full Width) */}
-                <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-blue-50 lg:col-span-3">
+                <div className="bg-white rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 lg:col-span-3">
                     <div className="flex items-center justify-between mb-8">
                         <h3 className="text-lg font-black text-slate-900 flex items-center">
                             <Briefcase className="mr-3 text-blue-600" />
@@ -368,16 +368,16 @@ export default function DashboardCandidatPage() {
             </div>
 
             {/* Help / Footer Notice */}
-            <div className="bg-blue-900/5 border border-blue-100 rounded-[2rem] p-8 flex items-center justify-between gap-6">
-                <div className="flex items-center space-x-4">
+            <div className="bg-blue-900/5 border border-blue-100 rounded-[2rem] p-5 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
+                <div className="flex items-center space-x-3 sm:space-x-4">
                     <AlertCircle className="text-blue-600 flex-shrink-0" />
-                    <p className="text-sm font-medium text-blue-900">
+                    <p className="text-xs sm:text-sm font-medium text-blue-900">
                         Votre dossier est actuellement en cours d'analyse par notre algorithme de placement. Mettez à jour vos documents pour accélérer le processus.
                     </p>
                 </div>
-                <div className="flex flex-col items-end gap-2 text-right">
-                    <a href="mailto:support@travago.ci" className="text-blue-600 font-black text-xs uppercase tracking-widest hover:underline">Support Travago</a>
-                    <span className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">Travago Placement System v2.1</span>
+                <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-2 text-right">
+                    <a href="mailto:support@travago.ci" className="text-blue-600 font-black text-[10px] sm:text-xs uppercase tracking-widest hover:underline">Support Travago</a>
+                    <span className="text-[9px] sm:text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">Travago Placement System v2.1</span>
                 </div>
             </div>
         </div>

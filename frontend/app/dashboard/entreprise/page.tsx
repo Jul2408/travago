@@ -113,11 +113,11 @@ export default function DashboardEntreprisePage() {
     if (!mounted) return null;
 
     return (
-        <div className="space-y-10">
+        <div className="space-y-6 sm:space-y-10">
             {/* 1. Placement IA Hero Section */}
-            <div className="bg-gradient-to-br from-blue-700 to-indigo-800 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-12 text-white relative overflow-hidden shadow-2xl shadow-blue-200">
+            <div className="bg-gradient-to-br from-blue-700 to-indigo-800 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-12 text-white relative overflow-hidden shadow-2xl shadow-blue-200">
                 <div className="absolute right-0 top-0 w-[400px] h-[400px] bg-white/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
-                <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+                <div className="relative z-10 grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
                     <div>
                         <div className="inline-flex items-center px-4 py-1.5 bg-blue-500/30 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border border-white/10">
                             Système de Placement Travago
@@ -152,9 +152,9 @@ export default function DashboardEntreprisePage() {
                 </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* 2. Suivi de Placements IA (Essential) */}
-                <div className="lg:col-span-2 space-y-8">
+                <div className="lg:col-span-2 space-y-6 sm:space-y-8">
                     <div className="bg-white rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 border border-blue-50 shadow-sm">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                             <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center">
@@ -213,7 +213,7 @@ export default function DashboardEntreprisePage() {
                         </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
+                    <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                         {/* Messages Module */}
                         <div className="bg-white rounded-[2rem] p-5 sm:p-8 border border-blue-50 shadow-sm flex flex-col">
                             <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center">
@@ -244,9 +244,9 @@ export default function DashboardEntreprisePage() {
                         </div>
 
                         {/* Credits & Stats */}
-                        <div className="space-y-6">
-                            <div className="bg-white p-5 sm:p-8 rounded-[2rem] border border-blue-50 shadow-sm flex items-center space-x-6">
-                                <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center">
+                        <div className="space-y-4 sm:space-y-6">
+                            <div className="bg-white p-5 sm:p-8 rounded-[2rem] border border-blue-50 shadow-sm flex items-center space-x-4 sm:space-x-6">
+                                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-50 text-blue-600 rounded-[1rem] sm:rounded-2xl flex items-center justify-center shrink-0">
                                     <Users size={24} />
                                 </div>
                                 <div>
@@ -255,8 +255,8 @@ export default function DashboardEntreprisePage() {
                                 </div>
                             </div>
                             <div className="bg-white p-5 sm:p-8 rounded-[2rem] border border-orange-50 shadow-sm flex items-center justify-between">
-                                <div className="flex items-center space-x-6">
-                                    <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center">
+                                <div className="flex items-center space-x-4 sm:space-x-6">
+                                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-orange-50 text-orange-600 rounded-[1rem] sm:rounded-2xl flex items-center justify-center shrink-0">
                                         <Coins size={24} />
                                     </div>
                                     <div>

@@ -202,17 +202,17 @@ export default function Home() {
               <Sparkles size={14} className="text-blue-600 animate-pulse" />
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-700">L'Excellence augmentée par l'algorithme v2.5</span>
             </motion.div>
-            <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} className="text-6xl sm:text-8xl lg:text-[7rem] font-black text-slate-900 leading-[0.85] tracking-tighter mb-10">
+            <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} className="text-5xl sm:text-6xl lg:text-[7rem] font-black text-slate-900 leading-[0.85] tracking-tighter mb-8 sm:mb-10">
               Recrutez au <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 italic">Cameroun</span> <br /> sans effort.
             </motion.h1>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-lg sm:text-2xl text-slate-500 mb-16 max-w-xl font-medium leading-relaxed italic">
               Travago fusionne l'expertise RH et l'IA pour identifier, certifier et matcher les meilleurs profils avec vos besoins stratégiques.
             </motion.p>
-            <div className="flex flex-col sm:flex-row gap-6 mb-8">
-              <Link href="/register/entreprise" className="px-12 py-5 bg-slate-900 text-white rounded-[2rem] font-black text-lg uppercase tracking-widest hover:bg-blue-600 shadow-2xl transition-all flex items-center justify-center group">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 w-full">
+              <Link href="/register/entreprise" className="w-full sm:w-auto px-8 sm:px-12 py-5 bg-slate-900 text-white rounded-[2rem] font-black text-sm sm:text-lg uppercase tracking-widest hover:bg-blue-600 shadow-2xl transition-all flex items-center justify-center group">
                 Recruter <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />
               </Link>
-              <Link href="/register/candidat" className="px-12 py-5 bg-white text-slate-900 border-2 border-slate-100 rounded-[2rem] font-black text-lg uppercase tracking-widest hover:border-blue-600 transition-all flex items-center justify-center">
+              <Link href="/register/candidat" className="w-full sm:w-auto px-8 sm:px-12 py-5 bg-white text-slate-900 border-2 border-slate-100 rounded-[2rem] font-black text-sm sm:text-lg uppercase tracking-widest hover:border-blue-600 transition-all flex items-center justify-center">
                 Je postule
               </Link>
             </div>
@@ -269,7 +269,7 @@ export default function Home() {
 
           <div className="grid lg:grid-cols-2 gap-16">
             {/* For Recruiters */}
-            <motion.div {...fadeInUp} className="bg-white p-12 rounded-[3.5rem] border border-blue-50 shadow-xl shadow-blue-900/5">
+            <motion.div {...fadeInUp} className="bg-white p-8 sm:p-12 rounded-[2rem] sm:rounded-[3.5rem] border border-blue-50 shadow-xl shadow-blue-900/5">
               <div className="flex items-center space-x-4 mb-12">
                 <div className="w-16 h-16 bg-blue-600 text-white rounded-[1.5rem] flex items-center justify-center"><Building2 size={32} /></div>
                 <div>
@@ -296,7 +296,7 @@ export default function Home() {
             </motion.div>
 
             {/* For Candidates */}
-            <motion.div {...fadeInUp} className="bg-slate-900 p-12 rounded-[3.5rem] text-white shadow-2xl">
+            <motion.div {...fadeInUp} className="bg-slate-900 p-8 sm:p-12 rounded-[2rem] sm:rounded-[3.5rem] text-white shadow-2xl">
               <div className="flex items-center space-x-4 mb-12">
                 <div className="w-16 h-16 bg-white text-slate-900 rounded-[1.5rem] flex items-center justify-center"><UserCheck size={32} /></div>
                 <div>
@@ -327,10 +327,10 @@ export default function Home() {
 
       {/* 4. IA Lab Section - Detailed Visuals */}
       <section id="ialab" className="py-24 sm:py-40 px-6 lg:px-12 bg-white">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div {...fadeInUp}>
             <div className="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest mb-6">Moteur de Confiance</div>
-            <h2 className="text-5xl sm:text-7xl font-black text-slate-900 tracking-tighter italic mb-8 leading-tight">La Science du <br /> <span className="text-blue-600 underline">Bon Profil</span>.</h2>
+            <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 tracking-tighter italic mb-8 leading-tight">La Science du <br /> <span className="text-blue-600 underline">Bon Profil</span>.</h2>
             <div className="space-y-8">
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-blue-50 rounded-xl text-blue-600"><FileSearch size={24} /></div>
@@ -363,7 +363,7 @@ export default function Home() {
                 { label: "Base Candidats", value: "10k+", color: "cyan" },
                 { label: "Temps Moy. Match", value: "48h", color: "slate" }
               ].map((card, i) => (
-                <div key={i} className="p-8 bg-white border border-slate-100 rounded-[2.5rem] shadow-xl shadow-slate-100/50 hover:border-blue-200 transition-all group">
+                <div key={i} className="p-6 sm:p-8 bg-white border border-slate-100 rounded-[1.5rem] sm:rounded-[2.5rem] shadow-xl shadow-slate-100/50 hover:border-blue-200 transition-all group">
                   <div className={`w-10 h-10 rounded-xl bg-${card.color}-50 mb-6 flex items-center justify-center text-${card.color}-600 group-hover:bg-blue-600 group-hover:text-white transition-all`}>
                     <Check size={20} />
                   </div>
@@ -382,7 +382,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-16">
             <div className="lg:col-span-1">
-              <h2 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tighter uppercase italic leading-none mb-8">Tarifs <br /> Crédits.</h2>
+              <h2 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tighter uppercase italic leading-none mb-6 sm:mb-8">Tarifs <br /> Crédits.</h2>
               <p className="text-lg text-slate-500 font-medium italic mb-12">Une monnaie unique pour un recrutement premium et sans friction.</p>
               <div className="p-8 bg-blue-600 rounded-[2.5rem] text-white shadow-2xl shadow-blue-200 relative overflow-hidden group">
                 <div className="relative z-10">
@@ -399,7 +399,7 @@ export default function Home() {
                 { title: "Standard", credits: "50 Cr.", desc: "Débloquez l'accès complet aux coordonnées et documents d'un profil certifié.", features: ["Full CV & Documentation", "Chat direct illimité", "Contact téléphonique"] },
                 { title: "Chasse IA", credits: "250 Cr.", desc: "Activez l'Agent IA pour chasser et valider le Top 3 des talents correspondant à votre besoin.", featured: true, features: ["Matching v2.5 Expert", "Rapport IA détaillé", "Validation KYC prioritaire"] }
               ].map((plan, i) => (
-                <div key={i} className={`p-10 rounded-[3rem] border-2 bg-white transition-all relative ${plan.featured ? 'border-blue-600 shadow-2xl scale-105 z-10' : 'border-slate-100 shadow-sm'}`}>
+                <div key={i} className={`p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-2 bg-white transition-all relative ${plan.featured ? 'border-blue-600 shadow-2xl scale-100 sm:scale-105 z-10' : 'border-slate-100 shadow-sm mt-4 sm:mt-0'}`}>
                   {plan.featured && <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white px-6 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest italic">Solution Elite</div>}
                   <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tighter mb-1">{plan.title}</h3>
                   <div className="text-4xl font-black text-blue-600 mb-6 italic tracking-tight">{plan.credits}</div>
