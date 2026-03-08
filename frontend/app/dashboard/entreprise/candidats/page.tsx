@@ -41,17 +41,28 @@ export default function TalentsBasePage() {
                 const results = Array.isArray(response.data) ? response.data :
                     (response.data.results ? response.data.results : []);
 
-                setTalents(results.map((t: any) => ({
-                    id: t.id,
-                    name: `${t.user_detail?.first_name || ''} ${t.user_detail?.last_name || 'Candidat'}`.trim() || t.user_detail?.username || 'Candidat',
-                    position: t.title || "Profil à compléter",
-                    location: t.location || "Non spécifié",
-                    score: t.placability_score || 0,
-                    reliability: t.reliability_score >= 80 ? "Elite" : t.reliability_score >= 50 ? "High" : "Standard",
-                    skills: t.skills || [],
-                    verified: t.is_verified,
-                    photo: t.photo
-                })));
+                setTalents(results.map((t: any) => {
+                    const firstName = t.user_detail?.first_name || '';
+                    const lastName = t.user_detail?.last_name || '';
+                    const username = t.user_detail?.username || '';
+                    const emailPrefix = t.user_detail?.email?.split('@')[0] || '';
+
+                    const name = (firstName || lastName)
+                        ? `${firstName} ${lastName}`.trim()
+                        : (username || emailPrefix || 'Candidat');
+
+                    return {
+                        id: t.id,
+                        name: name,
+                        position: t.title || "Profil à compléter",
+                        location: t.location || "Non spécifié",
+                        score: t.placability_score || 0,
+                        reliability: t.reliability_score >= 80 ? "Elite" : t.reliability_score >= 50 ? "High" : "Standard",
+                        skills: t.skills || [],
+                        verified: t.is_verified,
+                        photo: t.photo
+                    };
+                }));
             } catch (err: any) {
                 console.error("Error fetching talents:", err);
                 setError("Impossible de charger la base de talents. Vérifiez vos permissions.");

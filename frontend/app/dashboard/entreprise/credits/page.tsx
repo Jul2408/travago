@@ -457,10 +457,12 @@ export default function CreditsPage() {
                     </div>
                 </div>
                 <a
-                    href="mailto:contact@travago.ci?subject=Demande de Devis Personnalisé"
-                    className="px-10 py-5 bg-white text-blue-600 border-2 border-blue-100 rounded-2xl font-black text-xs uppercase tracking-widest hover:border-blue-600 transition-all shadow-sm"
+                    href="https://wa.me/237657948848"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-10 py-5 bg-[#25D366] text-white border-2 border-[#25D366] rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-[#20b858] transition-all shadow-sm flex items-center"
                 >
-                    Contacter un conseiller
+                    Contactez-nous sur WhatsApp
                 </a>
             </div>
         </div>

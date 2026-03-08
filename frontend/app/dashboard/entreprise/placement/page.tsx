@@ -285,11 +285,32 @@ export default function PlacementIAPage() {
             </AnimatePresence>
 
             {/* Help/Notice */}
-            <div className="p-6 sm:p-8 bg-blue-50 border border-blue-100 rounded-[2rem] sm:rounded-[2.5rem] flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 text-blue-900">
-                <ShieldCheck size={28} className="text-blue-600 shrink-0 sm:w-8 sm:h-8" />
-                <p className="text-xs sm:text-sm font-medium leading-relaxed italic">
-                    <strong>Garantie Travago :</strong> Tous les candidats présentés dans la section "Matches IA" ont un profil certifié, des documents d'identité validés et une fiabilité vérifiée à 100%.
-                </p>
+            <div className="grid lg:grid-cols-2 gap-6">
+                <div className="p-6 sm:p-8 bg-blue-50 border border-blue-100 rounded-[2rem] sm:rounded-[2.5rem] flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 text-blue-900">
+                    <ShieldCheck size={28} className="text-blue-600 shrink-0 sm:w-8 sm:h-8" />
+                    <p className="text-xs sm:text-sm font-medium leading-relaxed italic">
+                        <strong>Garantie Travago :</strong> Tous les candidats présentés dans la section "Matches IA" ont un profil certifié, des documents d'identité validés et une fiabilité vérifiée à 100%.
+                    </p>
+                </div>
+
+                <a
+                    href="https://wa.me/237657948848"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-6 sm:p-8 bg-green-50 hover:bg-green-100 border border-green-200 rounded-[2rem] sm:rounded-[2.5rem] flex items-center justify-between group transition-all"
+                >
+                    <div className="flex items-center space-x-4 sm:space-x-6">
+                        <div className="w-12 h-12 bg-green-500 text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-green-200 group-hover:scale-110 transition-transform">
+                            <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 className="text-[10px] font-black uppercase tracking-widest text-green-700 mb-1">Assistance Placement</h4>
+                            <p className="text-sm font-bold text-slate-900 italic">Discuter avec un conseiller</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     );

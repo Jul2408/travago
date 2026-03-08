@@ -464,10 +464,20 @@ export default function Home() {
             <div>
               <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900 mb-8">Contact Direct</h4>
               <p className="text-slate-900 font-black text-sm uppercase italic mb-3 underline decoration-blue-500 decoration-2">Douala, Cameroun</p>
-              <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100 flex items-center space-x-4 mb-3">
-                <Smartphone className="text-blue-600" size={20} />
-                <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Support WhatsApp <br /> <span className="text-slate-900 text-xs italic tracking-normal">+237 6XX XXX XXX</span></div>
-              </div>
+              <a
+                href="https://wa.me/237657948848"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-50 hover:bg-green-100 border border-green-200 p-6 rounded-3xl flex items-center space-x-4 mb-3 transition-all group"
+              >
+                <div className="w-10 h-10 bg-green-500 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-green-200 group-hover:scale-110 transition-transform">
+                  <Smartphone className="text-white" size={20} />
+                </div>
+                <div>
+                  <div className="text-[10px] font-black text-green-600 uppercase tracking-widest">WhatsApp Direct</div>
+                  <div className="text-slate-900 text-sm font-black italic">+237 657 948 848</div>
+                </div>
+              </a>
               <p className="text-blue-600 font-black text-xs uppercase italic font-mono">contact@travago.cm</p>
             </div>
           </div>
