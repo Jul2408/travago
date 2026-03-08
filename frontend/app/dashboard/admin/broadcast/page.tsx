@@ -23,7 +23,7 @@ export default function BroadcastPage() {
                 message,
                 link: link || undefined
             });
-            setStatus({ type: 'success', msg: 'Le message a été envoyé avec succès à tous les utilisateurs.' });
+            setStatus({ type: 'success', msg: 'Le message a été envoyé avec succès à tous les membres.' });
             setTitle('');
             setMessage('');
             setLink('');
@@ -117,11 +117,11 @@ export default function BroadcastPage() {
                             </li>
                             <li className="flex gap-3">
                                 <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 shrink-0"></div>
-                                Utilisez les liens pour guider les utilisateurs vers une action précise.
+                                Utilisez les liens pour guider les membres vers une action précise.
                             </li>
                             <li className="flex gap-3">
                                 <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 shrink-0"></div>
-                                Attention : ce message sera envoyé à TOUS les utilisateurs inscrits.
+                                Attention : ce message sera envoyé à TOUS les membres inscrits.
                             </li>
                         </ul>
                     </div>

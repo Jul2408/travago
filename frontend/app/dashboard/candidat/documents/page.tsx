@@ -15,6 +15,7 @@ import {
 import { api } from '@/lib/api';
 import axiosInstance from '@/lib/axios';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { toast } from 'sonner';
 
 interface Document {
     id?: number;
@@ -68,7 +69,7 @@ export default function CandidateDocumentsPage() {
         if (!file) return;
 
         if (file.size > 5 * 1024 * 1024) {
-            alert("Le fichier est trop volumineux (max 5MB)");
+            toast.warning("Le fichier est trop volumineux (max 5MB)");
             return;
         }
 
@@ -83,10 +84,10 @@ export default function CandidateDocumentsPage() {
             });
             await fetchDocuments();
             await fetchUser(); // Refresh placability score
-            alert('Document uploadé avec succès ! Nos équipes vont le vérifier.');
+            toast.success('Document uploadé avec succès ! Nos équipes vont le vérifier.');
         } catch (error) {
             console.error('Upload failed:', error);
-            alert('Erreur lors de l\'envoi du document.');
+            toast.error('Erreur lors de l\'envoi du document.');
         } finally {
             setUploadingType(null);
         }
@@ -227,7 +228,7 @@ export default function CandidateDocumentsPage() {
                     </p>
                 </div>
                 <button
-                    onClick={() => alert('Ouverture du support KYC...')}
+                    onClick={() => toast.info('Ouverture du support KYC...')}
                     className="text-blue-600 font-black text-xs uppercase tracking-widest hover:underline"
                 >
                     Support KYC

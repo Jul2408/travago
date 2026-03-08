@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Database, Search, Table, RefreshCw, HardDrive, Cpu, Archive } from 'lucide-react';
 import axiosInstance from '@/lib/axios';
+import { toast } from 'sonner';
 
 interface DBStats {
     total_users: number;
@@ -107,7 +108,7 @@ export default function AdminDatabasePage() {
                             <p className="text-slate-400 font-medium max-w-sm">Supprimez les données orphelines et optimisez les index de recherche pour de meilleures performances.</p>
                         </div>
                         <button
-                            onClick={() => alert("Optimisation de la base de données lancée en arrière-plan.")}
+                            onClick={() => toast.success("Optimisation de la base de données lancée en arrière-plan.")}
                             className="px-10 py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-blue-500/20"
                         >
                             Lancer Optimisation

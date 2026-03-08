@@ -20,7 +20,8 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import axiosInstance from '@/lib/axios';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import { toast } from 'sonner';
+import { Skeleton } from '@/components/ui/skeleton';
 export default function PlacementIAPage() {
     const [activePlacements, setActivePlacements] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -59,9 +60,10 @@ export default function PlacementIAPage() {
             setShowModal(false);
             setFormData({ title: '', description: '', budget_credits: 250 });
             fetchPlacements();
+            toast.success("Placement IA créé avec succès !");
         } catch (err) {
             console.error("Failed to create placement", err);
-            alert("Erreur lors de la création du placement. Vérifiez vos crédits.");
+            toast.error("Erreur lors de la création du placement. Vérifiez vos crédits.");
         } finally {
             setIsCreating(false);
         }
@@ -102,9 +104,26 @@ export default function PlacementIAPage() {
             {/* Placement List */}
             <div className="grid lg:grid-cols-2 gap-8">
                 {isLoading ? (
-                    <div className="col-span-2 text-center py-20 text-slate-400">
-                        <Loader2 className="animate-spin mx-auto mb-4" size={40} />
-                        Chargement des placements...
+                    <div className="grid lg:grid-cols-2 gap-8 col-span-2">
+                        {[1, 2].map((i) => (
+                            <div key={i} className="bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 border border-blue-50 shadow-sm space-y-6">
+                                <div className="flex items-center justify-between">
+                                    <div className="space-y-2 flex-1">
+                                        <Skeleton className="h-6 w-3/4" />
+                                        <Skeleton className="h-4 w-1/4" />
+                                    </div>
+                                    <Skeleton className="h-14 w-14 rounded-2xl" />
+                                </div>
+                                <div className="space-y-3">
+                                    <Skeleton className="h-2 w-full rounded-full" />
+                                    <div className="flex gap-4">
+                                        <Skeleton className="h-16 flex-1 rounded-2xl" />
+                                        <Skeleton className="h-16 flex-1 rounded-2xl" />
+                                    </div>
+                                </div>
+                                <Skeleton className="h-14 w-full rounded-[1.5rem]" />
+                            </div>
+                        ))}
                     </div>
                 ) : activePlacements.length === 0 ? (
                     <div className="col-span-2 text-center py-20 bg-slate-50 rounded-[3rem] border border-blue-50">
@@ -133,9 +152,9 @@ export default function PlacementIAPage() {
 
                             <div className="space-y-8">
                                 <div>
-                                    <div className="flex items-center justify-between mb-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                                        <span>Progression Algorithmique</span>
-                                        <span className="text-blue-600 font-black">{placement.progress}%</span>
+                                    <div className="flex items-center justify-between mb-3 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                                        <span className="whitespace-nowrap">Progression</span>
+                                        <span className="text-blue-600 font-black ml-4">{placement.progress}%</span>
                                     </div>
                                     <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
                                         <div
@@ -156,7 +175,7 @@ export default function PlacementIAPage() {
                                     </div>
                                 </div>
 
-                                <Link href={`/dashboard/entreprise/placement/${placement.id}`} className="w-full py-5 bg-slate-900 text-white rounded-[1.5rem] font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center hover:bg-blue-600 transition-all shadow-lg">
+                                <Link href={`/dashboard/entreprise/placement/${placement.id}`} className="w-full py-5 bg-slate-900 text-white rounded-[1.5rem] font-black text-xs uppercase tracking-widest flex items-center justify-center hover:bg-blue-600 transition-all shadow-lg">
                                     Voir la sélection IA <ChevronRight size={18} className="ml-2" />
                                 </Link>
                             </div>

@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import axiosInstance from '@/lib/axios';
+import { toast } from 'sonner';
 
 const CONTRACT_TYPES = [
     { value: 'CDI', label: 'CDI' },
@@ -85,10 +86,11 @@ export default function NewOfferPage() {
 
         try {
             await axiosInstance.post('jobs/offers/', formData);
+            toast.success("Offre publiée avec succès !");
             router.push('/dashboard/entreprise/offres');
         } catch (err) {
             console.error('Failed to create job offer', err);
-            alert('Erreur lors de la création de l\'offre. Veuillez vérifier les champs.');
+            toast.error('Erreur lors de la création de l\'offre. Veuillez vérifier les champs.');
         } finally {
             setIsLoading(false);
         }

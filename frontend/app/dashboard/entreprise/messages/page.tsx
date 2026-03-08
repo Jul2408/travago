@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/auth-store';
 import { getImageUrl } from '@/lib/utils';
+import { toast } from 'sonner';
 
 interface Message {
     id: number;
@@ -60,6 +61,9 @@ export default function EnterpriseMessagesPage() {
     useEffect(() => {
         setMounted(true);
         fetchConversations();
+        // Poll for new conversations every 10s
+        const interval = setInterval(fetchConversations, 10000);
+        return () => clearInterval(interval);
     }, []);
 
     useEffect(() => {
@@ -68,8 +72,11 @@ export default function EnterpriseMessagesPage() {
             if (window.innerWidth < 768) {
                 setShowListOnMobile(false);
             }
+            // Poll for new messages every 5s
+            const interval = setInterval(() => fetchMessages(selectedConversation.id), 5000);
+            return () => clearInterval(interval);
         }
-    }, [selectedConversation]);
+    }, [selectedConversation?.id]);
 
     useEffect(() => {
         scrollToBottom();
@@ -444,7 +451,7 @@ export default function EnterpriseMessagesPage() {
                             </div>
                             <button
                                 onClick={() => {
-                                    alert("Entretien planifié ! Le candidat recevra une notification.");
+                                    toast.success("Entretien planifié ! Le candidat recevra une notification.");
                                     setIsPlanningModalOpen(false);
                                 }}
                                 className="w-full py-5 mt-4 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-blue-100 hover:bg-blue-700 transition-all"

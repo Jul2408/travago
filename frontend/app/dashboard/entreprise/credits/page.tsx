@@ -19,6 +19,7 @@ import {
 
 import { useAuthStore } from '@/lib/store/auth-store';
 import axiosInstance from '@/lib/axios';
+import { toast } from 'sonner';
 
 export default function CreditsPage() {
     const { user } = useAuthStore();
@@ -76,7 +77,7 @@ export default function CreditsPage() {
     };
 
     const downloadCSV = () => {
-        if (transactions.length === 0) return alert("Aucune transaction à exporter.");
+        if (transactions.length === 0) return toast.info("Aucune transaction à exporter.");
 
         const headers = ["Référence", "Date", "Description", "Montant (FCFA)", "Statut"];
         const rows = transactions.map(tr => [
@@ -100,7 +101,7 @@ export default function CreditsPage() {
     };
 
     const handlePayment = async () => {
-        if (!phoneNumber) return alert("Veuillez entrer un numéro de téléphone.");
+        if (!phoneNumber) return toast.warning("Veuillez entrer un numéro de téléphone.");
         if (!selectedPack) return;
 
         setIsProcessing(true);
@@ -127,7 +128,7 @@ export default function CreditsPage() {
         } catch (error: any) {
             console.error(error);
             const errorMsg = error.response?.data?.error || "Erreur lors de l'initiation du paiement.";
-            alert(errorMsg);
+            toast.error(errorMsg);
             setIsProcessing(false);
         }
     };
@@ -140,7 +141,7 @@ export default function CreditsPage() {
             // The polling will pick it up, or we can manually trigger it
         } catch (error) {
             console.error(error);
-            alert("Erreur lors de la simulation.");
+            toast.error("Erreur lors de la simulation.");
         }
     };
 
@@ -155,7 +156,7 @@ export default function CreditsPage() {
                     setSelectedPack(null);
                     setCurrentTransactionId(null);
                     setValidationMessage(null);
-                    alert("✅ Paiement validé avec succès ! Vos crédits ont été ajoutés.");
+                    toast.success("✅ Paiement validé avec succès ! Vos crédits ont été ajoutés.");
                     // Refresh data
                     fetchTransactions();
                     window.location.reload();
@@ -163,7 +164,7 @@ export default function CreditsPage() {
                     clearInterval(interval);
                     setIsProcessing(false);
                     setIsPolling(false);
-                    alert("❌ Le paiement a échoué ou a été annulé.");
+                    toast.error("❌ Le paiement a échoué ou a été annulé.");
                 }
             } catch (err) {
                 console.error(err);
@@ -177,7 +178,7 @@ export default function CreditsPage() {
             if (isPolling) {
                 setIsPolling(false);
                 setIsProcessing(false);
-                alert("Le délai d'attente est dépassé. Si vous avez bien payé, vos crédits apparaîtront bientôt.");
+                toast.info("Le délai d'attente est dépassé. Si vous avez bien payé, vos crédits apparaîtront bientôt.");
             }
         }, 120000);
     };

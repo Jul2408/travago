@@ -48,13 +48,19 @@ export default function MessagesPage() {
 
     useEffect(() => {
         fetchConversations();
+        // Poll for new conversations every 10s
+        const interval = setInterval(fetchConversations, 10000);
+        return () => clearInterval(interval);
     }, []);
 
     useEffect(() => {
         if (selectedConversation) {
             fetchMessages(selectedConversation.id);
+            // Poll for new messages every 5s
+            const interval = setInterval(() => fetchMessages(selectedConversation.id), 5000);
+            return () => clearInterval(interval);
         }
-    }, [selectedConversation]);
+    }, [selectedConversation?.id]);
 
     useEffect(() => {
         scrollToBottom();

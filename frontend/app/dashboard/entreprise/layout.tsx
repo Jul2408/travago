@@ -178,8 +178,8 @@ export default function BusinessDashboardLayout({
                                     <div className="h-10 w-px bg-slate-100 hidden sm:block"></div>
                                     <div className="flex items-center space-x-3 pl-2 group cursor-pointer" onClick={() => router.push('/dashboard/entreprise/parametres')}>
                                         <div className="text-right hidden sm:block">
-                                            <div className="text-sm font-black text-slate-900 group-hover:text-blue-600 transition-colors">
-                                                {mounted ? (user?.company_profile?.name || user?.username || 'Recruteur') : '...'}
+                                            <div className="text-sm font-black text-slate-900 group-hover:text-blue-600 transition-colors min-w-[100px]">
+                                                {mounted ? (user?.company_profile?.name || user?.username || 'Recruteur') : <span className="invisible">Recruteur</span>}
                                             </div>
                                             <div className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Espace Entreprise</div>
                                         </div>
@@ -204,7 +204,7 @@ export default function BusinessDashboardLayout({
                     </header>
 
                     {/* Page Content */}
-                    <main className="p-3 sm:p-6 md:p-8 flex-1">
+                    <main className="p-3 sm:p-6 md:p-8 flex-1 w-full max-w-7xl mx-auto">
                         {children}
                     </main>
                 </div>

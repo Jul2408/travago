@@ -27,6 +27,7 @@ import Link from 'next/link';
 import axiosInstance from '@/lib/axios';
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import { toast } from 'sonner';
 
 interface AdminStats {
     stats: {
@@ -87,7 +88,7 @@ export default function AdminDashboardPage() {
 
     const statCards = [
         {
-            label: "Comptes Utilisateurs",
+            label: "Membres de la Communauté",
             value: stats?.total_users || 0,
             change: "Total Base",
             isPositive: true,
@@ -347,7 +348,7 @@ export default function AdminDashboardPage() {
                         <h3 className="text-lg font-black mb-4 uppercase italic">Besoin d'aide ?</h3>
                         <p className="text-sm font-medium text-blue-100 mb-6 uppercase tracking-tight">Consultez le guide de gestion ou contactez le support technique pour toute intervention complexe.</p>
                         <button
-                            onClick={() => alert('Ouverture de la documentation technique...')}
+                            onClick={() => toast.info('Ouverture de la documentation technique...')}
                             className="w-full py-4 bg-white text-blue-600 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg"
                         >
                             Documentation

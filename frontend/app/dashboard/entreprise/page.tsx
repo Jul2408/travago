@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import axiosInstance from '@/lib/axios';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function DashboardEntreprisePage() {
     const { user, fetchUser } = useAuthStore();
@@ -165,8 +166,16 @@ export default function DashboardEntreprisePage() {
 
                         <div className="space-y-4">
                             {isLoading ? (
-                                <div className="flex justify-center py-10">
-                                    <Loader2 className="animate-spin text-blue-600" />
+                                <div className="space-y-4">
+                                    {[1, 2, 3].map((i) => (
+                                        <div key={i} className="p-5 sm:p-8 bg-slate-50 rounded-[1.5rem] sm:rounded-[2rem] border border-slate-100 flex items-center justify-between">
+                                            <div className="space-y-3 flex-1">
+                                                <Skeleton className="h-6 w-1/3" />
+                                                <Skeleton className="h-4 w-1/4" />
+                                            </div>
+                                            <Skeleton className="h-10 w-24 rounded-xl" />
+                                        </div>
+                                    ))}
                                 </div>
                             ) : recentPlacements.length === 0 ? (
                                 <div className="p-12 bg-slate-50 rounded-[2rem] border border-dashed border-slate-200 text-center">
@@ -221,7 +230,17 @@ export default function DashboardEntreprisePage() {
                                 Messages Récents
                             </h3>
                             <div className="space-y-4 flex-1">
-                                {conversations.length > 0 ? conversations.slice(0, 3).map((conv: any, i: number) => (
+                                {isLoading ? (
+                                    [1, 2, 3].map((i) => (
+                                        <div key={i} className="flex items-center space-x-3 p-3">
+                                            <Skeleton className="w-10 h-10 rounded-lg" />
+                                            <div className="flex-1 space-y-2">
+                                                <Skeleton className="h-3 w-1/2" />
+                                                <Skeleton className="h-2 w-1/3" />
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : conversations.length > 0 ? conversations.slice(0, 3).map((conv: any, i: number) => (
                                     <div key={i} className="flex items-center space-x-3 p-3 hover:bg-slate-50 rounded-xl transition-all cursor-pointer border border-transparent hover:border-slate-100">
                                         <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center text-green-700 font-black text-xs">
                                             {conv.other_participant?.username?.substring(0, 2).toUpperCase() || '??'}
@@ -250,18 +269,36 @@ export default function DashboardEntreprisePage() {
                                     <Users size={24} />
                                 </div>
                                 <div>
-                                    <div className="text-xl sm:text-2xl font-black text-slate-900">{stats.matches}</div>
-                                    <div className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-wider sm:tracking-widest leading-tight">Candidatures reçues</div>
+                                    {isLoading ? (
+                                        <div className="space-y-2">
+                                            <Skeleton className="h-6 w-12" />
+                                            <Skeleton className="h-3 w-20" />
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <div className="text-xl sm:text-2xl font-black text-slate-900">{stats.matches}</div>
+                                            <div className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-wider sm:tracking-widest leading-tight">Candidatures reçues</div>
+                                        </>
+                                    )}
                                 </div>
                             </div>
-                            <div className="bg-white p-5 sm:p-8 rounded-[2rem] border border-orange-50 shadow-sm flex items-center justify-between">
+                            <div className="bg-white p-5 sm:p-8 rounded-[2rem] border border-orange-50 shadow-sm flex items-center justify-between font-black">
                                 <div className="flex items-center space-x-4 sm:space-x-6">
                                     <div className="w-12 h-12 sm:w-14 sm:h-14 bg-orange-50 text-orange-600 rounded-[1rem] sm:rounded-2xl flex items-center justify-center shrink-0">
                                         <Coins size={24} />
                                     </div>
                                     <div>
-                                        <div className="text-xl sm:text-2xl font-black text-slate-900">{stats.credits}</div>
-                                        <div className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-wider sm:tracking-widest leading-tight">Crédits de Placement</div>
+                                        {isLoading ? (
+                                            <div className="space-y-2">
+                                                <Skeleton className="h-6 w-12" />
+                                                <Skeleton className="h-3 w-20" />
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <div className="text-xl sm:text-2xl font-black text-slate-900">{stats.credits}</div>
+                                                <div className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-wider sm:tracking-widest leading-tight">Crédits de Placement</div>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                                 <Link href="/dashboard/entreprise/credits" className="p-3 bg-orange-100 text-orange-700 rounded-xl hover:bg-orange-600 hover:text-white transition-all">
@@ -284,7 +321,20 @@ export default function DashboardEntreprisePage() {
                     </div>
 
                     <div className="space-y-6 flex-1">
-                        {eliteTalents.length === 0 ? (
+                        {isLoading ? (
+                            [1, 2, 3].map((i) => (
+                                <div key={i} className="p-4 sm:p-6 rounded-[1.5rem] bg-slate-50 border border-slate-50 space-y-4">
+                                    <div className="flex items-center gap-4">
+                                        <Skeleton className="w-12 h-12 rounded-xl" />
+                                        <div className="flex-1 space-y-2">
+                                            <Skeleton className="h-4 w-1/2" />
+                                            <Skeleton className="h-3 w-1/3" />
+                                        </div>
+                                    </div>
+                                    <Skeleton className="h-1.5 w-full rounded-full" />
+                                </div>
+                            ))
+                        ) : eliteTalents.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-10 text-center space-y-3 opacity-60">
                                 <UserCheck size={32} className="text-slate-300" />
                                 <p className="text-slate-400 text-xs font-medium max-w-[200px]">Aucun talent 'Elite' détecté pour l'instant.</p>

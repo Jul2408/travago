@@ -11,6 +11,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import axiosInstance from '@/lib/axios';
 import { getImageUrl } from '@/lib/utils';
+import { toast } from 'sonner';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface Application {
     id: number;
@@ -90,7 +92,7 @@ export default function JobApplicationsPage() {
             router.push('/dashboard/entreprise/messages');
         } catch (err) {
             console.error('Failed to start conversation', err);
-            alert('Erreur lors de l\'ouverture de la discussion.');
+            toast.error('Erreur lors de l\'ouverture de la discussion.');
         } finally {
             setIsStartingChat(null);
         }
@@ -100,8 +102,35 @@ export default function JobApplicationsPage() {
 
     if (isLoading) {
         return (
-            <div className="flex items-center justify-center py-20">
-                <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
+            <div className="space-y-10">
+                <div className="h-6 w-32 bg-slate-200 animate-pulse rounded-lg" />
+                <div className="bg-white rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-10 border border-blue-50 shadow-sm">
+                    <div className="flex items-center gap-6">
+                        <Skeleton className="w-24 h-24 rounded-[2rem]" />
+                        <div className="space-y-4 flex-1">
+                            <Skeleton className="h-10 w-1/3" />
+                            <div className="flex gap-4">
+                                <Skeleton className="h-4 w-24" />
+                                <Skeleton className="h-4 w-24" />
+                                <Skeleton className="h-4 w-24" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="space-y-6">
+                    <Skeleton className="h-8 w-48" />
+                    {[1, 2, 3].map((i) => (
+                        <div key={i} className="bg-white rounded-[2rem] p-8 border border-blue-50 flex items-center gap-10">
+                            <Skeleton className="w-16 h-16 rounded-2xl" />
+                            <div className="flex-1 space-y-3">
+                                <Skeleton className="h-6 w-1/4" />
+                                <Skeleton className="h-4 w-1/6" />
+                            </div>
+                            <Skeleton className="h-4 w-1/3" />
+                            <Skeleton className="h-14 w-40 rounded-2xl" />
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     }

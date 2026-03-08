@@ -7,6 +7,7 @@ import axiosInstance from '@/lib/axios';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getImageUrl } from '@/lib/utils';
+import { toast } from 'sonner';
 
 interface CandidateDetail {
     id: number;
@@ -97,9 +98,10 @@ export default function CandidateDetailPage() {
         try {
             await axiosInstance.post(`users/documents/${docId}/verify/`);
             fetchCandidate();
+            toast.success("Document validé avec succès.");
         } catch (error) {
             console.error("Failed to verify document", error);
-            alert("Erreur lors de la validation.");
+            toast.error("Erreur lors de la validation.");
         }
     };
 
@@ -110,9 +112,10 @@ export default function CandidateDetailPage() {
         try {
             await axiosInstance.post(`users/documents/${docId}/reject/`, { reason });
             fetchCandidate();
+            toast.success("Document rejeté et candidat notifié.");
         } catch (error) {
             console.error("Failed to reject document", error);
-            alert("Erreur lors du rejet.");
+            toast.error("Erreur lors du rejet.");
         }
     };
 

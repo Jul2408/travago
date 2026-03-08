@@ -26,6 +26,7 @@ import Image from 'next/image';
 import axiosInstance from '@/lib/axios';
 import { useAuthStore } from '@/lib/store/auth-store';
 import { getImageUrl } from '@/lib/utils';
+import { toast } from 'sonner';
 
 interface Experience {
     company: string;
@@ -142,8 +143,10 @@ export default function ProfilePage() {
                     }
                 });
             }
+            toast.success("Profil mis à jour avec succès !");
         } catch (err) {
             console.error('Failed to save profile', err);
+            toast.error("Erreur lors de la sauvegarde du profil.");
         } finally {
             setIsSaving(false);
         }
@@ -175,7 +178,7 @@ export default function ProfilePage() {
             }
         } catch (err: any) {
             console.error('Failed to upload photo', err);
-            alert(`Erreur lors de l'envoi de la photo: ${err.response?.data?.detail || err.message}`);
+            toast.error(`Erreur lors de l'envoi de la photo: ${err.response?.data?.detail || err.message}`);
         } finally {
             setIsSaving(false);
         }

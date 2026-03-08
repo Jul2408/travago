@@ -6,6 +6,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import JobOffer, Application
 from .serializers import JobOfferSerializer, ApplicationSerializer
 from users.authentication import CsrfExemptSessionAuthentication
+from notifications.models import Notification
 
 class JobOfferViewSet(viewsets.ModelViewSet):
     queryset = JobOffer.objects.filter(is_active=True).order_by('-created_at')
@@ -58,6 +59,19 @@ class JobOfferViewSet(viewsets.ModelViewSet):
                 return Response({"detail": "Vous avez déjà postulé à cette offre."}, status=status.HTTP_400_BAD_REQUEST)
             
             application = Application.objects.create(job_offer=job, candidate=candidate)
+            
+            # Notify Company about the new application
+            try:
+                Notification.objects.create(
+                    user=job.company.user,
+                    notification_type=Notification.NotificationType.JOB_ALERT,
+                    title="Nouvelle candidature reçue",
+                    message=f"{request.user.get_full_name() or request.user.username} a postulé à votre offre : {job.title}",
+                    link=f"/dashboard/entreprise/offres/{job.slug}"
+                )
+            except Exception:
+                pass  # Don't break application creation if notification fails
+
             serializer = ApplicationSerializer(application)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except Exception as e:

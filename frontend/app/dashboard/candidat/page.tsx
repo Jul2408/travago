@@ -25,6 +25,7 @@ import {
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/lib/store/auth-store';
 import axiosInstance from '@/lib/axios';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function DashboardCandidatPage() {
     const { user, fetchUser } = useAuthStore();
@@ -324,8 +325,22 @@ export default function DashboardCandidatPage() {
                     </div>
 
                     {isLoading ? (
-                        <div className="flex justify-center py-10">
-                            <Loader2 className="animate-spin text-blue-600" />
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {[1, 2, 3].map((i) => (
+                                <div key={i} className="flex flex-col p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
+                                    <div className="flex items-center space-x-4">
+                                        <Skeleton className="w-12 h-12 rounded-xl" />
+                                        <div className="space-y-2 flex-1">
+                                            <Skeleton className="h-4 w-3/4" />
+                                            <Skeleton className="h-3 w-1/2" />
+                                        </div>
+                                    </div>
+                                    <div className="mt-auto flex items-center justify-between border-t border-slate-200 pt-4">
+                                        <Skeleton className="h-4 w-16" />
+                                        <Skeleton className="h-4 w-24" />
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     ) : candidatures.length > 0 ? (
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

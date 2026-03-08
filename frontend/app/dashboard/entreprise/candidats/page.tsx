@@ -22,6 +22,7 @@ import { api } from '@/lib/api';
 import { getImageUrl } from '@/lib/utils';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function TalentsBasePage() {
     const [talents, setTalents] = useState<any[]>([]);
@@ -160,9 +161,32 @@ export default function TalentsBasePage() {
             {/* Verified Talents List */}
             <div className="space-y-4 sm:space-y-6">
                 {loading ? (
-                    <div className="flex flex-col items-center justify-center py-10 sm:py-20 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-blue-50 shadow-sm">
-                        <Loader2 className="animate-spin text-blue-600 mb-4" size={48} />
-                        <p className="text-slate-500 font-black uppercase tracking-widest text-[10px]">Chargement des talents...</p>
+                    <div className="space-y-6">
+                        {[1, 2, 3].map((i) => (
+                            <div key={i} className="bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 border border-blue-50 shadow-sm">
+                                <div className="flex flex-col lg:flex-row lg:items-center gap-6 sm:gap-10">
+                                    <div className="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 lg:w-1/3">
+                                        <Skeleton className="w-16 h-16 sm:w-24 sm:h-24 rounded-2xl sm:rounded-[2.5rem]" />
+                                        <div className="flex-1 space-y-3">
+                                            <Skeleton className="h-6 w-3/4" />
+                                            <Skeleton className="h-4 w-1/2" />
+                                            <div className="flex gap-2">
+                                                <Skeleton className="h-6 w-16" />
+                                                <Skeleton className="h-6 w-16" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex-1 flex justify-around">
+                                        <Skeleton className="h-12 w-20" />
+                                        <Skeleton className="h-12 w-20" />
+                                    </div>
+                                    <div className="lg:w-1/4 flex flex-col items-end space-y-2">
+                                        <Skeleton className="h-4 w-20" />
+                                        <Skeleton className="h-12 w-full rounded-[1.5rem]" />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 ) : error ? (
                     <div className="text-center py-10 sm:py-20 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-red-50 shadow-sm">
@@ -212,32 +236,32 @@ export default function TalentsBasePage() {
                                 </div>
 
                                 {/* IA Certification Metrics */}
-                                <div className="flex items-center justify-between sm:justify-around flex-wrap gap-4 sm:gap-8 border-y lg:border-y-0 lg:border-x border-slate-50 py-6 sm:py-8 lg:py-0 text-center flex-1">
-                                    <div className="w-[45%] sm:w-auto">
-                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 sm:mb-2">IA Match Score</div>
+                                <div className="flex sm:items-center justify-between sm:justify-around gap-2 sm:gap-8 border-y lg:border-y-0 lg:border-x border-slate-50 py-6 sm:py-8 lg:py-0 text-center flex-1 overflow-x-auto hide-scrollbar">
+                                    <div className="px-2">
+                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 sm:mb-2 whitespace-nowrap">IA Match Score</div>
                                         <div className="text-2xl sm:text-3xl font-black text-blue-700">{talent.score}</div>
                                     </div>
-                                    <div className="w-[45%] sm:w-auto">
-                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 sm:mb-2">Reliability</div>
+                                    <div className="px-2">
+                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 sm:mb-2 whitespace-nowrap">Fiabilité</div>
                                         <div className="text-lg sm:text-xl font-black text-green-600 flex items-center justify-center italic">
                                             {talent.reliability}
                                         </div>
                                     </div>
-                                    <div className="hidden sm:block">
-                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 sm:mb-2">Diplôme Vérifié</div>
+                                    <div className="px-2">
+                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 sm:mb-2 whitespace-nowrap">Diplôme</div>
                                         <CheckCircle2 className="mx-auto text-blue-600" size={24} />
                                     </div>
                                 </div>
 
                                 {/* Cost & Contact */}
                                 <div className="flex flex-wrap sm:flex-nowrap items-center justify-between lg:justify-end gap-4 sm:gap-8 lg:w-1/4 mt-4 lg:mt-0">
-                                    <div className="text-left sm:text-right">
-                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Débloquer (Crédits)</div>
+                                    <div className="text-left sm:text-right shrink-0">
+                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 whitespace-nowrap">Coût (Crédits)</div>
                                         <div className="flex items-center sm:justify-end text-blue-700 font-black text-lg sm:text-xl">
                                             <Coins size={18} className="mr-2 text-orange-500" /> {talent.credits}
                                         </div>
                                     </div>
-                                    <Link href={`/dashboard/entreprise/candidats/${talent.id}`} className="w-full sm:w-auto bg-slate-900 text-white px-6 sm:px-10 py-4 sm:py-5 rounded-[1.5rem] sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-slate-100 flex items-center justify-center shrink-0">
+                                    <Link href={`/dashboard/entreprise/candidats/${talent.id}`} className="w-full sm:w-auto bg-slate-900 text-white px-6 sm:px-10 py-4 sm:py-5 rounded-[1.5rem] sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-slate-100 flex items-center justify-center shrink-0 whitespace-nowrap">
                                         Voir profil <ChevronRight size={16} className="ml-2" />
                                     </Link>
                                 </div>

@@ -51,6 +51,28 @@ class PlacementRequest(models.Model):
             self.status = self.PlacementStatus.SHORTLIST_READY
             self.save()
             
+            # Notify the company that their shortlist is ready
+            try:
+                from notifications.models import Notification
+                Notification.objects.create(
+                    user=self.company.user,
+                    notification_type=Notification.NotificationType.MATCH_FOUND,
+                    title="🎯 Shortlist IA Prête !",
+                    message=f"Votre mission \"{self.title}\" a trouvé {len(matches_found)} talent(s) certifié(s). Consultez votre shortlist.",
+                    link=f"/dashboard/entreprise/placement/{self.id}"
+                )
+                # Notify each matched candidate
+                for candidate in matches_found:
+                    Notification.objects.create(
+                        user=candidate.user,
+                        notification_type=Notification.NotificationType.MATCH_FOUND,
+                        title="✨ Vous avez été sélectionné !",
+                        message=f"L'IA Travago vous a identifié comme talent compatible pour le poste : \"{self.title}\".",
+                        link="/dashboard/candidat/candidatures"
+                    )
+            except Exception:
+                pass
+            
         return matches_found
 
     def __str__(self):

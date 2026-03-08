@@ -24,6 +24,7 @@ import {
     Lock
 } from 'lucide-react';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 export default function CandidateProfilePage() {
     const params = useParams();
@@ -57,7 +58,7 @@ export default function CandidateProfilePage() {
         setIsUnlocking(true);
         try {
             const response = await api.post(`users/candidates/${params.id}/unlock/`);
-            alert(response.data.detail);
+            toast.success(response.data.detail);
             // Update candidate state with unlocked data
             await fetchCandidate();
             // Optional: refresh user credits in global state if needed
@@ -65,7 +66,7 @@ export default function CandidateProfilePage() {
         } catch (error: any) {
             console.error('Failed to unlock candidate', error);
             const msg = error.response?.data?.detail || "Erreur lors du déblocage.";
-            alert(msg);
+            toast.error(msg);
         } finally {
             setIsUnlocking(false);
         }
@@ -74,7 +75,7 @@ export default function CandidateProfilePage() {
     const handleStartChat = async () => {
         if (!candidate) return;
         if (!candidate.is_unlocked) {
-            return alert("Veuillez débloquer ce profil pour discuter avec le candidat.");
+            return toast.warning("Veuillez débloquer ce profil pour discuter avec le candidat.");
         }
         try {
             const response = await api.post('chat/start_conversation/', {
@@ -84,7 +85,7 @@ export default function CandidateProfilePage() {
             router.push('/dashboard/entreprise/messages');
         } catch (error) {
             console.error('Failed to start conversation', error);
-            alert("Impossible de démarrer la conversation.");
+            toast.error("Impossible de démarrer la conversation.");
         }
     };
 

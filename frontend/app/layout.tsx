@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import PWARegistration from "@/components/pwa-registration";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: 'Travago - Recrutement Intelligent au Cameroun',
@@ -8,9 +9,9 @@ export const metadata: Metadata = {
   keywords: ['emploi', 'recrutement', 'Cameroun', 'travail', 'placement', 'IA', 'douala', 'yaoundé'],
   manifest: "/manifest.json",
   icons: {
-    icon: "/logo.jpeg",
-    shortcut: "/logo.jpeg",
-    apple: "/logo.jpeg",
+    icon: "/logo-192.png",
+    shortcut: "/logo-192.png",
+    apple: "/logo-192.png",
   },
   openGraph: {
     title: 'Travago - Recrutement Intelligent au Cameroun',
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body className="antialiased">
         <PWARegistration />
         {children}
+        <Toaster position="top-center" richColors theme="light" />
       </body>
     </html>
   );

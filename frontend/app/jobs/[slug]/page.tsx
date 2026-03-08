@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axiosInstance from '@/lib/axios';
 import { MapPin, Building2, Calendar, Clock, DollarSign, Briefcase, ChevronLeft, Send, BarChart2 } from 'lucide-react';
 import Link from 'next/link';
+import { toast } from 'sonner';
 import { useParams, useRouter } from 'next/navigation';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
@@ -63,14 +64,14 @@ export default function JobDetailPage() {
         try {
             await axiosInstance.post(`jobs/offers/${slug}/apply/`);
             setHasApplied(true);
-            alert("Candidature envoyée avec succès !");
+            toast.success("Candidature envoyée avec succès !");
         } catch (error: any) {
             if (error.response?.status === 400 && error.response?.data?.detail) {
-                alert(error.response.data.detail);
+                toast.error(error.response.data.detail);
                 setHasApplied(true); // Assuming 400 means already applied
             } else {
                 console.error("Failed to apply", error);
-                alert("Erreur lors de la candidature. Veuillez réessayer.");
+                toast.error("Erreur lors de la candidature. Veuillez réessayer.");
             }
         } finally {
             setIsApplying(false);

@@ -21,6 +21,7 @@ import axiosInstance from '@/lib/axios';
 import { getImageUrl } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 interface JobOffer {
     id: number;
@@ -82,10 +83,10 @@ export default function JobDetailPage() {
         try {
             await axiosInstance.post(`jobs/offers/${offer.slug}/apply/`);
             setHasApplied(true);
-            alert(`Succès ! Votre candidature pour "${offer.title}" a été transmise avec succès.`);
+            toast.success(`Succès ! Votre candidature pour "${offer.title}" a été transmise avec succès.`);
         } catch (err: any) {
             console.error('Failed to apply', err);
-            alert(err.response?.data?.detail || 'Une erreur est survenue.');
+            toast.error(err.response?.data?.detail || 'Une erreur est survenue.');
         } finally {
             setIsApplying(false);
         }
@@ -311,7 +312,7 @@ export default function JobDetailPage() {
                                 </div>
                             </div>
                             <button
-                                onClick={() => alert(`Visite du profil de ${offer.company_detail.name}...`)}
+                                onClick={() => toast.info(`Visite du profil de ${offer.company_detail.name}...`)}
                                 className="w-full bg-white text-slate-900 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest border border-slate-200 hover:border-blue-500 transition-all italic"
                             >
                                 Voir la page entreprise

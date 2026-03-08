@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import { Search, Filter, MoreHorizontal, Shield, Mail, Edit, XCircle } from 'lucide-react';
 import axiosInstance from '@/lib/axios';
 import Link from 'next/link';
+import { toast } from 'sonner';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Power } from 'lucide-react';
 
 interface User {
     id: number;
@@ -88,13 +91,27 @@ export default function UsersPage() {
     };
 
     const deleteUser = async (id: number) => {
-        if (!confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action est irréversible.")) return;
+        if (!confirm("Êtes-vous sûr de vouloir supprimer ce membre ? Cette action est irréversible.")) return;
         try {
             await axiosInstance.delete(`users/admin/users/${id}/`);
-            fetchUsers(); // Refresh list
+            fetchUsers();
+            toast.success("Membre supprimé de la communauté.");
         } catch (error) {
             console.error("Failed to delete user", error);
-            alert("Erreur lors de la suppression");
+            toast.error("Erreur lors de la suppression.");
+        }
+    };
+
+    const toggleUserStatus = async (id: number) => {
+        try {
+            const response = await axiosInstance.post(`users/admin/users/${id}/toggle_status/`);
+            if (response.data.status === 'success') {
+                setUsers(prev => prev.map(u => u.id === id ? { ...u, is_active: response.data.is_active } : u));
+                toast.success(response.data.message);
+            }
+        } catch (error) {
+            console.error("Failed to toggle user status", error);
+            toast.error("Erreur lors de la modification du statut.");
         }
     };
 
@@ -103,8 +120,8 @@ export default function UsersPage() {
         <div className="space-y-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-800 tracking-tight">Gestion de la Communauté</h1>
-                    <p className="text-slate-500 font-medium">Suivi des comptes, rôles et permissions ({users.length} membres).</p>
+                    <h1 className="text-3xl font-black text-slate-800 tracking-tight">Gestion des Membres</h1>
+                    <p className="text-slate-500 font-medium">Contrôle des comptes, rôles et accès ({users.length} membres actifs).</p>
                 </div>
             </div>
 
@@ -128,7 +145,7 @@ export default function UsersPage() {
                         Actualiser
                     </button>
                     <div className="px-4 py-3 bg-slate-100 text-slate-800 rounded-xl font-bold text-sm transition-all flex items-center justify-center">
-                        Total: {users.length}
+                        Total: {isLoading ? '...' : users.length}
                     </div>
                 </div>
             </div>
@@ -147,12 +164,25 @@ export default function UsersPage() {
                         </thead>
                         <tbody className="divide-y divide-slate-50">
                             {isLoading ? (
-                                <tr>
-                                    <td colSpan={4} className="p-8 text-center text-slate-500 font-bold italic">Recherche en cours...</td>
-                                </tr>
+                                [1, 2, 3, 4, 5].map((i) => (
+                                    <tr key={i}>
+                                        <td className="px-8 py-5">
+                                            <div className="flex items-center gap-4">
+                                                <Skeleton className="w-10 h-10 rounded-xl" />
+                                                <div className="space-y-2 flex-1">
+                                                    <Skeleton className="h-4 w-32" />
+                                                    <Skeleton className="h-3 w-48" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-8 py-5"><Skeleton className="h-6 w-20 rounded-lg" /></td>
+                                        <td className="px-8 py-5"><Skeleton className="h-6 w-16 rounded-full" /></td>
+                                        <td className="px-8 py-5"><Skeleton className="h-8 w-24 ml-auto rounded-lg" /></td>
+                                    </tr>
+                                ))
                             ) : users.length === 0 ? (
                                 <tr>
-                                    <td colSpan={4} className="p-8 text-center text-slate-500 font-bold italic">Aucun utilisateur correspondant.</td>
+                                    <td colSpan={4} className="p-8 text-center text-slate-500 font-bold italic">Aucun membre correspondant.</td>
                                 </tr>
                             ) : (
                                 users.map((user) => (
@@ -163,12 +193,12 @@ export default function UsersPage() {
                                                     {user.username.substring(0, 2)}
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-slate-800">
+                                                    <div className="font-bold text-slate-800 leading-tight">
                                                         {(user as any).first_name || (user as any).last_name
                                                             ? `${(user as any).first_name || ''} ${(user as any).last_name || ''}`.trim()
                                                             : user.username}
                                                     </div>
-                                                    <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{user.email}</div>
+                                                    <div className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-0.5">{user.email}</div>
                                                 </div>
                                             </div>
                                         </td>
@@ -178,27 +208,30 @@ export default function UsersPage() {
                                             </span>
                                         </td>
                                         <td className="px-8 py-5">
-                                            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold ${user.is_active ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'
-                                                }`}>
+                                            <button
+                                                onClick={() => toggleUserStatus(user.id)}
+                                                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${user.is_active ? 'bg-green-50 text-green-600 hover:bg-green-100' : 'bg-red-50 text-red-600 hover:bg-red-100'
+                                                    }`}
+                                            >
                                                 <div className={`w-1.5 h-1.5 rounded-full ${user.is_active ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                                                {user.is_active ? 'Actif' : 'Inactif'}
-                                            </span>
+                                                {user.is_active ? 'Actif' : 'Suspendu'}
+                                            </button>
                                         </td>
                                         <td className="px-8 py-5 text-right">
                                             <div className="flex items-center justify-end gap-2">
                                                 {getEditLink(user) ? (
-                                                    <Link href={getEditLink(user)!} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all" title="Voir Profil">
+                                                    <Link href={getEditLink(user)!} className="p-3 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all" title="Voir Profil">
                                                         <Edit size={16} />
                                                     </Link>
                                                 ) : (
-                                                    <button className="p-2 text-slate-200 cursor-not-allowed rounded-lg transition-all" title="Non modifiable" disabled>
+                                                    <button className="p-3 text-slate-200 cursor-not-allowed rounded-xl transition-all" title="Non modifiable" disabled>
                                                         <Edit size={16} />
                                                     </button>
                                                 )}
                                                 <button
                                                     onClick={() => deleteUser(user.id)}
-                                                    className="p-2 text-slate-300 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
-                                                    title="Supprimer Définitivement"
+                                                    className="p-3 text-slate-300 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
+                                                    title="Révoquer l'accès"
                                                 >
                                                     <XCircle size={16} />
                                                 </button>

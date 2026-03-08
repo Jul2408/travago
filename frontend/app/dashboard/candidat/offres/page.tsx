@@ -9,12 +9,12 @@ import {
     Filter,
     ChevronRight,
     Zap,
-    Loader2
 } from 'lucide-react';
 import Link from 'next/link';
 import axiosInstance from '@/lib/axios';
 import { getImageUrl } from '@/lib/utils';
 import Image from 'next/image';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface JobOffer {
     id: number;
@@ -28,6 +28,7 @@ interface JobOffer {
     company_logo: string | null;
     created_at: string;
     is_ia_boosted?: boolean;
+    ai_match_score?: number;
 }
 
 export default function CandidateOffresPage() {
@@ -44,7 +45,6 @@ export default function CandidateOffresPage() {
     const fetchOffers = async () => {
         try {
             const response = await axiosInstance.get('jobs/offers/');
-            // Handle pagination
             const results = response.data.results || response.data;
             setOffers(results);
         } catch (error) {
@@ -93,8 +93,28 @@ export default function CandidateOffresPage() {
             {/* Offers List */}
             <div className="space-y-6">
                 {isLoading ? (
-                    <div className="flex items-center justify-center py-20">
-                        <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
+                    <div className="space-y-6">
+                        {[1, 2, 3].map((i) => (
+                            <div key={i} className="bg-white rounded-[2.5rem] p-8 border border-blue-50 shadow-sm">
+                                <div className="flex flex-col lg:flex-row lg:items-center gap-8">
+                                    <div className="flex items-start space-x-6 lg:w-1/3">
+                                        <Skeleton className="w-20 h-20 rounded-[2rem] shrink-0" />
+                                        <div className="flex-1 space-y-3">
+                                            <Skeleton className="h-3 w-24" />
+                                            <Skeleton className="h-6 w-3/4" />
+                                            <Skeleton className="h-3 w-1/2" />
+                                        </div>
+                                    </div>
+                                    <div className="flex-1 space-y-2">
+                                        <Skeleton className="h-4 w-full" />
+                                        <Skeleton className="h-4 w-2/3" />
+                                    </div>
+                                    <div className="lg:w-1/4 flex justify-end">
+                                        <Skeleton className="h-14 w-40 rounded-2xl" />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 ) : filteredOffers.length === 0 ? (
                     <div className="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-blue-100">
@@ -146,6 +166,16 @@ export default function CandidateOffresPage() {
                                     <p className="text-sm text-slate-500 line-clamp-2 leading-relaxed">
                                         {offer.description}
                                     </p>
+                                    {offer.ai_match_score !== undefined && (
+                                        <div className="mt-3 flex items-center gap-2">
+                                            <div className="h-1.5 w-24 bg-slate-100 rounded-full overflow-hidden">
+                                                <div className="h-full bg-blue-600 rounded-full" style={{ width: `${offer.ai_match_score}%` }} />
+                                            </div>
+                                            <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">
+                                                {offer.ai_match_score}% Match IA
+                                            </span>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="flex items-center justify-end lg:w-1/4">

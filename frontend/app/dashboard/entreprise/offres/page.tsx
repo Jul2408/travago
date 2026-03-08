@@ -20,6 +20,8 @@ import {
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import axiosInstance from '@/lib/axios';
+import { toast } from 'sonner';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface JobOffer {
     id: number;
@@ -66,9 +68,10 @@ export default function OffersPage() {
         try {
             await axiosInstance.patch(`jobs/offers/${offerId}/`, { is_active: !currentStatus });
             setOffers(prev => prev.map(o => o.id === offerId ? { ...o, is_active: !currentStatus } : o));
+            toast.success("Statut de l'offre modifié avec succès !");
         } catch (err) {
             console.error('Failed to toggle offer status', err);
-            alert("Erreur lors de la modification du statut.");
+            toast.error("Erreur lors de la modification du statut.");
         }
     };
 
@@ -103,8 +106,30 @@ export default function OffersPage() {
             {/* Offers List */}
             <div className="space-y-6">
                 {isLoading ? (
-                    <div className="flex items-center justify-center py-20">
-                        <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
+                    <div className="space-y-6">
+                        {[1, 2, 3].map((i) => (
+                            <div key={i} className="bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 border border-blue-50 shadow-sm">
+                                <div className="flex flex-col lg:flex-row lg:items-center gap-6 sm:gap-10">
+                                    <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 lg:w-1/3">
+                                        <Skeleton className="w-20 h-20 rounded-[2rem]" />
+                                        <div className="flex-1 space-y-3">
+                                            <Skeleton className="h-6 w-3/4" />
+                                            <Skeleton className="h-4 w-1/2" />
+                                            <Skeleton className="h-3 w-1/3" />
+                                        </div>
+                                    </div>
+                                    <div className="flex-1 flex justify-around">
+                                        <Skeleton className="h-12 w-16" />
+                                        <Skeleton className="h-12 w-16" />
+                                        <Skeleton className="h-12 w-16" />
+                                    </div>
+                                    <div className="lg:w-1/4 flex gap-3">
+                                        <Skeleton className="h-12 w-12 rounded-2xl" />
+                                        <Skeleton className="h-12 w-full rounded-[1.5rem]" />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 ) : error ? (
                     <div className="text-center py-10 sm:py-20 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-red-50 shadow-sm">

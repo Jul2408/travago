@@ -1,8 +1,9 @@
 // Simple Service Worker for PWA
-const CACHE_NAME = 'travago-v2';
+const CACHE_NAME = 'travago-v3';
 const ASSETS_TO_CACHE = [
     '/manifest.json',
-    '/logo.jpeg',
+    '/logo-192.png',
+    '/logo-512.png',
 ];
 
 self.addEventListener('install', (event) => {
