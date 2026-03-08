@@ -152,7 +152,7 @@ export default function BusinessDashboardLayout({
                 </aside>
 
                 {/* Main Content Area */}
-                <div className="md:ml-72 flex flex-col min-h-screen">
+                <div className="md:ml-72 flex flex-col min-h-screen overflow-x-hidden">
                     {/* Header */}
                     <header className="bg-white/80 backdrop-blur-md border-b border-blue-50 sticky top-0 z-30">
                         <div className="px-4 md:px-8 py-5">

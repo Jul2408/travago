@@ -250,8 +250,8 @@ export default function DashboardEntreprisePage() {
                                     <Users size={24} />
                                 </div>
                                 <div>
-                                    <div className="text-2xl font-black text-slate-900">{stats.matches}</div>
-                                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Candidatures reçues</div>
+                                    <div className="text-xl sm:text-2xl font-black text-slate-900">{stats.matches}</div>
+                                    <div className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-wider sm:tracking-widest leading-tight">Candidatures reçues</div>
                                 </div>
                             </div>
                             <div className="bg-white p-5 sm:p-8 rounded-[2rem] border border-orange-50 shadow-sm flex items-center justify-between">
@@ -260,8 +260,8 @@ export default function DashboardEntreprisePage() {
                                         <Coins size={24} />
                                     </div>
                                     <div>
-                                        <div className="text-2xl font-black text-slate-900">{stats.credits}</div>
-                                        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Crédits de Placement</div>
+                                        <div className="text-xl sm:text-2xl font-black text-slate-900">{stats.credits}</div>
+                                        <div className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-wider sm:tracking-widest leading-tight">Crédits de Placement</div>
                                     </div>
                                 </div>
                                 <Link href="/dashboard/entreprise/credits" className="p-3 bg-orange-100 text-orange-700 rounded-xl hover:bg-orange-600 hover:text-white transition-all">
@@ -303,9 +303,9 @@ export default function DashboardEntreprisePage() {
                                                         name.charAt(0).toUpperCase()
                                                     )}
                                                 </div>
-                                                <div className="flex-1 min-w-0">
+                                                <div className="flex-1 min-w-0 pr-2">
                                                     <h4 className="font-black text-slate-900 text-sm truncate" title={name}>{name}</h4>
-                                                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest truncate">{c.title || 'Talent Certifié'}</p>
+                                                    <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider sm:tracking-widest truncate">{c.title || 'Talent Certifié'}</p>
                                                 </div>
                                                 <div className="shrink-0 text-right">
                                                     <div className="text-[10px] font-black text-blue-600 mb-1">{c.placability_score}% Match</div>
