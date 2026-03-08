@@ -85,11 +85,11 @@ export default function PlacementDetailPage() {
                             </div>
                             <div>
                                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Candidats Analyse</div>
-                                <div className="text-sm font-black text-slate-800">5,000+ Profils</div>
+                                <div className="text-sm font-black text-slate-800">Base de Talents Certifiés Travago</div>
                             </div>
                             <div>
                                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Précision Matching</div>
-                                <div className="text-sm font-black text-emerald-600">98.2% AI-Valid</div>
+                                <div className="text-sm font-black text-emerald-600">Haute Fidélité IA</div>
                             </div>
                         </div>
                     </div>
@@ -162,7 +162,7 @@ export default function PlacementDetailPage() {
                                 <div className="grid grid-cols-2 gap-4 mt-10">
                                     <div className="p-6 bg-slate-50 group-hover:bg-blue-50/50 rounded-2xl border border-transparent group-hover:border-blue-100 transition-all">
                                         <div className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Score Matching IA</div>
-                                        <div className="text-2xl font-black text-blue-600 italic">94%</div>
+                                        <div className="text-2xl font-black text-blue-600 italic">{candidate.placability_score || 85}%</div>
                                     </div>
                                     <div className="p-6 bg-slate-50 group-hover:bg-blue-50/50 rounded-2xl border border-transparent group-hover:border-blue-100 transition-all text-right">
                                         <div className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Expérience</div>

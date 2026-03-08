@@ -55,6 +55,7 @@ export default function DashboardEntreprisePage() {
             await Promise.all([
                 fetchUser(),
                 fetchDashboardStats(),
+                fetchRecentPlacements(),
                 fetchEliteTalents(),
                 fetchConversations()
             ]);
@@ -71,32 +72,32 @@ export default function DashboardEntreprisePage() {
             const data = response.data;
 
             setStats({
-                activePlacements: data.stats.active_offers,
-                matches: data.stats.total_applications,
-                credits: data.stats.credits,
-                certifiedTalents: data.stats.certified_talents_count
+                activePlacements: data.stats.total_placements || 0,
+                matches: data.stats.total_applications || 0,
+                credits: data.stats.credits || 0,
+                certifiedTalents: data.stats.certified_talents_count || 0
             });
-
-            // For recent placements, we can still use offers or applications
-            const offersResponse = await axiosInstance.get('jobs/offers/');
-            const offers = offersResponse.data.results || offersResponse.data;
-            setRecentPlacements(offers.filter((o: any) => o.is_active).slice(0, 3));
         } catch (err) {
             console.error('Failed to fetch dashboard stats', err);
         }
     };
 
+    const fetchRecentPlacements = async () => {
+        try {
+            const response = await axiosInstance.get('placements/');
+            const placements = response.data.results || response.data;
+            setRecentPlacements(placements.slice(0, 3));
+        } catch (err) {
+            console.error('Failed to fetch recent placements', err);
+        }
+    };
+
     const fetchEliteTalents = async () => {
         try {
-            const response = await axiosInstance.get('users/candidates/?limit=10');
+            const response = await axiosInstance.get('users/candidates/?limit=10&ordering=-placability_score');
             const talents = response.data.results || response.data;
-            // Define 'Elite' as talents with score >= 85
             const elite = talents.filter((t: any) => t.placability_score >= 80).slice(0, 3);
             setEliteTalents(elite.length > 0 ? elite : talents.slice(0, 3));
-            setStats(prev => ({
-                ...prev,
-                certifiedTalents: talents.filter((t: any) => t.is_verified).length
-            }));
         } catch (err) {
             console.error('Failed to fetch elite talents', err);
         }
@@ -148,9 +149,9 @@ export default function DashboardEntreprisePage() {
                                 ))
                                 : [
                                     { label: "Talents Certifiés", val: `${stats.certifiedTalents}`, icon: <ShieldCheck className="text-blue-200" /> },
-                                    { label: "Offres Actives", val: `${stats.activePlacements}`, icon: <TrendingUp className="text-blue-200" /> },
-                                    { label: "Candidatures reçues", val: `${stats.matches}`, icon: <Target className="text-blue-200" /> },
-                                    { label: "Crédits disponibles", val: `${stats.credits}`, icon: <Zap className="text-blue-200" /> },
+                                    { label: "Missions de Chasse IA", val: `${stats.activePlacements}`, icon: <TrendingUp className="text-blue-200" /> },
+                                    { label: "Matches Débloqués", val: `${stats.matches}`, icon: <Target className="text-blue-200" /> },
+                                    { label: "Budget Placements", val: `${stats.credits}`, icon: <Zap className="text-blue-200" /> },
                                 ].map((stat, i) => (
                                     <div key={i} className="bg-white/10 backdrop-blur-md border border-white/10 p-6 rounded-[2rem]">
                                         <div className="mb-4">{stat.icon}</div>
@@ -169,9 +170,9 @@ export default function DashboardEntreprisePage() {
                     <div className="bg-white rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 border border-blue-50 shadow-sm">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                             <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center">
-                                <Cpu className="mr-3 text-blue-600 shrink-0" /> <span className="truncate">Placements</span>
+                                <Cpu className="mr-3 text-blue-600 shrink-0" /> <span className="truncate">Chasses IA</span>
                             </h3>
-                            <Link href="/dashboard/entreprise/offres" className="text-blue-600 font-black text-[10px] uppercase tracking-widest hover:underline whitespace-nowrap">Gérer tout</Link>
+                            <Link href="/dashboard/entreprise/placement" className="text-blue-600 font-black text-[10px] uppercase tracking-widest hover:underline whitespace-nowrap">Gérer tout</Link>
                         </div>
 
                         <div className="space-y-4">
@@ -194,10 +195,10 @@ export default function DashboardEntreprisePage() {
                                     </div>
                                     <h4 className="text-lg font-black text-slate-900 mb-2">Aucun placement actif</h4>
                                     <p className="text-sm font-medium text-slate-500 max-w-xs mx-auto mb-6">
-                                        Lancez votre premier recrutement assisté par Travago dès maintenant.
+                                        Lancez votre première mission de chasse IA assistée par Travago dès maintenant.
                                     </p>
-                                    <Link href="/dashboard/entreprise/offres/nouvelle" className="inline-block px-8 py-4 bg-blue-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
-                                        Créer une offre
+                                    <Link href="/dashboard/entreprise/placement" className="inline-block px-8 py-4 bg-blue-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
+                                        Lancer une chasse IA
                                     </Link>
                                 </div>
                             ) : (
@@ -213,17 +214,17 @@ export default function DashboardEntreprisePage() {
                                                 </div>
                                                 <div className="flex items-center space-x-3">
                                                     <div className="flex items-center text-[9px] font-black text-slate-400 uppercase tracking-widest">
-                                                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse mr-1.5 "></div>
-                                                        Actif
+                                                        <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse mr-1.5 "></div>
+                                                        {p.status_display || p.status}
                                                     </div>
                                                     <div className="h-3 w-px bg-slate-200"></div>
                                                     <div className="text-[9px] font-black text-blue-600 uppercase tracking-widest truncate">
-                                                        {p.applications_count || 0} Matches
+                                                        {p.matches?.length || 0} Talents Matchés
                                                     </div>
                                                 </div>
                                             </div>
-                                            <Link href={`/dashboard/entreprise/offres/${p.slug}`} className="w-full sm:w-auto px-5 py-3 bg-white border border-blue-100 text-blue-600 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all shadow-sm text-center">
-                                                Consulter
+                                            <Link href={`/dashboard/entreprise/placement/${p.id}`} className="w-full sm:w-auto px-5 py-3 bg-white border border-blue-100 text-blue-600 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all shadow-sm text-center">
+                                                Voir la Shortlist
                                             </Link>
                                         </div>
                                     </div>
