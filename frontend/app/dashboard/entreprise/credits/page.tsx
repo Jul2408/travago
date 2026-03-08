@@ -125,6 +125,17 @@ export default function CreditsPage() {
             // Start polling for completion
             pollTransactionStatus(transaction_id);
 
+            // Auto-trigger simulation in TEST mode to prevent user confusion
+            if (mode === 'TEST') {
+                setTimeout(async () => {
+                    try {
+                        await axiosInstance.post(`users/transactions/${transaction_id}/simulate_success/`);
+                    } catch (e) {
+                        console.error("Auto-simulation failed", e);
+                    }
+                }, 4000);
+            }
+
         } catch (error: any) {
             console.error(error);
             const errorMsg = error.response?.data?.error || "Erreur lors de l'initiation du paiement.";

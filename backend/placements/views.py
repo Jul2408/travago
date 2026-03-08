@@ -18,9 +18,15 @@ class PlacementRequestViewSet(viewsets.ModelViewSet):
         
         if user.credits < budget:
             from rest_framework.exceptions import ValidationError
-            raise ValidationError("Crédits insuffisants pour lancer cette mission IA.")
+            raise ValidationError({"error": "Crédits insuffisants pour lancer cette mission IA."})
             
-        instance = serializer.save(company=user.company_profile, budget_credits=budget)
+        try:
+            company_profile = user.company_profile
+        except Exception:
+            from rest_framework.exceptions import ValidationError
+            raise ValidationError({"error": "Profil entreprise introuvable."})
+
+        instance = serializer.save(company=company_profile, budget_credits=budget)
         
         # Deduct credits
         user.credits -= budget
