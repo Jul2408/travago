@@ -53,12 +53,50 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [showInstallGuide, setShowInstallGuide] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
 
   useEffect(() => {
+    // Detect iOS
+    const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    setIsIOS(isIOSDevice);
+
     const handleScroll = () => setScrolled(window.scrollY > 50);
+
+    // PWA Install Prompt
+    const handleBeforeInstallPrompt = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
   }, []);
+
+  const handleInstallClick = async () => {
+    if (isIOS) {
+      setShowInstallGuide(true);
+      return;
+    }
+
+    if (!deferredPrompt) {
+      alert("L'application est déjà installée ou votre navigateur ne supporte pas l'installation automatique. Vous pouvez l'ajouter à l'écran d'accueil manuellement via le menu du navigateur.");
+      return;
+    }
+
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      setDeferredPrompt(null);
+    }
+  };
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
@@ -93,10 +131,13 @@ export default function Home() {
               <Link key={item} href={`#${item.toLowerCase().replace(' ', '')}`} className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">{item}</Link>
             ))}
             <div className="h-4 w-px bg-slate-200"></div>
-            <Link href="/travago.apk" download className="flex items-center space-x-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all">
+            <button
+              onClick={handleInstallClick}
+              className="flex items-center space-x-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all shadow-sm active:scale-95"
+            >
               <Smartphone size={14} />
-              <span>Télécharger APK</span>
-            </Link>
+              <span>Installer l'App</span>
+            </button>
             <Link href="/login" className="text-[10px] font-black uppercase tracking-widest text-slate-900 hover:text-blue-600 transition-colors">Connexion</Link>
             <Link href="/register" className="bg-slate-900 text-white px-8 py-3.5 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:shadow-2xl transition-all">S'inscrire</Link>
           </div>
@@ -155,15 +196,13 @@ export default function Home() {
               </div>
 
               <div className="space-y-4">
-                <Link
-                  href="/travago.apk"
-                  download
-                  className="flex items-center justify-center space-x-3 w-full bg-blue-50 text-blue-600 py-5 rounded-[2rem] text-sm font-black uppercase tracking-widest border border-blue-100 active:scale-95 transition-all"
-                  onClick={() => setMobileMenuOpen(false)}
+                <button
+                  onClick={handleInstallClick}
+                  className="flex items-center justify-center space-x-3 w-full bg-blue-600 text-white py-5 rounded-[2rem] text-sm font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 active:scale-95 transition-all"
                 >
                   <Smartphone size={20} />
-                  <span>Télécharger APK</span>
-                </Link>
+                  <span>Installer l'Application</span>
+                </button>
 
                 <div className="grid grid-cols-2 gap-4">
                   <Link
@@ -218,11 +257,14 @@ export default function Home() {
             </div>
             {/* Added APK download button in Hero for mobile accessibility */}
             <div className="lg:hidden">
-              <Link href="/travago.apk" download className="flex items-center justify-center space-x-3 w-full bg-blue-600 text-white py-6 rounded-[2rem] text-lg font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 active:scale-95 transition-all">
+              <button
+                onClick={handleInstallClick}
+                className="flex items-center justify-center space-x-3 w-full bg-blue-600 text-white py-6 rounded-[2rem] text-lg font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 active:scale-95 transition-all"
+              >
                 <Smartphone size={24} />
-                <span>Télécharger l'APK</span>
-              </Link>
-              <p className="text-center text-[10px] text-gray-400 mt-2 italic font-medium uppercase tracking-[0.2em]">Disponible pour Android - Version 1.0.2</p>
+                <span>Installer l'Application</span>
+              </button>
+              <p className="text-center text-[10px] text-gray-400 mt-2 italic font-medium uppercase tracking-[0.2em]">Compatible iOS, Android & Desktop</p>
             </div>
           </div>
           <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5 }} className="relative hidden lg:block">
@@ -490,6 +532,61 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      {/* iOS Install Guide Modal */}
+      <AnimatePresence>
+        {showInstallGuide && (
+          <div className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              className="bg-white w-full max-w-sm rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden"
+            >
+              <button
+                onClick={() => setShowInstallGuide(false)}
+                className="absolute top-6 right-6 p-2 bg-slate-100 rounded-full text-slate-400 hover:text-slate-900 transition-colors"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="text-center space-y-6">
+                <div className="mx-auto w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center text-blue-600 shadow-inner">
+                  <Smartphone size={40} />
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tighter mb-2 italic">Installer sur iPhone</h3>
+                  <p className="text-slate-500 text-sm font-medium italic leading-relaxed">
+                    Pour installer Travago sur votre iPhone ou iPad, suivez ces étapes :
+                  </p>
+                </div>
+
+                <div className="space-y-4 text-left">
+                  <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-black">1</div>
+                    <p className="text-xs font-black uppercase text-slate-900 italic">Appuyez sur le bouton <span className="text-blue-600">Partager</span> en bas du navigateur.</p>
+                  </div>
+                  <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-black">2</div>
+                    <p className="text-xs font-black uppercase text-slate-900 italic">Faites défiler et appuyez sur <span className="text-blue-600">Sur l'écran d'accueil</span>.</p>
+                  </div>
+                  <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-black">3</div>
+                    <p className="text-xs font-black uppercase text-slate-900 italic">Appuyez sur <span className="text-blue-600">Ajouter</span> en haut à droite.</p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setShowInstallGuide(false)}
+                  className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl"
+                >
+                  J'ai compris
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
