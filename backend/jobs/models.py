@@ -88,21 +88,50 @@ class Application(models.Model):
 
     def calculate_matching_score(self):
         """
-        Analyse IA simplifiée du matching entre l'offre et le candidat.
+        Algorithme de Scoring IA v2.1 : Analyse multidimensionnelle du fit.
+        Compare les compétences, le secteur, et le niveau d'expérience.
         """
+        score = 0
+        
+        # 1. Analyse des Compétences (Poids: 50)
         job_skills = set([s.lower() for s in self.job_offer.required_skills]) if self.job_offer.required_skills else set()
         candidate_skills = set([s.lower() for s in self.candidate.skills]) if self.candidate.skills else set()
         
         if not job_skills:
-            self.matching_score = 100
+            score += 50 # Base si pas de compétences requises spécifiées
         else:
             matches = job_skills.intersection(candidate_skills)
-            self.matching_score = int((len(matches) / len(job_skills)) * 100)
+            skill_ratio = len(matches) / len(job_skills)
+            score += int(skill_ratio * 50)
             
-        # Bonus based on experience level
-        # Simplified: if candidate experience matches or exceeds requirement
-        # (This is just a placeholder for more complex IA logic)
-        
+        # 2. Fit Sectoriel (Poids: 20)
+        # Si le candidat a déjà travaillé dans ce secteur (titre ou bio)
+        if self.job_offer.sector.lower() in (self.candidate.title or "").lower() or \
+           self.job_offer.sector.lower() in (self.candidate.bio or "").lower():
+            score += 20
+        elif self.job_offer.sector == "TECH" and ("développeur" in (self.candidate.title or "").lower()):
+            score += 15 # Bonus tech spécifique
+
+        # 3. Niveau d'Expérience (Poids: 20)
+        # Mapping simple des années d'expérience visées
+        exp_map = {
+            "STAGIAIRE": 0,
+            "JUNIOR": 2,
+            "INTERMEDIATE": 5,
+            "SENIOR": 10,
+            "EXPERT": 15
+        }
+        required_years = exp_map.get(self.job_offer.experience_level, 0)
+        if self.candidate.experience_years >= required_years:
+            score += 20
+        elif self.candidate.experience_years >= (required_years * 0.7):
+            score += 10 # Presque là
+
+        # 4. Bonus de Qualité de Dossier (Poids: 10)
+        # Utilise le score de placabilité calculé par le système
+        score += int((self.candidate.placability_score / 100) * 10)
+
+        self.matching_score = min(score, 100)
         return self.matching_score
 
     def save(self, *args, **kwargs):
