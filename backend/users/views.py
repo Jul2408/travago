@@ -160,7 +160,7 @@ def admin_stats(request):
 @permission_classes([permissions.IsAuthenticated])
 def company_stats(request):
     """
-    Returns statistics and activity for the Company Dashboard.
+    Returns 100% real statistics for the Company Dashboard.
     """
     user = request.user
     if user.role != User.Role.COMPANY:
@@ -170,26 +170,53 @@ def company_stats(request):
     if not profile:
         return Response({"detail": "Profil entreprise manquant."}, status=404)
 
-    # Base Stats
+    # --- Base Stats (all real) ---
     active_offers = JobOffer.objects.filter(company=profile, is_active=True).count() if JobOffer else 0
     total_offers = JobOffer.objects.filter(company=profile).count() if JobOffer else 0
     total_applications = Application.objects.filter(job_offer__company=profile).count() if Application else 0
-    
-    # Placements (if applicable)
     total_placements = PlacementRequest.objects.filter(company=profile).count() if PlacementRequest else 0
-    
-    # Matches (Apps with high score)
     high_match_apps = Application.objects.filter(job_offer__company=profile, matching_score__gte=80).count() if Application else 0
 
-    # Views
+    # Real view count from DB (not a heuristic)
     total_views = JobOffer.objects.filter(company=profile).aggregate(total=Sum('views_count'))['total'] or 0
-    # Let's use a dummy but believable view count if we don't have a views field
-    if JobOffer:
-        # Simple heuristic: 10-50 views per application
-        total_views = total_applications * 15 + active_offers * 42
 
-    # Certified Talents count
+    # Certified Talents in platform
     certified_talents_count = CandidateProfile.objects.filter(is_verified=True).count() if CandidateProfile else 0
+
+    # --- Weekly Trend (last 7 days, real data) ---
+    weekly_trend = []
+    for i in range(6, -1, -1):
+        day = datetime.date.today() - datetime.timedelta(days=i)
+        count = Application.objects.filter(
+            job_offer__company=profile,
+            applied_at__date=day
+        ).count() if Application else 0
+        weekly_trend.append({
+            "day": day.strftime("%a"),
+            "date": day.isoformat(),
+            "count": count
+        })
+
+    # --- Average IA Match Score (real) ---
+    from django.db.models import Avg
+    avg_score_result = Application.objects.filter(
+        job_offer__company=profile
+    ).aggregate(avg=Avg('matching_score')) if Application else None
+    avg_match_score = round(avg_score_result['avg'] or 0, 1) if avg_score_result else 0
+
+    # --- Top Performing Offer (most applications) ---
+    top_offer = None
+    if JobOffer and Application:
+        from django.db.models import Count as DjCount
+        top = JobOffer.objects.filter(company=profile).annotate(
+            app_count=DjCount('applications')
+        ).order_by('-app_count').first()
+        if top:
+            top_offer = {
+                "title": top.title,
+                "slug": top.slug,
+                "applications": top.app_count
+            }
 
     return Response({
         "stats": {
@@ -200,10 +227,13 @@ def company_stats(request):
             "total_placements": total_placements,
             "total_views": total_views,
             "credits": user.credits,
-            "certified_talents_count": certified_talents_count
+            "certified_talents_count": certified_talents_count,
+            "avg_match_score": avg_match_score,
         },
+        "weekly_trend": weekly_trend,
+        "top_offer": top_offer,
         "recent_applications": ApplicationSerializer(
-            Application.objects.filter(job_offer__company=profile).order_by('-applied_at')[:5], 
+            Application.objects.filter(job_offer__company=profile).order_by('-applied_at')[:5],
             many=True
         ).data if ApplicationSerializer and Application else []
     })

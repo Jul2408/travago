@@ -69,14 +69,12 @@ export default function JobApplicationsPage() {
         try {
             const [offerRes, appsRes] = await Promise.all([
                 axiosInstance.get(`jobs/offers/${slug}/`),
-                axiosInstance.get(`jobs/my-applications/`) // Backend filters by company
+                // Use server-side filter by slug — backend supports filterset_fields = ['job_offer__slug']
+                axiosInstance.get(`jobs/my-applications/?job_offer__slug=${slug}`)
             ]);
             setOffer(offerRes.data);
-            // In a better API design, we'd have a nested endpoint: jobs/offers/[slug]/applications/
-            // For now we filter locally or rely on the fact that my-applications returns all company apps
             const allApps = appsRes.data.results || appsRes.data;
-            const filteredApps = allApps.filter((a: any) => a.job_offer_detail?.slug === slug);
-            setApplications(filteredApps);
+            setApplications(allApps);
         } catch (err) {
             console.error('Failed to fetch applications', err);
         } finally {

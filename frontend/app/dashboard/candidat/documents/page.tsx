@@ -16,7 +16,6 @@ import { api } from '@/lib/api';
 import axiosInstance from '@/lib/axios';
 import { useAuthStore } from '@/lib/store/auth-store';
 import { toast } from 'sonner';
-import { Skeleton } from '@/components/ui/skeleton';
 
 interface Document {
     id?: number;
@@ -124,24 +123,19 @@ export default function CandidateDocumentsPage() {
             <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[2.5rem] p-8 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-blue-200">
                 <div className="flex items-center space-x-6">
                     <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20">
-                        <ShieldCheck size={32} className="text-blue-300" />
+                        <Loader2 size={32} className="text-blue-300 animate-pulse" />
                     </div>
                     <div>
-                        <h3 className="text-xl font-black mb-1">
-                            {isLoading ? 'Chargement...' : `${documents.filter(d => d.file).length} / ${documents.length} documents soumis`}
-                        </h3>
+                        <h3 className="text-xl font-black mb-1">Dossier en cours de complétion</h3>
                         <p className="text-blue-100 font-medium text-sm">
-                            {documents.filter(d => d.status === 'VERIFIED').length > 0
-                                ? `${documents.filter(d => d.status === 'VERIFIED').length} vérifié(s) par l'admin`
-                                : 'Uploadez tous vos documents pour obtenir le badge Vérifié.'}
+                            Uploadez tous vos documents pour obtenir le badge <span className="font-bold text-white uppercase italic">Vérifié par IA</span>.
                         </p>
                     </div>
                 </div>
-                {/* Real progress dots */}
                 <div className="flex -space-x-3">
-                    {documents.map((doc, i) => (
-                        <div key={i} className={`w-10 h-10 rounded-full border-4 border-blue-900 flex items-center justify-center font-black text-xs ${doc.status === 'VERIFIED' ? 'bg-emerald-500' : doc.status === 'PENDING' ? 'bg-orange-400' : doc.file ? 'bg-blue-500' : 'bg-blue-800 opacity-50'}`}>
-                            {doc.status === 'VERIFIED' ? '✓' : i + 1}
+                    {[1, 2, 3, 4].map(i => (
+                        <div key={i} className={`w-10 h-10 rounded-full border-4 border-blue-900 flex items-center justify-center font-black text-xs ${i === 1 ? 'bg-blue-500' : 'bg-blue-800 opacity-50'}`}>
+                            {i}
                         </div>
                     ))}
                 </div>
@@ -149,20 +143,9 @@ export default function CandidateDocumentsPage() {
 
             {/* Documents List */}
             {isLoading ? (
-                <div className="grid md:grid-cols-2 gap-8">
-                    {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="bg-white rounded-[2.5rem] p-8 border border-blue-50 shadow-sm">
-                            <div className="flex items-start justify-between mb-6">
-                                <Skeleton className="w-14 h-14 rounded-2xl" />
-                                <Skeleton className="h-6 w-24 rounded-full" />
-                            </div>
-                            <Skeleton className="h-6 w-3/4 mb-3" />
-                            <Skeleton className="h-4 w-full mb-8" />
-                            <Skeleton className="h-12 w-full rounded-xl" />
-                        </div>
-                    ))}
+                <div className="flex items-center justify-center py-20">
+                    <Loader2 size={40} className="text-blue-600 animate-spin" />
                 </div>
-
             ) : (
                 <div className="grid md:grid-cols-2 gap-8">
                     {documents.map((doc) => (

@@ -164,3 +164,28 @@ class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
             profile = getattr(user, 'company_profile', None)
             return Application.objects.filter(job_offer__company=profile) if profile else Application.objects.none()
         return Application.objects.none()
+
+    @action(detail=True, methods=['patch'], permission_classes=[permissions.IsAuthenticated])
+    def update_status(self, request, pk=None):
+        """Let company update the status of an application (PENDING, SHORTLISTED, REJECTED)."""
+        application = self.get_object()
+        new_status = request.data.get('status')
+        allowed = ['PENDING', 'SHORTLISTED', 'REJECTED', 'ACCEPTED']
+        if new_status not in allowed:
+            return Response({"detail": f"Statut invalide. Valeurs autorisées : {allowed}"}, status=400)
+        application.status = new_status
+        application.save()
+
+        # Notify the candidate
+        try:
+            Notification.objects.create(
+                user=application.candidate.user,
+                notification_type=Notification.NotificationType.JOB_ALERT,
+                title=f"Votre candidature a été mise à jour",
+                message=f"Votre candidature pour \"{application.job_offer.title}\" est maintenant : {new_status}.",
+                link="/dashboard/candidat/candidatures"
+            )
+        except Exception:
+            pass
+
+        return Response(ApplicationSerializer(application).data)

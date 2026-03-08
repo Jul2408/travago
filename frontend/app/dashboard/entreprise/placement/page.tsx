@@ -27,6 +27,7 @@ export default function PlacementIAPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isCreating, setIsCreating] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [certifiedCount, setCertifiedCount] = useState<number>(0);
 
     // Form state
     const [formData, setFormData] = useState({
@@ -37,6 +38,10 @@ export default function PlacementIAPage() {
 
     useEffect(() => {
         fetchPlacements();
+        // Fetch real certified count from stats
+        axiosInstance.get('users/company/stats/').then(res => {
+            setCertifiedCount(res.data.stats?.certified_talents_count ?? 0);
+        }).catch(() => { });
     }, []);
 
     const fetchPlacements = async () => {
@@ -94,8 +99,12 @@ export default function PlacementIAPage() {
                     <div className="flex-1">
                         <h3 className="text-xl sm:text-2xl font-black mb-2 tracking-tight">Algorithme Travago v2.5</h3>
                         <p className="text-blue-100/80 text-sm sm:text-base font-medium max-w-xl">
-                            Le moteur de placement analyse actuellement <span className="text-white font-black underline">5,842 profils certifiés</span>.
-                            Précision de matching garantie : <span className="text-white font-black">98.4%</span>.
+                            Le moteur de placement analyse{' '}
+                            <span className="text-white font-black underline">
+                                {isLoading ? '...' : `${certifiedCount} profil(s) certifié(s)`}
+                            </span>{' '}
+                            dans la base Travago.
+                            Matching algorithmique actif — résultats garantis sous 48h.
                         </p>
                     </div>
                 </div>

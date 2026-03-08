@@ -137,18 +137,28 @@ export default function DashboardEntreprisePage() {
                         </div>
                     </div>
                     <div className="hidden lg:grid grid-cols-2 gap-6">
-                        {[
-                            { label: "Talents Certifiés", val: `${stats.certifiedTalents}+`, icon: <ShieldCheck className="text-blue-200" /> },
-                            { label: "Placements / mois", val: "120+", icon: <TrendingUp className="text-blue-200" /> },
-                            { label: "Précision Matching", val: "98%", icon: <Target className="text-blue-200" /> },
-                            { label: "Économie de temps", val: "75%", icon: <Zap className="text-blue-200" /> },
-                        ].map((stat, i) => (
-                            <div key={i} className="bg-white/10 backdrop-blur-md border border-white/10 p-6 rounded-[2rem]">
-                                <div className="mb-4">{stat.icon}</div>
-                                <div className="text-2xl font-black leading-none mb-1">{stat.val}</div>
-                                <div className="text-[10px] font-black uppercase tracking-widest text-blue-200">{stat.label}</div>
-                            </div>
-                        ))}
+                        {
+                            isLoading
+                                ? [1, 2, 3, 4].map(i => (
+                                    <div key={i} className="bg-white/10 backdrop-blur-md border border-white/10 p-6 rounded-[2rem] space-y-3">
+                                        <div className="w-6 h-6 bg-white/20 rounded" />
+                                        <div className="h-8 bg-white/20 rounded w-2/3" />
+                                        <div className="h-3 bg-white/10 rounded w-full" />
+                                    </div>
+                                ))
+                                : [
+                                    { label: "Talents Certifiés", val: `${stats.certifiedTalents}`, icon: <ShieldCheck className="text-blue-200" /> },
+                                    { label: "Offres Actives", val: `${stats.activePlacements}`, icon: <TrendingUp className="text-blue-200" /> },
+                                    { label: "Candidatures reçues", val: `${stats.matches}`, icon: <Target className="text-blue-200" /> },
+                                    { label: "Crédits disponibles", val: `${stats.credits}`, icon: <Zap className="text-blue-200" /> },
+                                ].map((stat, i) => (
+                                    <div key={i} className="bg-white/10 backdrop-blur-md border border-white/10 p-6 rounded-[2rem]">
+                                        <div className="mb-4">{stat.icon}</div>
+                                        <div className="text-2xl font-black leading-none mb-1">{stat.val}</div>
+                                        <div className="text-[10px] font-black uppercase tracking-widest text-blue-200">{stat.label}</div>
+                                    </div>
+                                ))
+                        }
                     </div>
                 </div>
             </div>

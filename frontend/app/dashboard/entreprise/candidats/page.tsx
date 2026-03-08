@@ -43,12 +43,11 @@ export default function TalentsBasePage() {
 
                 setTalents(results.map((t: any) => ({
                     id: t.id,
-                    name: `${t.user_detail?.first_name || ''} ${t.user_detail?.last_name || 'Candidat'}`,
+                    name: `${t.user_detail?.first_name || ''} ${t.user_detail?.last_name || 'Candidat'}`.trim() || t.user_detail?.username || 'Candidat',
                     position: t.title || "Profil à compléter",
                     location: t.location || "Non spécifié",
-                    score: `${t.placability_score || 0}/100`,
+                    score: t.placability_score || 0,
                     reliability: t.reliability_score >= 80 ? "Elite" : t.reliability_score >= 50 ? "High" : "Standard",
-                    credits: 50,
                     skills: t.skills || [],
                     verified: t.is_verified,
                     photo: t.photo
@@ -239,7 +238,7 @@ export default function TalentsBasePage() {
                                 <div className="flex sm:items-center justify-between sm:justify-around gap-2 sm:gap-8 border-y lg:border-y-0 lg:border-x border-slate-50 py-6 sm:py-8 lg:py-0 text-center flex-1 overflow-x-auto hide-scrollbar">
                                     <div className="px-2">
                                         <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 sm:mb-2 whitespace-nowrap">IA Match Score</div>
-                                        <div className="text-2xl sm:text-3xl font-black text-blue-700">{talent.score}</div>
+                                        <div className="text-2xl sm:text-3xl font-black text-blue-700">{talent.score}/100</div>
                                     </div>
                                     <div className="px-2">
                                         <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 sm:mb-2 whitespace-nowrap">Fiabilité</div>
@@ -253,14 +252,8 @@ export default function TalentsBasePage() {
                                     </div>
                                 </div>
 
-                                {/* Cost & Contact */}
-                                <div className="flex flex-wrap sm:flex-nowrap items-center justify-between lg:justify-end gap-4 sm:gap-8 lg:w-1/4 mt-4 lg:mt-0">
-                                    <div className="text-left sm:text-right shrink-0">
-                                        <div className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1 whitespace-nowrap">Coût (Crédits)</div>
-                                        <div className="flex items-center sm:justify-end text-blue-700 font-black text-lg sm:text-xl">
-                                            <Coins size={18} className="mr-2 text-orange-500" /> {talent.credits}
-                                        </div>
-                                    </div>
+                                {/* Actions */}
+                                <div className="flex flex-wrap sm:flex-nowrap items-center justify-end gap-4 sm:gap-8 lg:w-1/4 mt-4 lg:mt-0">
                                     <Link href={`/dashboard/entreprise/candidats/${talent.id}`} className="w-full sm:w-auto bg-slate-900 text-white px-6 sm:px-10 py-4 sm:py-5 rounded-[1.5rem] sm:rounded-[2rem] font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-slate-100 flex items-center justify-center shrink-0 whitespace-nowrap">
                                         Voir profil <ChevronRight size={16} className="ml-2" />
                                     </Link>
