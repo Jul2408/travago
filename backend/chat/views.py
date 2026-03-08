@@ -51,3 +51,11 @@ class ConversationViewSet(viewsets.ModelViewSet):
             serializer.save(sender=request.user, conversation=conversation)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    @action(detail=False, methods=['get'])
+    def unread_total(self, request):
+        """Returns the total number of unread messages for the current user across all conversations."""
+        count = Message.objects.filter(
+            conversation__participants=request.user,
+            is_read=False
+        ).exclude(sender=request.user).count()
+        return Response({"unread_count": count})

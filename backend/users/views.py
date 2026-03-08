@@ -782,9 +782,9 @@ class TransactionViewSet(viewsets.ModelViewSet):
         transaction = self.get_object()
         
         # Parse callback data
-        status = request.data.get('status') or request.GET.get('status')
+        status_val = request.data.get('status') or request.GET.get('status')
         
-        if status in ['SUCCESS', 'SUCCESSFUL', 'COMPLETED']:
+        if status_val in ['SUCCESS', 'SUCCESSFUL', 'COMPLETED']:
             if transaction.status != 'COMPLETED':
                 transaction.status = "COMPLETED"
                 # Credit the user
@@ -795,22 +795,23 @@ class TransactionViewSet(viewsets.ModelViewSet):
 
                 Notification.objects.create(
                     user=user,
-                    notification_type="PAYMENT_RECEIVED",
-                    title="Paiement Reçu",
-                    message=f"Votre achat de {transaction.credits_amount} crédits a été validé. Référence: {transaction.reference}",
+                    notification_type=Notification.NotificationType.PAYMENT_RECEIVED,
+                    title="✅ Paiement Validé",
+                    message=f"Votre achat de {transaction.credits_amount} crédits a été confirmé. Référence: {transaction.reference}",
                     link="/dashboard/entreprise/credits"
                 )
             
-            return Response({"message": "Paiement validé avec succès"})
+            return Response({"status": "success", "message": "Paiement validé avec succès"})
         else:
             transaction.status = "FAILED"
             transaction.save()
-            return Response({"message": "Paiement échoué ou annulé"})
+            return Response({"status": "failed", "message": "Paiement échoué ou annulé"})
 
     @action(detail=True, methods=['post'])
     def simulate_success(self, request, pk=None):
         """
         DEV ONLY: Simulates a successful payment validation.
+        Standardized with callback logic.
         """
         from notifications.models import Notification
         transaction = self.get_object()
@@ -826,13 +827,13 @@ class TransactionViewSet(viewsets.ModelViewSet):
 
         Notification.objects.create(
             user=user,
-            notification_type="PAYMENT_RECEIVED",
-            title="Paiement Reçu (Simulation)",
+            notification_type=Notification.NotificationType.PAYMENT_RECEIVED,
+            title="✅ Paiement Reçu (Simulation)",
             message=f"Simulation : Votre achat de {transaction.credits_amount} crédits a été validé.",
             link="/dashboard/entreprise/credits"
         )
         
-        return Response({"message": "Simulation réussie. Crédits ajoutés."})
+        return Response({"status": "success", "message": "Simulation réussie. Crédits ajoutés."})
         
     @action(detail=True, methods=['get'])
     def check_status(self, request, pk=None):

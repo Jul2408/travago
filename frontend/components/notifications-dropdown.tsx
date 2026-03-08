@@ -109,7 +109,9 @@ export default function NotificationsDropdown() {
             >
                 <Bell size={20} />
                 {unreadCount > 0 && (
-                    <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 bg-red-500 rounded-full ring-4 ring-white"></span>
+                    <span className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 bg-red-500 text-white text-[9px] font-black flex items-center justify-center rounded-full ring-2 ring-white shadow-lg animate-in fade-in zoom-in duration-300">
+                        {unreadCount > 9 ? '9+' : unreadCount}
+                    </span>
                 )}
             </button>
 

@@ -27,6 +27,7 @@ import { getImageUrl } from '@/lib/utils';
 import { useAuthStore } from '@/lib/store/auth-store';
 import AuthGuard from '@/components/auth-guard';
 import NotificationsDropdown from '@/components/notifications-dropdown';
+import axiosInstance from '@/lib/axios';
 
 export default function CandidateDashboardLayout({
     children,
@@ -37,11 +38,27 @@ export default function CandidateDashboardLayout({
     const pathname = usePathname();
     const router = useRouter();
     const { user, logout } = useAuthStore();
+    const [unreadMessages, setUnreadMessages] = useState(0);
     const [mounted, setMounted] = useState(false);
+    const { isAuthenticated } = useAuthStore();
 
     useEffect(() => {
         setMounted(true);
-    }, []);
+        if (isAuthenticated) {
+            fetchUnreadCount();
+            const interval = setInterval(fetchUnreadCount, 20000); // Check every 20s
+            return () => clearInterval(interval);
+        }
+    }, [isAuthenticated]);
+
+    const fetchUnreadCount = async () => {
+        try {
+            const res = await axiosInstance.get('chat/unread_total/');
+            setUnreadMessages(res.data.unread_count || 0);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const handleLogout = () => {
         logout();
@@ -63,7 +80,7 @@ export default function CandidateDashboardLayout({
         { icon: <Zap size={20} />, label: 'Opportunités', href: '/dashboard/candidat/offres' },
         { icon: <User size={20} />, label: 'Mon Profil & CV', href: '/dashboard/candidat/profil' },
         { icon: <Briefcase size={20} />, label: 'État du Placement', href: '/dashboard/candidat/candidatures' },
-        { icon: <MessageSquare size={20} />, label: 'Messages', href: '/dashboard/candidat/messages' },
+        { icon: <MessageSquare size={20} />, label: 'Messages', href: '/dashboard/candidat/messages', badge: unreadMessages > 0 ? unreadMessages : undefined },
         { icon: <Settings size={20} />, label: 'Paramètres', href: '/dashboard/candidat/parametres' },
     ];
 
@@ -119,7 +136,7 @@ export default function CandidateDashboardLayout({
                                         </span>
                                         {item.label}
                                         {item.badge && (
-                                            <span className={`ml-auto text-[10px] px-2 py-0.5 rounded-full ring-2 ring-white font-black ${isActive ? 'bg-white text-blue-600' : 'bg-blue-600 text-white'}`}>
+                                            <span className={`ml-auto text-[10px] px-2 py-0.5 rounded-full ring-2 ring-white font-black animate-in fade-in zoom-in duration-300 ${isActive ? 'bg-white text-blue-600' : 'bg-red-500 text-white'}`}>
                                                 {item.badge}
                                             </span>
                                         )}
@@ -157,7 +174,7 @@ export default function CandidateDashboardLayout({
                 </aside>
 
                 {/* Main Content Area */}
-                <div className="md:ml-72 flex flex-col min-h-screen">
+                <div className="md:ml-72 flex flex-col min-h-screen overflow-x-hidden">
                     <header className="bg-white/80 backdrop-blur-md border-b border-blue-50 sticky top-0 z-30">
                         <div className="px-4 md:px-8 py-5">
                             <div className="flex items-center justify-between">

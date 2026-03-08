@@ -25,6 +25,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/auth-store';
 import AuthGuard from '@/components/auth-guard';
 import NotificationsDropdown from '@/components/notifications-dropdown';
+import axiosInstance from '@/lib/axios';
 import { getImageUrl } from '@/lib/utils';
 
 export default function BusinessDashboardLayout({
@@ -36,11 +37,27 @@ export default function BusinessDashboardLayout({
     const pathname = usePathname();
     const router = useRouter();
     const { user, logout } = useAuthStore();
+    const [unreadMessages, setUnreadMessages] = useState(0);
     const [mounted, setMounted] = useState(false);
+    const { isAuthenticated } = useAuthStore();
 
     useEffect(() => {
         setMounted(true);
-    }, []);
+        if (isAuthenticated) {
+            fetchUnreadCount();
+            const interval = setInterval(fetchUnreadCount, 20000); // Check every 20s
+            return () => clearInterval(interval);
+        }
+    }, [isAuthenticated]);
+
+    const fetchUnreadCount = async () => {
+        try {
+            const res = await axiosInstance.get('chat/unread_total/');
+            setUnreadMessages(res.data.unread_count || 0);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const handleLogout = () => {
         logout();
@@ -60,7 +77,7 @@ export default function BusinessDashboardLayout({
         { icon: <Users size={20} />, label: 'Base de Talents', href: '/dashboard/entreprise/candidats' },
         { icon: <Briefcase size={20} />, label: 'Mes Offres', href: '/dashboard/entreprise/offres' },
         { icon: <BarChart3 size={20} />, label: 'Statistiques', href: '/dashboard/entreprise/stats' },
-        { icon: <MessageSquare size={20} />, label: 'Messages', href: '/dashboard/entreprise/messages', badge: '5' },
+        { icon: <MessageSquare size={20} />, label: 'Messages', href: '/dashboard/entreprise/messages', badge: unreadMessages > 0 ? unreadMessages : undefined },
         { icon: <Coins size={20} />, label: 'Budget & Crédits', href: '/dashboard/entreprise/credits' },
         { icon: <Settings size={20} />, label: 'Paramètres', href: '/dashboard/entreprise/parametres' },
     ];
@@ -117,7 +134,7 @@ export default function BusinessDashboardLayout({
                                         </span>
                                         {item.label}
                                         {item.badge && (
-                                            <span className={`ml-auto text-[10px] px-2 py-0.5 rounded-full ring-2 ring-white font-black ${isActive ? 'bg-white text-blue-600' : 'bg-blue-600 text-white'}`}>
+                                            <span className={`ml-auto text-[10px] px-2 py-0.5 rounded-full ring-2 ring-white font-black animate-in fade-in zoom-in duration-300 ${isActive ? 'bg-white text-blue-600' : 'bg-red-500 text-white'}`}>
                                                 {item.badge}
                                             </span>
                                         )}

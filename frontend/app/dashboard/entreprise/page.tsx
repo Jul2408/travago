@@ -86,9 +86,14 @@ export default function DashboardEntreprisePage() {
         try {
             const response = await axiosInstance.get('placements/');
             const placements = response.data.results || response.data;
-            setRecentPlacements(placements.slice(0, 3));
+            if (Array.isArray(placements)) {
+                setRecentPlacements(placements.slice(0, 3));
+            } else {
+                setRecentPlacements([]);
+            }
         } catch (err) {
             console.error('Failed to fetch recent placements', err);
+            setRecentPlacements([]);
         }
     };
 
@@ -96,10 +101,15 @@ export default function DashboardEntreprisePage() {
         try {
             const response = await axiosInstance.get('users/candidates/?limit=10&ordering=-placability_score');
             const talents = response.data.results || response.data;
-            const elite = talents.filter((t: any) => t.placability_score >= 80).slice(0, 3);
-            setEliteTalents(elite.length > 0 ? elite : talents.slice(0, 3));
+            if (Array.isArray(talents)) {
+                const elite = talents.filter((t: any) => t.placability_score >= 80).slice(0, 3);
+                setEliteTalents(elite.length > 0 ? elite : talents.slice(0, 3));
+            } else {
+                setEliteTalents([]);
+            }
         } catch (err) {
             console.error('Failed to fetch elite talents', err);
+            setEliteTalents([]);
         }
     };
 
