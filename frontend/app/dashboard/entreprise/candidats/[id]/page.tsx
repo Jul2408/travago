@@ -74,14 +74,14 @@ export default function CandidateProfilePage() {
 
     const handleStartChat = async () => {
         if (!candidate) return;
-        if (!candidate.is_unlocked) {
-            return toast.warning("Veuillez débloquer ce profil pour discuter avec le candidat.");
+        const candidateUserId = candidate.user_detail?.id;
+        if (!candidateUserId) {
+            return toast.warning("Impossible d'identifier le candidat.");
         }
         try {
-            const response = await api.post('chat/start_conversation/', {
-                user_id: candidate.user_detail?.id
+            await api.post('chat/start_conversation/', {
+                user_id: candidateUserId
             });
-            // Redirect to messages with this conversation
             router.push('/dashboard/entreprise/messages');
         } catch (error) {
             console.error('Failed to start conversation', error);
@@ -110,7 +110,13 @@ export default function CandidateProfilePage() {
         );
     }
 
-    const fullName = `${candidate.user_detail?.first_name || ''} ${candidate.user_detail?.last_name || ''}`;
+    const firstName = candidate.user_detail?.first_name || '';
+    const lastName = candidate.user_detail?.last_name || '';
+    const username = candidate.user_detail?.username || '';
+    const fullName = (firstName || lastName)
+        ? `${firstName} ${lastName}`.trim()
+        : username || candidate.user_detail?.email?.split('@')[0] || 'Candidat';
+    const displayUsername = username && (firstName || lastName) ? `@${username}` : null;
 
     return (
         <div className="space-y-8 pb-20">
@@ -135,7 +141,7 @@ export default function CandidateProfilePage() {
                             </div>
                         )}
 
-                        <div className="w-32 h-32 bg-slate-50 rounded-[2.5rem] mx-auto mb-6 flex items-center justify-center text-4xl font-black text-blue-200 border-2 border-white shadow-lg overflow-hidden relative">
+                        <div className="w-32 h-32 bg-slate-50 rounded-[2.5rem] mx-auto mb-6 flex items-center justify-center text-4xl font-black text-blue-600 border-2 border-white shadow-lg overflow-hidden relative">
                             {candidate.photo ? (
                                 <Image
                                     src={getImageUrl(candidate.photo) || ''}
@@ -144,11 +150,16 @@ export default function CandidateProfilePage() {
                                     className="object-cover"
                                 />
                             ) : (
-                                fullName.charAt(0)
+                                <span className="text-5xl">{fullName.charAt(0).toUpperCase()}</span>
                             )}
                         </div>
 
-                        <h2 className="text-2xl font-black text-slate-900 mb-1">{fullName}</h2>
+                        <h2 className="text-2xl font-black text-slate-900 mb-0.5">
+                            {fullName}
+                        </h2>
+                        {displayUsername && (
+                            <p className="text-slate-400 font-bold text-xs mb-1">{displayUsername}</p>
+                        )}
                         <p className="text-blue-600 font-bold mb-6 uppercase tracking-wide text-xs">{candidate.title || 'Poste non spécifié'}</p>
 
                         <div className="flex justify-center flex-wrap gap-2 mb-8">
@@ -180,38 +191,32 @@ export default function CandidateProfilePage() {
                             <Briefcase className="mr-2 text-blue-400" /> Actions Recruteur
                         </h3>
                         <div className="space-y-4">
+                            {/* Chat button — always accessible so company can initiate */}
+                            <button
+                                onClick={handleStartChat}
+                                className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center shadow-lg shadow-blue-900/50"
+                            >
+                                <MessageSquare size={16} className="mr-2" /> Discuter avec {firstName || username}
+                            </button>
+
                             {candidate.is_unlocked ? (
-                                <>
-                                    <button
-                                        onClick={handleStartChat}
-                                        className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center shadow-lg shadow-blue-900/50"
-                                    >
-                                        <MessageSquare size={16} className="mr-2" /> Discuter maintenant
-                                    </button>
-                                    <button className="w-full py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center border border-white/10">
-                                        <Download size={16} className="mr-2" /> Télécharger CV
-                                    </button>
-                                </>
+                                <button className="w-full py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center border border-white/10">
+                                    <Download size={16} className="mr-2" /> Télécharger CV
+                                </button>
                             ) : (
                                 <button
                                     onClick={handleUnlock}
                                     disabled={isUnlocking}
-                                    className="w-full py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center shadow-lg shadow-blue-900/50 gap-2"
+                                    className="w-full py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center border border-white/10 gap-2 disabled:opacity-60"
                                 >
-                                    {isUnlocking ? (
-                                        <Loader2 className="animate-spin" size={16} />
-                                    ) : (
-                                        <Lock size={16} />
-                                    )}
+                                    {isUnlocking ? <Loader2 className="animate-spin" size={16} /> : <Lock size={16} />}
                                     Débloquer pour 50 Crédits
                                 </button>
                             )}
+
                             <div className="pt-4 border-t border-white/10 text-center">
                                 <p className="text-[10px] text-slate-400 font-medium">
-                                    {candidate.is_unlocked
-                                        ? "Profil débloqué ✅"
-                                        : "Coût de déblocage : 50 Crédits"
-                                    }
+                                    {candidate.is_unlocked ? 'Profil complet débloqué ✅' : 'Accès complet au CV : 50 Crédits'}
                                 </p>
                             </div>
                         </div>
