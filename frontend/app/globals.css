@@ -26,11 +26,18 @@ textarea::placeholder {
   box-sizing: border-box;
 }
 
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  position: relative;
 }
 
 /* Animations */
@@ -87,6 +94,22 @@ body {
 
 .animate-pulse-slow {
   animation: pulse-slow 15s ease-in-out infinite;
+}
+
+@keyframes bounce-short {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-bounce-short {
+  animation: bounce-short 1s ease-in-out infinite;
 }
 
 .glass-nav {

@@ -136,7 +136,7 @@ export default function CandidateDashboardLayout({
                                         </span>
                                         {item.label}
                                         {item.badge && (
-                                            <span className={`ml-auto text-[10px] px-2 py-0.5 rounded-full ring-2 ring-white font-black animate-in fade-in zoom-in duration-300 ${isActive ? 'bg-white text-blue-600' : 'bg-red-500 text-white'}`}>
+                                            <span className="ml-auto text-[10px] px-2 py-0.5 rounded-full ring-2 ring-white font-black animate-in fade-in zoom-in duration-300 bg-red-600 text-white shadow-lg shadow-red-200">
                                                 {item.badge}
                                             </span>
                                         )}

@@ -34,6 +34,8 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import axiosInstance from '@/lib/axios';
+import { getImageUrl } from '@/lib/utils';
 
 // Common Animation variants
 const fadeInUp: any = {
@@ -56,6 +58,24 @@ export default function Home() {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [showInstallGuide, setShowInstallGuide] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
+  const [offers, setOffers] = useState<any[]>([]);
+  const [loadingOffers, setLoadingOffers] = useState(true);
+
+  useEffect(() => {
+    fetchOffers();
+  }, []);
+
+  const fetchOffers = async () => {
+    try {
+      const res = await axiosInstance.get('jobs/offers/');
+      const data = res.data.results || res.data;
+      setOffers(Array.isArray(data) ? data.slice(0, 6) : []);
+    } catch (error) {
+      console.error("Failed to fetch offers", error);
+    } finally {
+      setLoadingOffers(false);
+    }
+  };
 
   useEffect(() => {
     // Detect iOS
@@ -419,8 +439,153 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Simple Pricing & FAQ */}
-      <section id="pricing" className="py-24 sm:py-40 bg-slate-50 px-6 lg:px-12">
+      {/* 5. Featured Job Offers Section */}
+      <section id="solutions" className="py-24 sm:py-40 bg-slate-50 overflow-hidden px-6 lg:px-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div className="max-w-2xl">
+              <div className="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest mb-6">Opportunités Live</div>
+              <h2 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tighter uppercase italic leading-[0.9]">Dernières offres <br /> de placement.</h2>
+            </div>
+            <Link href="/register/candidat" className="flex items-center text-xs font-black uppercase tracking-widest text-blue-600 group hover:text-slate-900 transition-colors">
+              Voir tout le catalogue <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          {loadingOffers ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-white rounded-[2.5rem] p-8 h-64 animate-pulse border border-slate-100"></div>
+              ))}
+            </div>
+          ) : offers.length === 0 ? (
+            <div className="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-slate-100">
+              <p className="text-slate-400 font-bold italic uppercase tracking-widest">Recherche de nouvelles pépites en cours...</p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {offers.map((offer, idx) => (
+                <motion.div
+                  key={offer.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group bg-white rounded-[2.5rem] p-8 border border-white shadow-xl shadow-blue-900/5 hover:border-blue-100 hover:shadow-2xl transition-all relative overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-100/50 transition-colors"></div>
+
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                      <Briefcase size={24} />
+                    </div>
+                    {offer.is_ia_boosted && (
+                      <span className="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest flex items-center border border-blue-100">
+                        <Zap size={10} className="mr-1 fill-blue-600" /> IA Match
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 className="text-xl font-black text-slate-900 mb-2 truncate group-hover:text-blue-600 transition-colors uppercase tracking-tighter">
+                    {offer.title}
+                  </h3>
+
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest">
+                      {offer.company_detail?.name || 'Entreprise Partenaire'}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-3 py-1 bg-slate-50 text-slate-500 rounded-lg text-[10px] font-black uppercase tracking-wider italic">
+                        {offer.location}
+                      </span>
+                      <span className="px-3 py-1 bg-slate-50 text-slate-500 rounded-lg text-[10px] font-black uppercase tracking-wider italic">
+                        {offer.contract_type}
+                      </span>
+                    </div>
+                  </div>
+
+                  <Link
+                    href={offer.slug ? `/login?callbackUrl=/dashboard/candidat/offres/${offer.slug}` : '/login'}
+                    className="flex items-center justify-center w-full py-4 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all group/btn"
+                  >
+                    Postuler <Zap size={14} className="ml-2 group-hover/btn:animate-bounce fill-white" />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* 6. Recruiter Advantage Section */}
+      <section className="py-24 sm:py-40 bg-slate-900 text-white relative overflow-hidden px-6 lg:px-12 text-left">
+        <div className="absolute left-0 bottom-0 w-[800px] h-[800px] bg-blue-600/10 blur-[150px] rounded-full -translate-x-1/2 translate-y-1/2"></div>
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center relative z-10">
+          <div>
+            <div className="inline-block px-4 py-1.5 bg-blue-600/20 text-blue-400 rounded-full text-[10px] font-black uppercase tracking-widest mb-6">Pour les Entreprises</div>
+            <h2 className="text-4xl sm:text-7xl font-black tracking-tighter uppercase italic leading-[0.9] mb-10">Recrutez <br /> sans effort <br /> avec l'IA.</h2>
+            <p className="text-blue-100/60 text-lg mb-12 max-w-lg font-medium leading-relaxed italic">
+              "Ne perdez plus de temps à trier des CV. Notre IA v2.5 fait le travail pour vous et vous présente uniquement le Top 3 des talents certifiés."
+            </p>
+            <div className="space-y-6">
+              {[
+                { label: "Placement Automatisé", desc: "Configuration en 2 min, résultats en 48h." },
+                { label: "Candidats Vérifiés", desc: "KYC complet et documents certifiés." },
+                { label: "Matching Algorithmique", desc: "Score de compatibilité précis à 95%." }
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start gap-4">
+                  <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center shrink-0 mt-1">
+                    <Check size={14} className="text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-black text-sm uppercase tracking-wider">{item.label}</h4>
+                    <p className="text-xs text-blue-100/40">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[3rem] p-1 shadow-2xl shadow-blue-900/40">
+            <div className="bg-slate-900 rounded-[2.9rem] p-8 sm:p-12 overflow-hidden relative">
+              <div className="flex items-center justify-between mb-12">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <div className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Dashboard Travago IA</div>
+              </div>
+              <div className="space-y-6">
+                <div className="p-6 bg-white/5 rounded-2xl border border-white/10 animate-pulse">
+                  <div className="flex justify-between items-center mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-blue-600 rounded-xl"></div>
+                      <div className="h-4 w-32 bg-white/10 rounded-full"></div>
+                    </div>
+                    <div className="h-4 w-12 bg-green-500/20 rounded-full"></div>
+                  </div>
+                  <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full w-4/5 bg-blue-600"></div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-6 bg-white/5 rounded-2xl border border-white/10">
+                    <div className="text-[9px] font-black text-blue-400 uppercase tracking-widest mb-1">Match Score</div>
+                    <div className="text-3xl font-black">98%</div>
+                  </div>
+                  <div className="p-6 bg-blue-600 rounded-2xl">
+                    <div className="text-[9px] font-black text-white/60 uppercase tracking-widest mb-1">Status</div>
+                    <div className="text-xl font-black">PRÊT</div>
+                  </div>
+                </div>
+              </div>
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-500/20 blur-3xl rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" className="py-24 sm:py-40 bg-slate-50 px-6 lg:px-12 text-left">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-16">
             <div className="lg:col-span-1">

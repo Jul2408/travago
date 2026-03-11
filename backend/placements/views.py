@@ -32,5 +32,16 @@ class PlacementRequestViewSet(viewsets.ModelViewSet):
         user.credits -= budget
         user.save()
         
-        # Trigger IA Hunt (Simulation/Algorithm)
+        # Trigger IA Hunt
         instance.find_matches()
+
+    def perform_update(self, serializer):
+        # On update, if title or description changes, we re-run the matching
+        old_instance = self.get_object()
+        new_instance = serializer.save()
+        
+        if old_instance.title != new_instance.title or old_instance.description != new_instance.description:
+            new_instance.progress = 0
+            new_instance.status = 'SOURCING'
+            new_instance.save()
+            new_instance.find_matches()

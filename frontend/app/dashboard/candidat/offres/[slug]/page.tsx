@@ -112,7 +112,7 @@ export default function JobDetailPage() {
     }
 
     return (
-        <div className="max-w-6xl mx-auto space-y-10 pb-20 px-4">
+        <div className="max-w-6xl mx-auto space-y-10 pb-20 px-4 overflow-x-hidden">
             {/* Navigation Header */}
             <div className="flex items-center justify-between">
                 <button

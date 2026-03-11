@@ -27,6 +27,7 @@ export default function PlacementIAPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isCreating, setIsCreating] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [editingPlacement, setEditingPlacement] = useState<any>(null);
     const [certifiedCount, setCertifiedCount] = useState<number>(0);
 
     // Form state
@@ -57,21 +58,37 @@ export default function PlacementIAPage() {
         }
     };
 
-    const handleCreate = async (e: React.FormEvent) => {
+    const handleCreateOrUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsCreating(true);
         try {
-            await axiosInstance.post('placements/', formData);
+            if (editingPlacement) {
+                await axiosInstance.patch(`placements/${editingPlacement.id}/`, formData);
+                toast.success("Placement IA mis à jour avec succès !");
+            } else {
+                await axiosInstance.post('placements/', formData);
+                toast.success("Placement IA créé avec succès !");
+            }
             setShowModal(false);
+            setEditingPlacement(null);
             setFormData({ title: '', description: '', budget_credits: 250 });
             fetchPlacements();
-            toast.success("Placement IA créé avec succès !");
         } catch (err) {
-            console.error("Failed to create placement", err);
-            toast.error("Erreur lors de la création du placement. Vérifiez vos crédits.");
+            console.error("Failed to save placement", err);
+            toast.error("Erreur lors de l'enregistrement du placement. Vérifiez vos crédits.");
         } finally {
             setIsCreating(false);
         }
+    };
+
+    const openEditModal = (placement: any) => {
+        setEditingPlacement(placement);
+        setFormData({
+            title: placement.title,
+            description: placement.description,
+            budget_credits: placement.budget_credits
+        });
+        setShowModal(true);
     };
 
     return (
@@ -154,8 +171,19 @@ export default function PlacementIAPage() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
-                                    <Target size={28} />
+                                <div className="flex flex-col items-end gap-2">
+                                    <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                                        <Target size={28} />
+                                    </div>
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            openEditModal(placement);
+                                        }}
+                                        className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline"
+                                    >
+                                        Modifier
+                                    </button>
                                 </div>
                             </div>
 
@@ -222,15 +250,21 @@ export default function PlacementIAPage() {
                         >
                             <div className="p-6 sm:p-10 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                                 <div>
-                                    <h2 className="text-xl sm:text-2xl font-black italic text-slate-800 uppercase tracking-tight">Nouvelle Mission IA</h2>
+                                    <h2 className="text-xl sm:text-2xl font-black italic text-slate-800 uppercase tracking-tight">
+                                        {editingPlacement ? 'Modifier la Mission IA' : 'Nouvelle Mission IA'}
+                                    </h2>
                                     <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Protocole automatisé</p>
                                 </div>
-                                <button onClick={() => setShowModal(false)} className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors shadow-sm shrink-0">
+                                <button onClick={() => {
+                                    setShowModal(false);
+                                    setEditingPlacement(null);
+                                    setFormData({ title: '', description: '', budget_credits: 250 });
+                                }} className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors shadow-sm shrink-0">
                                     <X size={20} className="sm:w-6 sm:h-6" />
                                 </button>
                             </div>
 
-                            <form onSubmit={handleCreate} className="p-6 sm:p-10 space-y-6 sm:space-y-8">
+                            <form onSubmit={handleCreateOrUpdate} className="p-6 sm:p-10 space-y-6 sm:space-y-8">
                                 <div className="space-y-6">
                                     <div>
                                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Titre du poste recherché</label>
@@ -276,7 +310,7 @@ export default function PlacementIAPage() {
                                     className="w-full py-5 sm:py-6 bg-slate-900 text-white rounded-[1.5rem] sm:rounded-[2rem] font-black text-[10px] sm:text-sm uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-blue-900/10 flex items-center justify-center gap-2 sm:gap-3"
                                 >
                                     {isCreating ? <Loader2 className="animate-spin" /> : <Target size={20} />}
-                                    Confirmer et Lancer la Recherche
+                                    {editingPlacement ? 'Enregistrer les modifications' : 'Confirmer et Lancer la Recherche'}
                                 </button>
                             </form>
                         </motion.div>
