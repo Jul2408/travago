@@ -476,8 +476,12 @@ export default function Home() {
                   <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-100/50 transition-colors"></div>
 
                   <div className="flex justify-between items-start mb-6">
-                    <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
-                      <Briefcase size={24} />
+                    <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:shadow-lg transition-all shadow-sm overflow-hidden relative border-2 border-white">
+                      {offer.company_detail?.logo ? (
+                        <Image src={getImageUrl(offer.company_detail.logo)} alt={offer.company_detail.name} fill className="object-cover" />
+                      ) : (
+                        <Briefcase size={24} />
+                      )}
                     </div>
                     {offer.is_ia_boosted && (
                       <span className="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest flex items-center border border-blue-100">
