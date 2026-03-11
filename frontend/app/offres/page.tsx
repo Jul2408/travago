@@ -171,61 +171,87 @@ export default function PublicJobsPage() {
                                     key={job.id}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="group bg-white p-8 rounded-[2.5rem] border border-slate-100 hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-900/5 transition-all relative overflow-hidden"
+                                    className="group bg-white p-8 rounded-[3rem] border border-slate-100 hover:border-blue-500/20 hover:shadow-2xl hover:shadow-blue-900/5 transition-all relative overflow-hidden"
                                 >
-                                    <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
-                                        <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center p-4 border border-slate-100 group-hover:scale-110 transition-transform relative">
-                                            {job.company_logo ? (
+                                    <div className="flex flex-col md:flex-row gap-10 items-start md:items-center relative z-10">
+                                        {/* Company Logo / Identifier */}
+                                        <div className="w-24 h-24 bg-white rounded-[2rem] flex items-center justify-center p-0 shadow-lg shadow-blue-900/5 border border-slate-50 overflow-hidden relative group-hover:scale-105 transition-transform duration-500 shrink-0">
+                                            {job.company_detail?.logo ? (
                                                 <Image
-                                                    src={getImageUrl(job.company_logo)}
-                                                    alt={job.company_name}
+                                                    src={getImageUrl(job.company_detail.logo)}
+                                                    alt={job.company_detail.name}
                                                     fill
-                                                    className="object-contain p-4"
+                                                    className="object-cover"
                                                 />
                                             ) : (
-                                                <Building2 className="text-slate-300" size={32} />
+                                                <div className="w-full h-full bg-slate-50 flex items-center justify-center">
+                                                    <Building2 className="text-slate-200" size={32} />
+                                                </div>
                                             )}
                                         </div>
 
-                                        <div className="flex-1">
-                                            <div className="flex flex-wrap gap-2 mb-3">
-                                                <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-lg text-[9px] font-black uppercase tracking-widest border border-blue-100">
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex flex-wrap gap-2 mb-4">
+                                                <span className="px-4 py-1.5 bg-blue-50 text-blue-600 rounded-xl text-[10px] font-black uppercase tracking-widest border border-blue-100/50">
                                                     {job.contract_type}
                                                 </span>
-                                                <span className="px-3 py-1 bg-slate-50 text-slate-500 rounded-lg text-[9px] font-black uppercase tracking-widest border border-slate-100">
+                                                <span className="px-4 py-1.5 bg-slate-50 text-slate-500 rounded-xl text-[10px] font-black uppercase tracking-widest border border-slate-100">
                                                     {job.experience_level}
                                                 </span>
                                                 {job.is_ia_boosted && (
-                                                    <span className="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-lg text-[9px] font-black uppercase tracking-widest border border-emerald-100 flex items-center">
-                                                        <Zap size={10} className="mr-1" /> IA MATCH READY
-                                                    </span>
+                                                    <div className="flex items-center gap-1.5 px-4 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-blue-500/20">
+                                                        <Zap size={10} className="fill-white" /> IA Verified
+                                                    </div>
                                                 )}
                                             </div>
-                                            <h3 className="text-2xl font-black text-slate-900 mb-1 group-hover:text-blue-600 transition-colors tracking-tight italic">
+
+                                            <h3 className="text-3xl font-black text-slate-900 mb-2 group-hover:text-blue-600 transition-colors tracking-tighter uppercase leading-none">
                                                 {job.title}
                                             </h3>
-                                            <div className="flex flex-wrap items-center gap-6 text-slate-400 text-xs font-bold uppercase tracking-widest">
-                                                <span className="flex items-center text-slate-900">
-                                                    <Building2 size={14} className="mr-2 text-blue-600" /> {job.company_name}
+
+                                            <div className="flex flex-wrap items-center gap-x-8 gap-y-3 text-slate-400 text-[11px] font-black uppercase tracking-[0.1em] italic">
+                                                <span className="flex items-center text-slate-900 not-italic">
+                                                    <span className="w-6 h-6 bg-slate-100 rounded-lg flex items-center justify-center mr-3 shrink-0">
+                                                        <Building2 size={12} className="text-blue-500" />
+                                                    </span>
+                                                    {job.company_detail?.name || 'Entreprise'}
                                                 </span>
                                                 <span className="flex items-center">
-                                                    <MapPin size={14} className="mr-2" /> {job.location}
+                                                    <MapPin size={14} className="mr-2 text-slate-300" /> {job.location}
                                                 </span>
                                                 <span className="flex items-center">
-                                                    <Calendar size={14} className="mr-2" /> {new Date(job.created_at).toLocaleDateString()}
+                                                    <Calendar size={14} className="mr-2 text-slate-300" /> {new Date(job.created_at).toLocaleDateString()}
                                                 </span>
                                             </div>
+
+                                            {/* Skills chips */}
+                                            {job.required_skills && job.required_skills.length > 0 && (
+                                                <div className="flex flex-wrap gap-2 mt-6">
+                                                    {job.required_skills.slice(0, 4).map((skill: string, i: number) => (
+                                                        <span key={i} className="text-[9px] font-bold text-slate-400 bg-slate-100/50 px-2.5 py-1 rounded-md uppercase tracking-tighter border border-slate-50">
+                                                            {skill}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </div>
 
-                                        <div className="w-full md:w-auto pt-6 md:pt-0 border-t md:border-none border-slate-50">
+                                        <div className="w-full md:w-auto pt-8 md:pt-0 border-t md:border-none border-slate-50 flex items-center gap-4">
+                                            <div className="hidden xl:flex flex-col items-end mr-4">
+                                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 italic">Salaire Est.</span>
+                                                <span className="text-lg font-black text-emerald-600 italic tracking-tighter uppercase">{job.salary_range || 'Confid.'}</span>
+                                            </div>
                                             <Link
                                                 href={`/offres/${job.slug}`}
-                                                className="w-full md:w-auto px-8 py-5 bg-slate-900 text-white rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center hover:bg-blue-600 transition-all shadow-xl shadow-slate-200"
+                                                className="flex-1 md:flex-none px-10 py-5 bg-slate-900 text-white rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.2em] flex items-center justify-center hover:bg-blue-600 transition-all shadow-xl shadow-slate-900/10 active:scale-95 group/btn"
                                             >
-                                                Voir Détails <ArrowRight size={16} className="ml-2" />
+                                                S'informer <ArrowRight size={16} className="ml-3 group-hover/btn:translate-x-2 transition-transform" />
                                             </Link>
                                         </div>
                                     </div>
+
+                                    {/* Decorative background element on hover */}
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2 group-hover:bg-blue-600/10 transition-colors"></div>
                                 </motion.div>
                             ))
                         )}

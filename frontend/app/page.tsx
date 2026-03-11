@@ -471,49 +471,91 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1 }}
                   viewport={{ once: true }}
-                  className="group bg-white rounded-[2.5rem] p-8 border border-white shadow-xl shadow-blue-900/5 hover:border-blue-100 hover:shadow-2xl transition-all relative overflow-hidden"
+                  className="group bg-white rounded-[2.5rem] border border-slate-100 shadow-xl shadow-blue-900/5 hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/10 transition-all relative overflow-hidden flex flex-col h-full"
                 >
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-100/50 transition-colors"></div>
+                  {/* Glass Header Decor */}
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-600/5 to-cyan-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:from-blue-600/10 group-hover:to-cyan-500/10 transition-colors"></div>
 
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:shadow-lg transition-all shadow-sm overflow-hidden relative border-2 border-white">
-                      {offer.company_detail?.logo ? (
-                        <Image src={getImageUrl(offer.company_detail.logo)} alt={offer.company_detail.name} fill className="object-cover" />
-                      ) : (
-                        <Briefcase size={24} />
-                      )}
+                  <div className="p-8 flex flex-col h-full relative z-10">
+                    {/* Top Row: Logo & Status */}
+                    <div className="flex justify-between items-start mb-8">
+                      <div className="w-16 h-16 bg-white rounded-[1.5rem] flex items-center justify-center shadow-lg shadow-blue-900/5 border border-slate-50 overflow-hidden relative group-hover:scale-110 transition-transform duration-500">
+                        {offer.company_detail?.logo ? (
+                          <Image src={getImageUrl(offer.company_detail.logo)} alt={offer.company_detail.name} fill className="object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+                            <Building2 size={24} className="text-slate-300" />
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex flex-col items-end gap-2">
+                        {offer.is_ia_boosted && (
+                          <div className="bg-blue-600 text-white px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest flex items-center shadow-lg shadow-blue-500/20 border border-blue-400/30">
+                            <Zap size={10} className="mr-1 fill-white" /> IA Boost
+                          </div>
+                        )}
+                        <span className="bg-slate-50 text-slate-400 px-3 py-1 rounded-lg text-[8px] font-black uppercase tracking-[0.2em] border border-slate-100">
+                          Réf #{offer.id}
+                        </span>
+                      </div>
                     </div>
-                    {offer.is_ia_boosted && (
-                      <span className="bg-blue-50 text-blue-600 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest flex items-center border border-blue-100">
-                        <Zap size={10} className="mr-1 fill-blue-600" /> IA Match
-                      </span>
-                    )}
+
+                    {/* Content Section */}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">
+                          {offer.sector || 'Sénior'}
+                        </span>
+                        <div className="w-1 h-1 bg-slate-200 rounded-full"></div>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                          {new Date(offer.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
+                        </span>
+                      </div>
+
+                      <h3 className="text-2xl font-black text-slate-900 mb-4 tracking-tighter uppercase leading-tight group-hover:text-blue-600 transition-colors decoration-blue-500 underline-offset-4 decoration-2">
+                        {offer.title}
+                      </h3>
+
+                      <div className="space-y-4 mb-8">
+                        <div className="flex items-center gap-2 text-sm font-bold text-slate-500 italic">
+                          <p className="truncate shrink-0">{offer.company_detail?.name || 'Entreprise Partenaire'}</p>
+                          <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                          <p className="truncate">{offer.location}</p>
+                        </div>
+
+                        {/* Tags / Info */}
+                        <div className="flex flex-wrap gap-2">
+                          <div className="flex items-center gap-1.5 px-4 py-2 bg-slate-50 rounded-xl border border-slate-100 text-[10px] font-black uppercase tracking-wider text-slate-600 italic">
+                            <Clock size={12} className="text-blue-500" /> {offer.contract_type}
+                          </div>
+                          <div className="flex items-center gap-1.5 px-4 py-2 bg-emerald-50 rounded-xl border border-emerald-100 text-[10px] font-black uppercase tracking-wider text-emerald-700 italic">
+                            <Coins size={12} className="text-emerald-500" /> {offer.salary_range || 'Confis.'}
+                          </div>
+                        </div>
+
+                        {/* Needed Skills Mockup for visual density */}
+                        <div className="flex flex-wrap gap-2 pt-2">
+                          {offer.required_skills?.slice(0, 3).map((skill: string, i: number) => (
+                            <span key={i} className="text-[9px] font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-100 uppercase tracking-tighter">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Footer Row */}
+                    <div className="pt-6 border-t border-slate-50 mt-auto">
+                      <Link
+                        href={offer.slug ? `/login?callbackUrl=/dashboard/candidat/offres/${offer.slug}` : '/login'}
+                        className="flex items-center justify-between w-full py-5 px-8 bg-slate-900 text-white rounded-[1.5rem] text-[11px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-slate-900/10 active:scale-95 group/btn"
+                      >
+                        <span>Postuler à l'offre</span>
+                        <ArrowRight size={16} className="group-hover/btn:translate-x-2 transition-transform" />
+                      </Link>
+                    </div>
                   </div>
-
-                  <h3 className="text-xl font-black text-slate-900 mb-2 truncate group-hover:text-blue-600 transition-colors uppercase tracking-tighter">
-                    {offer.title}
-                  </h3>
-
-                  <div className="space-y-4 mb-8">
-                    <div className="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest">
-                      {offer.company_detail?.name || 'Entreprise Partenaire'}
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1 bg-slate-50 text-slate-500 rounded-lg text-[10px] font-black uppercase tracking-wider italic">
-                        {offer.location}
-                      </span>
-                      <span className="px-3 py-1 bg-slate-50 text-slate-500 rounded-lg text-[10px] font-black uppercase tracking-wider italic">
-                        {offer.contract_type}
-                      </span>
-                    </div>
-                  </div>
-
-                  <Link
-                    href={offer.slug ? `/login?callbackUrl=/dashboard/candidat/offres/${offer.slug}` : '/login'}
-                    className="flex items-center justify-center w-full py-4 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all group/btn"
-                  >
-                    Postuler <Zap size={14} className="ml-2 group-hover/btn:animate-bounce fill-white" />
-                  </Link>
                 </motion.div>
               ))}
             </div>
