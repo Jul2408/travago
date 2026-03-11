@@ -13,7 +13,8 @@ import {
     CheckCircle2,
     ArrowUpRight,
     X,
-    Loader2
+    Loader2,
+    Edit3
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -180,9 +181,10 @@ export default function PlacementIAPage() {
                                             e.preventDefault();
                                             openEditModal(placement);
                                         }}
-                                        className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline"
+                                        className="p-2.5 bg-slate-50 text-slate-400 rounded-xl hover:text-blue-600 hover:bg-blue-50 transition-all border border-slate-100"
+                                        title="Modifier"
                                     >
-                                        Modifier
+                                        <Edit3 size={18} />
                                     </button>
                                 </div>
                             </div>

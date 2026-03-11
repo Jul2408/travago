@@ -8,7 +8,12 @@ import { useState } from 'react';
 import axiosInstance from '@/lib/axios';
 import { useAuthStore } from '@/lib/store/auth-store';
 
-export default function LoginPage() {
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+
+function LoginContent() {
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get('callbackUrl');
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
@@ -35,7 +40,13 @@ export default function LoginPage() {
 
             setAuth(userData, userData.token, userData.refresh);
 
-            // Redirect based on role
+            // If there's a callback URL, use it
+            if (callbackUrl) {
+                window.location.href = callbackUrl;
+                return;
+            }
+
+            // Otherwise redirect based on role
             if (userData.role === 'CANDIDATE') {
                 window.location.href = '/dashboard/candidat';
             } else if (userData.role === 'COMPANY') {
@@ -197,5 +208,13 @@ export default function LoginPage() {
                 </div>
             </motion.div>
         </div>
+    );
+}
+
+export default function LoginPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center font-black text-blue-600 uppercase tracking-widest animate-pulse">Chargement de la session...</div>}>
+            <LoginContent />
+        </Suspense>
     );
 }
