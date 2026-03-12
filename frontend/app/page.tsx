@@ -30,7 +30,8 @@ import {
   Fingerprint,
   QrCode,
   FileSearch,
-  Check
+  Check,
+  Clock
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -452,6 +453,11 @@ export default function Home() {
             </Link>
           </div>
 
+          {/* Mobile Swipe Hint */}
+          <div className="flex md:hidden items-center justify-center gap-2 mb-6 text-[10px] font-black uppercase opacity-30 animate-pulse">
+            <ArrowRight size={12} className="rotate-180" /> Glissez pour explorer <ArrowRight size={12} />
+          </div>
+
           {loadingOffers ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map((i) => (
@@ -463,7 +469,11 @@ export default function Home() {
               <p className="text-slate-400 font-bold italic uppercase tracking-widest">Recherche de nouvelles pépites en cours...</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 flex overflow-x-auto pb-10 pt-4 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory scroll-smooth"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              <style dangerouslySetInnerHTML={{ __html: `.scrollbar-hide::-webkit-scrollbar { display: none; }` }} />
               {offers.map((offer, idx) => (
                 <motion.div
                   key={offer.id}
@@ -471,7 +481,8 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1 }}
                   viewport={{ once: true }}
-                  className="group bg-white rounded-[2.5rem] border border-slate-100 shadow-xl shadow-blue-900/5 hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/10 transition-all relative overflow-hidden flex flex-col h-full"
+                  viewport={{ once: true }}
+                  className="group bg-white rounded-[2.5rem] border border-slate-100 shadow-xl shadow-blue-900/5 hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/10 transition-all relative overflow-hidden flex flex-col h-full min-w-[85vw] md:min-w-0 snap-center"
                 >
                   {/* Glass Header Decor */}
                   <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-600/5 to-cyan-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:from-blue-600/10 group-hover:to-cyan-500/10 transition-colors"></div>
