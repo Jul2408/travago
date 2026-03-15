@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import PWARegistration from "@/components/pwa-registration";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: 'Travago - Recrutement Intelligent au Cameroun',
@@ -45,10 +46,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">
-        <PWARegistration />
-        {children}
-        <Toaster position="top-center" richColors theme="light" />
+      <body className="antialiased dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <PWARegistration />
+          {children}
+          <Toaster position="top-center" richColors theme="system" />
+        </ThemeProvider>
       </body>
     </html>
   );

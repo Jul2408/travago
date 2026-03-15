@@ -25,6 +25,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/auth-store';
 import AuthGuard from '@/components/auth-guard';
 import NotificationsDropdown from '@/components/notifications-dropdown';
+import { ThemeToggle } from '@/components/theme-toggle';
 import axiosInstance from '@/lib/axios';
 import { getImageUrl } from '@/lib/utils';
 
@@ -191,6 +192,7 @@ export default function BusinessDashboardLayout({
                                     >
                                         <Power size={20} />
                                     </button>
+                                    <ThemeToggle />
                                     <NotificationsDropdown />
                                     <div className="h-10 w-px bg-slate-100 hidden sm:block"></div>
                                     <div className="flex items-center space-x-3 pl-2 group cursor-pointer" onClick={() => router.push('/dashboard/entreprise/parametres')}>
