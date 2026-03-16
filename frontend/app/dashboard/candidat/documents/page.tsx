@@ -110,18 +110,18 @@ export default function CandidateDocumentsPage() {
         <div className="space-y-10">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">Mes Documents & KYC</h1>
-                    <p className="text-slate-500 font-medium">Vérifiez votre identité pour débloquer les offres <span className="text-blue-600 font-black italic">Elite</span>.</p>
+                    <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Mes Documents & KYC</h1>
+                    <p className="text-slate-500 dark:text-slate-400 font-medium font-sans">Vérifiez votre identité pour débloquer les offres <span className="text-blue-600 dark:text-blue-400 font-black italic">Elite</span>.</p>
                 </div>
-                <div className="bg-blue-600 text-white px-6 py-3 rounded-2xl flex items-center space-x-3 shadow-lg shadow-blue-100">
+                <div className="bg-blue-600 dark:bg-blue-500 text-white px-6 py-3 rounded-2xl flex items-center space-x-3 shadow-lg shadow-blue-100 dark:shadow-none">
                     <ShieldCheck size={20} />
                     <span className="text-sm font-black uppercase tracking-widest leading-none">Confiance : Standard</span>
                 </div>
             </div>
 
             {/* Verification Status Banner */}
-            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[2.5rem] p-8 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-blue-200">
-                <div className="flex items-center space-x-6">
+            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[2.5rem] p-8 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-blue-200 dark:shadow-none transition-colors font-sans">
+                <div className="flex items-center space-x-6 text-left">
                     <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20">
                         <Loader2 size={32} className="text-blue-300 animate-pulse" />
                     </div>
@@ -149,19 +149,19 @@ export default function CandidateDocumentsPage() {
             ) : (
                 <div className="grid md:grid-cols-2 gap-8">
                     {documents.map((doc) => (
-                        <div key={doc.document_type} className="bg-white rounded-[2.5rem] p-8 border border-blue-50 shadow-sm hover:shadow-xl transition-all group">
+                        <div key={doc.document_type} className="bg-white dark:bg-slate-950 rounded-[2.5rem] p-8 border border-blue-50 dark:border-slate-800 shadow-sm hover:shadow-xl dark:hover:shadow-blue-900/10 transition-all group">
                             <div className="flex items-start justify-between mb-6">
-                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${doc.status === 'VERIFIED' ? 'bg-green-50 text-green-600' :
-                                    doc.status === 'PENDING' ? 'bg-orange-50 text-orange-600' :
-                                        doc.status === 'REJECTED' ? 'bg-red-50 text-red-600' :
-                                            'bg-blue-50 text-blue-400'
+                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors ${doc.status === 'VERIFIED' ? 'bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400' :
+                                    doc.status === 'PENDING' ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400' :
+                                        doc.status === 'REJECTED' ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400' :
+                                            'bg-blue-50 dark:bg-blue-900/20 text-blue-400 dark:text-blue-500'
                                     }`}>
                                     <FileText size={28} />
                                 </div>
-                                <div className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${doc.status === 'VERIFIED' ? 'bg-green-100 text-green-700' :
-                                    doc.status === 'PENDING' ? 'bg-orange-100 text-orange-700' :
-                                        doc.status === 'REJECTED' ? 'bg-red-100 text-red-700' :
-                                            'bg-slate-100 text-slate-400'
+                                <div className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-colors ${doc.status === 'VERIFIED' ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400' :
+                                    doc.status === 'PENDING' ? 'bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-400' :
+                                        doc.status === 'REJECTED' ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400' :
+                                            'bg-slate-100 dark:bg-slate-900 text-slate-400 dark:text-slate-600'
                                     }`}>
                                     {doc.status === 'VERIFIED' ? 'Vérifié' :
                                         doc.status === 'PENDING' ? 'En attente' :
@@ -170,10 +170,10 @@ export default function CandidateDocumentsPage() {
                                 </div>
                             </div>
 
-                            <h3 className="text-lg font-black text-slate-900 mb-2 uppercase tracking-tight">{doc.label}</h3>
-                            <p className="text-xs text-slate-500 font-medium mb-8">
+                            <h3 className="text-lg font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tight">{doc.label}</h3>
+                            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium font-sans mb-8 leading-relaxed">
                                 {doc.file ? `Dernière mise à jour : ${new Date(doc.updated_at!).toLocaleDateString()}` : 'Aucun fichier sélectionné. Format PDF recommandé.'}
-                                {doc.rejection_reason && <span className="block text-red-500 mt-2">Motif : {doc.rejection_reason}</span>}
+                                {doc.rejection_reason && <span className="block text-red-500 dark:text-red-400 mt-2 font-black">Motif : {doc.rejection_reason}</span>}
                             </p>
 
                             <div className="flex items-center gap-3">
@@ -201,13 +201,13 @@ export default function CandidateDocumentsPage() {
                                             href={doc.file!}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex-1 py-4 bg-slate-50 text-slate-400 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-100 transition-all flex items-center justify-center gap-2"
+                                            className="flex-1 py-4 bg-slate-50 dark:bg-slate-900 text-slate-400 dark:text-slate-500 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
                                         >
                                             <Download size={14} /> Voir
                                         </a>
                                         <button
                                             onClick={() => handleDelete(doc.id!)}
-                                            className="p-4 bg-red-50 text-red-400 rounded-xl hover:bg-red-100 transition-all"
+                                            className="p-4 bg-red-50 dark:bg-red-900/20 text-red-400 dark:text-red-500 rounded-xl hover:bg-red-100 dark:hover:bg-red-900/40 transition-all"
                                         >
                                             <Trash2 size={16} />
                                         </button>
@@ -220,16 +220,16 @@ export default function CandidateDocumentsPage() {
             )}
 
             {/* Help Section */}
-            <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-blue-100 flex items-center justify-between">
+            <div className="bg-slate-50 dark:bg-slate-950 p-8 rounded-[2.5rem] border border-blue-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors font-sans">
                 <div className="flex items-center space-x-4">
-                    <AlertCircle className="text-blue-600" />
-                    <p className="text-sm font-medium text-slate-600">
-                        La vérification de vos documents prend généralement moins de <span className="font-bold text-slate-900">24 heures</span> ouvrées.
+                    <AlertCircle className="text-blue-600 dark:text-blue-400" />
+                    <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                        La vérification de vos documents prend généralement moins de <span className="font-bold text-slate-900 dark:text-white">24 heures</span> ouvrées.
                     </p>
                 </div>
                 <button
                     onClick={() => toast.info('Ouverture du support KYC...')}
-                    className="text-blue-600 font-black text-xs uppercase tracking-widest hover:underline"
+                    className="text-blue-600 dark:text-blue-400 font-black text-xs uppercase tracking-widest hover:underline"
                 >
                     Support KYC
                 </button>

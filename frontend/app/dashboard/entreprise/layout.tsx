@@ -135,7 +135,7 @@ export default function BusinessDashboardLayout({
                                         </span>
                                         {item.label}
                                         {item.badge && (
-                                            <span className="ml-auto text-[10px] px-2 py-0.5 rounded-full ring-2 ring-white font-black animate-in fade-in zoom-in duration-300 bg-red-600 text-white shadow-lg shadow-red-200">
+                                            <span className="ml-auto text-[10px] px-2 py-0.5 rounded-full ring-2 ring-white dark:ring-slate-900 font-black animate-in fade-in zoom-in duration-300 bg-red-600 dark:bg-red-500 text-white shadow-lg shadow-red-200 dark:shadow-none">
                                                 {item.badge}
                                             </span>
                                         )}
@@ -145,13 +145,13 @@ export default function BusinessDashboardLayout({
                         </nav>
 
                         {/* Credits Shortcut */}
-                        <div className="mt-8 p-5 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-900/20 mb-6 font-black">
-                            <div className="flex items-center justify-between text-[10px] text-blue-400 uppercase tracking-widest mb-2">
+                        <div className="mt-8 p-5 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-900/20 mb-6 font-black transition-colors font-sans">
+                            <div className="flex items-center justify-between text-[10px] text-blue-400 dark:text-blue-500 uppercase tracking-widest mb-2">
                                 <span>Crédits Recrutement</span>
                                 <Coins size={14} />
                             </div>
-                            <div className="text-xl text-blue-700 leading-none mb-4">{mounted ? (user?.credits || 0) : '...'}</div>
-                            <Link href="/dashboard/entreprise/credits" className="block text-center py-2 bg-blue-600 text-white rounded-xl text-[10px] hover:bg-blue-700 transition-colors uppercase tracking-widest shadow-lg shadow-blue-100">
+                            <div className="text-xl text-blue-700 dark:text-blue-400 leading-none mb-4">{mounted ? (user?.credits || 0) : '...'}</div>
+                            <Link href="/dashboard/entreprise/credits" className="block text-center py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-xl text-[10px] hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors uppercase tracking-widest shadow-lg shadow-blue-100 dark:shadow-none">
                                 Acheter plus
                             </Link>
                         </div>
@@ -160,7 +160,7 @@ export default function BusinessDashboardLayout({
                         <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
                             <button
                                 onClick={handleLogout}
-                                className="flex items-center px-4 py-3 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-2xl font-bold text-sm transition-all w-full group"
+                                className="flex items-center px-4 py-3 text-slate-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-2xl font-bold text-sm transition-all w-full group"
                             >
                                 <LogOut className="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform" />
                                 Déconnexion
@@ -187,7 +187,7 @@ export default function BusinessDashboardLayout({
                                 <div className="flex items-center space-x-2 sm:space-x-4">
                                     <button
                                         onClick={handleLogout}
-                                        className="p-2.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
+                                        className="p-2.5 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all"
                                         title="Déconnexion"
                                     >
                                         <Power size={20} />

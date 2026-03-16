@@ -138,11 +138,11 @@ export default function DashboardCandidatPage() {
                         </div>
 
                         {isVerified ? (
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500 rounded-xl text-white text-[10px] font-black uppercase tracking-widest shadow-lg shadow-emerald-900/20 mb-4">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500 rounded-xl text-white text-[10px] font-black uppercase tracking-widest shadow-lg shadow-emerald-900/40 mb-4 transition-all">
                                 <BadgeCheck size={14} /> Profil Certifié Travago ✓
                             </div>
                         ) : (
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-xl text-blue-100 text-[10px] font-black uppercase tracking-widest mb-4">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-xl text-blue-100 text-[10px] font-black uppercase tracking-widest mb-4 transition-all">
                                 <Lock size={12} /> Certification en attente
                             </div>
                         )}
@@ -204,12 +204,12 @@ export default function DashboardCandidatPage() {
                             <div className="w-12 h-12 sm:w-16 sm:h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center shrink-0">
                                 {action.icon}
                             </div>
-                            <div className="flex-1">
+                            <div className="flex-1 font-sans">
                                 <h4 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-2 leading-tight">{action.title}</h4>
                                 <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-6">{action.desc}</p>
                                 <Link
                                     href={action.href}
-                                    className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+                                    className="inline-flex items-center px-6 py-3 bg-blue-600 dark:bg-blue-500 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-lg shadow-blue-100 dark:shadow-none"
                                 >
                                     {action.btn}
                                 </Link>
@@ -281,7 +281,7 @@ export default function DashboardCandidatPage() {
                             </p>
                         </div>
                     </div>
-                    <Link href="/dashboard/candidat/certifs" className="mt-8 text-purple-600 font-black text-xs uppercase tracking-widest flex items-center justify-center bg-purple-50 py-3 rounded-xl hover:bg-purple-600 hover:text-white transition-all">
+                    <Link href="/dashboard/candidat/certifs" className="mt-8 text-purple-600 dark:text-purple-400 font-black text-xs uppercase tracking-widest flex items-center justify-center bg-purple-50 dark:bg-purple-900/20 py-3 rounded-xl hover:bg-purple-600 dark:hover:bg-purple-500 hover:text-white transition-all shadow-sm">
                         Voir les détails <ChevronRight size={14} className="ml-1" />
                     </Link>
                 </div>
@@ -298,18 +298,18 @@ export default function DashboardCandidatPage() {
                                 <div className="w-10 h-10 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center text-green-700 dark:text-green-500 font-black text-xs">
                                     {conv.other_participant?.username?.substring(0, 2).toUpperCase() || '??'}
                                 </div>
-                                <div className="flex-1 min-w-0">
+                                <div className="flex-1 min-w-0 font-sans">
                                     <div className="text-xs font-black text-slate-900 dark:text-white truncate">{conv.other_participant?.username}</div>
                                     <div className="text-[10px] text-slate-500 dark:text-slate-400 truncate">{conv.last_message?.content || 'Pas de message'}</div>
                                 </div>
                             </div>
                         )) : (
-                            <div className="text-center py-6 text-slate-400 font-medium text-sm">
+                            <div className="text-center py-6 text-slate-400 dark:text-slate-500 font-medium text-sm">
                                 Pas de messages récents.
                             </div>
                         )}
                     </div>
-                    <Link href="/dashboard/candidat/messages" className="mt-8 text-green-600 font-black text-xs uppercase tracking-widest flex items-center justify-center bg-green-50 py-3 rounded-xl hover:bg-green-600 hover:text-white transition-all">
+                    <Link href="/dashboard/candidat/messages" className="mt-8 text-green-600 dark:text-green-400 font-black text-xs uppercase tracking-widest flex items-center justify-center bg-green-50 dark:bg-green-900/20 py-3 rounded-xl hover:bg-green-600 dark:hover:bg-green-500 hover:text-white transition-all shadow-sm">
                         Ouvrir la messagerie
                     </Link>
                 </div>
@@ -347,12 +347,12 @@ export default function DashboardCandidatPage() {
                             {candidatures.slice(0, 3).map((app: any) => (
                                 <div key={app.id} className="flex flex-col p-6 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 group hover:bg-white dark:hover:bg-slate-800 hover:border-blue-100 dark:hover:border-blue-900/50 transition-all">
                                     <div className="flex items-center space-x-4 mb-4">
-                                        <div className="w-12 h-12 bg-white dark:bg-slate-950 rounded-xl flex items-center justify-center text-slate-900 dark:text-white font-black text-xs border border-slate-100 dark:border-slate-800 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-900 transition-all">
+                                        <div className="w-12 h-12 bg-white dark:bg-slate-950 rounded-xl flex items-center justify-center text-slate-900 dark:text-white font-black text-xs border border-slate-100 dark:border-slate-800 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-900 transition-all font-sans">
                                             {app.job_offer_detail?.company_detail?.name.substring(0, 2).toUpperCase()}
                                         </div>
-                                        <div>
+                                        <div className="font-sans">
                                             <h4 className="font-black text-slate-900 dark:text-white text-sm truncate max-w-[150px]">{app.job_offer_detail?.title}</h4>
-                                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{app.job_offer_detail?.company_detail?.name}</p>
+                                            <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">{app.job_offer_detail?.company_detail?.name}</p>
                                         </div>
                                     </div>
                                     <div className="mt-auto flex items-center justify-between border-t border-slate-200 dark:border-slate-700 pt-4">
@@ -373,7 +373,7 @@ export default function DashboardCandidatPage() {
                             </p>
                             <Link
                                 href="/dashboard/candidat/certifs"
-                                className="inline-block px-6 py-3 bg-white text-blue-600 border border-blue-100 rounded-xl font-black text-xs uppercase tracking-widest hover:border-blue-600 transition-all text-center"
+                                className="inline-block px-6 py-3 bg-white dark:bg-slate-950 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-slate-800 rounded-xl font-black text-xs uppercase tracking-widest hover:border-blue-600 dark:hover:border-blue-400 transition-all text-center shadow-sm"
                             >
                                 Voir mon statut de certification
                             </Link>

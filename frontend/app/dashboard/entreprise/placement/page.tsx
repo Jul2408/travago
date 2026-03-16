@@ -96,12 +96,12 @@ export default function PlacementIAPage() {
         <div className="space-y-10">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
                 <div>
-                    <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Pilotage des Placements IA</h1>
-                    <p className="text-sm sm:text-base text-slate-500 font-medium mt-1">Suivez l'avancement de vos chasses automatisées en temps réel.</p>
+                    <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight decoration-blue-500 underline-offset-4 decoration-2">Pilotage des Placements IA</h1>
+                    <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 font-medium mt-1 italic">Suivez l'avancement de vos chasses automatisées en temps réel.</p>
                 </div>
                 <button
                     onClick={() => setShowModal(true)}
-                    className="w-full sm:w-auto px-6 sm:px-8 py-4 bg-blue-600 text-white rounded-[1.5rem] font-black text-xs sm:text-sm flex items-center justify-center hover:bg-blue-700 transition-all shadow-xl shadow-blue-100"
+                    className="w-full sm:w-auto px-6 sm:px-8 py-4 bg-blue-600 text-white rounded-[1.5rem] font-black text-xs sm:text-sm flex items-center justify-center hover:bg-blue-700 dark:hover:bg-blue-500 transition-all shadow-xl shadow-blue-100 dark:shadow-none"
                 >
                     <Plus size={18} className="mr-2 text-white" /> Lancer une nouvelle chasse
                 </button>
@@ -133,7 +133,7 @@ export default function PlacementIAPage() {
                 {isLoading ? (
                     <div className="grid lg:grid-cols-2 gap-8 col-span-2">
                         {[1, 2].map((i) => (
-                            <div key={i} className="bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 border border-blue-50 shadow-sm space-y-6">
+                            <div key={i} className="bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 border border-blue-50 dark:border-slate-800 shadow-sm space-y-6">
                                 <div className="flex items-center justify-between">
                                     <div className="space-y-2 flex-1">
                                         <Skeleton className="h-6 w-3/4" />
@@ -153,27 +153,27 @@ export default function PlacementIAPage() {
                         ))}
                     </div>
                 ) : activePlacements.length === 0 ? (
-                    <div className="col-span-2 text-center py-20 bg-slate-50 rounded-[3rem] border border-blue-50">
-                        <p className="text-slate-500 font-medium italic">Aucun placement actif.</p>
+                    <div className="col-span-2 text-center py-20 bg-slate-50 dark:bg-slate-900/50 rounded-[3rem] border border-blue-50 dark:border-slate-800">
+                        <p className="text-slate-500 dark:text-slate-400 font-medium italic">Aucun placement actif.</p>
                     </div>
                 ) : (
                     activePlacements.map((placement) => (
-                        <div key={placement.id} className="group bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 border border-blue-50 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all">
+                        <div key={placement.id} className="group bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 border border-blue-50 dark:border-slate-800 shadow-sm hover:shadow-2xl dark:hover:shadow-blue-900/10 hover:border-blue-100 dark:hover:border-blue-900/30 transition-all font-sans">
                             <div className="flex items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
                                 <div>
-                                    <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 group-hover:text-blue-600 transition-colors uppercase tracking-tight line-clamp-2">{placement.title}</h3>
+                                    <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight line-clamp-2 decoration-blue-500 underline-offset-4 decoration-2">{placement.title}</h3>
                                     <div className="flex items-center space-x-3">
-                                        <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-black uppercase tracking-widest border border-blue-100">
+                                        <span className="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 rounded-lg text-[10px] font-black uppercase tracking-widest border border-blue-100 dark:border-blue-900/30">
                                             {placement.status}
                                         </span>
-                                        <div className="flex items-center text-[10px] font-black text-blue-400 uppercase tracking-widest">
-                                            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse mr-2"></div>
+                                        <div className="flex items-center text-[10px] font-black text-blue-400 dark:text-blue-500 uppercase tracking-widest">
+                                            <div className="w-2 h-2 bg-blue-400 dark:bg-blue-500 rounded-full animate-bit-pulse mr-2"></div>
                                             {placement.progress === 100 ? 'Analyse terminée' : 'Recherche IA en cours'}
                                         </div>
                                     </div>
                                 </div>
                                 <div className="flex flex-col items-end gap-2">
-                                    <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                                    <div className="w-14 h-14 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center text-slate-400 dark:text-slate-500 group-hover:bg-blue-600 dark:group-hover:bg-blue-500 group-hover:text-white transition-all shadow-sm border border-slate-100 dark:border-slate-800">
                                         <Target size={28} />
                                     </div>
                                     <button
@@ -181,7 +181,7 @@ export default function PlacementIAPage() {
                                             e.preventDefault();
                                             openEditModal(placement);
                                         }}
-                                        className="p-2.5 bg-slate-50 text-slate-400 rounded-xl hover:text-blue-600 hover:bg-blue-50 transition-all border border-slate-100"
+                                        className="p-2.5 bg-slate-50 dark:bg-slate-900 text-slate-400 dark:text-slate-500 rounded-xl hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all border border-slate-100 dark:border-slate-800"
                                         title="Modifier"
                                     >
                                         <Edit3 size={18} />
@@ -203,14 +203,14 @@ export default function PlacementIAPage() {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                                    <div className="p-4 sm:p-5 bg-blue-50 rounded-2xl border border-blue-100">
-                                        <div className="text-[9px] sm:text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Dossiers Matchés</div>
-                                        <div className="text-xl sm:text-2xl font-black text-blue-700">{placement.matches?.length || 0}</div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 font-sans">
+                                    <div className="p-4 sm:p-5 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-900/20">
+                                        <div className="text-[9px] sm:text-[10px] font-black text-blue-400 dark:text-blue-500 uppercase tracking-widest mb-1 whitespace-nowrap">Dossiers Matchés</div>
+                                        <div className="text-xl sm:text-2xl font-black text-blue-700 dark:text-blue-400">{placement.matches?.length || 0}</div>
                                     </div>
-                                    <div className="p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-100">
-                                        <div className="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Budget Engagé</div>
-                                        <div className="text-xs sm:text-sm font-black text-slate-900 truncate">{placement.budget_credits} Crédits</div>
+                                    <div className="p-4 sm:p-5 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800">
+                                        <div className="text-[9px] sm:text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1 whitespace-nowrap">Budget Engagé</div>
+                                        <div className="text-xs sm:text-sm font-black text-slate-900 dark:text-slate-200 truncate">{placement.budget_credits} Crédits</div>
                                     </div>
                                 </div>
 
@@ -225,16 +225,16 @@ export default function PlacementIAPage() {
                 {/* Grid placeholder/Trigger */}
                 <button
                     onClick={() => setShowModal(true)}
-                    className="bg-white rounded-[2rem] sm:rounded-[2.5rem] border-2 border-dashed border-blue-100 p-6 sm:p-10 flex flex-col items-center justify-center text-center group cursor-pointer hover:bg-blue-50/10 hover:border-blue-400 transition-all"
+                    className="bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] border-2 border-dashed border-blue-100 dark:border-blue-900/30 p-6 sm:p-10 flex flex-col items-center justify-center text-center group cursor-pointer hover:bg-blue-50/10 dark:hover:bg-blue-950/20 hover:border-blue-400 dark:hover:border-blue-600 transition-all font-sans"
                 >
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-50 rounded-[1.5rem] sm:rounded-3xl flex items-center justify-center text-blue-200 mb-6 group-hover:text-blue-600 group-hover:bg-blue-100 transition-all shrink-0">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-50 dark:bg-blue-900/20 rounded-[1.5rem] sm:rounded-3xl flex items-center justify-center text-blue-200 dark:text-blue-800 mb-6 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/40 transition-all shrink-0">
                         <Plus size={32} className="sm:w-10 sm:h-10" />
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-3 tracking-tight">Lancer une nouvelle recherche</h3>
-                    <p className="text-xs sm:text-sm font-medium text-slate-500 max-w-xs mb-8 sm:mb-10 leading-relaxed italic">
-                        Notre IA définit les critères, valide les diplômes et vous présente le <span className="text-blue-600 font-bold">Top 3</span>.
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight italic uppercase">Lancer une nouvelle recherche</h3>
+                    <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 max-w-xs mb-8 sm:mb-10 leading-relaxed italic">
+                        Notre IA définit les critères, valide les diplômes et vous présente le <span className="text-blue-600 dark:text-blue-400 font-black">Top 3</span>.
                     </p>
-                    <span className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white border border-blue-100 text-blue-600 rounded-2xl font-black text-[10px] sm:text-xs uppercase tracking-widest group-hover:border-blue-600 group-hover:shadow-xl transition-all">
+                    <span className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white dark:bg-slate-900 border border-blue-100 dark:border-blue-800 text-blue-600 dark:text-blue-400 rounded-2xl font-black text-[10px] sm:text-xs uppercase tracking-widest group-hover:border-blue-600 dark:group-hover:border-blue-500 group-hover:shadow-xl transition-all">
                         Lancer l'Agent IA
                     </span>
                 </button>
@@ -248,59 +248,59 @@ export default function PlacementIAPage() {
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
-                            className="bg-white rounded-[2rem] sm:rounded-[3rem] w-full max-w-2xl overflow-hidden shadow-2xl"
+                            className="bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[3rem] w-full max-w-2xl overflow-hidden shadow-2xl border border-slate-100 dark:border-slate-800"
                         >
-                            <div className="p-6 sm:p-10 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                            <div className="p-6 sm:p-10 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/50">
                                 <div>
-                                    <h2 className="text-xl sm:text-2xl font-black italic text-slate-800 uppercase tracking-tight">
+                                    <h2 className="text-xl sm:text-2xl font-black italic text-slate-800 dark:text-white uppercase tracking-tight">
                                         {editingPlacement ? 'Modifier la Mission IA' : 'Nouvelle Mission IA'}
                                     </h2>
-                                    <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Protocole automatisé</p>
+                                    <p className="text-[10px] sm:text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">Protocole automatisé</p>
                                 </div>
                                 <button onClick={() => {
                                     setShowModal(false);
                                     setEditingPlacement(null);
                                     setFormData({ title: '', description: '', budget_credits: 250 });
-                                }} className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white flex items-center justify-center text-slate-400 hover:text-red-500 transition-colors shadow-sm shrink-0">
+                                }} className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-900 flex items-center justify-center text-slate-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 transition-colors shadow-sm shrink-0 border border-slate-100 dark:border-slate-800">
                                     <X size={20} className="sm:w-6 sm:h-6" />
                                 </button>
                             </div>
 
-                            <form onSubmit={handleCreateOrUpdate} className="p-6 sm:p-10 space-y-6 sm:space-y-8">
+                            <form onSubmit={handleCreateOrUpdate} className="p-6 sm:p-10 space-y-6 sm:space-y-8 font-sans">
                                 <div className="space-y-6">
                                     <div>
-                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Titre du poste recherché</label>
+                                        <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest block mb-2">Titre du poste recherché</label>
                                         <input
                                             required
                                             type="text"
                                             placeholder="Ex: Senior Fullstack Developer (Node/React)"
-                                            className="w-full bg-slate-50 border-2 border-transparent focus:border-blue-500 rounded-2xl p-5 font-bold text-sm outline-none transition-all"
+                                            className="w-full bg-slate-50 dark:bg-slate-900 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 rounded-2xl p-5 font-bold text-sm outline-none transition-all dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600"
                                             value={formData.title}
                                             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                         />
                                     </div>
                                     <div>
-                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Besoin détaillé (IA contextuelle)</label>
+                                        <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest block mb-2">Besoin détaillé (IA contextuelle)</label>
                                         <textarea
                                             required
                                             rows={4}
                                             placeholder="Décrivez les compétences clés, le contexte du projet..."
-                                            className="w-full bg-slate-50 border-2 border-transparent focus:border-blue-500 rounded-2xl p-5 font-bold text-sm outline-none transition-all"
+                                            className="w-full bg-slate-50 dark:bg-slate-900 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 rounded-2xl p-5 font-bold text-sm outline-none transition-all dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600"
                                             value={formData.description}
                                             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                         />
                                     </div>
-                                    <div className="p-4 sm:p-6 bg-blue-50 rounded-[1.5rem] sm:rounded-[2rem] border border-blue-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
+                                    <div className="p-4 sm:p-6 bg-blue-50 dark:bg-blue-900/10 rounded-[1.5rem] sm:rounded-[2rem] border border-blue-100 dark:border-blue-900/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 transition-colors">
                                         <div className="flex items-center gap-3 sm:gap-4">
-                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center text-blue-600 shadow-sm shrink-0">
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white dark:bg-slate-900 rounded-xl flex items-center justify-center text-blue-600 dark:text-blue-400 shadow-sm shrink-0 border border-blue-50 dark:border-slate-800">
                                                 <Zap size={20} className="sm:w-6 sm:h-6" />
                                             </div>
                                             <div>
-                                                <div className="text-[9px] sm:text-[10px] font-black text-blue-900 uppercase tracking-widest">Coût Mission</div>
-                                                <div className="text-lg sm:text-xl font-black text-blue-600">250 Crédits</div>
+                                                <div className="text-[9px] sm:text-[10px] font-black text-blue-900 dark:text-blue-400 uppercase tracking-widest">Coût Mission</div>
+                                                <div className="text-lg sm:text-xl font-black text-blue-600 dark:text-blue-400">250 Crédits</div>
                                             </div>
                                         </div>
-                                        <p className="text-[9px] sm:text-[10px] font-bold text-blue-400 uppercase italic text-left sm:text-right max-w-[200px] sm:max-w-[150px]">
+                                        <p className="text-[9px] sm:text-[10px] font-bold text-blue-400 dark:text-blue-500 uppercase italic text-left sm:text-right max-w-[200px] sm:max-w-[150px]">
                                             Inclut KYC et matching algorithmique v2.5
                                         </p>
                                     </div>
@@ -309,7 +309,7 @@ export default function PlacementIAPage() {
                                 <button
                                     disabled={isCreating}
                                     type="submit"
-                                    className="w-full py-5 sm:py-6 bg-slate-900 text-white rounded-[1.5rem] sm:rounded-[2rem] font-black text-[10px] sm:text-sm uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-blue-900/10 flex items-center justify-center gap-2 sm:gap-3"
+                                    className="w-full py-5 sm:py-6 bg-slate-900 dark:bg-blue-600 text-white dark:text-white rounded-[1.5rem] sm:rounded-[2rem] font-black text-[10px] sm:text-sm uppercase tracking-widest hover:bg-blue-600 dark:hover:bg-blue-500 transition-all shadow-xl shadow-blue-900/10 flex items-center justify-center gap-2 sm:gap-3"
                                 >
                                     {isCreating ? <Loader2 className="animate-spin" /> : <Target size={20} />}
                                     {editingPlacement ? 'Enregistrer les modifications' : 'Confirmer et Lancer la Recherche'}
@@ -321,9 +321,9 @@ export default function PlacementIAPage() {
             </AnimatePresence>
 
             {/* Help/Notice */}
-            <div className="grid lg:grid-cols-2 gap-6">
-                <div className="p-6 sm:p-8 bg-blue-50 border border-blue-100 rounded-[2rem] sm:rounded-[2.5rem] flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 text-blue-900">
-                    <ShieldCheck size={28} className="text-blue-600 shrink-0 sm:w-8 sm:h-8" />
+            <div className="grid lg:grid-cols-2 gap-6 font-sans">
+                <div className="p-6 sm:p-8 bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-900/20 rounded-[2rem] sm:rounded-[2.5rem] flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 text-blue-900 dark:text-blue-200 transition-colors">
+                    <ShieldCheck size={28} className="text-blue-600 dark:text-blue-400 shrink-0 sm:w-8 sm:h-8" />
                     <p className="text-xs sm:text-sm font-medium leading-relaxed italic">
                         <strong>Garantie Travago :</strong> Tous les candidats présentés dans la section "Matches IA" ont un profil certifié, des documents d'identité validés et une fiabilité vérifiée à 100%.
                     </p>
@@ -333,17 +333,17 @@ export default function PlacementIAPage() {
                     href="https://wa.me/237657948848"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-6 sm:p-8 bg-green-50 hover:bg-green-100 border border-green-200 rounded-[2rem] sm:rounded-[2.5rem] flex items-center justify-between group transition-all"
+                    className="p-6 sm:p-8 bg-green-50 dark:bg-green-900/10 hover:bg-green-100 dark:hover:bg-green-900/20 border border-green-200 dark:border-green-900/20 rounded-[2rem] sm:rounded-[2.5rem] flex items-center justify-between group transition-all"
                 >
                     <div className="flex items-center space-x-4 sm:space-x-6">
-                        <div className="w-12 h-12 bg-green-500 text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-green-200 group-hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 bg-green-500 dark:bg-green-600 text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-green-200 dark:shadow-none group-hover:scale-110 transition-transform">
                             <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                             </svg>
                         </div>
                         <div>
-                            <h4 className="text-[10px] font-black uppercase tracking-widest text-green-700 mb-1">Assistance Placement</h4>
-                            <p className="text-sm font-bold text-slate-900 italic">Discuter avec un conseiller</p>
+                            <h4 className="text-[10px] font-black uppercase tracking-widest text-green-700 dark:text-green-500 mb-1">Assistance Placement</h4>
+                            <p className="text-sm font-bold text-slate-900 dark:text-white italic">Discuter avec un conseiller</p>
                         </div>
                     </div>
                 </a>

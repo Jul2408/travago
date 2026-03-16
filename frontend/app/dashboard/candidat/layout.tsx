@@ -137,7 +137,7 @@ export default function CandidateDashboardLayout({
                                         </span>
                                         {item.label}
                                         {item.badge && (
-                                            <span className="ml-auto text-[10px] px-2 py-0.5 rounded-full ring-2 ring-white font-black animate-in fade-in zoom-in duration-300 bg-red-600 text-white shadow-lg shadow-red-200">
+                                            <span className="ml-auto text-[10px] px-2 py-0.5 rounded-full ring-2 ring-white dark:ring-slate-900 font-black animate-in fade-in zoom-in duration-300 bg-red-600 dark:bg-red-500 text-white shadow-lg shadow-red-200 dark:shadow-none">
                                                 {item.badge}
                                             </span>
                                         )}
@@ -147,15 +147,15 @@ export default function CandidateDashboardLayout({
                         </nav>
 
                         {/* Identity Status */}
-                        <div className="mt-8 p-5 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-900/20 mb-6">
+                        <div className="mt-8 p-5 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-900/20 mb-6 transition-colors font-sans">
                             <div className="flex items-center space-x-3 mb-2">
-                                <ShieldCheck className="text-blue-600" size={18} />
-                                <span className="text-xs font-black text-blue-900 uppercase">Vérification</span>
+                                <ShieldCheck className="text-blue-600 dark:text-blue-400" size={18} />
+                                <span className="text-xs font-black text-blue-900 dark:text-blue-100 uppercase">Vérification</span>
                             </div>
-                            <p className="text-[10px] font-bold text-blue-700 leading-tight mb-3">Complétez votre KYC pour être éligible au placement.</p>
-                            <div className="h-1.5 w-full bg-blue-200 rounded-full overflow-hidden">
+                            <p className="text-[10px] font-bold text-blue-700 dark:text-blue-400 leading-tight mb-3">Complétez votre KYC pour être éligible au placement.</p>
+                            <div className="h-1.5 w-full bg-blue-200 dark:bg-blue-900/40 rounded-full overflow-hidden">
                                 <div
-                                    className="h-full bg-blue-600 transition-all duration-1000"
+                                    className="h-full bg-blue-600 dark:bg-blue-400 transition-all duration-1000 shadow-[0_0_8px_rgba(59,130,246,0.5)]"
                                     style={{ width: `${mounted ? (user?.candidate_profile?.reliability_score || 0) : 0}%` }}
                                 />
                             </div>
@@ -165,7 +165,7 @@ export default function CandidateDashboardLayout({
                         <div className="pt-6 border-t border-slate-100 dark:border-slate-800">
                             <button
                                 onClick={handleLogout}
-                                className="flex items-center px-4 py-3 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-2xl font-bold text-sm transition-all w-full group"
+                                className="flex items-center px-4 py-3 text-slate-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-2xl font-bold text-sm transition-all w-full group"
                             >
                                 <LogOut className="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform" />
                                 Déconnexion
@@ -189,7 +189,7 @@ export default function CandidateDashboardLayout({
                                 <div className="flex items-center space-x-2 sm:space-x-4">
                                     <button
                                         onClick={handleLogout}
-                                        className="p-2.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
+                                        className="p-2.5 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all"
                                         title="Déconnexion"
                                     >
                                         <Power size={20} />

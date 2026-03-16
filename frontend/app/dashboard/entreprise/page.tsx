@@ -139,7 +139,7 @@ export default function DashboardEntreprisePage() {
                             Dites-nous quel poste vous souhaitez pourvoir, et notre système s'occupe du reste : sourcing, curation de talents, et vérification des certifications.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <Link href="/dashboard/entreprise/offres/nouvelle" className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white dark:bg-slate-900 text-blue-700 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl hover:scale-105 transition-transform flex items-center justify-center">
+                            <Link href="/dashboard/entreprise/offres/nouvelle" className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white dark:bg-slate-950 text-blue-700 dark:text-blue-400 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl dark:shadow-none hover:scale-105 transition-transform flex items-center justify-center">
                                 <Zap size={18} className="mr-2" /> Lancer un placement
                             </Link>
                             <Link href="/dashboard/entreprise/candidats" className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-blue-600/50 backdrop-blur-md text-white border border-white/20 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-blue-600/70 transition-all flex items-center justify-center">
@@ -177,12 +177,12 @@ export default function DashboardEntreprisePage() {
             <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* 2. Suivi de Placements IA (Essential) */}
                 <div className="lg:col-span-2 space-y-6 sm:space-y-8">
-                    <div className="bg-white dark:bg-slate-900 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 border border-blue-50 shadow-sm">
+                    <div className="bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 border border-blue-50 dark:border-slate-800 shadow-sm transition-colors">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                             <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight flex items-center">
-                                <Cpu className="mr-3 text-blue-600 shrink-0" /> <span className="truncate">Chasses IA</span>
+                                <Cpu className="mr-3 text-blue-600 dark:text-blue-400 shrink-0" /> <span className="truncate">Chasses IA</span>
                             </h3>
-                            <Link href="/dashboard/entreprise/placement" className="text-blue-600 font-black text-[10px] uppercase tracking-widest hover:underline whitespace-nowrap">Gérer tout</Link>
+                            <Link href="/dashboard/entreprise/placement" className="text-blue-600 dark:text-blue-400 font-black text-[10px] uppercase tracking-widest hover:underline whitespace-nowrap">Gérer tout</Link>
                         </div>
 
                         <div className="space-y-4">
@@ -199,41 +199,41 @@ export default function DashboardEntreprisePage() {
                                     ))}
                                 </div>
                             ) : recentPlacements.length === 0 ? (
-                                <div className="p-12 bg-slate-50 dark:bg-slate-800 rounded-[2rem] border border-dashed border-slate-200 text-center">
-                                    <div className="w-16 h-16 bg-white dark:bg-slate-900 rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-300">
+                                <div className="p-12 bg-slate-50 dark:bg-slate-900 rounded-[2rem] border border-dashed border-slate-200 dark:border-slate-800 text-center">
+                                    <div className="w-16 h-16 bg-white dark:bg-slate-950 rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-300 dark:text-slate-700">
                                         <Briefcase size={32} />
                                     </div>
                                     <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">Aucun placement actif</h4>
-                                    <p className="text-sm font-medium text-slate-500 max-w-xs mx-auto mb-6">
+                                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400 max-w-xs mx-auto mb-6">
                                         Lancez votre première mission de chasse IA assistée par Travago dès maintenant.
                                     </p>
-                                    <Link href="/dashboard/entreprise/placement" className="inline-block px-8 py-4 bg-blue-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
+                                    <Link href="/dashboard/entreprise/placement" className="inline-block px-8 py-4 bg-blue-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-100 dark:shadow-none">
                                         Lancer une chasse IA
                                     </Link>
                                 </div>
                             ) : (
                                 recentPlacements.map((p) => (
-                                    <div key={p.id} className="group p-5 sm:p-8 bg-slate-50 dark:bg-slate-800 rounded-[1.5rem] sm:rounded-[2rem] border border-slate-100 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-700 hover:border-blue-100 dark:hover:border-blue-900/50 hover:shadow-xl transition-all">
+                                    <div key={p.id} className="group p-5 sm:p-8 bg-slate-50 dark:bg-slate-900 rounded-[1.5rem] sm:rounded-[2rem] border border-slate-100 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-100 dark:hover:border-blue-900/50 hover:shadow-xl dark:hover:shadow-blue-900/10 transition-all">
                                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                                             <div className="flex-1 min-w-0">
-                                                <div className="flex flex-wrap items-center gap-2 mb-2">
+                                                <div className="flex flex-wrap items-center gap-2 mb-2 font-sans">
                                                     <h4 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white truncate leading-tight" title={p.title}>{p.title}</h4>
-                                                    <span className="shrink-0 px-2 py-0.5 bg-blue-100 text-blue-700 rounded-md text-[9px] font-black uppercase tracking-widest">
+                                                    <span className="shrink-0 px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-md text-[9px] font-black uppercase tracking-widest">
                                                         {p.is_ia_boosted ? 'Automatisé' : 'Standard'}
                                                     </span>
                                                 </div>
                                                 <div className="flex items-center space-x-3">
-                                                    <div className="flex items-center text-[9px] font-black text-slate-400 uppercase tracking-widest">
-                                                        <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse mr-1.5 "></div>
+                                                    <div className="flex items-center text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+                                                        <div className="w-1.5 h-1.5 bg-blue-500 dark:bg-blue-400 rounded-full animate-pulse mr-1.5 "></div>
                                                         {p.status_display || p.status}
                                                     </div>
-                                                    <div className="h-3 w-px bg-slate-200"></div>
-                                                    <div className="text-[9px] font-black text-blue-600 uppercase tracking-widest truncate">
+                                                    <div className="h-3 w-px bg-slate-200 dark:bg-slate-700"></div>
+                                                    <div className="text-[9px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest truncate">
                                                         {p.matches?.length || 0} Talents Matchés
                                                     </div>
                                                 </div>
                                             </div>
-                                            <Link href={`/dashboard/entreprise/placement/${p.id}`} className="w-full sm:w-auto px-5 py-3 bg-white dark:bg-slate-900 border border-blue-100 text-blue-600 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all shadow-sm text-center">
+                                            <Link href={`/dashboard/entreprise/placement/${p.id}`} className="w-full sm:w-auto px-5 py-3 bg-white dark:bg-slate-950 border border-blue-100 dark:border-slate-800 text-blue-600 dark:text-blue-400 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white transition-all shadow-sm text-center">
                                                 Voir la Shortlist
                                             </Link>
                                         </div>
@@ -245,9 +245,9 @@ export default function DashboardEntreprisePage() {
 
                     <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                         {/* Messages Module */}
-                        <div className="bg-white dark:bg-slate-900 rounded-[2rem] p-5 sm:p-8 border border-blue-50 shadow-sm flex flex-col">
+                        <div className="bg-white dark:bg-slate-950 rounded-[2rem] p-5 sm:p-8 border border-blue-50 dark:border-slate-800 shadow-sm flex flex-col transition-colors">
                             <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 flex items-center">
-                                <MessageSquare className="mr-3 text-green-600" />
+                                <MessageSquare className="mr-3 text-green-600 dark:text-green-400" />
                                 Messages Récents
                             </h3>
                             <div className="space-y-4 flex-1">
@@ -262,34 +262,34 @@ export default function DashboardEntreprisePage() {
                                         </div>
                                     ))
                                 ) : conversations.length > 0 ? conversations.slice(0, 3).map((conv: any, i: number) => (
-                                    <div key={i} className="flex items-center space-x-3 p-3 hover:bg-slate-50 dark:bg-slate-800 rounded-xl transition-all cursor-pointer border border-transparent hover:border-slate-100 dark:border-slate-800">
-                                        <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center text-green-700 font-black text-xs">
+                                    <div key={i} className="flex items-center space-x-3 p-3 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-xl transition-all cursor-pointer border border-transparent hover:border-slate-100 dark:hover:border-slate-800">
+                                        <div className="w-10 h-10 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center text-green-700 dark:text-green-400 font-black text-xs">
                                             {conv.other_participant?.username?.substring(0, 2).toUpperCase() || '??'}
                                         </div>
-                                        <div className="flex-1 min-w-0">
+                                        <div className="flex-1 min-w-0 font-sans">
                                             <div className="text-xs font-black text-slate-900 dark:text-white truncate">{conv.other_participant?.username}</div>
-                                            <div className="text-[10px] text-slate-500 truncate">{conv.last_message?.content || 'Pas de message'}</div>
+                                            <div className="text-[10px] text-slate-500 dark:text-slate-400 truncate">{conv.last_message?.content || 'Pas de message'}</div>
                                         </div>
-                                        <ChevronRight size={14} className="text-slate-300" />
+                                        <ChevronRight size={14} className="text-slate-300 dark:text-slate-600" />
                                     </div>
                                 )) : (
-                                    <div className="text-center py-6 text-slate-400 font-medium text-xs">
+                                    <div className="text-center py-6 text-slate-400 dark:text-slate-600 font-medium text-xs">
                                         Aucune conversation active.
                                     </div>
                                 )}
                             </div>
-                            <Link href="/dashboard/entreprise/messages" className="mt-8 text-green-600 font-black text-[10px] uppercase tracking-widest flex items-center justify-center bg-green-50 py-3 rounded-xl hover:bg-green-600 hover:text-white transition-all">
+                            <Link href="/dashboard/entreprise/messages" className="mt-8 text-green-600 dark:text-green-400 font-black text-[10px] uppercase tracking-widest flex items-center justify-center bg-green-50 dark:bg-green-900/20 py-3 rounded-xl hover:bg-green-600 dark:hover:bg-green-600 hover:text-white transition-all">
                                 Toutes les discussions
                             </Link>
                         </div>
 
                         {/* Credits & Stats */}
                         <div className="space-y-4 sm:space-y-6">
-                            <div className="bg-white dark:bg-slate-900 p-5 sm:p-8 rounded-[2rem] border border-blue-50 shadow-sm flex items-center space-x-4 sm:space-x-6">
-                                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-50 text-blue-600 rounded-[1rem] sm:rounded-2xl flex items-center justify-center shrink-0">
+                            <div className="bg-white dark:bg-slate-950 p-5 sm:p-8 rounded-[2rem] border border-blue-50 dark:border-slate-800 shadow-sm flex items-center space-x-4 sm:space-x-6 transition-colors">
+                                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-[1rem] sm:rounded-2xl flex items-center justify-center shrink-0">
                                     <Users size={24} />
                                 </div>
-                                <div>
+                                <div className="font-sans">
                                     {isLoading ? (
                                         <div className="space-y-2">
                                             <Skeleton className="h-6 w-12" />
@@ -298,17 +298,17 @@ export default function DashboardEntreprisePage() {
                                     ) : (
                                         <>
                                             <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">{stats.matches}</div>
-                                            <div className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-wider sm:tracking-widest leading-tight">Candidatures reçues</div>
+                                            <div className="text-[8px] sm:text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider sm:tracking-widest leading-tight">Candidatures reçues</div>
                                         </>
                                     )}
                                 </div>
                             </div>
-                            <div className="bg-white dark:bg-slate-900 p-5 sm:p-8 rounded-[2rem] border border-orange-50 shadow-sm flex items-center justify-between font-black">
+                            <div className="bg-white dark:bg-slate-950 p-5 sm:p-8 rounded-[2rem] border border-orange-50 dark:border-orange-900/20 shadow-sm flex items-center justify-between font-black transition-colors">
                                 <div className="flex items-center space-x-4 sm:space-x-6">
-                                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-orange-50 text-orange-600 rounded-[1rem] sm:rounded-2xl flex items-center justify-center shrink-0">
+                                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-[1rem] sm:rounded-2xl flex items-center justify-center shrink-0">
                                         <Coins size={24} />
                                     </div>
-                                    <div>
+                                    <div className="font-sans">
                                         {isLoading ? (
                                             <div className="space-y-2">
                                                 <Skeleton className="h-6 w-12" />
@@ -317,12 +317,12 @@ export default function DashboardEntreprisePage() {
                                         ) : (
                                             <>
                                                 <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">{stats.credits}</div>
-                                                <div className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-wider sm:tracking-widest leading-tight">Crédits de Placement</div>
+                                                <div className="text-[8px] sm:text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider sm:tracking-widest leading-tight">Crédits de Placement</div>
                                             </>
                                         )}
                                     </div>
                                 </div>
-                                <Link href="/dashboard/entreprise/credits" className="p-3 bg-orange-100 text-orange-700 rounded-xl hover:bg-orange-600 hover:text-white transition-all">
+                                <Link href="/dashboard/entreprise/credits" className="p-3 bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-400 rounded-xl hover:bg-orange-600 dark:hover:bg-orange-500 dark:hover:text-white transition-all shadow-sm">
                                     <Plus size={20} />
                                 </Link>
                             </div>
@@ -331,12 +331,12 @@ export default function DashboardEntreprisePage() {
                 </div>
 
                 {/* 3. Talents Elite Spotlight (Essential) */}
-                <div className="bg-white dark:bg-slate-900 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 border border-blue-50 shadow-sm flex flex-col h-full">
+                <div className="bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 border border-blue-50 dark:border-slate-800 shadow-sm flex flex-col h-full transition-colors">
                     <div className="flex items-center justify-between mb-8">
-                        <h3 className="text-lg font-black text-slate-900 dark:text-white flex items-center">
-                            <UserCheck className="mr-3 text-blue-600" /> Talents Elite
+                        <h3 className="text-lg font-black text-slate-900 dark:text-white flex items-center font-sans tracking-tight">
+                            <UserCheck className="mr-3 text-blue-600 dark:text-blue-400" /> Talents Elite
                         </h3>
-                        <Link href="/dashboard/entreprise/candidats" className="p-2 bg-blue-50 rounded-lg text-blue-600 hover:bg-blue-600 hover:text-white transition-all">
+                        <Link href="/dashboard/entreprise/candidats" className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-blue-600 dark:text-blue-400 hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white transition-all">
                             <ArrowUpRight size={18} />
                         </Link>
                     </div>
@@ -357,34 +357,34 @@ export default function DashboardEntreprisePage() {
                             ))
                         ) : eliteTalents.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-10 text-center space-y-3 opacity-60">
-                                <UserCheck size={32} className="text-slate-300" />
-                                <p className="text-slate-400 text-xs font-medium max-w-[200px]">Aucun talent 'Elite' détecté pour l'instant.</p>
+                                <UserCheck size={32} className="text-slate-300 dark:text-slate-700" />
+                                <p className="text-slate-400 dark:text-slate-600 text-xs font-medium max-w-[200px]">Aucun talent 'Elite' détecté pour l'instant.</p>
                             </div>
                         ) : (
                             eliteTalents.map((c) => {
                                 const name = c.user_detail?.username || 'Candidat';
                                 return (
-                                    <Link href={`/dashboard/entreprise/candidats/${c.id}`} key={c.id} className="block group p-4 sm:p-6 rounded-[1.5rem] sm:rounded-[2rem] bg-slate-50 dark:bg-slate-800 border border-slate-50 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-700 hover:border-blue-100 dark:hover:border-blue-900/50 transition-all cursor-pointer">
+                                    <Link href={`/dashboard/entreprise/candidats/${c.id}`} key={c.id} className="block group p-4 sm:p-6 rounded-[1.5rem] sm:rounded-[2rem] bg-slate-50 dark:bg-slate-900 border border-slate-50 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-100 dark:hover:border-blue-900/50 hover:shadow-xl dark:hover:shadow-blue-900/10 transition-all cursor-pointer">
                                         <div className="flex flex-col gap-4">
                                             <div className="flex items-center gap-4">
-                                                <div className="shrink-0 w-12 h-12 bg-white dark:bg-slate-900 rounded-xl flex items-center justify-center font-black text-slate-900 dark:text-white shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden relative group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-800 transition-all">
+                                                <div className="shrink-0 w-12 h-12 bg-white dark:bg-slate-950 rounded-xl flex items-center justify-center font-black text-slate-900 dark:text-white shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden relative group-hover:bg-slate-900 dark:group-hover:bg-slate-800 group-hover:text-white group-hover:border-slate-800 transition-all">
                                                     {c.photo ? (
                                                         <Image src={getImageUrl(c.photo) || ''} alt={name} fill className="object-cover" />
                                                     ) : (
                                                         name.charAt(0).toUpperCase()
                                                     )}
                                                 </div>
-                                                <div className="flex-1 min-w-0 pr-2">
+                                                <div className="flex-1 min-w-0 pr-2 font-sans">
                                                     <h4 className="font-black text-slate-900 dark:text-white text-sm truncate" title={name}>{name}</h4>
-                                                    <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider sm:tracking-widest truncate">{c.title || 'Talent Certifié'}</p>
+                                                    <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider sm:tracking-widest truncate">{c.title || 'Talent Certifié'}</p>
                                                 </div>
-                                                <div className="shrink-0 text-right">
-                                                    <div className="text-[10px] font-black text-blue-600 mb-1">{c.placability_score}% Match</div>
-                                                    <div className="text-[8px] font-black text-green-600 uppercase tracking-widest bg-green-50 px-2 py-0.5 rounded-full inline-block">Vérifié</div>
+                                                <div className="shrink-0 text-right font-sans">
+                                                    <div className="text-[10px] font-black text-blue-600 dark:text-blue-400 mb-1">{c.placability_score}% Match</div>
+                                                    <div className="text-[8px] font-black text-green-600 dark:text-green-400 uppercase tracking-widest bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full inline-block">Vérifié</div>
                                                 </div>
                                             </div>
-                                            <div className="h-1 w-full bg-slate-200 rounded-full overflow-hidden">
-                                                <div className="h-full bg-blue-600 transition-all duration-1000" style={{ width: `${c.placability_score}%` }} />
+                                            <div className="h-1 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                                                <div className="h-full bg-blue-600 dark:bg-blue-500 transition-all duration-1000" style={{ width: `${c.placability_score}%` }} />
                                             </div>
                                         </div>
                                     </Link>
@@ -393,10 +393,10 @@ export default function DashboardEntreprisePage() {
                         )}
                     </div>
 
-                    <p className="mt-8 text-[11px] font-medium text-slate-500 text-center leading-relaxed">
+                    <p className="mt-8 text-[11px] font-medium text-slate-500 dark:text-slate-400 text-center leading-relaxed">
                         Ces candidats ont des profils certifiés et ont leurs diplômes vérifiés à 100% par nos experts.
                     </p>
-                    <Link href="/dashboard/entreprise/candidats" className="mt-6 w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-600 transition-all text-center block">
+                    <Link href="/dashboard/entreprise/candidats" className="mt-6 w-full py-4 bg-slate-900 dark:bg-slate-800 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-600 dark:hover:bg-blue-600 transition-all shadow-xl shadow-slate-100 dark:shadow-none text-center block">
                         Explorer tous les talents
                     </Link>
                 </div>

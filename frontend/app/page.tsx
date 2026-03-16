@@ -38,6 +38,8 @@ import { useState, useEffect } from 'react';
 import axiosInstance from '@/lib/axios';
 import { getImageUrl } from '@/lib/utils';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { TypewriterEffect } from '@/components/typewriter-effect';
+import { FolderClickAnimation } from '@/components/folder-animation';
 
 // Common Animation variants
 const fadeInUp: any = {
@@ -185,7 +187,7 @@ export default function Home() {
             className="fixed inset-0 z-[100] bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl flex flex-col"
           >
             {/* Mobile Menu Header */}
-            <div className="p-8 flex justify-between items-center border-b border-slate-100">
+            <div className="p-8 flex justify-between items-center border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center space-x-3">
                 <div className="relative w-8 h-8 rounded-lg overflow-hidden shadow-lg">
                   <Image src="/logo.jpeg" alt="Logo" fill className="object-cover" />
@@ -250,8 +252,8 @@ export default function Home() {
             </div>
 
             {/* Mobile Menu Footer - Version info instead of redundant buttons */}
-            <div className="p-8 border-t border-slate-100 flex flex-col items-center">
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest text-center">Travago v1.0.2</p>
+            <div className="p-8 border-t border-slate-100 dark:border-slate-800 flex flex-col items-center">
+              <p className="text-[10px] text-gray-400 dark:text-slate-500 font-bold uppercase tracking-widest text-center">Travago v1.0.2</p>
               <p className="text-[8px] text-gray-300 uppercase tracking-[0.2em] mt-1 text-center font-black">Powered by Smart AI Placement</p>
             </div>
           </motion.div>
@@ -267,13 +269,13 @@ export default function Home() {
               <Sparkles size={14} className="text-blue-600 dark:text-blue-400 animate-pulse" />
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-700 dark:text-blue-300">L'Excellence augmentée par l'algorithme v2.5</span>
             </motion.div>
-            <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} className="text-5xl sm:text-6xl lg:text-[7rem] font-black text-slate-900 dark:text-white leading-[0.85] tracking-tighter mb-8 sm:mb-10">
-              Recrutez au <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 italic">Cameroun</span> <br /> sans effort.
+            <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} className="text-5xl sm:text-6xl lg:text-[6.5rem] font-black text-slate-900 dark:text-white leading-[0.85] tracking-tighter mb-8 sm:mb-10 uppercase transition-all">
+              <TypewriterEffect words={["Recrutez", "Postulez", "Matchez"]} className="text-blue-600 dark:text-blue-400 italic" /> au <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 italic">Cameroun</span> <br /> sans effort.
             </motion.h1>
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-lg sm:text-2xl text-slate-500 dark:text-slate-400 mb-16 max-w-xl font-medium leading-relaxed italic">
-              Travago fusionne l'expertise RH et l'IA pour identifier, certifier et matcher les meilleurs profils avec vos besoins stratégiques.
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-lg sm:text-2xl text-slate-500 dark:text-slate-400 mb-12 max-w-xl font-medium leading-relaxed italic">
+              Travago fusionne l'expertise RH et l'IA pour identifier, certifier et matcher les meilleurs profils avec les meilleures opportunités.
             </motion.p>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 w-full">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-12 w-full">
               <Link href="/register/entreprise" className="w-full sm:w-auto px-8 sm:px-12 py-5 bg-slate-900 dark:bg-blue-600 text-white rounded-[2rem] font-black text-sm sm:text-lg uppercase tracking-widest hover:bg-blue-600 dark:hover:bg-blue-500 shadow-2xl transition-all flex items-center justify-center group">
                 Recruter <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />
               </Link>
@@ -281,48 +283,31 @@ export default function Home() {
                 Je postule
               </Link>
             </div>
-            {/* Added APK download button in Hero for mobile accessibility */}
-            <div className="lg:hidden">
-              <button
-                onClick={handleInstallClick}
-                className="flex items-center justify-center space-x-3 w-full bg-blue-600 text-white py-6 rounded-[2rem] text-lg font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 active:scale-95 transition-all"
-              >
-                <Smartphone size={24} />
-                <span>Installer l'Application</span>
-              </button>
-              <p className="text-center text-[10px] text-gray-400 mt-2 italic font-medium uppercase tracking-[0.2em]">Compatible iOS, Android & Desktop</p>
+
+            {/* Added Folder Animation and APK download button in Hero for mobile accessibility */}
+            <div className="lg:hidden mt-8 w-full">
+              <div className="mb-12 scale-[0.95] sm:scale-100 origin-center">
+                <FolderClickAnimation />
+              </div>
+
+              <div className="space-y-4 px-2">
+                <button
+                  onClick={handleInstallClick}
+                  className="flex items-center justify-center space-x-3 w-full bg-blue-600 dark:bg-blue-600 text-white py-6 rounded-[2rem] text-lg font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 active:scale-95 transition-all"
+                >
+                  <Smartphone size={24} />
+                  <span>Installer l'Application</span>
+                </button>
+                <p className="text-center text-[10px] text-gray-400 italic font-medium uppercase tracking-[0.2em] opacity-80">
+                  Compatible iOS, Android & Desktop
+                </p>
+              </div>
             </div>
           </div>
           <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5 }} className="relative hidden lg:block">
-            <div className="relative z-10 bg-slate-900 rounded-[3rem] p-10 text-white shadow-2xl ring-1 ring-white/10">
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center"><Fingerprint size={24} /></div>
-                  <div>
-                    <div className="text-[10px] font-black uppercase opacity-50">IA Matching</div>
-                    <div className="text-sm font-black italic">Analyse en temps réel</div>
-                  </div>
-                </div>
-                <div className="text-xs font-black uppercase text-blue-400">92.4% Match</div>
-              </div>
-              <div className="space-y-6">
-                <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden">
-                  <motion.div initial={{ width: 0 }} animate={{ width: "92%" }} transition={{ duration: 2, delay: 1 }} className="h-full bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
-                    <div className="text-lg font-black">Certifié</div>
-                    <div className="text-[8px] uppercase tracking-widest opacity-40">KYC Status</div>
-                  </div>
-                  <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
-                    <div className="text-lg font-black">Expert</div>
-                    <div className="text-[8px] uppercase tracking-widest opacity-40">Niveau de fiabilité</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute -top-10 -right-10 w-48 h-48 bg-blue-600/10 blur-[60px] rounded-full" />
-            <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-cyan-600/10 blur-[60px] rounded-full" />
+            <FolderClickAnimation />
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-600/10 blur-[60px] rounded-full" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-cyan-600/10 blur-[60px] rounded-full" />
           </motion.div>
         </div>
       </section>
@@ -707,8 +692,8 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-16 mb-24">
             <div className="col-span-2">
               <div className="flex items-center space-x-3 mb-8">
-                <Image src="/logo.jpeg" alt="Logo" width={40} height={40} className="rounded-xl" />
-                <span className="text-2xl font-black tracking-tighter uppercase dark:text-white">TRAVAGO</span>
+                <Image src="/logo.jpeg" alt="Logo" width={40} height={40} className="rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm" />
+                <span className="text-2xl font-black tracking-tighter uppercase text-slate-900 dark:text-white">TRAVAGO</span>
               </div>
               <p className="text-slate-500 dark:text-slate-400 font-medium text-lg italic max-w-sm leading-relaxed mb-10">
                 La plateforme de placabilité augmentée au Cameroun. Fusion de l'intelligence artificielle et de l'expertise RH.

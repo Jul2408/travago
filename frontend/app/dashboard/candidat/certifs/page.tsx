@@ -55,8 +55,8 @@ export default function CandidateCertifsPage() {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">Mes Certifications</h1>
-                    <p className="text-slate-500 font-medium">Votre statut de certification officielle Travago et vos titres de compétences validés.</p>
+                    <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Mes Certifications</h1>
+                    <p className="text-slate-500 dark:text-slate-400 font-medium">Votre statut de certification officielle Travago et vos titres de compétences validés.</p>
                 </div>
             </div>
 
@@ -119,24 +119,24 @@ export default function CandidateCertifsPage() {
                 </div>
             ) : (
                 /* ── ÉTAT EN ATTENTE / NON VALIDÉ ── */
-                <div className="bg-white rounded-[3rem] border-2 border-dashed border-amber-200 p-12 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-amber-50 rounded-full -translate-y-32 translate-x-32 pointer-events-none"></div>
+                <div className="bg-white dark:bg-slate-950 rounded-[3rem] border-2 border-dashed border-amber-200 dark:border-amber-900/30 p-12 relative overflow-hidden transition-colors">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-amber-50 dark:bg-amber-900/10 rounded-full -translate-y-32 translate-x-32 pointer-events-none"></div>
                     <div className="relative z-10 flex flex-col lg:flex-row items-center gap-10">
                         {/* Lock Icon */}
                         <div className="shrink-0">
-                            <div className="w-32 h-32 rounded-[2.5rem] bg-amber-50 border-2 border-amber-100 flex items-center justify-center">
+                            <div className="w-32 h-32 rounded-[2.5rem] bg-amber-50 dark:bg-amber-900/20 border-2 border-amber-100 dark:border-amber-900/30 flex items-center justify-center">
                                 <Lock size={48} className="text-amber-500" />
                             </div>
                         </div>
                         <div className="flex-1 text-center lg:text-left">
-                            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-100 rounded-full text-amber-700 text-[10px] font-black uppercase tracking-widest mb-4">
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-100 dark:bg-amber-900/40 rounded-full text-amber-700 dark:text-amber-400 text-[10px] font-black uppercase tracking-widest mb-4">
                                 <AlertCircle size={12} />
                                 En attente de validation
                             </div>
-                            <h2 className="text-3xl font-black text-slate-900 mb-3">
+                            <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-3 tracking-tight font-sans">
                                 Certification <span className="text-amber-500">non encore accordée</span>
                             </h2>
-                            <p className="text-slate-500 font-medium leading-relaxed max-w-lg mb-6">
+                            <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed max-w-lg mb-6">
                                 L'équipe Travago examine votre dossier. Une fois tous vos documents KYC vérifiés, vous recevrez votre badge <strong>Travago Certified</strong> qui boostera votre visibilité auprès des recruteurs.
                             </p>
 
@@ -147,17 +147,17 @@ export default function CandidateCertifsPage() {
                                     { step: '2', label: 'Vérification admin', done: verifiedDocs.length > 0 },
                                     { step: '3', label: 'Badge Certifié accordé', done: isVerified },
                                 ].map((s) => (
-                                    <div key={s.step} className={`flex items-center gap-3 px-4 py-3 rounded-2xl flex-1 border ${s.done ? 'bg-emerald-50 border-emerald-100' : 'bg-slate-50 border-slate-100'}`}>
-                                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-black ${s.done ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
+                                    <div key={s.step} className={`flex items-center gap-3 px-4 py-3 rounded-2xl flex-1 border ${s.done ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-100 dark:border-emerald-900/30' : 'bg-slate-50 dark:bg-slate-900 border-slate-100 dark:border-slate-800'}`}>
+                                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-black ${s.done ? 'bg-emerald-500 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-600'}`}>
                                             {s.done ? <ShieldCheck size={14} /> : s.step}
                                         </div>
-                                        <span className={`text-xs font-bold ${s.done ? 'text-emerald-700' : 'text-slate-500'}`}>{s.label}</span>
+                                        <span className={`text-xs font-bold ${s.done ? 'text-emerald-700 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`}>{s.label}</span>
                                     </div>
                                 ))}
                             </div>
 
                             {pendingDocs.length > 0 && (
-                                <p className="text-xs text-amber-600 font-bold flex items-center gap-2 mb-4">
+                                <p className="text-xs text-amber-600 dark:text-amber-400 font-bold flex items-center gap-2 mb-4">
                                     <AlertCircle size={14} />
                                     {pendingDocs.length} document(s) en attente de vérification par l'admin.
                                 </p>
@@ -165,7 +165,7 @@ export default function CandidateCertifsPage() {
 
                             <Link
                                 href="/dashboard/candidat/documents"
-                                className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-600 transition-all shadow-lg"
+                                className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 dark:bg-slate-800 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-600 dark:hover:bg-blue-500 transition-all shadow-lg dark:shadow-none"
                             >
                                 <FileText size={14} /> Gérer mes documents <ChevronRight size={14} />
                             </Link>
