@@ -54,6 +54,16 @@ export default function EnterpriseMessagesPage() {
     const [isPlanningModalOpen, setIsPlanningModalOpen] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
+    const getParticipantName = (other: any) => {
+        if (!other) return 'Utilisateur inconnu';
+        if (other.role === 'CANDIDATE') {
+            return (other.first_name && other.last_name)
+                ? `${other.first_name} ${other.last_name}`
+                : (other.username ? `@${other.username}` : (other.email || 'Candidat'));
+        }
+        return other.company_profile?.name || (other.username ? `@${other.username}` : (other.email || 'Recruteur'));
+    };
+
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -122,11 +132,8 @@ export default function EnterpriseMessagesPage() {
     };
 
     const filteredConversations = conversations.filter(chat => {
-        const other = chat.other_participant;
-        const name = other?.role === 'CANDIDATE'
-            ? (other.first_name && other.last_name ? `${other.first_name} ${other.last_name}` : (other.username ? `@${other.username}` : other.email))
-            : (other?.company_profile?.name || (other.username ? `@${other.username}` : other.email));
-        return name.toLowerCase().includes(searchQuery.toLowerCase());
+        const name = getParticipantName(chat.other_participant);
+        return name?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false;
     });
 
     if (!mounted) return null;
@@ -165,9 +172,7 @@ export default function EnterpriseMessagesPage() {
                         filteredConversations.map((chat) => {
                             const other = chat.other_participant;
                             const photo = other?.photo;
-                            const name = other?.role === 'CANDIDATE'
-                                ? (other.first_name && other.last_name ? `${other.first_name} ${other.last_name}` : (other.username ? `@${other.username}` : other.email))
-                                : (other?.company_profile?.name || (other.username ? `@${other.username}` : other.email));
+                            const name = getParticipantName(other);
 
                             return (
                                 <div
@@ -244,9 +249,7 @@ export default function EnterpriseMessagesPage() {
                                 {(() => {
                                     const other = selectedConversation.other_participant;
                                     const photo = other?.photo;
-                                    const name = other?.role === 'CANDIDATE'
-                                        ? (other.first_name && other.last_name ? `${other.first_name} ${other.last_name}` : (other.username ? `@${other.username}` : other.email))
-                                        : (other?.company_profile?.name || (other.username ? `@${other.username}` : other.email));
+                                    const name = getParticipantName(other);
 
                                     return (
                                         <>
@@ -359,9 +362,7 @@ export default function EnterpriseMessagesPage() {
                         {(() => {
                             const other = selectedConversation.other_participant;
                             const photo = other?.photo;
-                            const name = other?.role === 'CANDIDATE'
-                                ? (other.first_name && other.last_name ? `${other.first_name} ${other.last_name}` : other.username || other.email.split('@')[0])
-                                : (other?.company_profile?.name || other?.username || other?.email.split('@')[0]);
+                            const name = getParticipantName(other);
 
                             return (
                                 <>
@@ -436,10 +437,7 @@ export default function EnterpriseMessagesPage() {
                         </div>
                         <div className="space-y-4">
                             <div className="p-4 bg-blue-50 rounded-2xl border border-blue-100">
-                                <p className="text-xs font-bold text-blue-800">Candidat : {(() => {
-                                    const other = selectedConversation?.other_participant;
-                                    return other?.role === 'CANDIDATE' ? `${other.first_name} ${other.last_name}` : other?.username;
-                                })()}</p>
+                                <p className="text-xs font-bold text-blue-800">Candidat : {getParticipantName(selectedConversation?.other_participant)}</p>
                             </div>
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Date de l'entretien</label>
