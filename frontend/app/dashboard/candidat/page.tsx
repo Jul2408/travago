@@ -156,9 +156,9 @@ export default function DashboardCandidatPage() {
                 </div>
 
                 {/* 2. Roadmap / Chemin vers l'emploi */}
-                <div className="lg:col-span-2 bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 shadow-sm border border-blue-50">
-                    <h3 className="text-xl font-black text-slate-900 mb-8 flex items-center">
-                        <TrendingUp className="mr-3 text-blue-600" />
+                <div className="lg:col-span-2 bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 shadow-sm border border-blue-50 dark:border-slate-800 transition-colors">
+                    <h3 className="text-xl font-black text-slate-900 dark:text-white mb-8 flex items-center">
+                        <TrendingUp className="mr-3 text-blue-600 dark:text-blue-400" />
                         Votre chemin vers le placement
                     </h3>
 
@@ -170,16 +170,16 @@ export default function DashboardCandidatPage() {
                             {roadmapSteps.map((step, idx) => (
                                 <div key={idx} className="relative flex items-center group">
                                     <div className={`w-16 h-16 rounded-2xl flex items-center justify-center z-10 transition-all ${step.status === 'completed' ? 'bg-green-500 text-white shadow-lg shadow-green-100' :
-                                        step.status === 'active' ? 'bg-blue-600 text-white shadow-lg shadow-blue-100 animate-pulse' :
-                                            'bg-slate-50 text-slate-300 border border-slate-100'
+                                        step.status === 'active' ? 'bg-blue-600 text-white shadow-lg shadow-blue-100 dark:shadow-blue-900/20 animate-pulse' :
+                                            'bg-slate-50 dark:bg-slate-900 text-slate-300 dark:text-slate-600 border border-slate-100 dark:border-slate-800'
                                         }`}>
                                         {step.status === 'completed' ? <CheckCircle2 size={24} /> : <span className="font-black">{idx + 1}</span>}
                                     </div>
                                     <div className="ml-6">
-                                        <h4 className={`text-lg font-black leading-none mb-1 ${step.status === 'pending' ? 'text-slate-400' : 'text-slate-900'}`}>
+                                        <h4 className={`text-lg font-black leading-none mb-1 ${step.status === 'pending' ? 'text-slate-400 dark:text-slate-600' : 'text-slate-900 dark:text-white'}`}>
                                             {step.label}
                                         </h4>
-                                        <p className="text-sm font-medium text-slate-500">{step.desc}</p>
+                                        <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{step.desc}</p>
                                     </div>
                                     {step.status === 'active' && (
                                         <Link
@@ -199,14 +199,14 @@ export default function DashboardCandidatPage() {
             {/* Middle Section: Critical Actions */}
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                 {criticalActions.map((action, idx) => (
-                    <div key={idx} className="bg-white rounded-[2rem] p-5 sm:p-8 border border-blue-50 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 transition-all">
+                    <div key={idx} className="bg-white dark:bg-slate-950 rounded-[2rem] p-5 sm:p-8 border border-blue-50 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 dark:hover:shadow-blue-900/20 transition-all">
                         <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 sm:space-x-0">
-                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-slate-50 rounded-2xl flex items-center justify-center shrink-0">
+                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center shrink-0">
                                 {action.icon}
                             </div>
                             <div className="flex-1">
-                                <h4 className="text-lg sm:text-xl font-black text-slate-900 mb-2 leading-tight">{action.title}</h4>
-                                <p className="text-sm font-medium text-slate-500 mb-6">{action.desc}</p>
+                                <h4 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mb-2 leading-tight">{action.title}</h4>
+                                <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-6">{action.desc}</p>
                                 <Link
                                     href={action.href}
                                     className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
@@ -222,16 +222,16 @@ export default function DashboardCandidatPage() {
             {/* Bottom Section: Specific Modules Portfolio */}
             <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* 1. Document Verification Status */}
-                <div className="bg-white rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 flex flex-col">
-                    <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center">
-                        <FolderCheck className="mr-3 text-blue-600" />
+                <div className="bg-white dark:bg-slate-950 rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 dark:border-slate-800 flex flex-col transition-colors">
+                    <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 flex items-center">
+                        <FolderCheck className="mr-3 text-blue-600 dark:text-blue-400" />
                         Documents KYC
                     </h3>
                     <div className="space-y-4 flex-1">
                         {user?.candidate_profile?.documents && user.candidate_profile.documents.length > 0 ? (
                             user.candidate_profile.documents.map((doc: any, i: number) => (
-                                <div key={i} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                                    <span className="text-sm font-bold text-slate-700">
+                                <div key={i} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800">
+                                    <span className="text-sm font-bold text-slate-700 dark:text-slate-300">
                                         {doc.document_type === 'CNI' ? 'CNI / Passeport' :
                                             doc.document_type === 'DIPLOMA' ? 'Diplôme' :
                                                 doc.document_type === 'CERTIFICATE' ? 'Certificat' : 'Autre'}
@@ -246,35 +246,35 @@ export default function DashboardCandidatPage() {
                                 </div>
                             ))
                         ) : (
-                            <div className="text-center py-6 text-slate-400 font-medium text-sm">
+                            <div className="text-center py-6 text-slate-400 dark:text-slate-500 font-medium text-sm">
                                 Aucun document soumis.
                             </div>
                         )}
 
                         {(!user?.candidate_profile?.documents?.some((d: any) => d.document_type === 'CNI')) && (
-                            <div className="flex items-center justify-between p-4 bg-red-50 rounded-2xl border border-red-100">
-                                <span className="text-sm font-bold text-red-700">CNI / Passeport</span>
-                                <span className="text-[10px] font-black uppercase px-2 py-1 rounded-lg bg-red-100 text-red-700">Manquant</span>
+                            <div className="flex items-center justify-between p-4 bg-red-50 dark:bg-red-900/20 rounded-2xl border border-red-100 dark:border-red-900/30">
+                                <span className="text-sm font-bold text-red-700 dark:text-red-400">CNI / Passeport</span>
+                                <span className="text-[10px] font-black uppercase px-2 py-1 rounded-lg bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300">Manquant</span>
                             </div>
                         )}
                     </div>
                 </div>
 
                 {/* 2. Certification Status */}
-                <div className="bg-white rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 flex flex-col">
-                    <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center">
-                        <Award className="mr-3 text-purple-600" />
+                <div className="bg-white dark:bg-slate-950 rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 dark:border-slate-800 flex flex-col transition-colors">
+                    <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 flex items-center">
+                        <Award className="mr-3 text-purple-600 dark:text-purple-400" />
                         Badge de Confiance
                     </h3>
                     <div className="space-y-4 flex-1">
-                        <div className={`p-5 rounded-2xl border flex flex-col items-center text-center ${isVerified ? 'bg-emerald-50 border-emerald-100' : 'bg-slate-50 border-slate-100'}`}>
-                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 ${isVerified ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-400'}`}>
+                        <div className={`p-5 rounded-2xl border flex flex-col items-center text-center ${isVerified ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-100 dark:border-emerald-900/30' : 'bg-slate-50 dark:bg-slate-900 border-slate-100 dark:border-slate-800'}`}>
+                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 ${isVerified ? 'bg-emerald-500 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500'}`}>
                                 {isVerified ? <BadgeCheck size={24} /> : <Lock size={24} />}
                             </div>
-                            <span className={`text-sm font-black uppercase tracking-widest ${isVerified ? 'text-emerald-700' : 'text-slate-500'}`}>
+                            <span className={`text-sm font-black uppercase tracking-widest ${isVerified ? 'text-emerald-700 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'}`}>
                                 {isVerified ? 'Profil Certifié' : 'Certification Restreinte'}
                             </span>
-                            <p className="text-[10px] font-medium text-slate-400 mt-2 leading-relaxed">
+                            <p className="text-[10px] font-medium text-slate-400 dark:text-slate-500 mt-2 leading-relaxed">
                                 {isVerified
                                     ? "Votre identité et vos compétences ont été validées par admin."
                                     : "Validez votre identité et vos diplômes pour débloquer votre badge."}
@@ -287,20 +287,20 @@ export default function DashboardCandidatPage() {
                 </div>
 
                 {/* 3. Messages / Conversations */}
-                <div className="bg-white rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 flex flex-col">
-                    <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center">
-                        <MessageSquare className="mr-3 text-green-600" />
+                <div className="bg-white dark:bg-slate-950 rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 dark:border-slate-800 flex flex-col transition-colors">
+                    <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 flex items-center">
+                        <MessageSquare className="mr-3 text-green-600 dark:text-green-400" />
                         Messages Récents
                     </h3>
                     <div className="space-y-4 flex-1">
                         {conversations.length > 0 ? conversations.slice(0, 3).map((conv: any, i: number) => (
-                            <div key={i} className="flex items-center space-x-3 p-3 hover:bg-slate-50 rounded-xl transition-all cursor-pointer border border-transparent hover:border-slate-100">
-                                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center text-green-700 font-black text-xs">
+                            <div key={i} className="flex items-center space-x-3 p-3 hover:bg-slate-50 dark:hover:bg-slate-900/50 rounded-xl transition-all cursor-pointer border border-transparent hover:border-slate-100 dark:hover:border-slate-800">
+                                <div className="w-10 h-10 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center text-green-700 dark:text-green-500 font-black text-xs">
                                     {conv.other_participant?.username?.substring(0, 2).toUpperCase() || '??'}
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <div className="text-xs font-black text-slate-900 truncate">{conv.other_participant?.username}</div>
-                                    <div className="text-[10px] text-slate-500 truncate">{conv.last_message?.content || 'Pas de message'}</div>
+                                    <div className="text-xs font-black text-slate-900 dark:text-white truncate">{conv.other_participant?.username}</div>
+                                    <div className="text-[10px] text-slate-500 dark:text-slate-400 truncate">{conv.last_message?.content || 'Pas de message'}</div>
                                 </div>
                             </div>
                         )) : (
@@ -315,29 +315,29 @@ export default function DashboardCandidatPage() {
                 </div>
 
                 {/* 4. Placement History / Requests (Full Width) */}
-                <div className="bg-white rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 lg:col-span-3">
+                <div className="bg-white dark:bg-slate-950 rounded-[2rem] p-5 sm:p-8 shadow-sm border border-blue-50 dark:border-slate-800 lg:col-span-3 transition-colors">
                     <div className="flex items-center justify-between mb-8">
-                        <h3 className="text-lg font-black text-slate-900 flex items-center">
-                            <Briefcase className="mr-3 text-blue-600" />
+                        <h3 className="text-lg font-black text-slate-900 dark:text-white flex items-center">
+                            <Briefcase className="mr-3 text-blue-600 dark:text-blue-400" />
                             État de vos Placements
                         </h3>
-                        <Link href="/dashboard/candidat/candidatures" className="text-blue-600 font-black text-xs uppercase tracking-widest hover:underline">Voir tout</Link>
+                        <Link href="/dashboard/candidat/candidatures" className="text-blue-600 dark:text-blue-400 font-black text-xs uppercase tracking-widest hover:underline">Voir tout</Link>
                     </div>
 
                     {isLoading ? (
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {[1, 2, 3].map((i) => (
-                                <div key={i} className="flex flex-col p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
+                                <div key={i} className="flex flex-col p-6 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 space-y-4">
                                     <div className="flex items-center space-x-4">
-                                        <Skeleton className="w-12 h-12 rounded-xl" />
+                                        <Skeleton className="w-12 h-12 rounded-xl dark:bg-slate-800" />
                                         <div className="space-y-2 flex-1">
-                                            <Skeleton className="h-4 w-3/4" />
-                                            <Skeleton className="h-3 w-1/2" />
+                                            <Skeleton className="h-4 w-3/4 dark:bg-slate-800" />
+                                            <Skeleton className="h-3 w-1/2 dark:bg-slate-800" />
                                         </div>
                                     </div>
-                                    <div className="mt-auto flex items-center justify-between border-t border-slate-200 pt-4">
-                                        <Skeleton className="h-4 w-16" />
-                                        <Skeleton className="h-4 w-24" />
+                                    <div className="mt-auto flex items-center justify-between border-t border-slate-200 dark:border-slate-800 pt-4">
+                                        <Skeleton className="h-4 w-16 dark:bg-slate-800" />
+                                        <Skeleton className="h-4 w-24 dark:bg-slate-800" />
                                     </div>
                                 </div>
                             ))}
@@ -345,31 +345,31 @@ export default function DashboardCandidatPage() {
                     ) : candidatures.length > 0 ? (
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {candidatures.slice(0, 3).map((app: any) => (
-                                <div key={app.id} className="flex flex-col p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:bg-white hover:border-blue-100 transition-all">
+                                <div key={app.id} className="flex flex-col p-6 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 group hover:bg-white dark:hover:bg-slate-800 hover:border-blue-100 dark:hover:border-blue-900/50 transition-all">
                                     <div className="flex items-center space-x-4 mb-4">
-                                        <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-slate-900 font-black text-xs border border-slate-100 group-hover:bg-slate-900 group-hover:text-white transition-all">
+                                        <div className="w-12 h-12 bg-white dark:bg-slate-950 rounded-xl flex items-center justify-center text-slate-900 dark:text-white font-black text-xs border border-slate-100 dark:border-slate-800 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-900 transition-all">
                                             {app.job_offer_detail?.company_detail?.name.substring(0, 2).toUpperCase()}
                                         </div>
                                         <div>
-                                            <h4 className="font-black text-slate-900 text-sm truncate max-w-[150px]">{app.job_offer_detail?.title}</h4>
+                                            <h4 className="font-black text-slate-900 dark:text-white text-sm truncate max-w-[150px]">{app.job_offer_detail?.title}</h4>
                                             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{app.job_offer_detail?.company_detail?.name}</p>
                                         </div>
                                     </div>
-                                    <div className="mt-auto flex items-center justify-between border-t border-slate-200 pt-4">
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">{app.status}</span>
-                                        <span className="text-xs font-black text-slate-900">Matching: {app.matching_score}%</span>
+                                    <div className="mt-auto flex items-center justify-between border-t border-slate-200 dark:border-slate-700 pt-4">
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400">{app.status}</span>
+                                        <span className="text-xs font-black text-slate-900 dark:text-white">Matching: {app.matching_score}%</span>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     ) : (
-                        <div className="p-12 bg-slate-50 rounded-[2rem] border border-dashed border-slate-200 text-center">
-                            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-300">
+                        <div className="p-12 bg-slate-50 dark:bg-slate-900/50 rounded-[2rem] border border-dashed border-slate-200 dark:border-slate-800 text-center">
+                            <div className="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-300 dark:text-slate-500">
                                 <Clock size={32} />
                             </div>
-                            <h4 className="text-lg font-black text-slate-900 mb-2">Pas de placement en cours</h4>
-                            <p className="text-sm font-medium text-slate-500 max-w-xs mx-auto mb-6">
-                                Augmentez votre <span className="text-blue-600 font-bold">score de placabilité</span> pour être suggéré automatiquement aux entreprises premium.
+                            <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">Pas de placement en cours</h4>
+                            <p className="text-sm font-medium text-slate-500 dark:text-slate-400 max-w-xs mx-auto mb-6">
+                                Augmentez votre <span className="text-blue-600 dark:text-blue-400 font-bold">score de placabilité</span> pour être suggéré automatiquement aux entreprises premium.
                             </p>
                             <Link
                                 href="/dashboard/candidat/certifs"
@@ -383,16 +383,16 @@ export default function DashboardCandidatPage() {
             </div>
 
             {/* Help / Footer Notice */}
-            <div className="bg-blue-900/5 border border-blue-100 rounded-[2rem] p-5 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
+            <div className="bg-blue-900/5 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-900/30 rounded-[2rem] p-5 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
                 <div className="flex items-center space-x-3 sm:space-x-4">
-                    <AlertCircle className="text-blue-600 flex-shrink-0" />
-                    <p className="text-xs sm:text-sm font-medium text-blue-900">
+                    <AlertCircle className="text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                    <p className="text-xs sm:text-sm font-medium text-blue-900 dark:text-blue-200">
                         Votre dossier est actuellement en cours d'analyse par notre algorithme de placement. Mettez à jour vos documents pour accélérer le processus.
                     </p>
                 </div>
                 <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-2 text-right">
-                    <a href="mailto:support@travago.ci" className="text-blue-600 font-black text-[10px] sm:text-xs uppercase tracking-widest hover:underline">Support Travago</a>
-                    <span className="text-[9px] sm:text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">Travago Placement System v2.1</span>
+                    <a href="mailto:support@travago.ci" className="text-blue-600 dark:text-blue-400 font-black text-[10px] sm:text-xs uppercase tracking-widest hover:underline">Support Travago</a>
+                    <span className="text-[9px] sm:text-[10px] text-slate-400 dark:text-slate-500 font-black uppercase tracking-[0.2em]">Travago Placement System v2.1</span>
                 </div>
             </div>
         </div>
