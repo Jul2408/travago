@@ -139,7 +139,7 @@ export default function DashboardEntreprisePage() {
                             Dites-nous quel poste vous souhaitez pourvoir, et notre système s'occupe du reste : sourcing, curation de talents, et vérification des certifications.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <Link href="/dashboard/entreprise/offres/nouvelle" className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white text-blue-700 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl hover:scale-105 transition-transform flex items-center justify-center">
+                            <Link href="/dashboard/entreprise/offres/nouvelle" className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-white dark:bg-slate-900 text-blue-700 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl hover:scale-105 transition-transform flex items-center justify-center">
                                 <Zap size={18} className="mr-2" /> Lancer un placement
                             </Link>
                             <Link href="/dashboard/entreprise/candidats" className="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 bg-blue-600/50 backdrop-blur-md text-white border border-white/20 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-blue-600/70 transition-all flex items-center justify-center">
@@ -151,10 +151,10 @@ export default function DashboardEntreprisePage() {
                         {
                             isLoading
                                 ? [1, 2, 3, 4].map(i => (
-                                    <div key={i} className="bg-white/10 backdrop-blur-md border border-white/10 p-6 rounded-[2rem] space-y-3">
-                                        <div className="w-6 h-6 bg-white/20 rounded" />
-                                        <div className="h-8 bg-white/20 rounded w-2/3" />
-                                        <div className="h-3 bg-white/10 rounded w-full" />
+                                    <div key={i} className="bg-white dark:bg-slate-900/10 backdrop-blur-md border border-white/10 p-6 rounded-[2rem] space-y-3">
+                                        <div className="w-6 h-6 bg-white dark:bg-slate-900/20 rounded" />
+                                        <div className="h-8 bg-white dark:bg-slate-900/20 rounded w-2/3" />
+                                        <div className="h-3 bg-white dark:bg-slate-900/10 rounded w-full" />
                                     </div>
                                 ))
                                 : [
@@ -163,7 +163,7 @@ export default function DashboardEntreprisePage() {
                                     { label: "Matches Débloqués", val: `${stats.matches}`, icon: <Target className="text-blue-200" /> },
                                     { label: "Budget Placements", val: `${stats.credits}`, icon: <Zap className="text-blue-200" /> },
                                 ].map((stat, i) => (
-                                    <div key={i} className="bg-white/10 backdrop-blur-md border border-white/10 p-6 rounded-[2rem]">
+                                    <div key={i} className="bg-white dark:bg-slate-900/10 backdrop-blur-md border border-white/10 p-6 rounded-[2rem]">
                                         <div className="mb-4">{stat.icon}</div>
                                         <div className="text-2xl font-black leading-none mb-1">{stat.val}</div>
                                         <div className="text-[10px] font-black uppercase tracking-widest text-blue-200">{stat.label}</div>
@@ -177,9 +177,9 @@ export default function DashboardEntreprisePage() {
             <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* 2. Suivi de Placements IA (Essential) */}
                 <div className="lg:col-span-2 space-y-6 sm:space-y-8">
-                    <div className="bg-white rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 border border-blue-50 shadow-sm">
+                    <div className="bg-white dark:bg-slate-900 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 border border-blue-50 shadow-sm">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-                            <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center">
+                            <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight flex items-center">
                                 <Cpu className="mr-3 text-blue-600 shrink-0" /> <span className="truncate">Chasses IA</span>
                             </h3>
                             <Link href="/dashboard/entreprise/placement" className="text-blue-600 font-black text-[10px] uppercase tracking-widest hover:underline whitespace-nowrap">Gérer tout</Link>
@@ -189,7 +189,7 @@ export default function DashboardEntreprisePage() {
                             {isLoading ? (
                                 <div className="space-y-4">
                                     {[1, 2, 3].map((i) => (
-                                        <div key={i} className="p-5 sm:p-8 bg-slate-50 rounded-[1.5rem] sm:rounded-[2rem] border border-slate-100 flex items-center justify-between">
+                                        <div key={i} className="p-5 sm:p-8 bg-slate-50 dark:bg-slate-800 rounded-[1.5rem] sm:rounded-[2rem] border border-slate-100 dark:border-slate-800 flex items-center justify-between">
                                             <div className="space-y-3 flex-1">
                                                 <Skeleton className="h-6 w-1/3" />
                                                 <Skeleton className="h-4 w-1/4" />
@@ -199,11 +199,11 @@ export default function DashboardEntreprisePage() {
                                     ))}
                                 </div>
                             ) : recentPlacements.length === 0 ? (
-                                <div className="p-12 bg-slate-50 rounded-[2rem] border border-dashed border-slate-200 text-center">
-                                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-300">
+                                <div className="p-12 bg-slate-50 dark:bg-slate-800 rounded-[2rem] border border-dashed border-slate-200 text-center">
+                                    <div className="w-16 h-16 bg-white dark:bg-slate-900 rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-300">
                                         <Briefcase size={32} />
                                     </div>
-                                    <h4 className="text-lg font-black text-slate-900 mb-2">Aucun placement actif</h4>
+                                    <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2">Aucun placement actif</h4>
                                     <p className="text-sm font-medium text-slate-500 max-w-xs mx-auto mb-6">
                                         Lancez votre première mission de chasse IA assistée par Travago dès maintenant.
                                     </p>
@@ -213,11 +213,11 @@ export default function DashboardEntreprisePage() {
                                 </div>
                             ) : (
                                 recentPlacements.map((p) => (
-                                    <div key={p.id} className="group p-5 sm:p-8 bg-slate-50 rounded-[1.5rem] sm:rounded-[2rem] border border-slate-100 hover:bg-white hover:border-blue-100 hover:shadow-xl transition-all">
+                                    <div key={p.id} className="group p-5 sm:p-8 bg-slate-50 dark:bg-slate-800 rounded-[1.5rem] sm:rounded-[2rem] border border-slate-100 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-700 hover:border-blue-100 dark:hover:border-blue-900/50 hover:shadow-xl transition-all">
                                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex flex-wrap items-center gap-2 mb-2">
-                                                    <h4 className="text-lg sm:text-xl font-black text-slate-900 truncate leading-tight" title={p.title}>{p.title}</h4>
+                                                    <h4 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white truncate leading-tight" title={p.title}>{p.title}</h4>
                                                     <span className="shrink-0 px-2 py-0.5 bg-blue-100 text-blue-700 rounded-md text-[9px] font-black uppercase tracking-widest">
                                                         {p.is_ia_boosted ? 'Automatisé' : 'Standard'}
                                                     </span>
@@ -233,7 +233,7 @@ export default function DashboardEntreprisePage() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <Link href={`/dashboard/entreprise/placement/${p.id}`} className="w-full sm:w-auto px-5 py-3 bg-white border border-blue-100 text-blue-600 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all shadow-sm text-center">
+                                            <Link href={`/dashboard/entreprise/placement/${p.id}`} className="w-full sm:w-auto px-5 py-3 bg-white dark:bg-slate-900 border border-blue-100 text-blue-600 rounded-xl font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all shadow-sm text-center">
                                                 Voir la Shortlist
                                             </Link>
                                         </div>
@@ -245,8 +245,8 @@ export default function DashboardEntreprisePage() {
 
                     <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                         {/* Messages Module */}
-                        <div className="bg-white rounded-[2rem] p-5 sm:p-8 border border-blue-50 shadow-sm flex flex-col">
-                            <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center">
+                        <div className="bg-white dark:bg-slate-900 rounded-[2rem] p-5 sm:p-8 border border-blue-50 shadow-sm flex flex-col">
+                            <h3 className="text-lg font-black text-slate-900 dark:text-white mb-6 flex items-center">
                                 <MessageSquare className="mr-3 text-green-600" />
                                 Messages Récents
                             </h3>
@@ -262,12 +262,12 @@ export default function DashboardEntreprisePage() {
                                         </div>
                                     ))
                                 ) : conversations.length > 0 ? conversations.slice(0, 3).map((conv: any, i: number) => (
-                                    <div key={i} className="flex items-center space-x-3 p-3 hover:bg-slate-50 rounded-xl transition-all cursor-pointer border border-transparent hover:border-slate-100">
+                                    <div key={i} className="flex items-center space-x-3 p-3 hover:bg-slate-50 dark:bg-slate-800 rounded-xl transition-all cursor-pointer border border-transparent hover:border-slate-100 dark:border-slate-800">
                                         <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center text-green-700 font-black text-xs">
                                             {conv.other_participant?.username?.substring(0, 2).toUpperCase() || '??'}
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <div className="text-xs font-black text-slate-900 truncate">{conv.other_participant?.username}</div>
+                                            <div className="text-xs font-black text-slate-900 dark:text-white truncate">{conv.other_participant?.username}</div>
                                             <div className="text-[10px] text-slate-500 truncate">{conv.last_message?.content || 'Pas de message'}</div>
                                         </div>
                                         <ChevronRight size={14} className="text-slate-300" />
@@ -285,7 +285,7 @@ export default function DashboardEntreprisePage() {
 
                         {/* Credits & Stats */}
                         <div className="space-y-4 sm:space-y-6">
-                            <div className="bg-white p-5 sm:p-8 rounded-[2rem] border border-blue-50 shadow-sm flex items-center space-x-4 sm:space-x-6">
+                            <div className="bg-white dark:bg-slate-900 p-5 sm:p-8 rounded-[2rem] border border-blue-50 shadow-sm flex items-center space-x-4 sm:space-x-6">
                                 <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-50 text-blue-600 rounded-[1rem] sm:rounded-2xl flex items-center justify-center shrink-0">
                                     <Users size={24} />
                                 </div>
@@ -297,13 +297,13 @@ export default function DashboardEntreprisePage() {
                                         </div>
                                     ) : (
                                         <>
-                                            <div className="text-xl sm:text-2xl font-black text-slate-900">{stats.matches}</div>
+                                            <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">{stats.matches}</div>
                                             <div className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-wider sm:tracking-widest leading-tight">Candidatures reçues</div>
                                         </>
                                     )}
                                 </div>
                             </div>
-                            <div className="bg-white p-5 sm:p-8 rounded-[2rem] border border-orange-50 shadow-sm flex items-center justify-between font-black">
+                            <div className="bg-white dark:bg-slate-900 p-5 sm:p-8 rounded-[2rem] border border-orange-50 shadow-sm flex items-center justify-between font-black">
                                 <div className="flex items-center space-x-4 sm:space-x-6">
                                     <div className="w-12 h-12 sm:w-14 sm:h-14 bg-orange-50 text-orange-600 rounded-[1rem] sm:rounded-2xl flex items-center justify-center shrink-0">
                                         <Coins size={24} />
@@ -316,7 +316,7 @@ export default function DashboardEntreprisePage() {
                                             </div>
                                         ) : (
                                             <>
-                                                <div className="text-xl sm:text-2xl font-black text-slate-900">{stats.credits}</div>
+                                                <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">{stats.credits}</div>
                                                 <div className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-wider sm:tracking-widest leading-tight">Crédits de Placement</div>
                                             </>
                                         )}
@@ -331,9 +331,9 @@ export default function DashboardEntreprisePage() {
                 </div>
 
                 {/* 3. Talents Elite Spotlight (Essential) */}
-                <div className="bg-white rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 border border-blue-50 shadow-sm flex flex-col h-full">
+                <div className="bg-white dark:bg-slate-900 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 border border-blue-50 shadow-sm flex flex-col h-full">
                     <div className="flex items-center justify-between mb-8">
-                        <h3 className="text-lg font-black text-slate-900 flex items-center">
+                        <h3 className="text-lg font-black text-slate-900 dark:text-white flex items-center">
                             <UserCheck className="mr-3 text-blue-600" /> Talents Elite
                         </h3>
                         <Link href="/dashboard/entreprise/candidats" className="p-2 bg-blue-50 rounded-lg text-blue-600 hover:bg-blue-600 hover:text-white transition-all">
@@ -344,7 +344,7 @@ export default function DashboardEntreprisePage() {
                     <div className="space-y-6 flex-1">
                         {isLoading ? (
                             [1, 2, 3].map((i) => (
-                                <div key={i} className="p-4 sm:p-6 rounded-[1.5rem] bg-slate-50 border border-slate-50 space-y-4">
+                                <div key={i} className="p-4 sm:p-6 rounded-[1.5rem] bg-slate-50 dark:bg-slate-800 border border-slate-50 space-y-4">
                                     <div className="flex items-center gap-4">
                                         <Skeleton className="w-12 h-12 rounded-xl" />
                                         <div className="flex-1 space-y-2">
@@ -364,10 +364,10 @@ export default function DashboardEntreprisePage() {
                             eliteTalents.map((c) => {
                                 const name = c.user_detail?.username || 'Candidat';
                                 return (
-                                    <Link href={`/dashboard/entreprise/candidats/${c.id}`} key={c.id} className="block group p-4 sm:p-6 rounded-[1.5rem] sm:rounded-[2rem] bg-slate-50 border border-slate-50 hover:bg-white hover:border-blue-100 transition-all cursor-pointer">
+                                    <Link href={`/dashboard/entreprise/candidats/${c.id}`} key={c.id} className="block group p-4 sm:p-6 rounded-[1.5rem] sm:rounded-[2rem] bg-slate-50 dark:bg-slate-800 border border-slate-50 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-700 hover:border-blue-100 dark:hover:border-blue-900/50 transition-all cursor-pointer">
                                         <div className="flex flex-col gap-4">
                                             <div className="flex items-center gap-4">
-                                                <div className="shrink-0 w-12 h-12 bg-white rounded-xl flex items-center justify-center font-black text-slate-900 shadow-sm border border-slate-100 overflow-hidden relative group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-800 transition-all">
+                                                <div className="shrink-0 w-12 h-12 bg-white dark:bg-slate-900 rounded-xl flex items-center justify-center font-black text-slate-900 dark:text-white shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden relative group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-800 transition-all">
                                                     {c.photo ? (
                                                         <Image src={getImageUrl(c.photo) || ''} alt={name} fill className="object-cover" />
                                                     ) : (
@@ -375,7 +375,7 @@ export default function DashboardEntreprisePage() {
                                                     )}
                                                 </div>
                                                 <div className="flex-1 min-w-0 pr-2">
-                                                    <h4 className="font-black text-slate-900 text-sm truncate" title={name}>{name}</h4>
+                                                    <h4 className="font-black text-slate-900 dark:text-white text-sm truncate" title={name}>{name}</h4>
                                                     <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider sm:tracking-widest truncate">{c.title || 'Talent Certifié'}</p>
                                                 </div>
                                                 <div className="shrink-0 text-right">

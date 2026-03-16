@@ -85,7 +85,7 @@ export default function BusinessDashboardLayout({
 
     return (
         <AuthGuard allowedRoles={['COMPANY']}>
-            <div className="min-h-screen bg-slate-50">
+            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
                 {/* Mobile Sidebar Overlay */}
                 {sidebarOpen && (
                     <div
@@ -95,7 +95,7 @@ export default function BusinessDashboardLayout({
                 )}
 
                 {/* Sidebar - Recruiter Blue Theme */}
-                <aside className={`fixed top-0 left-0 z-50 w-72 h-screen transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 bg-white border-r border-blue-50 shadow-sm overflow-y-auto overflow-x-hidden custom-scrollbar`}>
+                <aside className={`fixed top-0 left-0 z-50 w-72 h-screen transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 bg-white dark:bg-slate-900 border-r border-blue-50 dark:border-slate-800 shadow-sm overflow-y-auto overflow-x-hidden custom-scrollbar transition-colors`}>
                     <div className="min-h-full px-6 py-8 flex flex-col">
                         {/* Logo */}
                         <Link href="/" className="flex items-center space-x-3 mb-10 pl-2">
@@ -108,7 +108,7 @@ export default function BusinessDashboardLayout({
                                 />
                             </div>
                             <div>
-                                <h1 className="text-xl font-black bg-gradient-to-r from-blue-800 to-blue-600 bg-clip-text text-transparent tracking-tighter leading-none">
+                                <h1 className="text-xl font-black bg-gradient-to-r from-blue-800 to-blue-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent tracking-tighter leading-none">
                                     TRAVAGO
                                 </h1>
                                 <p className="text-[10px] font-black text-blue-400 uppercase tracking-widest leading-none mt-1">Espace Recruteur</p>
@@ -126,11 +126,11 @@ export default function BusinessDashboardLayout({
                                         href={item.href}
                                         onClick={() => setSidebarOpen(false)}
                                         className={`flex items-center px-4 py-3.5 rounded-2xl font-bold text-sm transition-all group ${isActive
-                                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-200'
-                                            : 'text-slate-500 hover:bg-blue-50 hover:text-blue-700'
+                                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 dark:shadow-blue-900/20'
+                                            : 'text-slate-500 dark:text-slate-400 hover:bg-blue-50 dark:hover:bg-slate-800 hover:text-blue-700 dark:hover:text-blue-400'
                                             }`}
                                     >
-                                        <span className={`${isActive ? 'text-white' : 'text-slate-400 group-hover:text-blue-600'} transition-colors mr-3`}>
+                                        <span className={`${isActive ? 'text-white' : 'text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400'} transition-colors mr-3`}>
                                             {item.icon}
                                         </span>
                                         {item.label}
@@ -145,7 +145,7 @@ export default function BusinessDashboardLayout({
                         </nav>
 
                         {/* Credits Shortcut */}
-                        <div className="mt-8 p-5 bg-blue-50 rounded-2xl border border-blue-100 mb-6 font-black">
+                        <div className="mt-8 p-5 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-900/20 mb-6 font-black">
                             <div className="flex items-center justify-between text-[10px] text-blue-400 uppercase tracking-widest mb-2">
                                 <span>Crédits Recrutement</span>
                                 <Coins size={14} />
@@ -157,10 +157,10 @@ export default function BusinessDashboardLayout({
                         </div>
 
                         {/* Logout */}
-                        <div className="pt-4 border-t border-slate-100">
+                        <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
                             <button
                                 onClick={handleLogout}
-                                className="flex items-center px-4 py-3 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-2xl font-bold text-sm transition-all w-full group"
+                                className="flex items-center px-4 py-3 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-2xl font-bold text-sm transition-all w-full group"
                             >
                                 <LogOut className="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform" />
                                 Déconnexion
@@ -172,7 +172,7 @@ export default function BusinessDashboardLayout({
                 {/* Main Content Area */}
                 <div className="md:ml-72 flex flex-col min-h-screen overflow-x-hidden">
                     {/* Header */}
-                    <header className="bg-white/80 backdrop-blur-md border-b border-blue-50 sticky top-0 z-30">
+                    <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-blue-50 dark:border-slate-800 sticky top-0 z-30 transition-colors">
                         <div className="px-4 md:px-8 py-5">
                             <div className="flex items-center justify-between">
                                 <button
@@ -182,7 +182,7 @@ export default function BusinessDashboardLayout({
                                     <Menu size={24} />
                                 </button>
                                 <div className="hidden md:block">
-                                    <h2 className="text-xl font-black text-slate-900 tracking-tight">Espace Recrutement 💼</h2>
+                                    <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Espace Recrutement 💼</h2>
                                 </div>
                                 <div className="flex items-center space-x-2 sm:space-x-4">
                                     <button
@@ -194,15 +194,15 @@ export default function BusinessDashboardLayout({
                                     </button>
                                     <ThemeToggle />
                                     <NotificationsDropdown />
-                                    <div className="h-10 w-px bg-slate-100 hidden sm:block"></div>
+                                    <div className="h-10 w-px bg-slate-100 dark:bg-slate-800 hidden sm:block"></div>
                                     <div className="flex items-center space-x-3 pl-2 group cursor-pointer" onClick={() => router.push('/dashboard/entreprise/parametres')}>
                                         <div className="text-right hidden sm:block">
-                                            <div className="text-sm font-black text-slate-900 group-hover:text-blue-600 transition-colors min-w-[100px]">
+                                            <div className="text-sm font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors min-w-[100px]">
                                                 {mounted ? (user?.company_profile?.name || user?.username || 'Recruteur') : <span className="invisible">Recruteur</span>}
                                             </div>
                                             <div className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Espace Entreprise</div>
                                         </div>
-                                        <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-sm border border-blue-100 group-hover:ring-2 group-hover:ring-blue-600 transition-all flex items-center justify-center bg-blue-50">
+                                        <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-sm border border-blue-100 dark:border-blue-900/30 group-hover:ring-2 group-hover:ring-blue-600 transition-all flex items-center justify-center bg-blue-50 dark:bg-slate-800">
                                             {mounted && user?.photo ? (
                                                 <Image
                                                     src={getImageUrl(user.photo)}
