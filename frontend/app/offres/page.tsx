@@ -19,6 +19,7 @@ import {
 import axiosInstance from '@/lib/axios';
 import { getImageUrl } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { trackEvent } from '@/components/analytics-provider';
 
 // Générateur de placeholder blur base64 pour les images (Core Web Vitals)
 const BLUR_DATA_URL = "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADQAQCdASoIAAgAAkA4JZQCdAEO/gHOAAD++Mu6FLpqHJExFkLrkjf4AA==";
@@ -61,6 +62,15 @@ export default function PublicJobsPage() {
 
             setJobs(prev => reset || pageNum === 1 ? results : [...prev, ...results]);
             setHasMore(hasNext);
+
+            // Analytics: Track search only on first page and if term exists
+            if (pageNum === 1 && searchTerm) {
+                trackEvent('job_search', {
+                    term: searchTerm,
+                    results_count: response.data.count || results.length,
+                    filters: filters
+                });
+            }
         } catch (error) {
             console.error("Failed to fetch jobs", error);
         } finally {
@@ -284,6 +294,11 @@ export default function PublicJobsPage() {
                                                 </div>
                                                 <Link
                                                     href={`/offres/${job.slug}`}
+                                                    onClick={() => trackEvent('job_offer_click', {
+                                                        job_id: job.id,
+                                                        job_title: job.title,
+                                                        company: job.company_detail?.name
+                                                    })}
                                                     className="flex-1 md:flex-none px-10 py-5 bg-slate-900 text-white rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.2em] flex items-center justify-center hover:bg-blue-600 transition-all shadow-xl shadow-slate-900/10 active:scale-95 group/btn"
                                                 >
                                                     S'informer <ArrowRight size={16} className="ml-3 group-hover/btn:translate-x-2 transition-transform" />

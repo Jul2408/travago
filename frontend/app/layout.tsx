@@ -4,6 +4,9 @@ import PWARegistration from "@/components/pwa-registration";
 import ConnectivityBanner from "@/components/connectivity-banner";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/theme-provider";
+import GdprBanner from "@/components/gdpr-banner";
+import AnalyticsProvider from "@/components/analytics-provider";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: 'Travago - Recrutement Intelligent au Cameroun',
@@ -49,9 +52,13 @@ export default function RootLayout({
       </head>
       <body className="antialiased dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Suspense fallback={null}>
+            <AnalyticsProvider />
+          </Suspense>
           <PWARegistration />
           <ConnectivityBanner />
           {children}
+          <GdprBanner />
           <Toaster position="top-center" richColors theme="system" />
         </ThemeProvider>
       </body>

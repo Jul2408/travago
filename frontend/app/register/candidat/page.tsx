@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import axiosInstance from '@/lib/axios';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { trackEvent, identifyUser } from '@/components/analytics-provider';
 
 export default function RegisterCandidatPage() {
     const [showPassword, setShowPassword] = useState(false);
@@ -51,6 +52,15 @@ export default function RegisterCandidatPage() {
             // Backend already logged the user in via session
             const userData = response.data;
             setAuth(userData, userData.token, userData.refresh);
+
+            // Analytics: Identify and track registration
+            identifyUser(userData.id, {
+                email: userData.email,
+                role: 'CANDIDATE',
+                username: userData.username,
+                location: formData.ville
+            });
+            trackEvent('registration_success', { role: 'CANDIDATE' });
             window.location.href = '/dashboard/candidat';
         } catch (err: any) {
             const errorData = err.response?.data;

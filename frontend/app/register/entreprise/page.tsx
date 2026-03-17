@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import axiosInstance from '@/lib/axios';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { trackEvent, identifyUser } from '@/components/analytics-provider';
 
 export default function RegisterEntreprisePage() {
     const [showPassword, setShowPassword] = useState(false);
@@ -52,6 +53,16 @@ export default function RegisterEntreprisePage() {
             // Backend already logged the user in via session
             const userData = response.data;
             setAuth(userData, userData.token, userData.refresh);
+
+            // Analytics: Identify and track registration
+            identifyUser(userData.id, {
+                email: userData.email,
+                role: 'COMPANY',
+                username: userData.username,
+                company_name: formData.companyName,
+                location: formData.ville
+            });
+            trackEvent('registration_success', { role: 'COMPANY' });
             window.location.href = '/dashboard/entreprise';
         } catch (err: any) {
             const errorData = err.response?.data;

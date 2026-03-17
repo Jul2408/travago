@@ -28,6 +28,7 @@ import NotificationsDropdown from '@/components/notifications-dropdown';
 import { ThemeToggle } from '@/components/theme-toggle';
 import axiosInstance from '@/lib/axios';
 import { getImageUrl } from '@/lib/utils';
+import OnboardingTour from '@/components/onboarding-tour';
 
 export default function BusinessDashboardLayout({
     children,
@@ -225,6 +226,7 @@ export default function BusinessDashboardLayout({
                     {/* Page Content */}
                     <main className="p-3 sm:p-6 md:p-8 flex-1 w-full max-w-7xl mx-auto">
                         {children}
+                        <OnboardingTour role="entreprise" />
                     </main>
                 </div>
             </div>

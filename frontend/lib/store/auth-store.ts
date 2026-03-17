@@ -84,9 +84,17 @@ export const useAuthStore = create<AuthState>()(
                     console.error('Failed to refresh user data', error);
                 }
             },
-            logout: () => {
+            logout: async () => {
                 localStorage.removeItem('access_token');
                 localStorage.removeItem('refresh_token');
+
+                try {
+                    const { resetAnalytics } = await import('@/components/analytics-provider');
+                    resetAnalytics();
+                } catch (e) {
+                    // Ignore analytics import issues
+                }
+
                 set({ user: null, token: null, isAuthenticated: false });
             },
         }),

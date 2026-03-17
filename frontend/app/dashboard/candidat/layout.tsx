@@ -29,6 +29,7 @@ import AuthGuard from '@/components/auth-guard';
 import NotificationsDropdown from '@/components/notifications-dropdown';
 import { ThemeToggle } from '@/components/theme-toggle';
 import axiosInstance from '@/lib/axios';
+import OnboardingTour from '@/components/onboarding-tour';
 
 export default function CandidateDashboardLayout({
     children,
@@ -221,6 +222,7 @@ export default function CandidateDashboardLayout({
                     </header>
                     <main className="p-3 sm:p-6 md:p-8 flex-1">
                         {children}
+                        <OnboardingTour role="candidat" />
                     </main>
                 </div>
             </div>
