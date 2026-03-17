@@ -106,7 +106,7 @@ export default function CandidateDashboardLayout({
                                     src="/logo.jpeg"
                                     alt="Travago Logo"
                                     fill
-                                    className="rounded-xl object-cover shadow-sm ring-2 ring-blue-50"
+                                    className="rounded-xl object-cover shadow-sm ring-2 ring-blue-50 dark:ring-slate-800"
                                 />
                             </div>
                             <div>
@@ -179,7 +179,7 @@ export default function CandidateDashboardLayout({
                     <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-blue-50 dark:border-slate-800 sticky top-0 z-30 transition-colors">
                         <div className="px-4 md:px-8 py-5">
                             <div className="flex items-center justify-between">
-                                <button onClick={() => setSidebarOpen(true)} className="md:hidden p-2 text-blue-600 bg-blue-50 rounded-xl">
+                                <button onClick={() => setSidebarOpen(true)} className="md:hidden p-2 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-xl transition-colors">
                                     <Menu size={24} />
                                 </button>
                                 <div className="hidden md:block">

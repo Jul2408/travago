@@ -27,7 +27,8 @@ from .views import (
     AdminPlacementRequestViewSet,
     SystemSettingsViewSet,
     TransactionViewSet,
-    AdminTransactionViewSet
+    AdminTransactionViewSet,
+    CVParsingView
 )
 
 router = DefaultRouter()
@@ -58,6 +59,7 @@ urlpatterns = [
     path('me/', UserDetailView.as_view(), name='user_detail'),
     path('profile/candidate/', CandidateProfileUpdateView.as_view(), name='candidate_profile'),
     path('profile/company/', CompanyProfileUpdateView.as_view(), name='company_profile'),
+    path('parse-cv/', CVParsingView.as_view(), name='parse_cv'),
     
     # Password Management
     path('password/change/', ChangePasswordView.as_view(), name='change_password'),

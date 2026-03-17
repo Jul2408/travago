@@ -1,8 +1,5 @@
 import type { NextConfig } from "next";
 
-// Force IDE Re-index
-// Force reload after HMR glitch
-
 const nextConfig: NextConfig = {
   images: {
     unoptimized: true,

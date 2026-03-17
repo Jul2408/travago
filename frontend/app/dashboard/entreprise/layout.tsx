@@ -104,7 +104,7 @@ export default function BusinessDashboardLayout({
                                     src="/logo.jpeg"
                                     alt="Travago Logo"
                                     fill
-                                    className="rounded-xl object-cover shadow-sm ring-2 ring-blue-50"
+                                    className="rounded-xl object-cover shadow-sm ring-2 ring-blue-50 dark:ring-slate-800"
                                 />
                             </div>
                             <div>
@@ -177,7 +177,7 @@ export default function BusinessDashboardLayout({
                             <div className="flex items-center justify-between">
                                 <button
                                     onClick={() => setSidebarOpen(true)}
-                                    className="md:hidden p-2 text-blue-600 bg-blue-50 rounded-xl"
+                                    className="md:hidden p-2 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-xl transition-colors"
                                 >
                                     <Menu size={24} />
                                 </button>

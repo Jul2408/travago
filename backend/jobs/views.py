@@ -170,9 +170,16 @@ class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
         """Let company update the status of an application (PENDING, SHORTLISTED, REJECTED)."""
         application = self.get_object()
         new_status = request.data.get('status')
-        allowed = ['PENDING', 'SHORTLISTED', 'REJECTED', 'ACCEPTED']
-        if new_status not in allowed:
-            return Response({"detail": f"Statut invalide. Valeurs autorisées : {allowed}"}, status=400)
+        status_labels = {
+            'PENDING': 'Nouvelle',
+            'SHORTLISTED': 'En Revue',
+            'INTERVIEW': 'Entretien',
+            'REJECTED': 'Refusé',
+            'PLACED': 'Embauché'
+        }
+        if new_status not in status_labels:
+            return Response({"detail": f"Statut invalide. Valeurs autorisées : {list(status_labels.keys())}"}, status=400)
+        
         application.status = new_status
         application.save()
 
@@ -181,8 +188,8 @@ class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
             Notification.objects.create(
                 user=application.candidate.user,
                 notification_type=Notification.NotificationType.JOB_ALERT,
-                title=f"Votre candidature a été mise à jour",
-                message=f"Votre candidature pour \"{application.job_offer.title}\" est maintenant : {new_status}.",
+                title=f"Mise à jour de votre candidature 📋",
+                message=f"Le statut de votre candidature pour \"{application.job_offer.title}\" est passé à : {status_labels[new_status]}.",
                 link="/dashboard/candidat/candidatures"
             )
         except Exception:

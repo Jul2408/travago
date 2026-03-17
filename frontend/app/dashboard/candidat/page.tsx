@@ -24,6 +24,15 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/lib/store/auth-store';
+
+const STATUS_INFO: Record<string, { label: string; color: string }> = {
+    PENDING: { label: 'Nouvelle', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' },
+    AI_REVIEW: { label: 'Analyse IA', color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300' },
+    SHORTLISTED: { label: 'En Revue', color: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' },
+    INTERVIEW: { label: 'Entretien 🎉', color: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300' },
+    PLACED: { label: 'Embauché ✅', color: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' },
+    REJECTED: { label: 'Refusé', color: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300' },
+};
 import axiosInstance from '@/lib/axios';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -105,7 +114,15 @@ export default function DashboardCandidatPage() {
             icon: <FileText className="text-orange-600" />,
             btn: "Éditer mon profil",
             href: "/dashboard/candidat/profil"
-        }] : [])
+        }] : []),
+        // Always show AI CV import shortcut
+        {
+            title: "Importation IA de CV",
+            desc: "Uploadez votre ancien CV et l'IA remplira votre profil automatiquement.",
+            icon: <Zap className="text-blue-600" />,
+            btn: "Lancer l'import",
+            href: "/dashboard/candidat/profil"
+        }
     ].slice(0, 2); // Keep only 2 main actions
 
     if (!mounted) {
@@ -121,7 +138,7 @@ export default function DashboardCandidatPage() {
             {/* Top Section: Placability & Roadmap */}
             <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* 1. Score de Placabilité (The HERO metric) */}
-                <div className="bg-gradient-to-br from-blue-700 to-blue-500 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 text-white shadow-xl shadow-blue-200 relative overflow-hidden flex flex-col items-center justify-center">
+                <div className="bg-gradient-to-br from-blue-700 to-blue-500 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 text-white shadow-xl shadow-blue-200 dark:shadow-blue-900/20 relative overflow-hidden flex flex-col items-center justify-center">
                     <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2"></div>
                     <div className="relative z-10 text-center flex flex-col items-center">
                         <h3 className="text-sm font-black uppercase tracking-[0.2em] text-blue-100 mb-8">Indice de Placabilité</h3>
@@ -164,13 +181,13 @@ export default function DashboardCandidatPage() {
 
                     <div className="relative">
                         {/* Connecting Line */}
-                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-slate-100 hidden sm:block"></div>
+                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-slate-100 dark:bg-slate-800 hidden sm:block"></div>
 
                         <div className="space-y-8">
                             {roadmapSteps.map((step, idx) => (
                                 <div key={idx} className="relative flex items-center group">
-                                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center z-10 transition-all ${step.status === 'completed' ? 'bg-green-500 text-white shadow-lg shadow-green-100' :
-                                        step.status === 'active' ? 'bg-blue-600 text-white shadow-lg shadow-blue-100 dark:shadow-blue-900/20 animate-pulse' :
+                                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center z-10 transition-all ${step.status === 'completed' ? 'bg-green-500 text-white shadow-lg shadow-green-100 dark:shadow-none' :
+                                        step.status === 'active' ? 'bg-blue-600 text-white shadow-lg shadow-blue-100 dark:shadow-blue-900/40 animate-pulse' :
                                             'bg-slate-50 dark:bg-slate-900 text-slate-300 dark:text-slate-600 border border-slate-100 dark:border-slate-800'
                                         }`}>
                                         {step.status === 'completed' ? <CheckCircle2 size={24} /> : <span className="font-black">{idx + 1}</span>}
@@ -355,9 +372,13 @@ export default function DashboardCandidatPage() {
                                             <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">{app.job_offer_detail?.company_detail?.name}</p>
                                         </div>
                                     </div>
-                                    <div className="mt-auto flex items-center justify-between border-t border-slate-200 dark:border-slate-700 pt-4">
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400">{app.status}</span>
-                                        <span className="text-xs font-black text-slate-900 dark:text-white">Matching: {app.matching_score}%</span>
+                                    <div className="mt-auto border-t border-slate-200 dark:border-slate-700 pt-4 space-y-3">
+                                        <div className="flex items-center justify-between">
+                                            <span className={`text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-lg ${(STATUS_INFO[app.status] || STATUS_INFO.PENDING).color}`}>
+                                                {(STATUS_INFO[app.status] || { label: app.status }).label}
+                                            </span>
+                                            <span className="text-xs font-black text-blue-600 dark:text-blue-400">{app.matching_score}%</span>
+                                        </div>
                                     </div>
                                 </div>
                             ))}

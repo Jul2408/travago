@@ -3,7 +3,7 @@
 import {
     ChevronLeft, Briefcase, MapPin, Clock, Zap, Users,
     UserCheck, MessageSquare, Eye, ShieldCheck, Loader2,
-    CheckCircle2, XCircle
+    CheckCircle2, XCircle, LayoutGrid
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
@@ -169,6 +169,12 @@ export default function JobApplicationsPage() {
                             </div>
                         </div>
                     </div>
+                    <Link
+                        href={`/dashboard/entreprise/offres/${slug}/pipeline`}
+                        className="px-8 py-4 bg-slate-900 text-white rounded-[1.5rem] font-black text-xs uppercase tracking-widest flex items-center shadow-lg shadow-slate-100 hover:bg-blue-600 transition-all"
+                    >
+                        <LayoutGrid size={18} className="mr-2" /> Pipeline IA
+                    </Link>
                 </div>
             </div>
 

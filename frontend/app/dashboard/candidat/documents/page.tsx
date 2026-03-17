@@ -132,9 +132,9 @@ export default function CandidateDocumentsPage() {
                         </p>
                     </div>
                 </div>
-                <div className="flex -space-x-3">
+                <div className="flex -space-x-3 transition-opacity">
                     {[1, 2, 3, 4].map(i => (
-                        <div key={i} className={`w-10 h-10 rounded-full border-4 border-blue-900 flex items-center justify-center font-black text-xs ${i === 1 ? 'bg-blue-500' : 'bg-blue-800 opacity-50'}`}>
+                        <div key={i} className={`w-10 h-10 rounded-full border-4 border-blue-900 dark:border-slate-900 flex items-center justify-center font-black text-xs ${i === 1 ? 'bg-blue-500' : 'bg-blue-800/50 dark:bg-slate-800/50 opacity-100'}`}>
                             {i}
                         </div>
                     ))}
@@ -158,10 +158,10 @@ export default function CandidateDocumentsPage() {
                                     }`}>
                                     <FileText size={28} />
                                 </div>
-                                <div className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-colors ${doc.status === 'VERIFIED' ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400' :
-                                    doc.status === 'PENDING' ? 'bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-400' :
-                                        doc.status === 'REJECTED' ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400' :
-                                            'bg-slate-100 dark:bg-slate-900 text-slate-400 dark:text-slate-600'
+                                <div className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-colors ${doc.status === 'VERIFIED' ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300' :
+                                    doc.status === 'PENDING' ? 'bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300' :
+                                        doc.status === 'REJECTED' ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300' :
+                                            'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500'
                                     }`}>
                                     {doc.status === 'VERIFIED' ? 'Vérifié' :
                                         doc.status === 'PENDING' ? 'En attente' :

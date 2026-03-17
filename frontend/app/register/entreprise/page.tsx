@@ -73,7 +73,7 @@ export default function RegisterEntreprisePage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 py-12 px-4">
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 dark:from-slate-950 dark:via-slate-900 dark:to-blue-950 py-12 px-4 transition-colors duration-500">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -97,35 +97,35 @@ export default function RegisterEntreprisePage() {
                             <p className="text-xs text-cyan-600 font-medium text-left">Un clic tout emplois</p>
                         </div>
                     </Link>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
                         Créez votre compte entreprise
                     </h2>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 dark:text-slate-400">
                         Trouvez les meilleurs talents pour votre équipe
                     </p>
                 </div>
 
                 {/* Form Card */}
-                <div className="bg-white rounded-3xl shadow-2xl p-8">
+                <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl dark:shadow-blue-900/10 p-8 border border-transparent dark:border-slate-800 transition-all">
                     {error && (
-                        <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-xl text-sm font-medium">
+                        <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 text-red-600 dark:text-red-400 rounded-xl text-sm font-medium">
                             {error}
                         </div>
                     )}
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Company Name */}
                         <div>
-                            <label htmlFor="companyName" className="block text-sm font-semibold text-gray-700 mb-2">
+                            <label htmlFor="companyName" className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
                                 Nom de l'entreprise
                             </label>
                             <div className="relative">
-                                <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 w-5 h-5" />
                                 <input
                                     type="text"
                                     id="companyName"
                                     value={formData.companyName}
                                     onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-                                    className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors"
+                                    className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 dark:border-slate-800 bg-transparent dark:bg-slate-950 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors dark:text-white"
                                     placeholder="TechCorp SARL"
                                     required
                                 />
@@ -134,35 +134,35 @@ export default function RegisterEntreprisePage() {
 
                         {/* Username */}
                         <div>
-                            <label htmlFor="username" className="block text-sm font-semibold text-gray-700 mb-2">
+                            <label htmlFor="username" className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
                                 Nom d'utilisateur (Handle)
                             </label>
                             <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 w-5 h-5" />
                                 <input
                                     type="text"
                                     id="username"
                                     value={formData.username}
                                     onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                                    className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors font-sans"
+                                    className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 dark:border-slate-800 bg-transparent dark:bg-slate-950 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors dark:text-white font-sans"
                                     placeholder="techcorp_official"
                                     required
                                 />
                             </div>
-                            <p className="text-[10px] text-gray-500 mt-1">Ce nom servira d'identifiant public pour l'entreprise.</p>
+                            <p className="text-[10px] text-gray-500 dark:text-slate-400 mt-1">Ce nom servira d'identifiant public pour l'entreprise.</p>
                         </div>
 
                         {/* Secteur & Taille */}
                         <div className="grid sm:grid-cols-2 gap-4">
                             <div>
-                                <label htmlFor="secteur" className="block text-sm font-semibold text-gray-700 mb-2">
+                                <label htmlFor="secteur" className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
                                     Secteur d'activité
                                 </label>
                                 <select
                                     id="secteur"
                                     value={formData.secteur}
                                     onChange={(e) => setFormData({ ...formData, secteur: e.target.value })}
-                                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors appearance-none bg-white font-sans"
+                                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors appearance-none dark:text-white font-sans"
                                     required
                                 >
                                     <option value="">Sélectionnez</option>
@@ -181,16 +181,16 @@ export default function RegisterEntreprisePage() {
                             </div>
 
                             <div>
-                                <label htmlFor="taille" className="block text-sm font-semibold text-gray-700 mb-2">
+                                <label htmlFor="taille" className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
                                     Taille de l'entreprise
                                 </label>
                                 <div className="relative">
-                                    <Users className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                    <Users className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 w-5 h-5" />
                                     <select
                                         id="taille"
                                         value={formData.taille}
                                         onChange={(e) => setFormData({ ...formData, taille: e.target.value })}
-                                        className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors appearance-none bg-white font-sans"
+                                        className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors appearance-none dark:text-white font-sans"
                                         required
                                     >
                                         <option value="">Sélectionnez</option>
@@ -206,17 +206,17 @@ export default function RegisterEntreprisePage() {
 
                         {/* Email */}
                         <div>
-                            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
                                 Email professionnel
                             </label>
                             <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 w-5 h-5" />
                                 <input
                                     type="email"
                                     id="email"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors"
+                                    className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 dark:border-slate-800 bg-transparent dark:bg-slate-950 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors dark:text-white"
                                     placeholder="contact@entreprise.com"
                                     required
                                 />
@@ -226,17 +226,17 @@ export default function RegisterEntreprisePage() {
                         {/* Phone & Ville */}
                         <div className="grid sm:grid-cols-2 gap-4">
                             <div>
-                                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                                <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
                                     Téléphone
                                 </label>
                                 <div className="relative">
-                                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 w-5 h-5" />
                                     <input
                                         type="tel"
                                         id="phone"
                                         value={formData.phone}
                                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                        className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors"
+                                        className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 dark:border-slate-800 bg-transparent dark:bg-slate-950 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors dark:text-white"
                                         placeholder="6 XX XX XX XX"
                                         required
                                     />
@@ -244,16 +244,16 @@ export default function RegisterEntreprisePage() {
                             </div>
 
                             <div>
-                                <label htmlFor="ville" className="block text-sm font-semibold text-gray-700 mb-2">
+                                <label htmlFor="ville" className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
                                     Ville
                                 </label>
                                 <div className="relative">
-                                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 w-5 h-5" />
                                     <select
                                         id="ville"
                                         value={formData.ville}
                                         onChange={(e) => setFormData({ ...formData, ville: e.target.value })}
-                                        className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors appearance-none bg-white font-sans"
+                                        className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors appearance-none dark:text-white font-sans"
                                         required
                                     >
                                         <option value="">Sélectionnez</option>
@@ -274,17 +274,17 @@ export default function RegisterEntreprisePage() {
 
                         {/* Site Web */}
                         <div>
-                            <label htmlFor="siteWeb" className="block text-sm font-semibold text-gray-700 mb-2">
+                            <label htmlFor="siteWeb" className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
                                 Site web (optionnel)
                             </label>
                             <div className="relative">
-                                <Globe className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                <Globe className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 w-5 h-5" />
                                 <input
                                     type="url"
                                     id="siteWeb"
                                     value={formData.siteWeb}
                                     onChange={(e) => setFormData({ ...formData, siteWeb: e.target.value })}
-                                    className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors"
+                                    className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 dark:border-slate-800 bg-transparent dark:bg-slate-950 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors dark:text-white"
                                     placeholder="https://www.entreprise.com"
                                 />
                             </div>
@@ -292,17 +292,17 @@ export default function RegisterEntreprisePage() {
 
                         {/* Password */}
                         <div>
-                            <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
+                            <label htmlFor="password" className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
                                 Mot de passe
                             </label>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 w-5 h-5" />
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     id="password"
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                    className="w-full pl-12 pr-12 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors"
+                                    className="w-full pl-12 pr-12 py-3 border-2 border-gray-200 dark:border-slate-800 bg-transparent dark:bg-slate-950 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors dark:text-white"
                                     placeholder="••••••••"
                                     required
                                     minLength={8}
@@ -310,34 +310,34 @@ export default function RegisterEntreprisePage() {
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-slate-500 dark:hover:text-slate-300"
                                 >
                                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                 </button>
                             </div>
-                            <p className="text-xs text-gray-500 mt-1">Minimum 8 caractères</p>
+                            <p className="text-xs text-gray-500 dark:text-slate-400 mt-1">Minimum 8 caractères</p>
                         </div>
 
                         {/* Confirm Password */}
                         <div>
-                            <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-700 mb-2">
+                            <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2">
                                 Confirmer le mot de passe
                             </label>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-slate-500 w-5 h-5" />
                                 <input
                                     type={showConfirmPassword ? 'text' : 'password'}
                                     id="confirmPassword"
                                     value={formData.confirmPassword}
                                     onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                                    className="w-full pl-12 pr-12 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors"
+                                    className="w-full pl-12 pr-12 py-3 border-2 border-gray-200 dark:border-slate-800 bg-transparent dark:bg-slate-950 rounded-xl focus:border-cyan-500 focus:outline-none transition-colors dark:text-white"
                                     placeholder="••••••••"
                                     required
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-slate-500 dark:hover:text-slate-300"
                                 >
                                     {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                 </button>
@@ -349,16 +349,16 @@ export default function RegisterEntreprisePage() {
                             <input
                                 type="checkbox"
                                 id="terms"
-                                className="w-4 h-4 mt-1 text-cyan-600 border-gray-300 rounded focus:ring-cyan-500"
+                                className="w-4 h-4 mt-1 text-cyan-600 border-gray-300 dark:border-slate-800 rounded focus:ring-cyan-500 bg-transparent"
                                 required
                             />
-                            <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
+                            <label htmlFor="terms" className="ml-2 text-sm text-gray-600 dark:text-slate-400">
                                 J'accepte les{' '}
-                                <Link href="/cgv" className="text-cyan-600 hover:text-cyan-700 font-medium font-sans">
+                                <Link href="/cgv" className="text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 font-medium font-sans">
                                     conditions générales d'utilisation
                                 </Link>
                                 {' '}et la{' '}
-                                <Link href="/confidentialite" className="text-cyan-600 hover:text-cyan-700 font-medium font-sans">
+                                <Link href="/confidentialite" className="text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 font-medium font-sans">
                                     politique de confidentialité
                                 </Link>
                             </label>
@@ -381,9 +381,9 @@ export default function RegisterEntreprisePage() {
 
                     {/* Login Link */}
                     <div className="text-center mt-6">
-                        <p className="text-gray-600">
+                        <p className="text-gray-600 dark:text-slate-400">
                             Vous avez déjà un compte ?{' '}
-                            <Link href="/login" className="text-cyan-600 hover:text-cyan-700 font-semibold font-sans">
+                            <Link href="/login" className="text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 font-semibold font-sans">
                                 Connectez-vous
                             </Link>
                         </p>
@@ -392,10 +392,10 @@ export default function RegisterEntreprisePage() {
 
                 {/* Back Links */}
                 <div className="flex justify-between mt-6 text-sm">
-                    <Link href="/register" className="text-gray-600 hover:text-gray-900 font-sans">
+                    <Link href="/register" className="text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white font-sans transition-colors">
                         ← Changer de type de compte
                     </Link>
-                    <Link href="/" className="text-gray-600 hover:text-gray-900 font-sans">
+                    <Link href="/" className="text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white font-sans transition-colors">
                         Retour à l'accueil
                     </Link>
                 </div>

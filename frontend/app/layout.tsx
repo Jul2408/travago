@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import PWARegistration from "@/components/pwa-registration";
+import ConnectivityBanner from "@/components/connectivity-banner";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -49,6 +50,7 @@ export default function RootLayout({
       <body className="antialiased dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <PWARegistration />
+          <ConnectivityBanner />
           {children}
           <Toaster position="top-center" richColors theme="system" />
         </ThemeProvider>

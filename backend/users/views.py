@@ -8,6 +8,9 @@ from django.contrib.admin.models import LogEntry
 from django.contrib.contenttypes.models import ContentType
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from django.core.mail import send_mail
+from django.utils.html import format_html
+from django.conf import settings
 from .serializers import (
     UserSerializer, 
     RegisterCandidateSerializer, 
@@ -26,6 +29,82 @@ import datetime
 import uuid
 import requests
 from django.conf import settings
+
+# ─── Helpers ─────────────────────────────────────────────────────────────────
+def _send_welcome_email(user, role='candidat'):
+    """Envoie un email HTML de bienvenue après l'inscription."""
+    try:
+        if role == 'entreprise':
+            subject = "Bienvenue sur Travago - Votre espace recruteur est prêt !"
+            intro = f"Votre espace entreprise <strong>{user.username}</strong> est maintenant actif."
+            cta_url = f"https://travago-eta.vercel.app/dashboard/entreprise"
+            cta_text = "Accéder à mon espace recruteur"
+            color = "#2563eb"
+        else:
+            subject = "Bienvenue sur Travago - Votre profil candidat est créé !"
+            intro = f"Nous sommes ravis de t'accueillir, <strong>{user.first_name or user.username}</strong> !"
+            cta_url = f"https://travago-eta.vercel.app/dashboard/candidat"
+            cta_text = "Compléter mon profil"
+            color = "#0ea5e9"
+
+        html_message = f"""
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"></head>
+        <body style="margin:0;padding:0;background:#f1f5f9;font-family:'Helvetica Neue',Arial,sans-serif;">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr><td align="center" style="padding:40px 20px;">
+                    <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+                        <!-- Header -->
+                        <tr><td style="background:{color};border-radius:24px 24px 0 0;padding:40px;text-align:center;">
+                            <h1 style="color:#fff;font-size:32px;font-weight:900;margin:0;letter-spacing:-1px;">TRAVAGO</h1>
+                            <p style="color:rgba(255,255,255,0.7);font-size:10px;margin:4px 0 0;letter-spacing:4px;text-transform:uppercase;">Smart AI Placement</p>
+                        </td></tr>
+                        <!-- Body -->
+                        <tr><td style="background:#fff;padding:48px 40px;">
+                            <h2 style="font-size:24px;font-weight:900;color:#0f172a;margin:0 0 16px;">Bienvenue ! 🎉</h2>
+                            <p style="font-size:16px;color:#475569;line-height:1.6;margin:0 0 32px;">{intro}<br><br>
+                            Votre compte a été créé avec succès. Commencez dès maintenant à profiter de la puissance de l'IA pour votre {role}.</p>
+                            <div style="text-align:center;margin:32px 0;">
+                                <a href="{cta_url}" style="background:{color};color:#fff;text-decoration:none;padding:18px 40px;border-radius:50px;font-weight:900;font-size:14px;letter-spacing:2px;text-transform:uppercase;display:inline-block;">{cta_text}</a>
+                            </div>
+                            <p style="font-size:13px;color:#94a3b8;margin:32px 0 0;">Si vous n'avez pas créé ce compte, ignorez cet email.</p>
+                        </td></tr>
+                        <!-- Footer -->
+                        <tr><td style="background:#f8fafc;border-radius:0 0 24px 24px;padding:24px 40px;text-align:center;">
+                            <p style="font-size:11px;color:#94a3b8;margin:0;">© 2026 Travago · Cameroun · <a href="https://travago-eta.vercel.app" style="color:{color};">travago-eta.vercel.app</a></p>
+                        </td></tr>
+                    </table>
+                </td></tr>
+            </table>
+        </body>
+        </html>
+        """
+        send_mail(
+            subject=subject,
+            message=f"Bienvenue sur Travago ! Connectez-vous sur https://travago-eta.vercel.app",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[user.email],
+            html_message=html_message,
+            fail_silently=True,  # Ne pas bloquer l'inscription si le mail échoue
+        )
+    except Exception:
+        pass  # L'email est non-critique
+
+
+# Rate limiting helper - simple IP-based throttling via DRF
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
+
+class LoginRateThrottle(AnonRateThrottle):
+    """5 tentatives de connexion par minute par IP."""
+    rate = '5/min'
+    scope = 'login'
+
+class RegisterRateThrottle(AnonRateThrottle):
+    """3 inscriptions par heure par IP."""
+    rate = '3/hour'
+    scope = 'register'
+
 
 # Try to import from other apps for stats and admin views
 try:
@@ -508,6 +587,7 @@ class CandidateDocumentViewSet(viewsets.ModelViewSet):
 class RegisterCandidateView(generics.CreateAPIView):
     serializer_class = RegisterCandidateSerializer
     permission_classes = [permissions.AllowAny]
+    throttle_classes = [RegisterRateThrottle]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -515,6 +595,8 @@ class RegisterCandidateView(generics.CreateAPIView):
         user = serializer.save()
         refresh = RefreshToken.for_user(user)
         login(self.request, user)
+        # Envoi email HTML de bienvenue
+        _send_welcome_email(user, role='candidat')
         data = UserSerializer(user).data
         data['token'] = str(refresh.access_token)
         data['refresh'] = str(refresh)
@@ -523,6 +605,7 @@ class RegisterCandidateView(generics.CreateAPIView):
 class RegisterCompanyView(generics.CreateAPIView):
     serializer_class = RegisterCompanySerializer
     permission_classes = [permissions.AllowAny]
+    throttle_classes = [RegisterRateThrottle]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -530,6 +613,8 @@ class RegisterCompanyView(generics.CreateAPIView):
         user = serializer.save()
         refresh = RefreshToken.for_user(user)
         login(self.request, user)
+        # Envoi email HTML de bienvenue
+        _send_welcome_email(user, role='entreprise')
         data = UserSerializer(user).data
         data['token'] = str(refresh.access_token)
         data['refresh'] = str(refresh)
@@ -537,6 +622,7 @@ class RegisterCompanyView(generics.CreateAPIView):
 
 class LoginView(APIView):
     permission_classes = [permissions.AllowAny]
+    throttle_classes = [LoginRateThrottle]
 
     def post(self, request):
         email = request.data.get('email')
@@ -801,7 +887,7 @@ class TransactionViewSet(viewsets.ModelViewSet):
                     link="/dashboard/entreprise/credits"
                 )
             
-            return Response({"status": "success", "message": "Paiement validé avec succès"})
+            return Response({"status": "PROCESSED"})
         else:
             transaction.status = "FAILED"
             transaction.save()
@@ -842,4 +928,43 @@ class TransactionViewSet(viewsets.ModelViewSet):
         """
         transaction = self.get_object()
         return Response(self.get_serializer(transaction).data)
+
+class CVParsingView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        if 'file' not in request.FILES:
+            return Response({"error": "Aucun fichier n'a été fourni."}, status=400)
+        
+        cv_file = request.FILES['file']
+        file_extension = cv_file.name.split('.')[-1].lower()
+        
+        if file_extension not in ['pdf', 'doc', 'docx']:
+            return Response({"error": "Format de fichier non supporté (PDF ou Word uniquement)."}, status=400)
+
+        # Save temporarily
+        temp_name = f"temp_cv_{uuid.uuid4().hex}.{file_extension}"
+        temp_path = f"media/temp/{temp_name}"
+        
+        import os
+        if not os.path.exists('media/temp'):
+            os.makedirs('media/temp')
+            
+        with open(temp_path, 'wb+') as destination:
+            for chunk in cv_file.chunks():
+                destination.write(chunk)
+        
+        try:
+            from services.cv_processor import CVProcessor
+            processor = CVProcessor()
+            parsed_data = processor.process(temp_path, file_extension)
+            
+            # Clean up
+            os.remove(temp_path)
+            
+            return Response(parsed_data)
+        except Exception as e:
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+            return Response({"error": f"Erreur lors de l'analyse : {str(e)}"}, status=500)
 

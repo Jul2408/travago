@@ -68,11 +68,12 @@ class JobOffer(models.Model):
 
 class Application(models.Model):
     class Status(models.TextChoices):
-        PENDING = "PENDING", _("En attente")
+        PENDING = "PENDING", _("Nouvelle")
         AI_REVIEW = "AI_REVIEW", _("Analyse IA")
-        SHORTLISTED = "SHORTLISTED", _("Retenu")
+        SHORTLISTED = "SHORTLISTED", _("En Revue")
+        INTERVIEW = "INTERVIEW", _("Entretien")
         REJECTED = "REJECTED", _("Refusé")
-        PLACED = "PLACED", _("Placé")
+        PLACED = "PLACED", _("Embauché")
 
     job_offer = models.ForeignKey(JobOffer, on_delete=models.CASCADE, related_name="applications")
     candidate = models.ForeignKey("users.CandidateProfile", on_delete=models.CASCADE, related_name="applications")
@@ -88,50 +89,56 @@ class Application(models.Model):
 
     def calculate_matching_score(self):
         """
-        Algorithme de Scoring IA v2.1 : Analyse multidimensionnelle du fit.
-        Compare les compétences, le secteur, et le niveau d'expérience.
+        Algorithme de Matching IA v2 : 
+        Poids : Compétences (50%), Secteur/Fit (20%), Expérience (20%), Qualité Dossier (10%)
         """
         score = 0
         
         # 1. Analyse des Compétences (Poids: 50)
-        job_skills = set([s.lower() for s in self.job_offer.required_skills]) if self.job_offer.required_skills else set()
-        candidate_skills = set([s.lower() for s in self.candidate.skills]) if self.candidate.skills else set()
+        # On normalise les compétences pour éviter les erreurs de casse
+        job_skills = set(s.lower().strip() for s in (self.job_offer.required_skills or []))
+        candidate_skills = set(s.lower().strip() for s in (self.candidate.skills or []))
         
         if not job_skills:
-            score += 50 # Base si pas de compétences requises spécifiées
+            score += 50
         else:
             matches = job_skills.intersection(candidate_skills)
             skill_ratio = len(matches) / len(job_skills)
             score += int(skill_ratio * 50)
             
-        # 2. Fit Sectoriel (Poids: 20)
-        # Si le candidat a déjà travaillé dans ce secteur (titre ou bio)
-        if self.job_offer.sector.lower() in (self.candidate.title or "").lower() or \
-           self.job_offer.sector.lower() in (self.candidate.bio or "").lower():
+        # 2. Fit Sectoriel & Titre (Poids: 20)
+        job_title = self.job_offer.title.lower()
+        cand_title = (self.candidate.title or "").lower()
+        job_sector = self.job_offer.sector.lower()
+        
+        # Titre exact ou partiel
+        if cand_title and (cand_title in job_title or job_title in cand_title):
             score += 20
-        elif self.job_offer.sector == "TECH" and ("développeur" in (self.candidate.title or "").lower()):
-            score += 15 # Bonus tech spécifique
-
-        # 3. Niveau d'Expérience (Poids: 20)
-        # Mapping simple des années d'expérience visées
+        # Secteur mentionné dans le titre ou la bio
+        elif job_sector in cand_title or job_sector in (self.candidate.bio or "").lower():
+            score += 15
+        elif job_sector == "tech" and any(word in cand_title for word in ["développeur", "engineer", "data", "it", "soft"]):
+            score += 15
+        
+        # 3. Adéquation Expérience (Poids: 20)
         exp_map = {
-            "STAGIAIRE": 0,
-            "JUNIOR": 2,
-            "INTERMEDIATE": 5,
-            "SENIOR": 10,
-            "EXPERT": 15
+            "STAGIAIRE": 0, "JUNIOR": 2, "INTERMEDIATE": 5, "SENIOR": 10, "EXPERT": 15
         }
         required_years = exp_map.get(self.job_offer.experience_level, 0)
-        if self.candidate.experience_years >= required_years:
+        cand_years = self.candidate.experience_years
+        
+        if cand_years >= required_years:
             score += 20
-        elif self.candidate.experience_years >= (required_years * 0.7):
-            score += 10 # Presque là
+        elif cand_years >= (required_years * 0.7):
+            score += 12
+        else:
+            # Bonus dégressif pour l'ambition
+            score += min(int((cand_years / max(required_years, 1)) * 10), 10)
 
-        # 4. Bonus de Qualité de Dossier (Poids: 10)
-        # Utilise le score de placabilité calculé par le système
+        # 4. Qualité du Dossier / Placabilité (Poids: 10)
         score += int((self.candidate.placability_score / 100) * 10)
 
-        self.matching_score = min(score, 100)
+        self.matching_score = min(max(score, 10), 100)
         return self.matching_score
 
     def save(self, *args, **kwargs):

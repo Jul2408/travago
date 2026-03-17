@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hors-ligne | Travago</title>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, oxygen, ubuntu, cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #1e293b;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            padding: 40px;
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(37, 99, 235, 0.05);
+            border: 1px solid #f1f5f9;
+        }
+        .icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        h1 { font-weight: 900; margin: 0 0 16px; font-size: 24px; text-transform: uppercase; letter-spacing: -0.02em; }
+        p { color: #64748b; font-weight: 500; font-size: 14px; line-height: 1.6; margin-bottom: 32px; }
+        .btn {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🛰️</div>
+        <h1>Perte de Signal</h1>
+        <p>Vous êtes actuellement hors-ligne. Travago a mis en cache vos dernières offres consultées, mais cette page nécessite une connexion active.</p>
+        <a href="/" class="btn">Retour à l'accueil</a>
+    </div>
+</body>
+</html>

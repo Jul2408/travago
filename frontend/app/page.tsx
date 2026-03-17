@@ -289,19 +289,6 @@ export default function Home() {
               <div className="mb-12 scale-[0.95] sm:scale-100 origin-center">
                 <FolderClickAnimation />
               </div>
-
-              <div className="space-y-4 px-2">
-                <button
-                  onClick={handleInstallClick}
-                  className="flex items-center justify-center space-x-3 w-full bg-blue-600 dark:bg-blue-600 text-white py-6 rounded-[2rem] text-lg font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 active:scale-95 transition-all"
-                >
-                  <Smartphone size={24} />
-                  <span>Installer l'Application</span>
-                </button>
-                <p className="text-center text-[10px] text-gray-400 italic font-medium uppercase tracking-[0.2em] opacity-80">
-                  Compatible iOS, Android & Desktop
-                </p>
-              </div>
             </div>
           </div>
           <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5 }} className="relative hidden lg:block">

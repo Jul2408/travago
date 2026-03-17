@@ -127,7 +127,7 @@ export default function DashboardEntreprisePage() {
     return (
         <div className="space-y-6 sm:space-y-10">
             {/* 1. Placement IA Hero Section */}
-            <div className="bg-gradient-to-br from-blue-700 to-indigo-800 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-12 text-white relative overflow-hidden shadow-2xl shadow-blue-200">
+            <div className="bg-gradient-to-br from-blue-700 to-indigo-800 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-12 text-white relative overflow-hidden shadow-2xl shadow-blue-200 dark:shadow-blue-900/20">
                 <div className="absolute right-0 top-0 w-[400px] h-[400px] bg-white/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
                 <div className="relative z-10 grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
                     <div>

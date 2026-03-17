@@ -131,32 +131,32 @@ export default function MessagesPage() {
 
     if (isLoading) {
         return (
-            <div className="h-[calc(100vh-8rem)] bg-white rounded-[2.5rem] flex items-center justify-center">
-                <Loader2 className="w-10 h-10 text-blue-600 animate-spin" />
+            <div className="h-[calc(100vh-8rem)] bg-white dark:bg-slate-950 rounded-[2.5rem] flex items-center justify-center">
+                <Loader2 className="w-10 h-10 text-blue-600 dark:text-blue-400 animate-spin" />
             </div>
         );
     }
 
     return (
-        <div className="h-[calc(100vh-8rem)] bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden flex">
+        <div className="h-[calc(100vh-8rem)] bg-white dark:bg-slate-950 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden flex transition-colors">
 
             {/* ─── Sidebar: Conversation List ─────────────────────────────────── */}
             {/* On mobile: visible only when showChat=false */}
             <div className={`
-                flex-col border-r border-slate-100
+                flex-col border-r border-slate-100 dark:border-slate-800
                 ${showChat ? 'hidden' : 'flex'} w-full
                 md:flex md:w-80 lg:w-96
             `}>
-                <div className="p-5 border-b border-slate-50 shrink-0">
-                    <h2 className="text-xl font-black text-slate-900 mb-4">Messages</h2>
+                <div className="p-5 border-b border-slate-50 dark:border-slate-800 shrink-0">
+                    <h2 className="text-xl font-black text-slate-900 dark:text-white mb-4">Messages</h2>
                     <div className="relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" size={16} />
                         <input
                             type="text"
                             placeholder="Rechercher..."
                             value={searchQuery}
                             onChange={e => setSearchQuery(e.target.value)}
-                            className="w-full pl-11 pr-4 py-3 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all"
+                            className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all"
                         />
                     </div>
                 </div>
@@ -164,8 +164,8 @@ export default function MessagesPage() {
                 <div className="flex-1 overflow-y-auto">
                     {filteredConversations.length === 0 ? (
                         <div className="p-10 text-center">
-                            <MessageSquare size={40} className="mx-auto text-slate-200 mb-4" />
-                            <p className="text-slate-400 text-sm font-medium">
+                            <MessageSquare size={40} className="mx-auto text-slate-200 dark:text-slate-700 mb-4" />
+                            <p className="text-slate-400 dark:text-slate-500 text-sm font-medium">
                                 {searchQuery ? 'Aucune conversation trouvée.' : 'Aucune conversation encore.'}
                             </p>
                         </div>
@@ -174,10 +174,10 @@ export default function MessagesPage() {
                             <div
                                 key={chat.id}
                                 onClick={() => handleSelectConversation(chat)}
-                                className={`p-4 sm:p-5 flex items-center space-x-4 cursor-pointer transition-all hover:bg-slate-50 border-b border-slate-50/80 ${selectedConversation?.id === chat.id ? 'bg-blue-50/60 border-l-4 border-l-blue-600' : ''}`}
+                                className={`p-4 sm:p-5 flex items-center space-x-4 cursor-pointer transition-all hover:bg-slate-50 dark:hover:bg-slate-900 border-b border-slate-50/80 dark:border-slate-800/80 ${selectedConversation?.id === chat.id ? 'bg-blue-50/60 dark:bg-blue-900/10 border-l-4 border-l-blue-600' : ''}`}
                             >
                                 <div className="relative shrink-0">
-                                    <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center font-black text-blue-700 overflow-hidden relative">
+                                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-2xl flex items-center justify-center font-black text-blue-700 dark:text-blue-400 overflow-hidden relative">
                                         {chat.other_participant?.photo ? (
                                             <Image
                                                 src={getImageUrl(chat.other_participant.photo)}
@@ -189,21 +189,21 @@ export default function MessagesPage() {
                                             <span>{getDisplayName(chat.other_participant).charAt(0).toUpperCase()}</span>
                                         )}
                                     </div>
-                                    <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white" />
+                                    <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white dark:border-slate-950" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-center justify-between gap-2 mb-0.5">
-                                        <h4 className="font-black text-slate-900 truncate text-sm">
+                                        <h4 className="font-black text-slate-900 dark:text-white truncate text-sm">
                                             {getDisplayName(chat.other_participant)}
                                         </h4>
-                                        <span className="text-[10px] font-bold text-slate-400 shrink-0">
+                                        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 shrink-0">
                                             {chat.last_message
                                                 ? new Date(chat.last_message.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
                                                 : ''}
                                         </span>
                                     </div>
                                     <div className="flex items-center justify-between gap-2">
-                                        <p className="text-xs font-medium text-slate-500 truncate">
+                                        <p className="text-xs font-medium text-slate-500 dark:text-slate-400 truncate">
                                             {chat.last_message?.content || 'Démarrez la conversation'}
                                         </p>
                                         {chat.unread_count > 0 && (
@@ -222,32 +222,32 @@ export default function MessagesPage() {
             {/* ─── Chat Panel ─────────────────────────────────────────────────── */}
             {/* On mobile: visible only when showChat=true */}
             <div className={`
-                flex-1 flex-col bg-slate-50/30
+                flex-1 flex-col bg-slate-50/30 dark:bg-slate-900/10
                 ${showChat ? 'flex' : 'hidden'}
                 md:flex
             `}>
                 {!selectedConversation ? (
                     /* Empty state — desktop only */
                     <div className="flex-1 hidden md:flex flex-col items-center justify-center text-center p-10 opacity-40">
-                        <div className="w-24 h-24 bg-blue-50 rounded-[2rem] flex items-center justify-center text-blue-600 mb-6">
+                        <div className="w-24 h-24 bg-blue-50 dark:bg-blue-900/20 rounded-[2rem] flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6">
                             <MessageSquare size={40} />
                         </div>
-                        <h3 className="text-xl font-black text-slate-900 mb-2">Sélectionnez une discussion</h3>
-                        <p className="text-sm font-medium text-slate-500">Choisissez une conversation dans la liste pour commencer.</p>
+                        <h3 className="text-xl font-black text-slate-900 dark:text-white mb-2">Sélectionnez une discussion</h3>
+                        <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Choisissez une conversation dans la liste pour commencer.</p>
                     </div>
                 ) : (
                     <>
                         {/* Chat Header */}
-                        <div className="p-4 sm:p-5 bg-white border-b border-slate-100 flex items-center justify-between shrink-0">
+                        <div className="p-4 sm:p-5 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between shrink-0">
                             <div className="flex items-center space-x-3">
                                 {/* Back button — mobile only */}
                                 <button
                                     onClick={handleBackToList}
-                                    className="md:hidden p-2 text-slate-500 hover:text-blue-600 bg-slate-100 rounded-xl mr-1 transition-all"
+                                    className="md:hidden p-2 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 bg-slate-100 dark:bg-slate-900 rounded-xl mr-1 transition-all"
                                 >
                                     <ChevronLeft size={20} />
                                 </button>
-                                <div className="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center font-bold overflow-hidden relative shrink-0">
+                                <div className="w-10 h-10 bg-blue-600 dark:bg-blue-500 text-white rounded-xl flex items-center justify-center font-bold overflow-hidden relative shrink-0">
                                     {selectedConversation.other_participant?.photo ? (
                                         <Image
                                             src={getImageUrl(selectedConversation.other_participant.photo)}
@@ -260,20 +260,20 @@ export default function MessagesPage() {
                                     )}
                                 </div>
                                 <div>
-                                    <h3 className="font-black text-slate-900 text-sm leading-tight">
+                                    <h3 className="font-black text-slate-900 dark:text-white text-sm leading-tight">
                                         {getDisplayName(selectedConversation.other_participant)}
                                     </h3>
-                                    <p className="text-[10px] font-bold text-green-500 uppercase tracking-widest">En ligne</p>
+                                    <p className="text-[10px] font-bold text-green-500 dark:text-green-400 uppercase tracking-widest">En ligne</p>
                                 </div>
                             </div>
                             <div className="flex items-center space-x-1">
-                                <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all">
+                                <button className="p-2 text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl transition-all">
                                     <Phone size={18} />
                                 </button>
-                                <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all">
+                                <button className="p-2 text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl transition-all">
                                     <Video size={18} />
                                 </button>
-                                <button className="p-2 text-slate-400 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all">
+                                <button className="p-2 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900 rounded-xl transition-all">
                                     <MoreVertical size={18} />
                                 </button>
                             </div>
@@ -282,7 +282,7 @@ export default function MessagesPage() {
                         {/* Messages Area */}
                         <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
                             {messages.length === 0 && (
-                                <div className="text-center py-12 opacity-30">
+                                <div className="text-center py-12 opacity-30 text-slate-900 dark:text-white">
                                     <p className="text-xs font-black uppercase tracking-widest">Aucun message — dites bonjour ! 👋</p>
                                 </div>
                             )}
@@ -291,11 +291,11 @@ export default function MessagesPage() {
                                 return (
                                     <div key={msg.id} className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}>
                                         <div className={`max-w-[80%] sm:max-w-md px-4 py-3 rounded-2xl shadow-sm ${isMe
-                                                ? 'bg-blue-600 text-white rounded-br-sm'
-                                                : 'bg-white text-slate-700 rounded-bl-sm border border-slate-100'
+                                            ? 'bg-blue-600 text-white rounded-br-sm'
+                                            : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-white rounded-bl-sm border border-slate-100 dark:border-slate-800'
                                             }`}>
                                             <p className="text-sm font-medium leading-relaxed break-words">{msg.content}</p>
-                                            <p className={`text-[10px] mt-1.5 font-bold uppercase tracking-widest ${isMe ? 'text-blue-200 text-right' : 'text-slate-400'}`}>
+                                            <p className={`text-[10px] mt-1.5 font-bold uppercase tracking-widest ${isMe ? 'text-blue-200 text-right' : 'text-slate-400 dark:text-slate-500'}`}>
                                                 {new Date(msg.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                                             </p>
                                         </div>
@@ -306,9 +306,9 @@ export default function MessagesPage() {
                         </div>
 
                         {/* Input Bar */}
-                        <form onSubmit={handleSendMessage} className="p-3 sm:p-4 bg-white border-t border-slate-100 shrink-0">
+                        <form onSubmit={handleSendMessage} className="p-3 sm:p-4 bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800 shrink-0">
                             <div className="flex items-center gap-2 sm:gap-3">
-                                <button type="button" className="p-2.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all shrink-0">
+                                <button type="button" className="p-2.5 text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl transition-all shrink-0">
                                     <Paperclip size={18} />
                                 </button>
                                 <div className="flex-1 relative">
@@ -318,16 +318,16 @@ export default function MessagesPage() {
                                         onChange={e => setNewMessage(e.target.value)}
                                         placeholder="Écrire un message..."
                                         disabled={isSending}
-                                        className="w-full pl-4 pr-10 py-3 bg-slate-50 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all disabled:opacity-50"
+                                        className="w-full pl-4 pr-10 py-3 bg-slate-50 dark:bg-slate-900 border-none rounded-2xl text-sm font-medium focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white transition-all disabled:opacity-50"
                                     />
-                                    <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-300 hover:text-blue-500 transition-all">
+                                    <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-300 dark:text-slate-600 hover:text-blue-500 transition-all">
                                         <Smile size={18} />
                                     </button>
                                 </div>
                                 <button
                                     type="submit"
                                     disabled={isSending || !newMessage.trim()}
-                                    className="p-3 bg-blue-600 text-white rounded-2xl shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all disabled:opacity-50 shrink-0"
+                                    className="p-3 bg-blue-600 dark:bg-blue-500 text-white rounded-2xl shadow-lg shadow-blue-200 dark:shadow-none hover:bg-blue-700 dark:hover:bg-blue-600 transition-all disabled:opacity-50 shrink-0"
                                 >
                                     {isSending ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send size={18} />}
                                 </button>

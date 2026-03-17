@@ -63,11 +63,12 @@ export default function CandidaturesPage() {
 
     const getStatusInfo = (status: string) => {
         switch (status) {
-            case 'PENDING': return { label: 'En attente', color: 'blue', icon: <Clock size={14} /> };
+            case 'PENDING': return { label: 'Nouvelle', color: 'blue', icon: <Clock size={14} /> };
             case 'AI_REVIEW': return { label: 'Analyse IA', color: 'purple', icon: <Info size={14} /> };
-            case 'SHORTLISTED': return { label: 'Retenu', color: 'green', icon: <CheckCircle2 size={14} /> };
+            case 'SHORTLISTED': return { label: 'En Revue', color: 'green', icon: <CheckCircle2 size={14} /> };
+            case 'INTERVIEW': return { label: 'Entretien', color: 'purple', icon: <MessageSquare size={14} /> };
             case 'REJECTED': return { label: 'Refusé', color: 'red', icon: <XCircle size={14} /> };
-            case 'PLACED': return { label: 'Placé', color: 'indigo', icon: <ShieldCheck size={14} /> };
+            case 'PLACED': return { label: 'Embauché', color: 'indigo', icon: <ShieldCheck size={14} /> };
             default: return { label: status, color: 'slate', icon: <Info size={14} /> };
         }
     };

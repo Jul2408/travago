@@ -105,46 +105,46 @@ export default function NotificationsDropdown() {
         <div className="relative">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="relative p-2.5 text-blue-600 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors"
+                className="relative p-2.5 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-xl hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
             >
                 <Bell size={20} />
                 {unreadCount > 0 && (
-                    <span className="absolute -top-2 -right-2 min-w-[20px] h-[20px] px-1 bg-red-600 text-white text-[10px] font-black flex items-center justify-center rounded-full ring-2 ring-white shadow-xl animate-bounce-short">
+                    <span className="absolute -top-2 -right-2 min-w-[20px] h-[20px] px-1 bg-red-600 text-white text-[10px] font-black flex items-center justify-center rounded-full ring-2 ring-white dark:ring-slate-900 shadow-xl animate-bounce-short">
                         {unreadCount}
                     </span>
                 )}
             </button>
 
             {isOpen && (
-                <div className="fixed inset-x-4 mt-3 md:absolute md:inset-auto md:right-0 md:mt-3 md:w-80 bg-white rounded-2xl shadow-2xl border border-blue-50 z-50 overflow-hidden animate-in fade-in zoom-in duration-200">
-                    <div className="p-4 border-b border-blue-50 flex items-center justify-between">
-                        <h3 className="font-black text-slate-900 text-sm">Notifications</h3>
+                <div className="fixed inset-x-4 mt-3 md:absolute md:inset-auto md:right-0 md:mt-3 md:w-80 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-blue-50 dark:border-slate-800 z-50 overflow-hidden animate-in fade-in zoom-in duration-200">
+                    <div className="p-4 border-b border-blue-50 dark:border-slate-800 flex items-center justify-between">
+                        <h3 className="font-black text-slate-900 dark:text-white text-sm">Notifications</h3>
                         {unreadCount > 0 && <span className="text-[10px] font-black bg-blue-600 text-white px-2 py-0.5 rounded-full">{unreadCount} New</span>}
                     </div>
                     <div className="max-h-96 overflow-y-auto">
                         {notifications.length === 0 ? (
                             <div className="p-8 text-center">
-                                <Bell size={32} className="mx-auto text-slate-200 mb-2" />
-                                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Aucune notification</p>
+                                <Bell size={32} className="mx-auto text-slate-200 dark:text-slate-700 mb-2" />
+                                <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Aucune notification</p>
                             </div>
                         ) : (
                             notifications.map((n) => (
                                 <div
                                     key={n.id}
-                                    className={`p-4 border-b border-blue-50 hover:bg-slate-50 transition-colors cursor-pointer ${!n.is_read ? 'bg-blue-50/30' : ''}`}
+                                    className={`p-4 border-b border-blue-50 dark:border-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer ${!n.is_read ? 'bg-blue-50/30 dark:bg-blue-900/10' : ''}`}
                                     onClick={() => handleNotificationClick(n)}
                                 >
                                     <div className="flex items-start justify-between mb-1">
                                         <div className="flex items-center gap-2">
-                                            <h4 className={`text-sm font-black ${!n.is_read ? 'text-blue-900' : 'text-slate-900'}`}>{n.title}</h4>
-                                            {n.link && <ExternalLink size={10} className="text-blue-400" />}
+                                            <h4 className={`text-sm font-black ${!n.is_read ? 'text-blue-900 dark:text-blue-400' : 'text-slate-900 dark:text-slate-200'}`}>{n.title}</h4>
+                                            {n.link && <ExternalLink size={10} className="text-blue-400 dark:text-blue-500" />}
                                         </div>
-                                        <span className="text-[10px] text-slate-400 font-bold whitespace-nowrap ml-2">
+                                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold whitespace-nowrap ml-2">
                                             {new Date(n.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                         </span>
                                     </div>
                                     <p
-                                        className={`text-xs text-slate-500 font-medium leading-relaxed transition-all ${expandedId === n.id ? '' : 'line-clamp-2'}`}
+                                        className={`text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed transition-all ${expandedId === n.id ? '' : 'line-clamp-2'}`}
                                         onClick={(e) => {
                                             if (n.message.length > 60) {
                                                 e.stopPropagation();
@@ -154,14 +154,14 @@ export default function NotificationsDropdown() {
                                     >
                                         {n.message}
                                         {n.message.length > 60 && expandedId !== n.id && (
-                                            <span className="text-blue-500 ml-1 font-black text-[10px] uppercase cursor-pointer hover:underline">...Lire plus</span>
+                                            <span className="text-blue-500 dark:text-blue-400 ml-1 font-black text-[10px] uppercase cursor-pointer hover:underline">...Lire plus</span>
                                         )}
                                     </p>
                                 </div>
                             ))
                         )}
                     </div>
-                    <button className="w-full py-3 bg-slate-50 text-[10px] font-black text-blue-600 uppercase tracking-widest hover:bg-blue-50 transition-colors">
+                    <button className="w-full py-3 bg-slate-50 dark:bg-slate-800/50 text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors">
                         Voir toutes les notifications
                     </button>
                 </div>
