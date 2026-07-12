@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import JobOffer, Application,
+from .models import JobOffer, Application
 from users.serializers import CompanyProfileMiniSerializer, CandidateProfileMiniSerializer
 
 class JobOfferSerializer(serializers.ModelSerializer):
