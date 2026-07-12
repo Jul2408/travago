@@ -24,8 +24,10 @@ interface JobOffer {
     location: string;
     contract_type: string;
     salary_range: string | null;
-    company_name: string;
-    company_logo: string | null;
+    company_detail?: {
+        name: string;
+        logo: string | null;
+    };
     created_at: string;
     is_ia_boosted?: boolean;
     ai_match_score?: number;
@@ -45,7 +47,8 @@ export default function CandidateOffresPage() {
     const fetchOffers = async () => {
         try {
             const response = await axiosInstance.get('jobs/offers/');
-            const results = response.data.results || response.data;
+            const data = response.data.results || response.data;
+            const results = Array.isArray(data) ? data : [];
             setOffers(results);
         } catch (error) {
             console.error('Failed to fetch offers:', error);
@@ -56,7 +59,7 @@ export default function CandidateOffresPage() {
 
     const filteredOffers = offers.filter(o =>
         o.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        o.company_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        o.company_detail?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         o.location.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
@@ -132,10 +135,10 @@ export default function CandidateOffresPage() {
                             <div className="flex flex-col lg:flex-row lg:items-center gap-8">
                                 <div className="flex items-start space-x-6 lg:w-1/3">
                                     <div className="w-20 h-20 bg-blue-50 dark:bg-blue-900/20 rounded-[2rem] flex items-center justify-center text-blue-400 dark:text-blue-500 border border-blue-100 dark:border-blue-900/30 shrink-0 relative overflow-hidden shadow-sm">
-                                        {offer.company_logo ? (
+                                        {offer.company_detail?.logo ? (
                                             <Image
-                                                src={getImageUrl(offer.company_logo)}
-                                                alt={offer.company_name}
+                                                src={getImageUrl(offer.company_detail.logo)}
+                                                alt={offer.company_detail.name}
                                                 fill
                                                 className="object-cover"
                                             />
@@ -146,7 +149,7 @@ export default function CandidateOffresPage() {
                                     <div className="min-w-0">
                                         <div className="flex items-center space-x-2 mb-1">
                                             <span className="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded">
-                                                {offer.company_name}
+                                                {offer.company_detail?.name || 'Entreprise'}
                                             </span>
                                             {offer.is_ia_boosted && (
                                                 <Zap size={14} className="text-orange-400 fill-orange-400" />

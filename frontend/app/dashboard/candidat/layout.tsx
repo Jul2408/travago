@@ -78,7 +78,6 @@ export default function CandidateDashboardLayout({
         { icon: <LayoutDashboard size={20} />, label: 'Tableau de bord', href: '/dashboard/candidat' },
         { icon: <FolderCheck size={20} />, label: 'Mes Documents (KYC)', href: '/dashboard/candidat/documents' },
         { icon: <Award size={20} />, label: 'Mes Certifications', href: '/dashboard/candidat/certifs' },
-        { icon: <Brain size={20} />, label: 'Tests de Compétences', href: '/dashboard/candidat/tests' },
         { icon: <Zap size={20} />, label: 'Opportunités', href: '/dashboard/candidat/offres' },
         { icon: <User size={20} />, label: 'Mon Profil & CV', href: '/dashboard/candidat/profil' },
         { icon: <Briefcase size={20} />, label: 'État du Placement', href: '/dashboard/candidat/candidatures' },

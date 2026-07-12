@@ -53,7 +53,7 @@ export default function CandidateSettingsPage() {
         }
 
         try {
-            await api.post('/users/password/change/', {
+            await api.post('users/password/change/', {
                 old_password: passwordData.old_password,
                 new_password: passwordData.new_password
             });

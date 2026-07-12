@@ -10,9 +10,9 @@ import {
     ShieldCheck,
     Loader2,
     Trash2,
-    Download
+    Download,
+    AlertTriangle
 } from 'lucide-react';
-import { api } from '@/lib/api';
 import axiosInstance from '@/lib/axios';
 import { useAuthStore } from '@/lib/store/auth-store';
 import { toast } from 'sonner';
@@ -30,6 +30,7 @@ interface Document {
 export default function CandidateDocumentsPage() {
     const [mounted, setMounted] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const { fetchUser } = useAuthStore();
     const [documents, setDocuments] = useState<Document[]>([
         { document_type: 'CNI', label: 'Carte d\'Identité / Passeport', file: null, status: 'MISSING', updated_at: null },
@@ -47,8 +48,10 @@ export default function CandidateDocumentsPage() {
     const fetchDocuments = async () => {
         try {
             setIsLoading(true);
+            setError(null);
             const response = await axiosInstance.get('users/documents/');
-            const apiDocs = response.data.results || response.data;
+            const data = response.data.results || response.data;
+            const apiDocs = Array.isArray(data) ? data : [];
 
             setDocuments(prev => prev.map(baseDoc => {
                 const found = apiDocs.find((d: any) => d.document_type === baseDoc.document_type);
@@ -57,8 +60,9 @@ export default function CandidateDocumentsPage() {
                 }
                 return baseDoc;
             }));
-        } catch (error) {
+        } catch (error: any) {
             console.error('Failed to fetch documents:', error);
+            setError("Impossible de charger vos documents. Veuillez vérifier votre connexion.");
         } finally {
             setIsLoading(false);
         }
@@ -145,6 +149,17 @@ export default function CandidateDocumentsPage() {
             {isLoading ? (
                 <div className="flex items-center justify-center py-20">
                     <Loader2 size={40} className="text-blue-600 animate-spin" />
+                </div>
+            ) : error ? (
+                <div className="text-center py-20 bg-red-50 dark:bg-red-900/10 rounded-[2.5rem] border border-red-100 dark:border-red-900/20">
+                    <AlertTriangle className="mx-auto text-red-500 mb-4" size={40} />
+                    <p className="text-red-700 dark:text-red-400 font-bold uppercase tracking-widest text-xs">{error}</p>
+                    <button
+                        onClick={fetchDocuments}
+                        className="mt-6 px-8 py-3 bg-red-600 text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-red-700 transition-all font-sans"
+                    >
+                        Réessayer
+                    </button>
                 </div>
             ) : (
                 <div className="grid md:grid-cols-2 gap-8">
