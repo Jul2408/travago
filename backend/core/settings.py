@@ -18,11 +18,11 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-zdipvgpc47o%#*%uk68)uz69^2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*'] # Temporary allow all for debugging Render proxy
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'Mbeleg.pythonanywhere.com,localhost,127.0.0.1').split(',')
 
-# Essential for Render / Vercel to handle HTTPS correctly behind a proxy
+# Required for PythonAnywhere / Vercel to handle HTTPS correctly behind a proxy
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = False # Let Render handle the SSL redirect to avoid 400/loops
+SECURE_SSL_REDIRECT = False
 
 
 
@@ -55,8 +55,8 @@ INSTALLED_APPS = [
 ]
 
 # CORS & CSRF Configuration
-CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,https://travago-eta.vercel.app,https://*.onrender.com").split(',')
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,http://localhost:8000,http://127.0.0.1:8000,https://travago-eta.vercel.app").split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,https://travago-eta.vercel.app,https://Mbeleg.pythonanywhere.com").split(',')
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,http://localhost:8000,http://127.0.0.1:8000,https://travago-eta.vercel.app,https://Mbeleg.pythonanywhere.com").split(',')
 CORS_ALLOW_CREDENTIALS = True
 
 # Security settings for production (Cookies over HTTPS)
@@ -190,7 +190,8 @@ AUTH_USER_MODEL = 'users.User'
 # REST Framework Configuration
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'users.supabase_auth.SupabaseJWTAuthentication', # 1st priority: Supabase JWTs
+        'rest_framework_simplejwt.authentication.JWTAuthentication', # 2nd: Legacy simplejwt
         'users.authentication.CsrfExemptSessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
