@@ -221,7 +221,7 @@ export default async function Home() {
                 </li>
                 <li className="flex items-center">
                   <Phone size={16} className="text-blue-600 dark:text-blue-500 mr-3 shrink-0" />
-                  <a href="tel:+237600000000" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">+237 600 00 00 00</a>
+                  <a href="tel:+237657948848" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">+237 600 00 00 00</a>
                 </li>
                 <li className="flex items-center">
                   <Mail size={16} className="text-blue-600 dark:text-blue-500 mr-3 shrink-0" />
