@@ -168,20 +168,20 @@ export default function EnterpriseSettingsPage() {
     return (
         <div className="max-w-4xl mx-auto space-y-10 pb-20">
             <div>
-                <h1 className="text-3xl font-black text-slate-900 tracking-tight">Paramètres Entreprise</h1>
-                <p className="text-slate-500 font-medium">Gérez votre profil recruteur, vos préférences et la sécurité de votre équipe.</p>
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Paramètres Entreprise</h1>
+                <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium">Gérez votre profil recruteur, vos préférences et la sécurité de votre équipe.</p>
             </div>
 
             {/* 1. EDIT PROFILE SECTION */}
-            <form onSubmit={handleProfileSubmit} className="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
-                <div className="p-8 border-b border-slate-50 flex items-center justify-between">
+            <form onSubmit={handleProfileSubmit} className="bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
+                <div className="p-8 border-b border-slate-50 dark:border-slate-700 flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                        <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center">
                             <Building2 size={24} />
                         </div>
                         <div>
-                            <h2 className="text-lg font-black text-slate-900 leading-tight">Profil Entreprise</h2>
-                            <p className="text-sm font-medium text-slate-500">Informations publiques visibles par les candidats.</p>
+                            <h2 className="text-lg font-black text-slate-900 dark:text-white leading-tight">Profil Entreprise</h2>
+                            <p className="text-sm font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500">Informations publiques visibles par les candidats.</p>
                         </div>
                     </div>
                 </div>
@@ -190,7 +190,7 @@ export default function EnterpriseSettingsPage() {
                     {/* Logo Upload */}
                     <div className="flex items-center gap-8">
                         <div className="relative group shrink-0">
-                            <div className="w-24 h-24 bg-blue-50 rounded-[2rem] border-4 border-white shadow-lg overflow-hidden flex items-center justify-center relative">
+                            <div className="w-24 h-24 bg-blue-50 dark:bg-blue-900/20 rounded-[2rem] border-4 border-white shadow-lg overflow-hidden flex items-center justify-center relative">
                                 {logoPreview ? (
                                     <Image src={logoPreview || ''} alt="Logo" fill className="object-cover" />
                                 ) : (
@@ -203,70 +203,70 @@ export default function EnterpriseSettingsPage() {
                             </label>
                         </div>
                         <div className="flex-1">
-                            <div className="text-sm font-medium text-slate-500 mb-2">Logo de l'entreprise</div>
-                            <div className="text-xs text-slate-400">Recommandé: 500x500px, PNG ou JPG.</div>
+                            <div className="text-sm font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-2">Logo de l'entreprise</div>
+                            <div className="text-xs text-slate-400 dark:text-slate-500">Recommandé: 500x500px, PNG ou JPG.</div>
                         </div>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-1">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nom de l'entreprise</label>
+                            <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Nom de l'entreprise</label>
                             <input
                                 type="text"
                                 name="name"
                                 value={profileData.name}
                                 onChange={handleProfileChange}
-                                className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                                 required
                             />
                         </div>
                         <div className="space-y-1">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Secteur d'activité</label>
+                            <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Secteur d'activité</label>
                             <input
                                 type="text"
                                 name="sector"
                                 value={profileData.sector}
                                 onChange={handleProfileChange}
-                                className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                             />
                         </div>
                     </div>
 
                     <div className="space-y-1">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Description</label>
+                        <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Description</label>
                         <textarea
                             name="description"
                             value={profileData.description}
                             onChange={handleProfileChange}
                             rows={3}
-                            className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all resize-none"
+                            className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all resize-none"
                         />
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-1">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Site Web</label>
+                            <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Site Web</label>
                             <div className="relative">
-                                <Globe className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+                                <Globe className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" size={16} />
                                 <input
                                     type="url"
                                     name="website"
                                     value={profileData.website}
                                     onChange={handleProfileChange}
-                                    className="w-full pl-10 pr-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                    className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                                 />
                             </div>
                         </div>
                         <div className="space-y-1">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Téléphone</label>
+                            <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Téléphone</label>
                             <div className="relative">
-                                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+                                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" size={16} />
                                 <input
                                     type="tel"
                                     name="phone"
                                     value={profileData.phone}
                                     onChange={handleProfileChange}
-                                    className="w-full pl-10 pr-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                    className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                                 />
                             </div>
                         </div>
@@ -274,23 +274,23 @@ export default function EnterpriseSettingsPage() {
 
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-1">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Ville</label>
+                            <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Ville</label>
                             <input
                                 type="text"
                                 name="city"
                                 value={profileData.city}
                                 onChange={handleProfileChange}
-                                className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                             />
                         </div>
                         <div className="space-y-1">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Adresse</label>
+                            <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Adresse</label>
                             <input
                                 type="text"
                                 name="address"
                                 value={profileData.address}
                                 onChange={handleProfileChange}
-                                className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                             />
                         </div>
                     </div>
@@ -312,48 +312,48 @@ export default function EnterpriseSettingsPage() {
             </form>
 
             {/* 2. SECURITY (PASSWORD) SECTION */}
-            <form onSubmit={handlePasswordSubmit} className="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
-                <div className="p-8 border-b border-slate-50 flex items-center justify-between">
+            <form onSubmit={handlePasswordSubmit} className="bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
+                <div className="p-8 border-b border-slate-50 dark:border-slate-700 flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                         <div className="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center">
                             <Shield size={24} />
                         </div>
                         <div>
-                            <h2 className="text-lg font-black text-slate-900 leading-tight">Sécurité & Connexion</h2>
-                            <p className="text-sm font-medium text-slate-500">Mettez à jour votre mot de passe.</p>
+                            <h2 className="text-lg font-black text-slate-900 dark:text-white leading-tight">Sécurité & Connexion</h2>
+                            <p className="text-sm font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500">Mettez à jour votre mot de passe.</p>
                         </div>
                     </div>
                 </div>
                 <div className="p-8 space-y-6">
                     <div className="space-y-4">
                         <div className="space-y-1">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Ancien mot de passe</label>
+                            <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Ancien mot de passe</label>
                             <input
                                 type="password"
                                 value={passwordData.old_password}
                                 onChange={(e) => setPasswordData({ ...passwordData, old_password: e.target.value })}
-                                className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                                 required
                             />
                         </div>
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-1">
-                                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nouveau mot de passe</label>
+                                <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Nouveau mot de passe</label>
                                 <input
                                     type="password"
                                     value={passwordData.new_password}
                                     onChange={(e) => setPasswordData({ ...passwordData, new_password: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                                     required
                                 />
                             </div>
                             <div className="space-y-1">
-                                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Confirmer mot de passe</label>
+                                <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Confirmer mot de passe</label>
                                 <input
                                     type="password"
                                     value={passwordData.confirm_password}
                                     onChange={(e) => setPasswordData({ ...passwordData, confirm_password: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                                     required
                                 />
                             </div>
@@ -384,15 +384,15 @@ export default function EnterpriseSettingsPage() {
             </form>
 
             {/* 3. NOTIFICATIONS */}
-            <div className="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
-                <div className="p-8 border-b border-slate-50 flex items-center justify-between">
+            <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
+                <div className="p-8 border-b border-slate-50 dark:border-slate-700 flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                         <div className="w-12 h-12 bg-cyan-50 text-cyan-600 rounded-xl flex items-center justify-center">
                             <Bell size={24} />
                         </div>
                         <div>
-                            <h2 className="text-lg font-black text-slate-900 leading-tight">Alertes IA & Recrutement</h2>
-                            <p className="text-sm font-medium text-slate-500">Recevez des mises à jour sur vos placements IA.</p>
+                            <h2 className="text-lg font-black text-slate-900 dark:text-white leading-tight">Alertes IA & Recrutement</h2>
+                            <p className="text-sm font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500">Recevez des mises à jour sur vos placements IA.</p>
                         </div>
                     </div>
                 </div>
@@ -400,14 +400,14 @@ export default function EnterpriseSettingsPage() {
                     {notifications.map((notif) => (
                         <div key={notif.id} className="flex items-center justify-between">
                             <div className="max-w-md">
-                                <div className="text-sm font-black text-slate-900 mb-1">{notif.label}</div>
-                                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{notif.desc}</p>
+                                <div className="text-sm font-black text-slate-900 dark:text-white mb-1">{notif.label}</div>
+                                <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 dark:text-slate-500 uppercase tracking-widest">{notif.desc}</p>
                             </div>
                             <button
                                 onClick={() => toggleNotification(notif.id)}
                                 className={`w-12 h-6 rounded-full transition-all relative ${notif.enabled ? 'bg-cyan-600' : 'bg-slate-200'}`}
                             >
-                                <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${notif.enabled ? 'right-1 shadow-sm' : 'left-1'}`}></div>
+                                <div className={`absolute top-1 w-4 h-4 bg-white dark:bg-slate-800 rounded-full transition-all ${notif.enabled ? 'right-1 shadow-sm' : 'left-1'}`}></div>
                             </button>
                         </div>
                     ))}

@@ -77,51 +77,51 @@ export default function CandidateSettingsPage() {
     return (
         <div className="max-w-4xl mx-auto space-y-10 pb-20">
             <div>
-                <h1 className="text-3xl font-black text-slate-900 tracking-tight">Paramètres Compte</h1>
-                <p className="text-slate-500 font-medium">Gérez votre sécurité et vos préférences de notifications.</p>
+                <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Paramètres Compte</h1>
+                <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium">Gérez votre sécurité et vos préférences de notifications.</p>
             </div>
 
             {/* Security Section */}
-            <form onSubmit={handlePasswordSubmit} className="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
-                <div className="p-8 border-b border-slate-50 flex items-center space-x-4">
+            <form onSubmit={handlePasswordSubmit} className="bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
+                <div className="p-8 border-b border-slate-50 dark:border-slate-700 flex items-center space-x-4">
                     <div className="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center">
                         <Shield size={24} />
                     </div>
                     <div>
-                        <h2 className="text-lg font-black text-slate-900 leading-tight">Sécurité</h2>
-                        <p className="text-sm font-medium text-slate-500">Mettez à jour votre mot de passe pour protéger votre compte.</p>
+                        <h2 className="text-lg font-black text-slate-900 dark:text-white leading-tight">Sécurité</h2>
+                        <p className="text-sm font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500">Mettez à jour votre mot de passe pour protéger votre compte.</p>
                     </div>
                 </div>
                 <div className="p-8 space-y-6">
                     <div className="space-y-4">
                         <div className="space-y-1">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Ancien mot de passe</label>
+                            <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Ancien mot de passe</label>
                             <input
                                 type="password"
                                 value={passwordData.old_password}
                                 onChange={(e) => setPasswordData({ ...passwordData, old_password: e.target.value })}
-                                className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                                 required
                             />
                         </div>
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-1">
-                                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nouveau mot de passe</label>
+                                <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Nouveau mot de passe</label>
                                 <input
                                     type="password"
                                     value={passwordData.new_password}
                                     onChange={(e) => setPasswordData({ ...passwordData, new_password: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                                     required
                                 />
                             </div>
                             <div className="space-y-1">
-                                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Confirmer mot de passe</label>
+                                <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1">Confirmer mot de passe</label>
                                 <input
                                     type="password"
                                     value={passwordData.confirm_password}
                                     onChange={(e) => setPasswordData({ ...passwordData, confirm_password: e.target.value })}
-                                    className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
+                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-none rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all"
                                     required
                                 />
                             </div>
@@ -152,28 +152,28 @@ export default function CandidateSettingsPage() {
             </form>
 
             {/* Notifications Section */}
-            <div className="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
-                <div className="p-8 border-b border-slate-50 flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+            <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
+                <div className="p-8 border-b border-slate-50 dark:border-slate-700 flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center">
                         <Bell size={24} />
                     </div>
                     <div>
-                        <h2 className="text-lg font-black text-slate-900 leading-tight">Préférences d'Alerte</h2>
-                        <p className="text-sm font-medium text-slate-500">Contrôlez comment vous souhaitez être informé.</p>
+                        <h2 className="text-lg font-black text-slate-900 dark:text-white leading-tight">Préférences d'Alerte</h2>
+                        <p className="text-sm font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500">Contrôlez comment vous souhaitez être informé.</p>
                     </div>
                 </div>
                 <div className="p-8 space-y-6">
                     {notifications.map((notif) => (
                         <div key={notif.id} className="flex items-center justify-between">
                             <div className="max-w-md">
-                                <div className="text-sm font-black text-slate-900 mb-1">{notif.label}</div>
-                                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{notif.desc}</p>
+                                <div className="text-sm font-black text-slate-900 dark:text-white mb-1">{notif.label}</div>
+                                <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 dark:text-slate-500 uppercase tracking-widest">{notif.desc}</p>
                             </div>
                             <button
                                 onClick={() => toggleNotification(notif.id)}
                                 className={`w-12 h-6 rounded-full transition-all relative ${notif.enabled ? 'bg-blue-600' : 'bg-slate-200'}`}
                             >
-                                <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${notif.enabled ? 'right-1 shadow-sm' : 'left-1'}`}></div>
+                                <div className={`absolute top-1 w-4 h-4 bg-white dark:bg-slate-800 rounded-full transition-all ${notif.enabled ? 'right-1 shadow-sm' : 'left-1'}`}></div>
                             </button>
                         </div>
                     ))}
