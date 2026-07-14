@@ -35,7 +35,7 @@ export default function RegisterPage() {
                 </div>
 
                 {/* Cards */}
-                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div className="grid md:grid-cols-2 gap-4 md:gap-8 mb-8">
                     {/* Candidat Card */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

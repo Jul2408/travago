@@ -186,7 +186,7 @@ export default function OnboardingTour({ role }: OnboardingTourProps) {
                             </div>
 
                             {/* Emoji */}
-                            <div className="text-6xl mb-6 text-center">{step.emoji}</div>
+                            <div className="text-4xl md:text-6xl mb-6 text-center">{step.emoji}</div>
 
                             {/* Brand badge */}
                             <div className="flex items-center gap-2 mb-4">

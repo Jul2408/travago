@@ -42,7 +42,7 @@ export function EmptyState({
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col items-center justify-center p-12 text-center bg-white dark:bg-slate-900/50 rounded-[3rem] border-2 border-dashed border-slate-200 dark:border-slate-800 w-full"
+            className="flex flex-col items-center justify-center p-5 md:p-12 text-center bg-white dark:bg-slate-900/50 rounded-[3rem] border-2 border-dashed border-slate-200 dark:border-slate-800 w-full"
         >
             <div className="w-32 h-32 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mb-8 shadow-inner relative">
                 <div className="absolute inset-0 bg-blue-500/5 dark:bg-blue-500/10 rounded-full animate-pulse-slow"></div>

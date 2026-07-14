@@ -43,8 +43,8 @@ export default function PlacementDetailPage() {
         }
     };
 
-    if (isLoading) return <div className="p-20 text-center text-slate-400 italic">Analyse des matches IA...</div>;
-    if (!placement) return <div className="p-20 text-center text-red-500 font-black">Placement introuvable.</div>;
+    if (isLoading) return <div className="p-8 md:p-20 text-center text-slate-400 italic">Analyse des matches IA...</div>;
+    if (!placement) return <div className="p-8 md:p-20 text-center text-red-500 font-black">Placement introuvable.</div>;
 
     return (
         <div className="space-y-10">
@@ -70,8 +70,8 @@ export default function PlacementDetailPage() {
             </div>
 
             {/* Summary Grid */}
-            <div className="grid md:grid-cols-3 gap-8">
-                <div className="md:col-span-2 bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm relative overflow-hidden">
+            <div className="grid md:grid-cols-3 gap-4 md:gap-8">
+                <div className="md:col-span-2 bg-white rounded-[2.5rem] p-4 md:p-10 border border-slate-100 shadow-sm relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-40 h-40 bg-blue-50/50 blur-3xl rounded-full -mt-20 -mr-20"></div>
                     <div className="relative z-10 space-y-8">
                         <div>
@@ -95,7 +95,7 @@ export default function PlacementDetailPage() {
                     </div>
                 </div>
 
-                <div className="bg-slate-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-2xl">
+                <div className="bg-slate-900 rounded-[2.5rem] p-4 md:p-10 text-white relative overflow-hidden shadow-2xl">
                     <div className="absolute bottom-0 right-0 w-32 h-32 bg-blue-600/20 blur-3xl rounded-full mb--16 mr--16"></div>
                     <Cpu size={40} className="text-blue-500 mb-8" />
                     <h3 className="text-2xl font-black italic mb-4 tracking-tight">Analyse Algorithmique en cours...</h3>
@@ -121,18 +121,18 @@ export default function PlacementDetailPage() {
                     </span>
                 </div>
 
-                <div className="grid xl:grid-cols-2 gap-8">
+                <div className="grid xl:grid-cols-2 gap-4 md:gap-8">
                     {placement.matches_detail?.length === 0 ? (
-                        <div className="col-span-full py-20 bg-slate-50 rounded-[3rem] border border-dashed border-slate-200 text-center">
+                        <div className="col-span-full py-10 md:py-20 bg-slate-50 rounded-[3rem] border border-dashed border-slate-200 text-center">
                             <p className="text-slate-400 font-black uppercase text-xs tracking-widest">Recherche des meilleurs talents en cours...</p>
                         </div>
                     ) : (
                         placement.matches_detail?.map((candidate: any, i: number) => (
-                            <div key={candidate.id} className="group bg-white rounded-[3rem] p-10 border border-slate-100 hover:border-blue-200 hover:shadow-2xl transition-all relative overflow-hidden">
+                            <div key={candidate.id} className="group bg-white rounded-[3rem] p-4 md:p-10 border border-slate-100 hover:border-blue-200 hover:shadow-2xl transition-all relative overflow-hidden">
                                 <div className="absolute top-8 right-8 w-16 h-16 bg-blue-50/50 rounded-full flex items-center justify-center text-blue-600 font-black italic">
                                     #{i + 1}
                                 </div>
-                                <div className="flex gap-8 items-start">
+                                <div className="flex gap-4 md:gap-8 items-start">
                                     <div className="w-24 h-24 bg-slate-50 rounded-[2rem] overflow-hidden border border-slate-100 relative shrink-0">
                                         {candidate.photo ? (
                                             <Image src={getImageUrl(candidate.photo)} alt="" fill className="object-cover" />
@@ -182,8 +182,8 @@ export default function PlacementDetailPage() {
             </div>
 
             {/* Guaranteed Banner */}
-            <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-[2.5rem] p-10 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-blue-200">
-                <div className="flex items-center gap-8">
+            <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-[2.5rem] p-4 md:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 shadow-2xl shadow-blue-200">
+                <div className="flex items-center gap-4 md:gap-8">
                     <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-[2rem] flex items-center justify-center">
                         <ShieldCheck size={40} className="text-blue-100" />
                     </div>
@@ -192,7 +192,7 @@ export default function PlacementDetailPage() {
                         <p className="text-blue-50/80 font-medium">Tous ces profils ont été vérifiés physiquement par nos équipes.</p>
                     </div>
                 </div>
-                <button className="px-10 py-5 bg-white text-blue-600 rounded-[1.5rem] font-black text-xs uppercase tracking-widest shadow-xl hover:scale-105 transition-all">
+                <button className="px-4 md:px-10 py-5 bg-white text-blue-600 rounded-[1.5rem] font-black text-xs uppercase tracking-widest shadow-xl hover:scale-105 transition-all">
                     Demander une interview assistée
                 </button>
             </div>

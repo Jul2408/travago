@@ -132,7 +132,7 @@ export default function OffersPage() {
                         ))}
                     </div>
                 ) : error ? (
-                    <div className="text-center py-10 sm:py-20 bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] border border-red-50 dark:border-red-900/20 shadow-sm">
+                    <div className="text-center py-6 md:py-10 sm:py-20 bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] border border-red-50 dark:border-red-900/20 shadow-sm">
                         <p className="text-red-500 dark:text-red-400 font-bold px-4">{error}</p>
                         <button onClick={() => window.location.reload()} className="text-blue-600 dark:text-blue-400 font-black text-xs uppercase underline mt-4">Réessayer</button>
                     </div>
@@ -145,7 +145,7 @@ export default function OffersPage() {
                         <p className="text-slate-500 dark:text-slate-400 font-medium max-w-sm mx-auto mb-10 leading-relaxed">
                             Publiez votre premier besoin en moins de 2 minutes et laissez notre IA trouver les meilleurs talents.
                         </p>
-                        <Link href="/dashboard/entreprise/offres/nouvelle" className="px-12 py-5 bg-blue-600 text-white rounded-[2rem] font-black text-xs uppercase tracking-widest hover:shadow-2xl transition-all shadow-lg shadow-blue-100 dark:shadow-none inline-block">
+                        <Link href="/dashboard/entreprise/offres/nouvelle" className="px-5 md:px-12 py-5 bg-blue-600 text-white rounded-[2rem] font-black text-xs uppercase tracking-widest hover:shadow-2xl transition-all shadow-lg shadow-blue-100 dark:shadow-none inline-block">
                             Créer ma première offre
                         </Link>
                     </div>
@@ -236,7 +236,7 @@ export default function OffersPage() {
             </div>
 
             {/* Performance Banner */}
-            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-10 shadow-2xl shadow-blue-200 dark:shadow-none">
+            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 sm:gap-10 shadow-2xl shadow-blue-200 dark:shadow-none">
                 <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left">
                     <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/10 backdrop-blur-md rounded-[1.5rem] flex items-center justify-center border border-white/20 shrink-0">
                         <TrendingUp size={32} className="text-blue-300 sm:w-10 sm:h-10" />

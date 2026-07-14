@@ -103,7 +103,7 @@ export default function JobDetailPage() {
         <div className="min-h-screen bg-slate-50 pb-20">
             {/* Header / Hero */}
             <div className="bg-white border-b border-slate-100">
-                <div className="max-w-5xl mx-auto px-6 py-10">
+                <div className="max-w-5xl mx-auto px-6 py-6 md:py-10">
                     <button
                         onClick={() => router.back()}
                         className="flex items-center text-slate-400 hover:text-blue-600 transition-colors font-bold text-xs uppercase tracking-widest mb-8"
@@ -111,7 +111,7 @@ export default function JobDetailPage() {
                         <ChevronLeft size={16} className="mr-1" /> Retour
                     </button>
 
-                    <div className="flex flex-col md:flex-row gap-8 items-start justify-between">
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start justify-between">
                         <div>
                             <div className="flex flex-wrap items-center gap-3 mb-4">
                                 <span className="px-4 py-1.5 bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-widest rounded-full">
@@ -124,7 +124,7 @@ export default function JobDetailPage() {
                                     </span>
                                 )}
                             </div>
-                            <h1 className="text-4xl md:text-5xl font-black text-slate-800 uppercase italic tracking-tighter mb-4">
+                            <h1 className="text-2xl md:text-5xl font-black text-slate-800 uppercase italic tracking-tighter mb-4">
                                 {job.title}
                             </h1>
                             <div className="flex flex-wrap items-center gap-6 text-sm font-bold text-slate-500 uppercase">
@@ -148,7 +148,7 @@ export default function JobDetailPage() {
                                 <button
                                     onClick={handleApply}
                                     disabled={isApplying || hasApplied}
-                                    className={`px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl flex items-center justify-center gap-3 
+                                    className={`px-4 md:px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl flex items-center justify-center gap-3 
                                         ${hasApplied
                                             ? 'bg-emerald-50 text-emerald-600 cursor-default'
                                             : 'bg-blue-600 text-white hover:bg-blue-700 shadow-blue-600/30'
@@ -168,7 +168,7 @@ export default function JobDetailPage() {
             </div>
 
             {/* Content */}
-            <div className="max-w-5xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="max-w-5xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
                 <div className="md:col-span-2 space-y-12">
                     <section>
                         <h2 className="text-2xl font-black text-slate-800 uppercase italic tracking-tight mb-6 flex items-center gap-3">

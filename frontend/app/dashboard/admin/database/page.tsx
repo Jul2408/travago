@@ -69,9 +69,10 @@ export default function AdminDatabasePage() {
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
                 <div className="lg:col-span-2 space-y-6">
                     <div className="bg-white rounded-[2rem] border border-blue-50 shadow-sm overflow-hidden">
+                        <div className="overflow-x-auto w-full -mx-0">
                         <table className="w-full text-left">
                             <thead className="bg-slate-50 border-b border-slate-100">
                                 <tr>
@@ -99,9 +100,10 @@ export default function AdminDatabasePage() {
                                 ))}
                             </tbody>
                         </table>
+                        </div>
                     </div>
 
-                    <div className="bg-slate-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 border border-white/5 shadow-2xl">
+                    <div className="bg-slate-900 rounded-[2.5rem] p-4 md:p-10 text-white relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 border border-white/5 shadow-2xl">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500 opacity-5 rounded-full blur-3xl -mr-20 -mt-20"></div>
                         <div>
                             <h3 className="text-2xl font-black mb-2 italic">Nettoyage de Printemps 🧹</h3>
@@ -109,7 +111,7 @@ export default function AdminDatabasePage() {
                         </div>
                         <button
                             onClick={() => toast.success("Optimisation de la base de données lancée en arrière-plan.")}
-                            className="px-10 py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-blue-500/20"
+                            className="px-4 md:px-10 py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-blue-500/20"
                         >
                             Lancer Optimisation
                         </button>

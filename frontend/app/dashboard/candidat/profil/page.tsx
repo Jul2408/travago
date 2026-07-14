@@ -243,11 +243,11 @@ export default function ProfilePage() {
             {/* AI Magic Parsing Banner */}
             {!isEditing && (
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[2.5rem] p-8 text-white shadow-2xl shadow-blue-500/20 dark:shadow-blue-900/20 relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:scale-110 transition-transform -rotate-12 translate-x-10 -translate-y-5">
+                    <div className="absolute top-0 right-0 p-4 md:p-10 opacity-10 group-hover:scale-110 transition-transform -rotate-12 translate-x-10 -translate-y-5">
                         <Zap size={160} fill="white" />
                     </div>
 
-                    <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
                         <div className="flex-1 text-center md:text-left">
                             <h2 className="text-2xl font-black mb-2 uppercase tracking-tight flex items-center justify-center md:justify-start">
                                 <Zap className="mr-3 fill-yellow-400 text-yellow-400" size={24} />
@@ -262,7 +262,7 @@ export default function ProfilePage() {
                             <button
                                 onClick={() => cvInputRef.current?.click()}
                                 disabled={isParsing}
-                                className="w-full bg-white dark:bg-slate-100 text-blue-600 px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl hover:bg-blue-50 transition-all flex items-center justify-center group/btn active:scale-95 disabled:opacity-50"
+                                className="w-full bg-white dark:bg-slate-100 text-blue-600 px-4 md:px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl hover:bg-blue-50 transition-all flex items-center justify-center group/btn active:scale-95 disabled:opacity-50"
                             >
                                 {isParsing ? (
                                     <>
@@ -289,13 +289,13 @@ export default function ProfilePage() {
             )}
 
             {/* Profile Header */}
-            <div className="bg-white dark:bg-slate-950 rounded-[3rem] p-10 shadow-xl shadow-blue-500/5 dark:shadow-none border border-blue-50 dark:border-slate-800 relative overflow-hidden">
+            <div className="bg-white dark:bg-slate-950 rounded-[3rem] p-4 md:p-10 shadow-xl shadow-blue-500/5 dark:shadow-none border border-blue-50 dark:border-slate-800 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50/50 dark:bg-blue-900/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl -z-10"></div>
 
-                <div className="flex flex-col md:flex-row items-center gap-10">
+                <div className="flex flex-col md:flex-row items-center gap-5 md:gap-10">
                     {/* Avatar Section */}
                     <div className="relative group">
-                        <div className="w-40 h-40 bg-gradient-to-br from-blue-600 to-blue-400 rounded-[3rem] flex items-center justify-center text-5xl font-black text-white shadow-2xl relative overflow-hidden border-4 border-white dark:border-slate-900">
+                        <div className="w-40 h-40 bg-gradient-to-br from-blue-600 to-blue-400 rounded-[3rem] flex items-center justify-center text-3xl md:text-5xl font-black text-white shadow-2xl relative overflow-hidden border-4 border-white dark:border-slate-900">
                             {profile?.photo ? (
                                 <Image
                                     src={getImageUrl(profile.photo) || ''}
@@ -330,7 +330,7 @@ export default function ProfilePage() {
                         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                             <div>
                                 <div className="flex items-center justify-center md:justify-start space-x-3 mb-2">
-                                    <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+                                    <h1 className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
                                         {profile?.first_name} {profile?.last_name}
                                     </h1>
                                     {profile?.is_verified && (
@@ -451,7 +451,7 @@ export default function ProfilePage() {
                 </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-4 md:gap-8">
                 {/* Left Column: Summary & Skills */}
                 <div className="lg:col-span-1 space-y-8">
                     {/* Bio / Summary */}
@@ -531,7 +531,7 @@ export default function ProfilePage() {
 
                 {/* Right Column: Experience */}
                 <div className="lg:col-span-2 space-y-8">
-                    <div className="bg-white dark:bg-slate-950 rounded-[2.5rem] p-10 shadow-sm border border-slate-100 dark:border-slate-800">
+                    <div className="bg-white dark:bg-slate-950 rounded-[2.5rem] p-4 md:p-10 shadow-sm border border-slate-100 dark:border-slate-800">
                         <div className="flex items-center justify-between mb-10">
                             <div>
                                 <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-[0.2em] mb-1">Expérience & Parcours</h3>

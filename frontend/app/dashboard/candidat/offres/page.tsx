@@ -99,7 +99,7 @@ export default function CandidateOffresPage() {
                     <div className="space-y-6">
                         {[1, 2, 3].map((i) => (
                             <div key={i} className="bg-white dark:bg-slate-950 rounded-[2.5rem] p-8 border border-blue-50 dark:border-slate-800 shadow-sm">
-                                <div className="flex flex-col lg:flex-row lg:items-center gap-8">
+                                <div className="flex flex-col lg:flex-row lg:items-center gap-4 md:gap-8">
                                     <div className="flex items-start space-x-6 lg:w-1/3">
                                         <Skeleton className="w-20 h-20 rounded-[2rem] shrink-0" />
                                         <div className="flex-1 space-y-3">
@@ -120,7 +120,7 @@ export default function CandidateOffresPage() {
                         ))}
                     </div>
                 ) : filteredOffers.length === 0 ? (
-                    <div className="text-center py-20 bg-white dark:bg-slate-950 rounded-[3rem] border-2 border-dashed border-blue-100 dark:border-slate-800 transition-colors">
+                    <div className="text-center py-10 md:py-20 bg-white dark:bg-slate-950 rounded-[3rem] border-2 border-dashed border-blue-100 dark:border-slate-800 transition-colors">
                         <div className="w-20 h-20 bg-blue-50 dark:bg-blue-900/20 rounded-3xl flex items-center justify-center text-blue-200 dark:text-blue-800 mx-auto mb-6">
                             <Briefcase size={40} />
                         </div>
@@ -132,7 +132,7 @@ export default function CandidateOffresPage() {
                 ) : (
                     filteredOffers.map((offer) => (
                         <div key={offer.id} className="group bg-white dark:bg-slate-950 rounded-[2.5rem] p-8 border border-blue-50 dark:border-slate-800 shadow-sm hover:shadow-2xl dark:hover:shadow-blue-900/10 hover:border-blue-100 dark:hover:border-blue-900/30 transition-all relative overflow-hidden">
-                            <div className="flex flex-col lg:flex-row lg:items-center gap-8">
+                            <div className="flex flex-col lg:flex-row lg:items-center gap-4 md:gap-8">
                                 <div className="flex items-start space-x-6 lg:w-1/3">
                                     <div className="w-20 h-20 bg-blue-50 dark:bg-blue-900/20 rounded-[2rem] flex items-center justify-center text-blue-400 dark:text-blue-500 border border-blue-100 dark:border-blue-900/30 shrink-0 relative overflow-hidden shadow-sm">
                                         {offer.company_detail?.logo ? (

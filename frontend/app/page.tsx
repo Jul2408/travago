@@ -70,7 +70,7 @@ export default async function Home() {
         <FeatureSection />
 
         {/* 3. LATEST JOB OFFERS (Server Fetched) */}
-        <section className="py-32 bg-white dark:bg-slate-950 px-6 lg:px-12 relative">
+        <section className="py-12 md:py-32 bg-white dark:bg-slate-950 px-6 lg:px-12 relative">
           {/* Background decoration */}
           <div className="absolute top-0 right-0 w-full h-1/2 bg-slate-50 dark:bg-slate-900/50 rounded-bl-[100px] -z-10"></div>
           
@@ -80,7 +80,7 @@ export default async function Home() {
                 <div className="inline-flex items-center px-4 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-full text-[10px] font-black uppercase tracking-widest mb-4 border border-blue-100 dark:border-blue-900/30">
                   Le marché caché
                 </div>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic leading-[0.9]">
+                <h2 className="text-2xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic leading-[0.9]">
                   Nos Dernières<br />Opportunités.
                 </h2>
               </div>
@@ -89,7 +89,7 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               {offers.length > 0 ? (
                 offers.map((offer: any) => (
                   <div key={offer.id} className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none hover:-translate-y-2 transition-transform flex flex-col group">
@@ -138,7 +138,7 @@ export default async function Home() {
                   </div>
                 ))
               ) : (
-                <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-20 bg-white dark:bg-slate-900 rounded-[3rem] border border-dashed border-slate-200 dark:border-slate-800">
+                <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-10 md:py-20 bg-white dark:bg-slate-900 rounded-[3rem] border border-dashed border-slate-200 dark:border-slate-800">
                   <div className="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Search className="text-slate-400" size={32} />
                   </div>
@@ -167,7 +167,7 @@ export default async function Home() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[40vw] max-w-[500px] h-[200px] bg-blue-600/10 blur-[100px] rounded-full"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-12 lg:gap-8 mb-16">
             
             {/* Brand Column */}
             <div className="lg:col-span-2">

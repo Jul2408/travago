@@ -119,8 +119,8 @@ export default function CandidateDetailPage() {
         }
     };
 
-    if (isLoading) return <div className="p-10 text-center font-black animate-pulse text-slate-400">CHARGEMENT DU PROFIL TALENT...</div>;
-    if (!candidate) return <div className="p-10 text-center font-black text-red-500">CANDIDAT NON TROUVÉ.</div>;
+    if (isLoading) return <div className="p-4 md:p-10 text-center font-black animate-pulse text-slate-400">CHARGEMENT DU PROFIL TALENT...</div>;
+    if (!candidate) return <div className="p-4 md:p-10 text-center font-black text-red-500">CANDIDAT NON TROUVÉ.</div>;
 
     const getAppStatusBadge = (status: string) => {
         switch (status) {
@@ -144,7 +144,7 @@ export default function CandidateDetailPage() {
                 {/* Header Profile */}
                 <div className="bg-slate-900 h-48 relative">
                     <div className="absolute -bottom-16 left-12 w-32 h-32 rounded-[2.5rem] bg-gradient-to-br from-blue-500 to-indigo-600 p-1 shadow-2xl">
-                        <div className="w-full h-full rounded-[2.2rem] bg-white flex items-center justify-center text-4xl font-black text-blue-600 relative overflow-hidden">
+                        <div className="w-full h-full rounded-[2.2rem] bg-white flex items-center justify-center text-2xl md:text-4xl font-black text-blue-600 relative overflow-hidden">
                             {candidate.user_detail.photo ? (
                                 <Image
                                     src={getImageUrl(candidate.user_detail.photo)}
@@ -167,11 +167,11 @@ export default function CandidateDetailPage() {
                     </div>
                 </div>
 
-                <div className="mt-20 px-12 pb-12">
-                    <div className="grid lg:grid-cols-3 gap-12">
+                <div className="mt-20 px-5 md:px-12 pb-12">
+                    <div className="grid lg:grid-cols-3 gap-6 md:gap-12">
                         <div className="lg:col-span-2 space-y-12">
                             <div>
-                                <h1 className="text-4xl font-black text-slate-800 tracking-tighter mb-2 flex items-center gap-3">
+                                <h1 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tighter mb-2 flex items-center gap-3">
                                     {candidate.user_detail.first_name} {candidate.user_detail.last_name}
                                     {candidate.is_verified && <CheckCircle className="text-blue-500" size={28} />}
                                 </h1>
@@ -210,7 +210,7 @@ export default function CandidateDetailPage() {
                                 </div>
                             </div>
 
-                            <div className="grid lg:grid-cols-2 gap-8">
+                            <div className="grid lg:grid-cols-2 gap-4 md:gap-8">
                                 <div className="space-y-6">
                                     <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight flex items-center">
                                         <Briefcase className="mr-2 text-blue-600" size={20} /> Candidatures

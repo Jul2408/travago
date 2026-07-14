@@ -42,7 +42,7 @@ export default function BroadcastPage() {
                     <Megaphone size={32} />
                 </div>
                 <div>
-                    <h1 className="text-4xl font-black text-slate-800 tracking-tighter uppercase italic">Diffusion Communautaire</h1>
+                    <h1 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tighter uppercase italic">Diffusion Communautaire</h1>
                     <p className="text-slate-500 font-medium tracking-tight italic">Envoyez une annonce importante à tous les membres de Travago.</p>
                 </div>
             </div>
@@ -54,9 +54,9 @@ export default function BroadcastPage() {
                 </div>
             )}
 
-            <div className="grid lg:grid-cols-5 gap-8">
+            <div className="grid lg:grid-cols-5 gap-4 md:gap-8">
                 <div className="lg:col-span-3">
-                    <form onSubmit={handleSend} className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-xl shadow-slate-200/50 space-y-8">
+                    <form onSubmit={handleSend} className="bg-white rounded-[3rem] p-4 md:p-10 border border-slate-100 shadow-xl shadow-slate-200/50 space-y-8">
                         <div className="space-y-4">
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Titre de l'annonce</label>
@@ -96,7 +96,7 @@ export default function BroadcastPage() {
                         <button
                             type="submit"
                             disabled={isSending}
-                            className="w-full px-12 py-5 bg-blue-600 text-white rounded-[2rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-slate-900 transition-all shadow-2xl shadow-blue-200 disabled:opacity-50"
+                            className="w-full px-5 md:px-12 py-5 bg-blue-600 text-white rounded-[2rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-slate-900 transition-all shadow-2xl shadow-blue-200 disabled:opacity-50"
                         >
                             {isSending ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />}
                             Diffuser à la communauté

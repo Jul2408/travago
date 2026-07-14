@@ -62,12 +62,12 @@ export default function StatisticsPage() {
                         </div>
                     ))}
                 </div>
-                <div className="grid lg:grid-cols-2 gap-8">
-                    <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm">
+                <div className="grid lg:grid-cols-2 gap-4 md:gap-8">
+                    <div className="bg-white rounded-[2.5rem] p-4 md:p-10 border border-slate-100 shadow-sm">
                         <Skeleton className="h-6 w-1/3 mb-8" />
                         <Skeleton className="h-64 w-full rounded-[2rem]" />
                     </div>
-                    <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm">
+                    <div className="bg-white rounded-[2.5rem] p-4 md:p-10 border border-slate-100 shadow-sm">
                         <Skeleton className="h-6 w-1/2 mb-8 mx-auto" />
                         <Skeleton className="w-48 h-48 rounded-full mx-auto" />
                     </div>
@@ -123,15 +123,15 @@ export default function StatisticsPage() {
                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${stat.color}`}>
                             {stat.icon}
                         </div>
-                        <div className="text-4xl font-black text-slate-900 mb-1">{stat.value}</div>
+                        <div className="text-2xl md:text-4xl font-black text-slate-900 mb-1">{stat.value}</div>
                         <div className="text-[10px] font-black uppercase tracking-widest text-slate-400">{stat.label}</div>
                     </div>
                 ))}
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-2 gap-4 md:gap-8">
                 {/* Real Weekly Bar Chart */}
-                <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm">
+                <div className="bg-white rounded-[2.5rem] p-4 md:p-10 border border-slate-100 shadow-sm">
                     <div className="flex items-center justify-between mb-10">
                         <h3 className="text-xl font-black text-slate-900 tracking-tight">Candidatures (7 derniers jours)</h3>
                         <span className="text-[10px] font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-xl uppercase tracking-widest">Temps réel</span>
@@ -154,7 +154,7 @@ export default function StatisticsPage() {
                 </div>
 
                 {/* Real Average AI Match Score */}
-                <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm text-center">
+                <div className="bg-white rounded-[2.5rem] p-4 md:p-10 border border-slate-100 shadow-sm text-center">
                     <h3 className="text-xl font-black text-slate-900 tracking-tight mb-2">Score Moyen des Candidats</h3>
                     <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-8">
                         Basé sur {stats?.total_applications ?? 0} candidature(s)
@@ -178,7 +178,7 @@ export default function StatisticsPage() {
                                 />
                             </svg>
                             <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                <span className="text-5xl font-black text-slate-900">{avgMatchScore}</span>
+                                <span className="text-3xl md:text-5xl font-black text-slate-900">{avgMatchScore}</span>
                                 <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">Score IA Moyen</span>
                             </div>
                         </div>
@@ -199,7 +199,7 @@ export default function StatisticsPage() {
 
             {/* Top Performing Offer */}
             {topOffer ? (
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-[2.5rem] p-10 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-blue-200">
+                <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-[2.5rem] p-4 md:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 shadow-2xl shadow-blue-200">
                     <div className="flex items-center gap-6 text-center md:text-left flex-wrap">
                         <div className="w-16 h-16 bg-white/10 border border-white/20 rounded-[1.5rem] flex items-center justify-center shrink-0">
                             <Award size={32} className="text-yellow-300" />
@@ -218,7 +218,7 @@ export default function StatisticsPage() {
                     </Link>
                 </div>
             ) : (
-                <div className="bg-gradient-to-r from-slate-100 to-slate-50 rounded-[2.5rem] p-10 text-center border border-slate-100">
+                <div className="bg-gradient-to-r from-slate-100 to-slate-50 rounded-[2.5rem] p-4 md:p-10 text-center border border-slate-100">
                     <Briefcase size={40} className="mx-auto text-slate-300 mb-4" />
                     <h3 className="font-black text-slate-900 text-xl mb-2">Pas encore de données</h3>
                     <p className="text-slate-500 font-medium mb-6">Publiez une offre pour voir vos statistiques de performance apparaître ici.</p>
@@ -230,7 +230,7 @@ export default function StatisticsPage() {
 
             {/* Recent Applications */}
             {recentApps.length > 0 && (
-                <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm">
+                <div className="bg-white rounded-[2.5rem] p-4 md:p-10 border border-slate-100 shadow-sm">
                     <h3 className="text-xl font-black text-slate-900 tracking-tight mb-6">Dernières candidatures reçues</h3>
                     <div className="space-y-4">
                         {recentApps.map((app: any) => (

@@ -109,12 +109,12 @@ export default function PipelinePage() {
                             initial={{ scale: 0.5, y: 50, opacity: 0 }}
                             animate={{ scale: 1, y: 0, opacity: 1 }}
                             exit={{ scale: 1.5, opacity: 0 }}
-                            className="bg-white p-12 rounded-[4rem] shadow-2xl flex flex-col items-center text-center relative z-20 border border-blue-100"
+                            className="bg-white p-5 md:p-12 rounded-[4rem] shadow-2xl flex flex-col items-center text-center relative z-20 border border-blue-100"
                         >
                             <div className="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center text-white mb-6 shadow-xl shadow-green-200">
                                 <CheckCircle2 size={48} />
                             </div>
-                            <h2 className="text-4xl font-black text-slate-900 mb-2 uppercase tracking-tight italic">Contrat Signé ! 🎉</h2>
+                            <h2 className="text-2xl md:text-4xl font-black text-slate-900 mb-2 uppercase tracking-tight italic">Contrat Signé ! 🎉</h2>
                             <p className="text-slate-500 font-bold max-w-xs">Félicitations ! Vous venez de clore un placement avec succès.</p>
                         </motion.div>
                     </motion.div>
@@ -224,7 +224,7 @@ export default function PipelinePage() {
                                     </AnimatePresence>
 
                                     {stageApps.length === 0 && (
-                                        <div className="py-10 text-center border-2 border-dashed border-slate-100 rounded-3xl group-hover/column:border-blue-100 transition-colors">
+                                        <div className="py-6 md:py-10 text-center border-2 border-dashed border-slate-100 rounded-3xl group-hover/column:border-blue-100 transition-colors">
                                             <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Vide</p>
                                         </div>
                                     )}

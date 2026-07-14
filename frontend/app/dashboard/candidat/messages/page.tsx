@@ -163,7 +163,7 @@ export default function MessagesPage() {
 
                 <div className="flex-1 overflow-y-auto">
                     {filteredConversations.length === 0 ? (
-                        <div className="p-10 text-center">
+                        <div className="p-4 md:p-10 text-center">
                             <MessageSquare size={40} className="mx-auto text-slate-200 dark:text-slate-700 mb-4" />
                             <p className="text-slate-400 dark:text-slate-500 text-sm font-medium">
                                 {searchQuery ? 'Aucune conversation trouvée.' : 'Aucune conversation encore.'}
@@ -228,7 +228,7 @@ export default function MessagesPage() {
             `}>
                 {!selectedConversation ? (
                     /* Empty state — desktop only */
-                    <div className="flex-1 hidden md:flex flex-col items-center justify-center text-center p-10 opacity-40">
+                    <div className="flex-1 hidden md:flex flex-col items-center justify-center text-center p-4 md:p-10 opacity-40">
                         <div className="w-24 h-24 bg-blue-50 dark:bg-blue-900/20 rounded-[2rem] flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6">
                             <MessageSquare size={40} />
                         </div>

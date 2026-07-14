@@ -61,11 +61,11 @@ export default function PublicCompanyProfile() {
 
             {/* Profile Content */}
             <div className="max-w-7xl mx-auto px-6 py-12">
-                <div className="grid lg:grid-cols-12 gap-12">
+                <div className="grid lg:grid-cols-12 gap-6 md:gap-12">
 
                     {/* Left: Identity Card */}
                     <div className="lg:col-span-4 space-y-8">
-                        <div className="p-10 bg-slate-50 rounded-[3rem] border border-slate-100 space-y-8 sticky top-12 shadow-sm">
+                        <div className="p-4 md:p-10 bg-slate-50 rounded-[3rem] border border-slate-100 space-y-8 sticky top-12 shadow-sm">
                             <div className="relative w-32 h-32 mx-auto">
                                 <div className="w-full h-full bg-white rounded-[2.5rem] shadow-xl border border-slate-100 flex items-center justify-center overflow-hidden">
                                     {company.logo ? (
@@ -147,7 +147,7 @@ export default function PublicCompanyProfile() {
                         </div>
 
                         {/* Company Stats Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                             <div className="p-8 bg-blue-50 rounded-[3rem] border border-blue-100 flex items-center gap-6">
                                 <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-blue-600">
                                     <Briefcase size={32} />
@@ -206,17 +206,17 @@ export default function PublicCompanyProfile() {
 
             {/* CTA Footer */}
             <div className="max-w-7xl mx-auto px-6 pb-20">
-                <div className="bg-slate-900 rounded-[4rem] p-16 text-center space-y-8 relative overflow-hidden shadow-2xl shadow-slate-200">
+                <div className="bg-slate-900 rounded-[4rem] p-6 md:p-16 text-center space-y-8 relative overflow-hidden shadow-2xl shadow-slate-200">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
-                    <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter italic">Rejoignez l'aventure {company.name}</h2>
+                    <h2 className="text-2xl md:text-5xl font-black text-white tracking-tighter italic">Rejoignez l'aventure {company.name}</h2>
                     <p className="max-w-xl mx-auto text-slate-400 font-bold text-lg leading-relaxed">
                         Prêt à faire passer votre carrière au niveau supérieur ? Postulez à nos offres exclusives sur Travago.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
-                        <Link href="/dashboard/candidat/offres" className="px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white hover:text-slate-900 transition-all">
+                        <Link href="/dashboard/candidat/offres" className="px-4 md:px-10 py-5 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white hover:text-slate-900 transition-all">
                             Voir toutes les offres
                         </Link>
-                        <Link href="/register/candidate" className="px-10 py-5 bg-white/5 text-white border border-white/10 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
+                        <Link href="/register/candidate" className="px-4 md:px-10 py-5 bg-white/5 text-white border border-white/10 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
                             Créer mon profil candidat
                         </Link>
                     </div>

@@ -112,7 +112,7 @@ export default function PublicJobsPage() {
             <header className="bg-white border-b border-slate-100 pt-32 pb-16">
                 <div className="max-w-7xl mx-auto px-6 lg:px-12">
                     <div className="text-center max-w-3xl mx-auto mb-12">
-                        <h1 className="text-5xl font-black text-slate-900 tracking-tighter italic mb-6">
+                        <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter italic mb-6">
                             Trouvez votre futur <br />
                             <span className="text-blue-600">dans l'excellence.</span>
                         </h1>
@@ -143,15 +143,15 @@ export default function PublicJobsPage() {
                                 onChange={(e) => setFilters({ ...filters, location: e.target.value })}
                             />
                         </div>
-                        <button className="px-10 py-5 bg-blue-600 text-white rounded-[2rem] font-black text-sm uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-200">
+                        <button className="px-4 md:px-10 py-5 bg-blue-600 text-white rounded-[2rem] font-black text-sm uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-200">
                             Rechercher
                         </button>
                     </div>
                 </div>
             </header>
 
-            <main className="max-w-7xl mx-auto px-6 lg:px-12 py-20">
-                <div className="grid lg:grid-cols-4 gap-12">
+            <main className="max-w-7xl mx-auto px-6 lg:px-12 py-10 md:py-20">
+                <div className="grid lg:grid-cols-4 gap-6 md:gap-12">
                     {/* Filters Sidebar */}
                     <aside className="lg:col-span-1 space-y-10">
                         <div>
@@ -209,7 +209,7 @@ export default function PublicJobsPage() {
                                 <div key={i} className="h-44 bg-white rounded-[2.5rem] animate-pulse border border-slate-100"></div>
                             ))
                         ) : jobs.length === 0 ? (
-                            <div className="text-center py-32 bg-white rounded-[2.5rem] border border-blue-50">
+                            <div className="text-center py-12 md:py-32 bg-white rounded-[2.5rem] border border-blue-50">
                                 <p className="text-slate-400 font-medium italic">Aucune offre ne correspond à votre recherche.</p>
                             </div>
                         ) : (
@@ -222,7 +222,7 @@ export default function PublicJobsPage() {
                                         transition={{ delay: Math.min(index * 0.05, 0.5) }}
                                         className="group bg-white p-8 rounded-[3rem] border border-slate-100 hover:border-blue-500/20 hover:shadow-2xl hover:shadow-blue-900/5 transition-all relative overflow-hidden"
                                     >
-                                        <div className="flex flex-col md:flex-row gap-10 items-start md:items-center relative z-10">
+                                        <div className="flex flex-col md:flex-row gap-5 md:gap-10 items-start md:items-center relative z-10">
                                             {/* Company Logo avec blurDataURL pour Core Web Vitals */}
                                             <div className="w-24 h-24 bg-white rounded-[2rem] flex items-center justify-center p-0 shadow-lg shadow-blue-900/5 border border-slate-50 overflow-hidden relative group-hover:scale-105 transition-transform duration-500 shrink-0">
                                                 {job.company_detail?.logo ? (
@@ -299,7 +299,7 @@ export default function PublicJobsPage() {
                                                         job_title: job.title,
                                                         company: job.company_detail?.name
                                                     })}
-                                                    className="flex-1 md:flex-none px-10 py-5 bg-slate-900 text-white rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.2em] flex items-center justify-center hover:bg-blue-600 transition-all shadow-xl shadow-slate-900/10 active:scale-95 group/btn"
+                                                    className="flex-1 md:flex-none px-4 md:px-10 py-5 bg-slate-900 text-white rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.2em] flex items-center justify-center hover:bg-blue-600 transition-all shadow-xl shadow-slate-900/10 active:scale-95 group/btn"
                                                 >
                                                     S'informer <ArrowRight size={16} className="ml-3 group-hover/btn:translate-x-2 transition-transform" />
                                                 </Link>

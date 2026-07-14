@@ -122,7 +122,7 @@ export default function EnterpriseProfilePage() {
                 {/* Logo & Basic Info */}
                 <div className="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
                     <div className="p-8 border-b border-slate-50">
-                        <div className="flex flex-col md:flex-row items-center gap-8">
+                        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
                             <div className="relative group">
                                 <div className="w-32 h-32 bg-blue-50 rounded-[2.5rem] border-4 border-white shadow-lg overflow-hidden flex items-center justify-center relative">
                                     {logoPreview ? (
@@ -278,7 +278,7 @@ export default function EnterpriseProfilePage() {
                         <button
                             type="submit"
                             disabled={saving}
-                            className={`flex items-center space-x-2 px-10 py-5 rounded-3xl font-black text-xs uppercase tracking-widest transition-all ${success
+                            className={`flex items-center space-x-2 px-4 md:px-10 py-5 rounded-3xl font-black text-xs uppercase tracking-widest transition-all ${success
                                 ? 'bg-green-600 text-white shadow-xl shadow-green-100'
                                 : 'bg-blue-600 text-white hover:bg-blue-700 shadow-xl shadow-blue-100'
                                 } disabled:opacity-50`}

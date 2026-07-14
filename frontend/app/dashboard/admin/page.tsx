@@ -128,7 +128,7 @@ export default function AdminDashboardPage() {
     return (
         <div className="space-y-8 pb-10">
             {/* Header Section */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 bg-slate-50 -mx-8 -mt-8 p-10 border-b border-slate-100">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 bg-slate-50 -mx-8 -mt-8 p-4 md:p-10 border-b border-slate-100">
                 <div>
                     <div className="flex items-center gap-3 mb-2">
                         <span className="px-3 py-1 bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest rounded-full">Admin Core V2</span>
@@ -137,7 +137,7 @@ export default function AdminDashboardPage() {
                             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Connecté à la Production</span>
                         </div>
                     </div>
-                    <h1 className="text-4xl font-black text-slate-800 tracking-tight italic uppercase">Tableau de Bord Supervision</h1>
+                    <h1 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tight italic uppercase">Tableau de Bord Supervision</h1>
                     <p className="text-slate-500 font-medium">Pilotage centralisé des flux, de la croissance et de la validation des talents.</p>
                 </div>
                 <div className="flex gap-3">
@@ -178,12 +178,12 @@ export default function AdminDashboardPage() {
                 ))}
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-4 md:gap-8">
                 {/* Main Trends & Activity */}
                 <div className="lg:col-span-2 space-y-8">
 
                     {/* Charts Section */}
-                    <div className="bg-white rounded-[2.5rem] p-10 border border-blue-50 shadow-sm relative overflow-hidden">
+                    <div className="bg-white rounded-[2.5rem] p-4 md:p-10 border border-blue-50 shadow-sm relative overflow-hidden">
                         <div className="flex items-center justify-between mb-10">
                             <div>
                                 <h3 className="text-xl font-black text-slate-800">Croissance Inscriptions</h3>
@@ -220,7 +220,7 @@ export default function AdminDashboardPage() {
                     </div>
 
                     {/* Activity Log */}
-                    <div className="bg-white rounded-[2.5rem] p-10 border border-blue-50 shadow-sm relative overflow-hidden">
+                    <div className="bg-white rounded-[2.5rem] p-4 md:p-10 border border-blue-50 shadow-sm relative overflow-hidden">
                         <div className="flex items-center justify-between mb-8">
                             <h3 className="text-xl font-black text-slate-800 flex items-center">
                                 <History className="mr-3 text-blue-600" /> Journal Système
@@ -234,7 +234,7 @@ export default function AdminDashboardPage() {
                                     <div key={i} className="h-16 bg-slate-50 animate-pulse rounded-2xl"></div>
                                 ))
                             ) : !data?.recent_activity?.length ? (
-                                <p className="text-center py-10 text-slate-400 font-bold uppercase text-xs tracking-widest">Aucune activité</p>
+                                <p className="text-center py-6 md:py-10 text-slate-400 font-bold uppercase text-xs tracking-widest">Aucune activité</p>
                             ) : (
                                 data.recent_activity.map((item) => (
                                     <div key={item.id} className="flex items-center gap-4 p-4 hover:bg-slate-50 rounded-2xl transition-colors border border-transparent hover:border-slate-100 group">

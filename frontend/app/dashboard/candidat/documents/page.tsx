@@ -124,7 +124,7 @@ export default function CandidateDocumentsPage() {
             </div>
 
             {/* Verification Status Banner */}
-            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[2.5rem] p-8 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-blue-200 dark:shadow-none transition-colors font-sans">
+            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[2.5rem] p-8 text-white flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 shadow-2xl shadow-blue-200 dark:shadow-none transition-colors font-sans">
                 <div className="flex items-center space-x-6 text-left">
                     <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20">
                         <Loader2 size={32} className="text-blue-300 animate-pulse" />
@@ -147,11 +147,11 @@ export default function CandidateDocumentsPage() {
 
             {/* Documents List */}
             {isLoading ? (
-                <div className="flex items-center justify-center py-20">
+                <div className="flex items-center justify-center py-10 md:py-20">
                     <Loader2 size={40} className="text-blue-600 animate-spin" />
                 </div>
             ) : error ? (
-                <div className="text-center py-20 bg-red-50 dark:bg-red-900/10 rounded-[2.5rem] border border-red-100 dark:border-red-900/20">
+                <div className="text-center py-10 md:py-20 bg-red-50 dark:bg-red-900/10 rounded-[2.5rem] border border-red-100 dark:border-red-900/20">
                     <AlertTriangle className="mx-auto text-red-500 mb-4" size={40} />
                     <p className="text-red-700 dark:text-red-400 font-bold uppercase tracking-widest text-xs">{error}</p>
                     <button
@@ -162,7 +162,7 @@ export default function CandidateDocumentsPage() {
                     </button>
                 </div>
             ) : (
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 gap-4 md:gap-8">
                     {documents.map((doc) => (
                         <div key={doc.document_type} className="bg-white dark:bg-slate-950 rounded-[2.5rem] p-8 border border-blue-50 dark:border-slate-800 shadow-sm hover:shadow-xl dark:hover:shadow-blue-900/10 transition-all group">
                             <div className="flex items-start justify-between mb-6">

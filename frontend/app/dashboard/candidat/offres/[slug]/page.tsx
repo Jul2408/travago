@@ -102,7 +102,7 @@ export default function JobDetailPage() {
 
     if (!offer) {
         return (
-            <div className="text-center py-20">
+            <div className="text-center py-10 md:py-20">
                 <h2 className="text-2xl font-black text-slate-900 mb-4">Offre introuvable</h2>
                 <button onClick={() => router.back()} className="text-blue-600 font-bold hover:underline">
                     Retourner aux opportunités
@@ -138,7 +138,7 @@ export default function JobDetailPage() {
             <div className="bg-white rounded-[3.5rem] p-8 md:p-12 shadow-xl shadow-blue-500/5 border border-blue-50 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-blue-50/50 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 -z-10"></div>
 
-                <div className="flex flex-col md:flex-row gap-10 items-start md:items-center">
+                <div className="flex flex-col md:flex-row gap-5 md:gap-10 items-start md:items-center">
                     {/* Logo */}
                     <div className="w-24 h-24 md:w-32 md:h-32 bg-slate-50 rounded-[2.5rem] flex items-center justify-center border-2 border-white shadow-xl relative overflow-hidden shrink-0">
                         {offer.company_detail.logo ? (
@@ -160,7 +160,7 @@ export default function JobDetailPage() {
                             <span className="w-1.5 h-1.5 rounded-full bg-slate-200"></span>
                             <span className="text-slate-400 font-bold text-sm uppercase tracking-widest">{offer.company_detail.sector}</span>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-black text-slate-900 leading-none mb-6 tracking-tighter uppercase whitespace-normal break-words">{offer.title}</h1>
+                        <h1 className="text-2xl md:text-5xl font-black text-slate-900 leading-none mb-6 tracking-tighter uppercase whitespace-normal break-words">{offer.title}</h1>
 
                         <div className="flex flex-wrap gap-6 text-[11px] font-black text-slate-500 uppercase tracking-[0.1em]">
                             <div className="flex items-center bg-slate-50 px-4 py-2 rounded-xl border border-slate-100 italic">
@@ -193,7 +193,7 @@ export default function JobDetailPage() {
                             <button
                                 onClick={handleApply}
                                 disabled={isApplying}
-                                className="px-12 py-6 bg-blue-600 text-white rounded-[2.2rem] font-black text-sm uppercase tracking-widest hover:bg-blue-700 hover:-translate-y-1 transition-all shadow-2xl shadow-blue-200 flex items-center justify-center min-w-[200px]"
+                                className="px-5 md:px-12 py-6 bg-blue-600 text-white rounded-[2.2rem] font-black text-sm uppercase tracking-widest hover:bg-blue-700 hover:-translate-y-1 transition-all shadow-2xl shadow-blue-200 flex items-center justify-center min-w-[200px]"
                             >
                                 {isApplying ? <Loader2 className="w-5 h-5 animate-spin" /> : (
                                     <>Postuler<Zap size={18} className="ml-3 fill-white" /></>
@@ -202,7 +202,7 @@ export default function JobDetailPage() {
                         )}
                         <Link
                             href="/dashboard/candidat/messages"
-                            className="px-12 py-5 bg-slate-50 text-slate-600 rounded-[2.2rem] font-black text-xs uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition-all border border-transparent hover:border-blue-100 flex items-center justify-center"
+                            className="px-5 md:px-12 py-5 bg-slate-50 text-slate-600 rounded-[2.2rem] font-black text-xs uppercase tracking-widest hover:bg-blue-50 hover:text-blue-600 transition-all border border-transparent hover:border-blue-100 flex items-center justify-center"
                         >
                             <MessageSquare size={16} className="mr-2" /> Contacter RH
                         </Link>
@@ -211,11 +211,11 @@ export default function JobDetailPage() {
             </div>
 
             {/* Grid Content */}
-            <div className="grid lg:grid-cols-3 gap-10">
+            <div className="grid lg:grid-cols-3 gap-5 md:gap-10">
                 {/* Left: Main details */}
                 <div className="lg:col-span-2 space-y-10">
                     {/* Description */}
-                    <section className="bg-white rounded-[2.5rem] p-10 shadow-sm border border-slate-100">
+                    <section className="bg-white rounded-[2.5rem] p-4 md:p-10 shadow-sm border border-slate-100">
                         <div className="flex items-center space-x-4 mb-8">
                             <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 shadow-inner">
                                 <Briefcase size={24} />
@@ -228,7 +228,7 @@ export default function JobDetailPage() {
                     </section>
 
                     {/* Missions */}
-                    <section className="bg-white rounded-[2.5rem] p-10 shadow-sm border border-slate-100">
+                    <section className="bg-white rounded-[2.5rem] p-4 md:p-10 shadow-sm border border-slate-100">
                         <div className="flex items-center space-x-4 mb-8">
                             <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 shadow-inner">
                                 <Target size={24} />
@@ -241,7 +241,7 @@ export default function JobDetailPage() {
                     </section>
 
                     {/* Requirements */}
-                    <section className="bg-blue-900 rounded-[3rem] p-10 text-white shadow-2xl shadow-blue-200 relative overflow-hidden">
+                    <section className="bg-blue-900 rounded-[3rem] p-4 md:p-10 text-white shadow-2xl shadow-blue-200 relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600 blur-3xl opacity-20"></div>
                         <div className="flex items-center space-x-4 mb-8">
                             <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20">

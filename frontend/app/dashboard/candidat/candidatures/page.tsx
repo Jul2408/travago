@@ -148,7 +148,7 @@ export default function CandidaturesPage() {
                             const statusInfo = getStatusInfo(app.status);
                             return (
                                 <div key={app.id} className="group bg-white dark:bg-slate-950 rounded-[2rem] p-8 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl dark:hover:shadow-blue-900/10 hover:border-blue-100 dark:hover:border-blue-900/30 transition-all">
-                                    <div className="flex flex-col lg:flex-row lg:items-center gap-8">
+                                    <div className="flex flex-col lg:flex-row lg:items-center gap-4 md:gap-8">
                                         {/* Logo & Info */}
                                         <div className="flex items-start space-x-5 lg:w-1/3">
                                             <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center text-slate-300 dark:text-slate-600 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-900 transition-all overflow-hidden flex-shrink-0 font-black text-xl italic">

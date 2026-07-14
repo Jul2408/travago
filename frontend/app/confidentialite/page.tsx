@@ -27,7 +27,7 @@ export default function ConfidentialitePage() {
                 </div>
             </header>
 
-            <main className="max-w-4xl mx-auto px-6 py-16 space-y-12">
+            <main className="max-w-4xl mx-auto px-6 py-8 md:py-16 space-y-12">
 
                 {/* Section 1 */}
                 <section className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-sm">

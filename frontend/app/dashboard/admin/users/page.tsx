@@ -153,6 +153,7 @@ export default function UsersPage() {
             {/* Table */}
             <div className="bg-white rounded-[2rem] border border-blue-50 shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
+                    <div className="overflow-x-auto w-full -mx-0">
                     <table className="w-full text-left">
                         <thead className="bg-slate-50 border-b border-slate-100">
                             <tr>
@@ -242,6 +243,7 @@ export default function UsersPage() {
                             )}
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

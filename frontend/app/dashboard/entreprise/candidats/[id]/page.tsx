@@ -101,7 +101,7 @@ export default function CandidateProfilePage() {
 
     if (!candidate) {
         return (
-            <div className="text-center py-20">
+            <div className="text-center py-10 md:py-20">
                 <h2 className="text-2xl font-bold text-slate-900">Candidat introuvable</h2>
                 <Link href="/dashboard/entreprise/candidats" className="text-blue-600 hover:underline mt-4 inline-block">
                     Retour à la liste
@@ -131,7 +131,7 @@ export default function CandidateProfilePage() {
                 </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-4 md:gap-8">
                 {/* Left Column: Main Identity Card */}
                 <div className="space-y-8">
                     <div className="bg-white rounded-[2.5rem] p-8 border border-blue-50 shadow-sm text-center relative overflow-hidden group hover:shadow-xl transition-all">
@@ -141,7 +141,7 @@ export default function CandidateProfilePage() {
                             </div>
                         )}
 
-                        <div className="w-32 h-32 bg-slate-50 rounded-[2.5rem] mx-auto mb-6 flex items-center justify-center text-4xl font-black text-blue-600 border-2 border-white shadow-lg overflow-hidden relative">
+                        <div className="w-32 h-32 bg-slate-50 rounded-[2.5rem] mx-auto mb-6 flex items-center justify-center text-2xl md:text-4xl font-black text-blue-600 border-2 border-white shadow-lg overflow-hidden relative">
                             {candidate.photo ? (
                                 <Image
                                     src={getImageUrl(candidate.photo) || ''}
@@ -150,7 +150,7 @@ export default function CandidateProfilePage() {
                                     className="object-cover"
                                 />
                             ) : (
-                                <span className="text-5xl">{fullName.charAt(0).toUpperCase()}</span>
+                                <span className="text-3xl md:text-5xl">{fullName.charAt(0).toUpperCase()}</span>
                             )}
                         </div>
 

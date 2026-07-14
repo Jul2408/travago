@@ -110,6 +110,7 @@ export default function AdminCandidatesPage() {
             {/* Table */}
             <div className="bg-white rounded-[2rem] border border-blue-50 shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
+                    <div className="overflow-x-auto w-full -mx-0">
                     <table className="w-full text-left">
                         <thead className="bg-slate-50 border-b border-slate-100">
                             <tr>
@@ -122,9 +123,9 @@ export default function AdminCandidatesPage() {
                         </thead>
                         <tbody className="divide-y divide-slate-50">
                             {isLoading ? (
-                                <tr><td colSpan={5} className="p-10 text-center text-slate-400 font-medium">Chargement...</td></tr>
+                                <tr><td colSpan={5} className="p-4 md:p-10 text-center text-slate-400 font-medium">Chargement...</td></tr>
                             ) : filteredCandidates.length === 0 ? (
-                                <tr><td colSpan={5} className="p-10 text-center text-slate-400 font-medium">Aucun candidat trouvé.</td></tr>
+                                <tr><td colSpan={5} className="p-4 md:p-10 text-center text-slate-400 font-medium">Aucun candidat trouvé.</td></tr>
                             ) : (
                                 filteredCandidates.map((candidate) => (
                                     <tr key={candidate.id} className="group hover:bg-blue-50/30 transition-colors">
@@ -177,6 +178,7 @@ export default function AdminCandidatesPage() {
                             )}
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

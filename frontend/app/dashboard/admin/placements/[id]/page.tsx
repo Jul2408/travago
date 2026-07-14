@@ -52,7 +52,7 @@ export default function PlacementDetailPage() {
 
     if (!placement) {
         return (
-            <div className="text-center py-20">
+            <div className="text-center py-10 md:py-20">
                 <h2 className="text-2xl font-black text-slate-800">Placement introuvable</h2>
                 <Link href="/dashboard/admin/placements" className="text-blue-600 hover:underline mt-4 block">
                     Retour à la liste
@@ -68,7 +68,7 @@ export default function PlacementDetailPage() {
                 Retour aux Placements
             </Link>
 
-            <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm">
+            <div className="bg-white rounded-[2.5rem] p-4 md:p-10 border border-slate-100 shadow-sm">
                 <div className="flex flex-col md:flex-row justify-between gap-6 mb-8">
                     <div>
                         <div className="flex items-center gap-3 mb-4">
@@ -113,7 +113,7 @@ export default function PlacementDetailPage() {
                     </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 border-t border-slate-100 pt-8">
+                <div className="grid md:grid-cols-2 gap-4 md:gap-8 border-t border-slate-100 pt-8">
                     <div>
                         <h3 className="text-lg font-black text-slate-800 mb-4 flex items-center gap-2">
                             <Target className="text-blue-600" size={20} />

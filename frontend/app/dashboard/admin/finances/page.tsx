@@ -81,9 +81,9 @@ export default function AdminFinancesPage() {
     return (
         <div className="space-y-8 pb-10">
             {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white -mx-8 -mt-8 p-10 border-b border-slate-100 italic">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white -mx-8 -mt-8 p-4 md:p-10 border-b border-slate-100 italic">
                 <div>
-                    <h1 className="text-4xl font-black text-slate-800 tracking-tight uppercase italic">Flux Financiers</h1>
+                    <h1 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tight uppercase italic">Flux Financiers</h1>
                     <p className="text-slate-500 font-medium">Contrôle des revenus et des transactions de crédits.</p>
                 </div>
                 <button className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center gap-3 hover:bg-blue-600 transition-all shadow-xl shadow-slate-200">
@@ -143,36 +143,37 @@ export default function AdminFinancesPage() {
                 </div>
 
                 <div className="overflow-x-auto">
+                    <div className="overflow-x-auto w-full -mx-0">
                     <table className="w-full text-left">
                         <thead className="bg-slate-50/50 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                             <tr>
-                                <th className="px-10 py-6">Référence / Date</th>
-                                <th className="px-10 py-6">Utilisateur</th>
-                                <th className="px-10 py-6">Détails Paiement</th>
-                                <th className="px-10 py-6 text-right">Montant</th>
-                                <th className="px-10 py-6 text-center">Statut</th>
+                                <th className="px-4 md:px-10 py-6">Référence / Date</th>
+                                <th className="px-4 md:px-10 py-6">Utilisateur</th>
+                                <th className="px-4 md:px-10 py-6">Détails Paiement</th>
+                                <th className="px-4 md:px-10 py-6 text-right">Montant</th>
+                                <th className="px-4 md:px-10 py-6 text-center">Statut</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 font-bold">
                             {isLoading ? (
-                                <tr><td colSpan={5} className="p-20 text-center text-slate-300 italic">Analyse des flux financiers...</td></tr>
+                                <tr><td colSpan={5} className="p-8 md:p-20 text-center text-slate-300 italic">Analyse des flux financiers...</td></tr>
                             ) : filteredTransactions.length === 0 ? (
-                                <tr><td colSpan={5} className="p-20 text-center text-slate-300 italic">Aucune transaction trouvée.</td></tr>
+                                <tr><td colSpan={5} className="p-8 md:p-20 text-center text-slate-300 italic">Aucune transaction trouvée.</td></tr>
                             ) : (
                                 filteredTransactions.map((t) => (
                                     <tr key={t.id} className="hover:bg-blue-50/30 transition-all group">
-                                        <td className="px-10 py-8">
+                                        <td className="px-4 md:px-10 py-8">
                                             <div className="text-sm font-black text-slate-800 tracking-tighter uppercase mb-1">#{t.reference}</div>
                                             <div className="text-[10px] text-slate-400 uppercase flex items-center gap-1 font-black underline decoration-blue-100">
                                                 <Clock size={10} />
                                                 {format(new Date(t.created_at), 'dd MMM yyyy, HH:mm', { locale: fr })}
                                             </div>
                                         </td>
-                                        <td className="px-10 py-8">
+                                        <td className="px-4 md:px-10 py-8">
                                             <div className="text-sm font-black text-slate-900 leading-none mb-1">{t.user_detail?.username || 'Utilisateur'}</div>
                                             <div className="text-[10px] text-blue-400 lowercase italic">{t.user_detail?.email}</div>
                                         </td>
-                                        <td className="px-10 py-8">
+                                        <td className="px-4 md:px-10 py-8">
                                             <div className="flex items-center gap-3">
                                                 <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-500 group-hover:bg-white transition-colors">
                                                     {t.payment_method === 'OM' ? 'OM' : 'MO'}
@@ -183,10 +184,10 @@ export default function AdminFinancesPage() {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-10 py-8 text-right font-black text-slate-900 italic tracking-tighter">
+                                        <td className="px-4 md:px-10 py-8 text-right font-black text-slate-900 italic tracking-tighter">
                                             {Number(t.amount).toLocaleString()} FCFA
                                         </td>
-                                        <td className="px-10 py-8 text-center">
+                                        <td className="px-4 md:px-10 py-8 text-center">
                                             <span className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest ${t.status === 'COMPLETED' ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' :
                                                     t.status === 'PENDING' ? 'bg-amber-50 text-amber-600 border border-amber-100' :
                                                         'bg-red-50 text-red-600 border border-red-100'
@@ -199,6 +200,7 @@ export default function AdminFinancesPage() {
                             )}
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -199,12 +199,12 @@ export default function TalentsBasePage() {
                         ))}
                     </div>
                 ) : error ? (
-                    <div className="text-center py-10 sm:py-20 bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] border border-red-50 dark:border-red-900/20 shadow-sm">
+                    <div className="text-center py-6 md:py-10 sm:py-20 bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] border border-red-50 dark:border-red-900/20 shadow-sm">
                         <p className="text-red-500 dark:text-red-400 font-bold px-4">{error}</p>
                         <button onClick={() => window.location.reload()} className="text-blue-600 dark:text-blue-400 font-black text-[10px] sm:text-xs uppercase underline mt-2">Réessayer</button>
                     </div>
                 ) : filteredTalents.length === 0 ? (
-                    <div className="text-center py-10 sm:py-20 bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] border border-blue-50 dark:border-slate-800 shadow-sm px-4">
+                    <div className="text-center py-6 md:py-10 sm:py-20 bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] border border-blue-50 dark:border-slate-800 shadow-sm px-4">
                         <p className="text-slate-400 dark:text-slate-500 font-bold font-sans">Aucun talent trouvé pour cette recherche.</p>
                         <button onClick={() => setSearchTerm('')} className="text-blue-600 dark:text-blue-400 font-black text-[10px] sm:text-xs uppercase underline mt-2">Effacer les filtres</button>
                     </div>

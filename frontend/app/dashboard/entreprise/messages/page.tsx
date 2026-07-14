@@ -165,7 +165,7 @@ export default function EnterpriseMessagesPage() {
                 </div>
                 <div className="flex-1 overflow-y-auto custom-scrollbar">
                     {filteredConversations.length === 0 ? (
-                        <div className="p-10 text-center text-slate-400 dark:text-slate-500 font-medium">
+                        <div className="p-4 md:p-10 text-center text-slate-400 dark:text-slate-500 font-medium">
                             Aucun résultat trouvé.
                         </div>
                     ) : (
@@ -228,7 +228,7 @@ export default function EnterpriseMessagesPage() {
             {/* Chat Content */}
             <div className={`${!showListOnMobile ? 'flex' : 'hidden'} md:flex flex-1 flex-col bg-slate-50/30 dark:bg-slate-900/20`}>
                 {!selectedConversation ? (
-                    <div className="flex-1 flex flex-col items-center justify-center text-center p-10 opacity-50">
+                    <div className="flex-1 flex flex-col items-center justify-center text-center p-4 md:p-10 opacity-50">
                         <div className="w-24 h-24 bg-blue-50 dark:bg-blue-900/20 rounded-[2rem] flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6">
                             <MessageSquare className="w-12 h-12" />
                         </div>
@@ -376,7 +376,7 @@ export default function EnterpriseMessagesPage() {
                                             />
                                         </div>
                                     ) : (
-                                        <div className="w-24 h-24 bg-blue-50 dark:bg-blue-900/20 rounded-[2.5rem] flex items-center justify-center font-black text-4xl text-blue-200 dark:text-blue-400 mx-auto mb-4 border-2 border-white dark:border-slate-800 shadow-xl dark:shadow-none italic uppercase">
+                                        <div className="w-24 h-24 bg-blue-50 dark:bg-blue-900/20 rounded-[2.5rem] flex items-center justify-center font-black text-2xl md:text-4xl text-blue-200 dark:text-blue-400 mx-auto mb-4 border-2 border-white dark:border-slate-800 shadow-xl dark:shadow-none italic uppercase">
                                             {name.substring(0, 2)}
                                         </div>
                                     )}

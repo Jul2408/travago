@@ -62,17 +62,17 @@ export default function CandidateCertifsPage() {
 
             {/* ── BLOC PRINCIPAL : Badge Certifié Travago ─────────────────── */}
             {isLoading ? (
-                <div className="flex items-center justify-center py-20">
+                <div className="flex items-center justify-center py-10 md:py-20">
                     <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
                 </div>
             ) : isVerified ? (
                 /* ── ÉTAT VALIDÉ ── */
-                <div className="bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 rounded-[3rem] p-12 text-white relative overflow-hidden shadow-2xl shadow-blue-300/30">
+                <div className="bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 rounded-[3rem] p-5 md:p-12 text-white relative overflow-hidden shadow-2xl shadow-blue-300/30">
                     {/* Glow effects */}
                     <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 blur-[120px] rounded-full pointer-events-none"></div>
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/10 blur-[80px] rounded-full pointer-events-none"></div>
 
-                    <div className="relative z-10 flex flex-col lg:flex-row items-center gap-12">
+                    <div className="relative z-10 flex flex-col lg:flex-row items-center gap-6 md:gap-12">
                         {/* Badge Icon */}
                         <div className="shrink-0 flex flex-col items-center">
                             <div className="relative">
@@ -93,7 +93,7 @@ export default function CandidateCertifsPage() {
                                 <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
                                 Validé par l'Équipe Travago
                             </div>
-                            <h2 className="text-4xl font-black leading-tight mb-4">
+                            <h2 className="text-2xl md:text-4xl font-black leading-tight mb-4">
                                 {profile?.title || 'Talent Certifié'}<br />
                                 <span className="text-blue-400">Travago Certified ✓</span>
                             </h2>
@@ -119,9 +119,9 @@ export default function CandidateCertifsPage() {
                 </div>
             ) : (
                 /* ── ÉTAT EN ATTENTE / NON VALIDÉ ── */
-                <div className="bg-white dark:bg-slate-950 rounded-[3rem] border-2 border-dashed border-amber-200 dark:border-amber-900/30 p-12 relative overflow-hidden transition-colors">
+                <div className="bg-white dark:bg-slate-950 rounded-[3rem] border-2 border-dashed border-amber-200 dark:border-amber-900/30 p-5 md:p-12 relative overflow-hidden transition-colors">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-amber-50 dark:bg-amber-900/10 rounded-full -translate-y-32 translate-x-32 pointer-events-none"></div>
-                    <div className="relative z-10 flex flex-col lg:flex-row items-center gap-10">
+                    <div className="relative z-10 flex flex-col lg:flex-row items-center gap-5 md:gap-10">
                         {/* Lock Icon */}
                         <div className="shrink-0">
                             <div className="w-32 h-32 rounded-[2.5rem] bg-amber-50 dark:bg-amber-900/20 border-2 border-amber-100 dark:border-amber-900/30 flex items-center justify-center">

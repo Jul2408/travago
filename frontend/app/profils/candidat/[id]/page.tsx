@@ -75,7 +75,7 @@ export default function PublicCandidateProfile() {
                     <div className="bg-slate-900 h-64 relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent"></div>
                         <div className="absolute -bottom-20 left-12 w-40 h-40 rounded-[3rem] bg-gradient-to-br from-blue-500 to-blue-700 p-1.5 shadow-2xl overflow-hidden">
-                            <div className="w-full h-full rounded-[2.8rem] bg-white flex items-center justify-center text-5xl font-black text-blue-600 relative overflow-hidden">
+                            <div className="w-full h-full rounded-[2.8rem] bg-white flex items-center justify-center text-3xl md:text-5xl font-black text-blue-600 relative overflow-hidden">
                                 {candidate.user_detail.photo ? (
                                     <Image
                                         src={getImageUrl(candidate.user_detail.photo)}
@@ -90,12 +90,12 @@ export default function PublicCandidateProfile() {
                         </div>
                     </div>
 
-                    <div className="mt-28 px-12 pb-16">
-                        <div className="grid lg:grid-cols-3 gap-16">
+                    <div className="mt-28 px-5 md:px-12 pb-16">
+                        <div className="grid lg:grid-cols-3 gap-8 md:gap-16">
                             {/* Left Column: Main Info */}
                             <div className="lg:col-span-2 space-y-12">
                                 <div>
-                                    <h1 className="text-5xl font-black text-slate-900 tracking-tighter mb-3 flex items-center gap-4">
+                                    <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter mb-3 flex items-center gap-4">
                                         {candidate.user_detail.first_name} {candidate.user_detail.last_name}
                                         {candidate.is_verified && (
                                             <div className="bg-blue-600 text-white p-1 rounded-full shadow-lg shadow-blue-200">

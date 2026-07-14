@@ -34,7 +34,7 @@ export function PageSkeleton({ type = "dashboard" }: { type?: "dashboard" | "lis
 
     if (type === "list") {
         return (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in duration-500">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 animate-in fade-in duration-500">
                 {[1, 2, 3, 4, 5, 6].map((i) => (
                     <Skeleton key={i} className="h-80 w-full rounded-[3rem] bg-slate-100 dark:bg-slate-800" />
                 ))}
@@ -43,7 +43,7 @@ export function PageSkeleton({ type = "dashboard" }: { type?: "dashboard" | "lis
     }
 
     return (
-        <div className="max-w-4xl mx-auto space-y-10 py-10 animate-in fade-in duration-500">
+        <div className="max-w-4xl mx-auto space-y-10 py-6 md:py-10 animate-in fade-in duration-500">
             <Skeleton className="h-10 w-64 bg-slate-200 dark:bg-slate-700" />
             <Skeleton className="h-96 w-full rounded-[3rem] bg-slate-100 dark:bg-slate-800" />
             <div className="space-y-4">

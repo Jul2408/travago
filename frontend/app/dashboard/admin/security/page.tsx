@@ -72,6 +72,7 @@ export default function AdminSecurityPage() {
                     </div>
                 </div>
                 <div className="overflow-x-auto">
+                    <div className="overflow-x-auto w-full -mx-0">
                     <table className="w-full text-left">
                         <thead className="bg-slate-100/50 text-[10px] font-black text-slate-500 uppercase tracking-widest">
                             <tr>
@@ -84,9 +85,9 @@ export default function AdminSecurityPage() {
                         </thead>
                         <tbody className="divide-y divide-slate-100">
                             {isLoading ? (
-                                <tr><td colSpan={5} className="p-10 text-center font-bold text-slate-400">Scan des journaux...</td></tr>
+                                <tr><td colSpan={5} className="p-4 md:p-10 text-center font-bold text-slate-400">Scan des journaux...</td></tr>
                             ) : activity.length === 0 ? (
-                                <tr><td colSpan={5} className="p-10 text-center font-bold text-slate-400">Aucun log de sécurité.</td></tr>
+                                <tr><td colSpan={5} className="p-4 md:p-10 text-center font-bold text-slate-400">Aucun log de sécurité.</td></tr>
                             ) : (
                                 activity.map((log) => (
                                     <tr key={log.id} className="hover:bg-slate-50/80 transition-all group">
@@ -124,6 +125,7 @@ export default function AdminSecurityPage() {
                             )}
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

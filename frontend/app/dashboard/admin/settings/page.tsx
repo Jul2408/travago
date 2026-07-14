@@ -52,9 +52,9 @@ export default function AdminSettingsPage() {
 
     return (
         <div className="space-y-8 pb-10">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white -mx-8 -mt-8 p-10 border-b border-slate-100">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white -mx-8 -mt-8 p-4 md:p-10 border-b border-slate-100">
                 <div>
-                    <h1 className="text-4xl font-black text-slate-800 tracking-tight uppercase italic">Configuration Système</h1>
+                    <h1 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tight uppercase italic">Configuration Système</h1>
                     <p className="text-slate-500 font-medium">Pilotez les paramètres critiques de la plateforme en temps réel.</p>
                 </div>
             </div>
@@ -65,14 +65,14 @@ export default function AdminSettingsPage() {
                 </div>
             )}
 
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-2 gap-4 md:gap-8">
                 <div className="space-y-6">
                     <h3 className="text-xl font-black text-slate-800 uppercase italic flex items-center gap-3">
                         <ShieldCheck className="text-blue-600" /> Paramètres Actifs
                     </h3>
 
                     {isLoading ? (
-                        <div className="p-10 text-center text-slate-400 font-bold uppercase italic">Chargement...</div>
+                        <div className="p-4 md:p-10 text-center text-slate-400 font-bold uppercase italic">Chargement...</div>
                     ) : (
                         settings.map((s) => (
                             <div key={s.id} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm group hover:shadow-xl transition-all">
@@ -127,9 +127,9 @@ export default function AdminSettingsPage() {
                     )}
                 </div>
 
-                <div className="bg-slate-900 rounded-[3rem] p-10 text-white relative overflow-hidden group">
+                <div className="bg-slate-900 rounded-[3rem] p-4 md:p-10 text-white relative overflow-hidden group">
                     <div className="absolute -top-20 -right-20 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl"></div>
-                    <div className="relative z-10 text-center py-10">
+                    <div className="relative z-10 text-center py-6 md:py-10">
                         <AlertTriangle size={60} className="text-amber-400 mx-auto mb-6 animate-pulse" />
                         <h3 className="text-3xl font-black uppercase italic tracking-tighter mb-4 text-amber-400">Zone de Danger</h3>
                         <p className="text-slate-400 font-bold text-sm uppercase leading-relaxed mb-10">

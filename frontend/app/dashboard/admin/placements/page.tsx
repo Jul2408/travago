@@ -58,9 +58,9 @@ export default function AdminPlacementsPage() {
 
     return (
         <div className="space-y-8 pb-10">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white -mx-8 -mt-8 p-10 border-b border-slate-100">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white -mx-8 -mt-8 p-4 md:p-10 border-b border-slate-100">
                 <div>
-                    <h1 className="text-4xl font-black text-slate-800 tracking-tight uppercase italic">Marché & Opérations</h1>
+                    <h1 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tight uppercase italic">Marché & Opérations</h1>
                     <p className="text-slate-500 font-medium">Supervision des offres d'emploi et des demandes de placement IA.</p>
                 </div>
                 <div className="flex gap-4">
@@ -94,6 +94,7 @@ export default function AdminPlacementsPage() {
             {activeTab === 'jobs' ? (
                 <div className="bg-white rounded-[2.5rem] border border-blue-50 shadow-sm overflow-hidden">
                     <div className="overflow-x-auto">
+                        <div className="overflow-x-auto w-full -mx-0">
                         <table className="w-full text-left">
                             <thead className="bg-slate-50/50 border-b border-slate-100">
                                 <tr>
@@ -106,9 +107,9 @@ export default function AdminPlacementsPage() {
                             </thead>
                             <tbody className="divide-y divide-slate-50">
                                 {isLoading ? (
-                                    <tr><td colSpan={5} className="p-20 text-center"><Activity className="animate-spin mx-auto text-blue-600" /></td></tr>
+                                    <tr><td colSpan={5} className="p-8 md:p-20 text-center"><Activity className="animate-spin mx-auto text-blue-600" /></td></tr>
                                 ) : jobs.length === 0 ? (
-                                    <tr><td colSpan={5} className="p-20 text-center text-slate-300 font-black uppercase italic text-xl">Aucune donnée</td></tr>
+                                    <tr><td colSpan={5} className="p-8 md:p-20 text-center text-slate-300 font-black uppercase italic text-xl">Aucune donnée</td></tr>
                                 ) : (
                                     jobs.map((job) => (
                                         <tr key={job.id} className="hover:bg-blue-50/30 transition-colors group">
@@ -150,12 +151,13 @@ export default function AdminPlacementsPage() {
                                 )}
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                     {isLoading ? (
-                        <div className="col-span-full text-center py-20 text-slate-400 font-medium">Chargement des placements...</div>
+                        <div className="col-span-full text-center py-10 md:py-20 text-slate-400 font-medium">Chargement des placements...</div>
                     ) : placements.length === 0 ? (
                         <div className="col-span-full text-center py-40 border-4 border-dashed border-slate-50 rounded-[3rem]">
                             <Target size={60} className="mx-auto text-slate-100 mb-6" />
@@ -163,8 +165,8 @@ export default function AdminPlacementsPage() {
                         </div>
                     ) : (
                         placements.map((p) => (
-                            <div key={p.id} className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm relative overflow-hidden group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-                                <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
+                            <div key={p.id} className="bg-white p-4 md:p-10 rounded-[3rem] border border-slate-100 shadow-sm relative overflow-hidden group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+                                <div className="absolute top-0 right-0 p-4 md:p-10 opacity-5 group-hover:opacity-10 transition-opacity">
                                     <Target size={120} className="text-blue-600" />
                                 </div>
                                 <div className="relative z-10">

@@ -194,7 +194,7 @@ export const FolderClickAnimation = () => {
                         exit={{ opacity: 0, y: -20 }}
                         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40"
                     >
-                        <div className="bg-blue-600 text-white px-10 py-4 rounded-full font-black text-xs uppercase tracking-[0.3em] flex items-center shadow-[0_0_30px_rgba(59,130,246,0.5)]">
+                        <div className="bg-blue-600 text-white px-4 md:px-10 py-4 rounded-full font-black text-xs uppercase tracking-[0.3em] flex items-center shadow-[0_0_30px_rgba(59,130,246,0.5)]">
                             <Zap size={18} className="mr-3 fill-white" />
                             Recrutement Instantané Réussi
                         </div>

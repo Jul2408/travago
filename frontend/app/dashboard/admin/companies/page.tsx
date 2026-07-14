@@ -104,6 +104,7 @@ export default function AdminCompaniesPage() {
             {/* Table */}
             <div className="bg-white rounded-[2rem] border border-blue-50 shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
+                    <div className="overflow-x-auto w-full -mx-0">
                     <table className="w-full text-left">
                         <thead className="bg-slate-50 border-b border-slate-100">
                             <tr>
@@ -115,9 +116,9 @@ export default function AdminCompaniesPage() {
                         </thead>
                         <tbody className="divide-y divide-slate-50">
                             {isLoading ? (
-                                <tr><td colSpan={4} className="p-10 text-center text-slate-400 font-medium">Chargement...</td></tr>
+                                <tr><td colSpan={4} className="p-4 md:p-10 text-center text-slate-400 font-medium">Chargement...</td></tr>
                             ) : filteredCompanies.length === 0 ? (
-                                <tr><td colSpan={4} className="p-10 text-center text-slate-400 font-medium">Aucune entreprise trouvée.</td></tr>
+                                <tr><td colSpan={4} className="p-4 md:p-10 text-center text-slate-400 font-medium">Aucune entreprise trouvée.</td></tr>
                             ) : (
                                 filteredCompanies.map((company) => (
                                     <tr key={company.id} className="group hover:bg-blue-50/30 transition-colors">
@@ -162,6 +163,7 @@ export default function AdminCompaniesPage() {
                             )}
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

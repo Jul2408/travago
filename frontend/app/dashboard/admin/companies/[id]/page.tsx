@@ -73,8 +73,8 @@ export default function CompanyDetailPage() {
         }
     };
 
-    if (isLoading) return <div className="p-10 text-center font-black animate-pulse text-slate-400">ANALYSE DU PARTENAIRE...</div>;
-    if (!company) return <div className="p-10 text-center font-black text-red-500">ENTREPRISE NON TROUVÉE.</div>;
+    if (isLoading) return <div className="p-4 md:p-10 text-center font-black animate-pulse text-slate-400">ANALYSE DU PARTENAIRE...</div>;
+    if (!company) return <div className="p-4 md:p-10 text-center font-black text-red-500">ENTREPRISE NON TROUVÉE.</div>;
 
     return (
         <div className="space-y-8 pb-20">
@@ -102,11 +102,11 @@ export default function CompanyDetailPage() {
                     </div>
                 </div>
 
-                <div className="mt-20 px-12 pb-12">
-                    <div className="grid lg:grid-cols-3 gap-12">
+                <div className="mt-20 px-5 md:px-12 pb-12">
+                    <div className="grid lg:grid-cols-3 gap-6 md:gap-12">
                         <div className="lg:col-span-2 space-y-12">
                             <div>
-                                <h1 className="text-4xl font-black text-slate-800 tracking-tighter mb-4 flex items-center gap-4">
+                                <h1 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tighter mb-4 flex items-center gap-4">
                                     {company.name || company.user_detail.username}
                                     {company.is_verified && <CheckCircle className="text-emerald-500" size={32} />}
                                 </h1>
@@ -133,7 +133,7 @@ export default function CompanyDetailPage() {
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {!company.job_offers?.length ? (
-                                        <div className="col-span-2 p-10 bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 text-center text-slate-400 font-black uppercase tracking-widest text-xs italic">
+                                        <div className="col-span-2 p-4 md:p-10 bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 text-center text-slate-400 font-black uppercase tracking-widest text-xs italic">
                                             Aucune offre publiée par ce partenaire
                                         </div>
                                     ) : (
@@ -163,7 +163,7 @@ export default function CompanyDetailPage() {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-8 ring-1 ring-slate-100 p-10 rounded-[2.5rem] bg-indigo-50/20">
+                            <div className="grid grid-cols-2 gap-4 md:gap-8 ring-1 ring-slate-100 p-4 md:p-10 rounded-[2.5rem] bg-indigo-50/20">
                                 <div>
                                     <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 italic">Digital Presence</div>
                                     <div className="space-y-3">
@@ -190,7 +190,7 @@ export default function CompanyDetailPage() {
                         </div>
 
                         <div className="space-y-8">
-                            <div className="p-10 bg-slate-900 rounded-[3rem] text-white relative overflow-hidden group">
+                            <div className="p-4 md:p-10 bg-slate-900 rounded-[3rem] text-white relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform">
                                     <TrendingUp size={100} />
                                 </div>

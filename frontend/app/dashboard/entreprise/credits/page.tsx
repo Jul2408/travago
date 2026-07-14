@@ -315,17 +315,17 @@ export default function CreditsPage() {
                 </div>
             )}
 
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 md:gap-8">
                 <div>
                     <h1 className="text-3xl font-black tracking-tight">Budget & Crédits</h1>
                     <p className="text-slate-500 font-medium">Investissez dans les meilleurs talents pour votre croissance.</p>
                 </div>
 
                 {/* Solde Card - Deep Blue */}
-                <div className="bg-gradient-to-br from-blue-700 to-blue-600 rounded-[2.5rem] p-10 text-white shadow-2xl shadow-blue-200 border border-blue-400 flex items-center justify-between min-w-[380px] relative overflow-hidden">
+                <div className="bg-gradient-to-br from-blue-700 to-blue-600 rounded-[2.5rem] p-4 md:p-10 text-white shadow-2xl shadow-blue-200 border border-blue-400 flex items-center justify-between min-w-[380px] relative overflow-hidden">
                     <div className="relative z-10">
                         <div className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100 mb-2">Solde de Placement Total</div>
-                        <div className="text-5xl font-black mb-1">{user?.credits || 0}</div>
+                        <div className="text-3xl md:text-5xl font-black mb-1">{user?.credits || 0}</div>
                         <div className="text-xs font-bold text-blue-100 flex items-center">
                             <Zap size={14} className="mr-1 text-orange-400 fill-orange-400" /> Crédits Travago actifs
                         </div>
@@ -352,9 +352,9 @@ export default function CreditsPage() {
                     </div>
                 </div>
 
-                <div className="grid lg:grid-cols-3 gap-8">
+                <div className="grid lg:grid-cols-3 gap-4 md:gap-8">
                     {packs.map((pack, idx) => (
-                        <div key={idx} className={`relative bg-white rounded-[3rem] p-10 border-2 transition-all hover:shadow-2xl hover:scale-[1.02] flex flex-col ${pack.popular ? 'border-blue-600 shadow-xl z-10' : 'border-blue-50 shadow-sm'}`}>
+                        <div key={idx} className={`relative bg-white rounded-[3rem] p-4 md:p-10 border-2 transition-all hover:shadow-2xl hover:scale-[1.02] flex flex-col ${pack.popular ? 'border-blue-600 shadow-xl z-10' : 'border-blue-50 shadow-sm'}`}>
                             {pack.popular && (
                                 <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-8 py-2.5 rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-lg">
                                     Plus Populaire
@@ -363,7 +363,7 @@ export default function CreditsPage() {
                             <div className="text-center mb-10">
                                 <h3 className={`text-xl font-black mb-4 ${pack.popular ? 'text-blue-600' : 'text-slate-900'}`}>{pack.name}</h3>
                                 <div className="flex items-center justify-center mb-2">
-                                    <span className="text-5xl font-black text-slate-900">{pack.credits}</span>
+                                    <span className="text-3xl md:text-5xl font-black text-slate-900">{pack.credits}</span>
                                     <span className="ml-2 text-sm text-slate-400 font-bold uppercase tracking-widest">Crédits</span>
                                 </div>
                                 <div className="text-slate-900 font-black text-2xl">{pack.price}</div>
@@ -402,6 +402,7 @@ export default function CreditsPage() {
                     </button>
                 </div>
                 <div className="overflow-x-auto">
+                    <div className="overflow-x-auto w-full -mx-0">
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-blue-50/30">
@@ -415,7 +416,7 @@ export default function CreditsPage() {
                         <tbody className="divide-y divide-blue-50">
                             {transactions.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5} className="p-10 text-center text-slate-400 font-medium">Aucune transaction pour le moment.</td>
+                                    <td colSpan={5} className="p-4 md:p-10 text-center text-slate-400 font-medium">Aucune transaction pour le moment.</td>
                                 </tr>
                             ) : (
                                 transactions.map((tr) => (
@@ -451,11 +452,12 @@ export default function CreditsPage() {
                             )}
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
 
             {/* Assistance Section */}
-            <div className="bg-blue-50 border border-blue-100 rounded-[2.5rem] p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="bg-blue-50 border border-blue-100 rounded-[2.5rem] p-4 md:p-10 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
                 <div className="flex items-center space-x-6 text-center md:text-left">
                     <div className="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-100">
                         <DollarSign size={32} />
@@ -471,7 +473,7 @@ export default function CreditsPage() {
                     href="https://wa.me/237657948848"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-10 py-5 bg-[#25D366] text-white border-2 border-[#25D366] rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-[#20b858] transition-all shadow-sm flex items-center"
+                    className="px-4 md:px-10 py-5 bg-[#25D366] text-white border-2 border-[#25D366] rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-[#20b858] transition-all shadow-sm flex items-center"
                 >
                     Contactez-nous sur WhatsApp
                 </a>

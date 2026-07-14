@@ -14,7 +14,7 @@ import { TypewriterEffect } from '@/components/typewriter-effect';
    ========================================= */
 export function HeroSection() {
   return (
-    <section className="relative pt-44 pb-20 px-6 max-w-7xl mx-auto text-center overflow-hidden">
+    <section className="relative pt-28 md:pt-44 pb-12 md:pb-20 px-4 md:px-6 max-w-7xl mx-auto text-center overflow-hidden">
       {/* Background glow effects */}
       <div className="absolute top-0 right-1/2 translate-x-1/2 w-[90vw] max-w-[800px] h-[400px] bg-blue-600/10 dark:bg-blue-600/20 blur-[120px] rounded-full -z-10 mt-10"></div>
       
@@ -33,7 +33,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="text-5xl sm:text-7xl lg:text-[7.5rem] font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-[0.85] mb-8"
+        className="text-4xl sm:text-6xl lg:text-[7.5rem] font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-[0.85] mb-6 md:mb-8"
       >
         L'Élite du<br />
         <TypewriterEffect 
@@ -47,7 +47,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="text-lg md:text-xl text-slate-500 dark:text-slate-400 font-medium italic max-w-3xl mx-auto mb-12 leading-relaxed"
+        className="text-base md:text-xl text-slate-500 dark:text-slate-400 font-medium italic max-w-3xl mx-auto mb-8 md:mb-12 leading-relaxed px-2"
       >
         Nous ne sommes pas un simple site d'offres d'emploi. Nous sommes l'agence de chasse de tête automatisée du Cameroun. Confiez-nous vos exigences, notre IA vous ramène le candidat parfait, profil vérifié.
       </motion.p>
@@ -58,10 +58,10 @@ export function HeroSection() {
         transition={{ duration: 0.5, delay: 0.3 }}
         className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
       >
-        <Link href="/register/entreprise" className="w-full sm:w-auto px-10 py-5 bg-blue-600 text-white rounded-[2rem] font-black text-xs uppercase tracking-widest hover:bg-blue-700 shadow-2xl shadow-blue-600/30 dark:shadow-blue-900/40 transition-all flex items-center justify-center group active:scale-95">
+        <Link href="/register/entreprise" className="w-full sm:w-auto px-4 md:px-10 py-5 bg-blue-600 text-white rounded-[2rem] font-black text-xs uppercase tracking-widest hover:bg-blue-700 shadow-2xl shadow-blue-600/30 dark:shadow-blue-900/40 transition-all flex items-center justify-center group active:scale-95">
           Je Recrute du Talent <ArrowRight className="ml-3 group-hover:translate-x-1 transition-transform" size={18} />
         </Link>
-        <Link href="/register/candidat" className="w-full sm:w-auto px-10 py-5 bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-100 dark:shadow-none rounded-[2rem] font-black text-xs uppercase tracking-widest hover:border-blue-300 dark:hover:border-slate-700 transition-all text-center active:scale-95">
+        <Link href="/register/candidat" className="w-full sm:w-auto px-4 md:px-10 py-5 bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-100 dark:shadow-none rounded-[2rem] font-black text-xs uppercase tracking-widest hover:border-blue-300 dark:hover:border-slate-700 transition-all text-center active:scale-95">
           Trouver un emploi Premium
         </Link>
       </motion.div>
@@ -101,21 +101,21 @@ export function InfiniteMarquee() {
 export function StatsSection() {
   return (
     <section className="py-12 border-t border-b border-slate-200/50 dark:border-slate-800/50 bg-white dark:bg-slate-950/50">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once:true }}>
-          <div className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">10k+</div>
+          <div className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tighter">10k+</div>
           <div className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mt-2">Candidats Certifiés</div>
         </motion.div>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once:true }} transition={{ delay: 0.1 }}>
-          <div className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">98%.</div>
+          <div className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tighter">98%.</div>
           <div className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mt-2">Précision du Match IA</div>
         </motion.div>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once:true }} transition={{ delay: 0.2 }}>
-          <div className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">24h.</div>
+          <div className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tighter">24h.</div>
           <div className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mt-2">Temps de Placement Moyen</div>
         </motion.div>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once:true }} transition={{ delay: 0.3 }}>
-          <div className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">100%.</div>
+          <div className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tighter">100%.</div>
           <div className="text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mt-2">Dossiers Vérifiés (KYC)</div>
         </motion.div>
       </div>
@@ -130,23 +130,24 @@ export function HowItWorksSection() {
   const [activeTab, setActiveTab] = useState<'recruiter' | 'candidate'>('recruiter');
 
   return (
-    <section id="comment-ca-marche" className="py-32 px-6 bg-slate-50 dark:bg-slate-900">
+    <section id="comment-ca-marche" className="py-12 md:py-32 px-6 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white uppercase tracking-tighter italic mb-4">Le Fonctionnement</h2>
+          <h2 className="text-2xl md:text-4xl sm:text-5xl font-black text-slate-900 dark:text-white uppercase tracking-tighter italic mb-4">Le Fonctionnement</h2>
           <p className="text-slate-500 font-medium italic">Un processus transparent, adapté à vos objectifs.</p>
         </div>
 
-        <div className="flex justify-center mb-12">
-          <div className="bg-white dark:bg-slate-950 p-2 rounded-full border border-slate-200 dark:border-slate-800 shadow-sm flex">
+        <div className="flex justify-center mb-8 md:mb-12 px-4">
+          <div className="bg-white dark:bg-slate-950 p-1.5 md:p-2 rounded-full border border-slate-200 dark:border-slate-800 shadow-sm flex flex-wrap justify-center gap-1">
             <button 
               onClick={() => setActiveTab('recruiter')}
-              className={`px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'recruiter' ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
+              className={`px-5 md:px-8 py-2.5 md:py-3 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'recruiter' ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
             >
               Je suis Recruteur
             </button>
             <button 
               onClick={() => setActiveTab('candidate')}
+              className={`px-5 md:px-8 py-2.5 md:py-3 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'candidate' ? 'bg-emerald-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
               className={`px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'candidate' ? 'bg-emerald-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
             >
               Je suis Candidat
@@ -154,7 +155,7 @@ export function HowItWorksSection() {
           </div>
         </div>
 
-        <div className="relative min-h-[500px]">
+        <div className="relative min-h-[400px]">
           <AnimatePresence mode="wait">
             {activeTab === 'recruiter' && (
               <motion.div 
@@ -163,7 +164,7 @@ export function HowItWorksSection() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3 }}
-                className="grid lg:grid-cols-3 gap-8"
+                className="grid lg:grid-cols-3 gap-4 md:gap-8"
               >
                 {[
                   {
@@ -185,7 +186,7 @@ export function HowItWorksSection() {
                     desc: "Recevez votre top sélection confidentielle de talents avec leur 'Indice de Placabilité', et accédez aux candidats immédiatement prêts pour l'embauche."
                   }
                 ].map((item, i) => (
-                  <div key={i} className="bg-white dark:bg-slate-950 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/40 dark:shadow-none hover:-translate-y-2 transition-transform relative overflow-hidden group">
+                  <div key={i} className="bg-white dark:bg-slate-950 p-4 md:p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/40 dark:shadow-none hover:-translate-y-2 transition-transform relative overflow-hidden group">
                     <div className="text-[6rem] font-black text-slate-100 dark:text-slate-900 absolute -top-6 -right-2 z-0 tracking-tighter leading-none group-hover:text-blue-50 dark:group-hover:text-blue-900/20 transition-colors">{item.step}</div>
                     <div className="relative z-10">
                       <div className="w-16 h-16 bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center rounded-2xl mb-8 group-hover:scale-110 transition-transform">{item.icon}</div>
@@ -204,7 +205,7 @@ export function HowItWorksSection() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3 }}
-                className="grid lg:grid-cols-3 gap-8"
+                className="grid lg:grid-cols-3 gap-4 md:gap-8"
               >
                 {[
                   {
@@ -226,7 +227,7 @@ export function HowItWorksSection() {
                     desc: "Atteignez un indice de placabilité parfait (100%). Plus votre score est élevé, plus l'IA vous propulse en priorité vers les offres du marché caché."
                   }
                 ].map((item, i) => (
-                  <div key={i} className="bg-white dark:bg-slate-950 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/40 dark:shadow-none hover:-translate-y-2 transition-transform relative overflow-hidden group">
+                  <div key={i} className="bg-white dark:bg-slate-950 p-4 md:p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/40 dark:shadow-none hover:-translate-y-2 transition-transform relative overflow-hidden group">
                     <div className="text-[6rem] font-black text-slate-100 dark:text-slate-900 absolute -top-6 -right-2 z-0 tracking-tighter leading-none group-hover:text-emerald-50 dark:group-hover:text-emerald-900/20 transition-colors">{item.step}</div>
                     <div className="relative z-10">
                       <div className="w-16 h-16 bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center rounded-2xl mb-8 group-hover:scale-110 transition-transform">{item.icon}</div>
@@ -249,13 +250,13 @@ export function HowItWorksSection() {
    ========================================= */
 export function FeatureSection() {
   return (
-    <section id="recrutement-ia" className="py-32 bg-slate-900 dark:bg-slate-950 border-y border-slate-800 overflow-hidden relative">
+    <section id="recrutement-ia" className="py-12 md:py-32 bg-slate-900 dark:bg-slate-950 border-y border-slate-800 overflow-hidden relative">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-12 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center relative z-10">
         <div>
           <div className="inline-flex items-center px-4 py-1.5 bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-full text-[10px] font-black uppercase tracking-widest mb-6">Technologie Propriétaire</div>
-          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase italic leading-[0.9] mb-8">
+          <h2 className="text-2xl md:text-4xl md:text-6xl font-black text-white tracking-tighter uppercase italic leading-[0.9] mb-8">
             Sourcing <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Chirurgical.</span>
           </h2>
           <p className="text-slate-400 font-medium italic text-lg leading-relaxed mb-10">
@@ -336,11 +337,11 @@ export function FeatureSection() {
    ========================================= */
 export function PricingSection() {
   return (
-    <section id="pricing" className="py-32 bg-slate-50 dark:bg-slate-900 px-6 lg:px-12 border-t border-slate-200 dark:border-slate-800">
+    <section id="pricing" className="py-12 md:py-32 bg-slate-50 dark:bg-slate-900 px-6 lg:px-12 border-t border-slate-200 dark:border-slate-800">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <div className="inline-block px-4 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border border-blue-100 dark:border-blue-900/30 shadow-sm">Tarifs Recruteurs</div>
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic leading-[0.9] mb-6">
+          <h2 className="text-2xl md:text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic leading-[0.9] mb-6">
             L'Excellence <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Accessible.</span>
           </h2>
           <p className="text-lg text-slate-500 dark:text-slate-400 font-medium italic max-w-2xl mx-auto mb-10">L'Intelligence Artificielle travaille pour vous. Vous ne payez que le résultat. Aucun engagement caché.</p>
@@ -357,7 +358,7 @@ export function PricingSection() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 items-start">
+        <div className="grid lg:grid-cols-3 gap-4 md:gap-8 items-start">
           {[
             {
               title: "Déblocage Unitaire",
@@ -394,7 +395,7 @@ export function PricingSection() {
               <h3 className={`text-2xl font-black uppercase tracking-tighter mb-4 italic ${plan.featured ? 'text-blue-600 dark:text-blue-400' : 'text-slate-900 dark:text-white'}`}>{plan.title}</h3>
 
               <div className="flex items-baseline mb-3">
-                <div className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">{plan.price}</div>
+                <div className="text-2xl md:text-4xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">{plan.price}</div>
                 <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2 italic">{plan.currency}</div>
               </div>
               <div className="inline-block px-3 py-1 rounded-lg text-[10px] uppercase font-black tracking-widest text-slate-500 mb-6 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">{plan.subtitle}</div>
@@ -426,7 +427,7 @@ export function PricingSection() {
    ========================================= */
 export function SuccessStoriesSection() {
   return (
-    <section className="py-32 bg-slate-50 dark:bg-slate-950 px-6 lg:px-12 relative overflow-hidden transition-colors duration-300">
+    <section className="py-12 md:py-32 bg-slate-50 dark:bg-slate-950 px-6 lg:px-12 relative overflow-hidden transition-colors duration-300">
       {/* Background patterns */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/5 blur-[100px] rounded-full"></div>
       
@@ -435,13 +436,13 @@ export function SuccessStoriesSection() {
           <div className="inline-flex items-center px-4 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border border-blue-200 dark:border-blue-500/20 shadow-sm">
             <Star size={12} className="mr-2 text-blue-600 dark:text-blue-400" /> Succès Prouvés
           </div>
-          <h2 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic leading-[0.9] mb-6">
+          <h2 className="text-2xl md:text-4xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic leading-[0.9] mb-6">
             Ils ont fait <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400">Match.</span>
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-400 font-medium italic max-w-2xl mx-auto mb-10">Ce sont les algorithmiques qui connectent, mais ce sont les humains qui accomplissent de grandes choses.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-8">
           {[
             {
               role: "Responsable RH - FinTech",

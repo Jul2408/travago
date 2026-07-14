@@ -127,7 +127,7 @@ export default function DashboardCandidatPage() {
 
     if (!mounted) {
         return (
-            <div className="flex items-center justify-center py-20">
+            <div className="flex items-center justify-center py-10 md:py-20">
                 <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
             </div>
         );
@@ -149,7 +149,7 @@ export default function DashboardCandidatPage() {
                                 <circle className="text-white" strokeWidth="12" strokeDasharray={502} strokeDashoffset={502 - (502 * placabilityScore) / 100} strokeLinecap="round" stroke="currentColor" fill="transparent" r="80" cx="88" cy="88" />
                             </svg>
                             <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                <span className="text-5xl font-black">{placabilityScore}%</span>
+                                <span className="text-3xl md:text-5xl font-black">{placabilityScore}%</span>
                                 <span className="text-[10px] font-bold uppercase tracking-widest text-blue-100">Prêt au placement</span>
                             </div>
                         </div>
@@ -384,7 +384,7 @@ export default function DashboardCandidatPage() {
                             ))}
                         </div>
                     ) : (
-                        <div className="p-12 bg-slate-50 dark:bg-slate-900/50 rounded-[2rem] border border-dashed border-slate-200 dark:border-slate-800 text-center">
+                        <div className="p-5 md:p-12 bg-slate-50 dark:bg-slate-900/50 rounded-[2rem] border border-dashed border-slate-200 dark:border-slate-800 text-center">
                             <div className="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-300 dark:text-slate-500">
                                 <Clock size={32} />
                             </div>

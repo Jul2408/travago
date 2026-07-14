@@ -117,7 +117,7 @@ export default function AdminProfilePage() {
     return (
         <div className="max-w-4xl mx-auto space-y-10 pb-20">
             <div>
-                <h1 className="text-4xl font-black text-slate-800 tracking-tight uppercase italic">Mon Profil Administrateur</h1>
+                <h1 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tight uppercase italic">Mon Profil Administrateur</h1>
                 <p className="text-slate-500 font-medium tracking-tight">Gérez vos informations personnelles et votre sécurité.</p>
             </div>
 
@@ -135,7 +135,7 @@ export default function AdminProfilePage() {
                 </div>
             )}
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-4 md:gap-8">
                 {/* Profile Card */}
                 <div className="lg:col-span-1">
                     <div className="bg-white rounded-[3rem] p-8 border border-slate-100 shadow-xl shadow-slate-200/50 flex flex-col items-center">
@@ -175,7 +175,7 @@ export default function AdminProfilePage() {
 
                 {/* Edit Form */}
                 <div className="lg:col-span-2 space-y-8">
-                    <form onSubmit={handleProfileSubmit} className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm space-y-8">
+                    <form onSubmit={handleProfileSubmit} className="bg-white rounded-[3rem] p-4 md:p-10 border border-slate-100 shadow-sm space-y-8">
                         <div className="flex items-center gap-4 mb-2">
                             <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
                                 <User size={20} />
@@ -230,7 +230,7 @@ export default function AdminProfilePage() {
                             <button
                                 type="submit"
                                 disabled={isSaving}
-                                className="w-full md:w-auto px-12 py-5 bg-slate-900 text-white rounded-[1.5rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-blue-600 transition-all shadow-xl shadow-slate-100"
+                                className="w-full md:w-auto px-5 md:px-12 py-5 bg-slate-900 text-white rounded-[1.5rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-blue-600 transition-all shadow-xl shadow-slate-100"
                             >
                                 {isSaving ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
                                 Enregistrer les modifications
@@ -238,7 +238,7 @@ export default function AdminProfilePage() {
                         </div>
                     </form>
 
-                    <form onSubmit={handlePasswordSubmit} className="bg-slate-900 rounded-[3rem] p-10 text-white space-y-8">
+                    <form onSubmit={handlePasswordSubmit} className="bg-slate-900 rounded-[3rem] p-4 md:p-10 text-white space-y-8">
                         <div className="flex items-center gap-4 mb-2">
                             <div className="w-10 h-10 bg-white/10 text-white rounded-xl flex items-center justify-center">
                                 <Shield size={20} />
@@ -285,7 +285,7 @@ export default function AdminProfilePage() {
                             <button
                                 type="submit"
                                 disabled={isSaving}
-                                className="w-full md:w-auto px-12 py-5 bg-white text-slate-900 rounded-[1.5rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-blue-400 hover:text-white transition-all shadow-2xl"
+                                className="w-full md:w-auto px-5 md:px-12 py-5 bg-white text-slate-900 rounded-[1.5rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-blue-400 hover:text-white transition-all shadow-2xl"
                             >
                                 {isSaving ? <Loader2 className="animate-spin" size={18} /> : <Lock size={18} />}
                                 Mettre à jour le mot de passe

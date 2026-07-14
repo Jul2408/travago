@@ -188,7 +188,7 @@ export default function EnterpriseSettingsPage() {
 
                 <div className="p-8 space-y-8">
                     {/* Logo Upload */}
-                    <div className="flex items-center gap-8">
+                    <div className="flex items-center gap-4 md:gap-8">
                         <div className="relative group shrink-0">
                             <div className="w-24 h-24 bg-blue-50 dark:bg-blue-900/20 rounded-[2rem] border-4 border-white shadow-lg overflow-hidden flex items-center justify-center relative">
                                 {logoPreview ? (

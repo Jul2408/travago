@@ -129,7 +129,7 @@ export default function DashboardEntreprisePage() {
             {/* 1. Placement IA Hero Section */}
             <div className="bg-gradient-to-br from-blue-700 to-indigo-800 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-12 text-white relative overflow-hidden shadow-2xl shadow-blue-200 dark:shadow-blue-900/20">
                 <div className="absolute right-0 top-0 w-[400px] h-[400px] bg-white/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
-                <div className="relative z-10 grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+                <div className="relative z-10 grid lg:grid-cols-2 gap-4 md:gap-8 sm:gap-12 items-center">
                     <div>
                         <div className="inline-flex items-center px-4 py-1.5 bg-blue-500/30 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest mb-6 border border-white/10">
                             Système de Placement Travago
@@ -199,7 +199,7 @@ export default function DashboardEntreprisePage() {
                                     ))}
                                 </div>
                             ) : recentPlacements.length === 0 ? (
-                                <div className="p-12 bg-slate-50 dark:bg-slate-900 rounded-[2rem] border border-dashed border-slate-200 dark:border-slate-800 text-center">
+                                <div className="p-5 md:p-12 bg-slate-50 dark:bg-slate-900 rounded-[2rem] border border-dashed border-slate-200 dark:border-slate-800 text-center">
                                     <div className="w-16 h-16 bg-white dark:bg-slate-950 rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-300 dark:text-slate-700">
                                         <Briefcase size={32} />
                                     </div>
@@ -356,7 +356,7 @@ export default function DashboardEntreprisePage() {
                                 </div>
                             ))
                         ) : eliteTalents.length === 0 ? (
-                            <div className="flex flex-col items-center justify-center py-10 text-center space-y-3 opacity-60">
+                            <div className="flex flex-col items-center justify-center py-6 md:py-10 text-center space-y-3 opacity-60">
                                 <UserCheck size={32} className="text-slate-300 dark:text-slate-700" />
                                 <p className="text-slate-400 dark:text-slate-600 text-xs font-medium max-w-[200px]">Aucun talent 'Elite' détecté pour l'instant.</p>
                             </div>

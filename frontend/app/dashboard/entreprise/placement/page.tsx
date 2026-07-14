@@ -129,9 +129,9 @@ export default function PlacementIAPage() {
             </div>
 
             {/* Placement List */}
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-2 gap-4 md:gap-8">
                 {isLoading ? (
-                    <div className="grid lg:grid-cols-2 gap-8 col-span-2">
+                    <div className="grid lg:grid-cols-2 gap-4 md:gap-8 col-span-2">
                         {[1, 2].map((i) => (
                             <div key={i} className="bg-white dark:bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 border border-blue-50 dark:border-slate-800 shadow-sm space-y-6">
                                 <div className="flex items-center justify-between">
@@ -153,7 +153,7 @@ export default function PlacementIAPage() {
                         ))}
                     </div>
                 ) : activePlacements.length === 0 ? (
-                    <div className="col-span-2 text-center py-20 bg-slate-50 dark:bg-slate-900/50 rounded-[3rem] border border-blue-50 dark:border-slate-800">
+                    <div className="col-span-2 text-center py-10 md:py-20 bg-slate-50 dark:bg-slate-900/50 rounded-[3rem] border border-blue-50 dark:border-slate-800">
                         <p className="text-slate-500 dark:text-slate-400 font-medium italic">Aucun placement actif.</p>
                     </div>
                 ) : (

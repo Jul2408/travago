@@ -118,7 +118,7 @@ export default function JobApplicationsPage() {
                 <div className="space-y-6">
                     <Skeleton className="h-8 w-48" />
                     {[1, 2, 3].map((i) => (
-                        <div key={i} className="bg-white rounded-[2rem] p-8 border border-blue-50 flex items-center gap-10">
+                        <div key={i} className="bg-white rounded-[2rem] p-8 border border-blue-50 flex items-center gap-5 md:gap-10">
                             <Skeleton className="w-16 h-16 rounded-2xl" />
                             <div className="flex-1 space-y-3">
                                 <Skeleton className="h-6 w-1/4" />

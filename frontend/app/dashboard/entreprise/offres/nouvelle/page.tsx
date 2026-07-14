@@ -108,7 +108,7 @@ export default function NewOfferPage() {
                 </Link>
             </div>
 
-            <div className="bg-white rounded-[3rem] p-12 border border-blue-50 shadow-2xl shadow-blue-500/5">
+            <div className="bg-white rounded-[3rem] p-5 md:p-12 border border-blue-50 shadow-2xl shadow-blue-500/5">
                 <div className="flex items-center space-x-6 mb-12">
                     <div className="w-20 h-20 bg-blue-600 rounded-[2rem] flex items-center justify-center text-white shadow-xl shadow-blue-200">
                         <Plus size={40} />
@@ -121,7 +121,7 @@ export default function NewOfferPage() {
 
                 <form onSubmit={handleSubmit} className="space-y-10">
                     {/* General Info */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                         <div className="space-y-3">
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">Intitulé du poste</label>
                             <input
@@ -145,7 +145,7 @@ export default function NewOfferPage() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
                         <div className="space-y-3">
                             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">Type de contrat</label>
                             <select
@@ -282,7 +282,7 @@ export default function NewOfferPage() {
                         <button
                             type="button"
                             onClick={() => router.back()}
-                            className="px-10 py-5 bg-slate-100 text-slate-500 rounded-[2rem] font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-all"
+                            className="px-4 md:px-10 py-5 bg-slate-100 text-slate-500 rounded-[2rem] font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-all"
                         >
                             Enregistrer en brouillon
                         </button>

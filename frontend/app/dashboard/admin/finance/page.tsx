@@ -41,9 +41,9 @@ export default function AdminFinancePage() {
 
     return (
         <div className="space-y-8 pb-10">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white -mx-8 -mt-8 p-10 border-b border-slate-100">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white -mx-8 -mt-8 p-4 md:p-10 border-b border-slate-100">
                 <div>
-                    <h1 className="text-4xl font-black text-slate-800 tracking-tight uppercase italic">Flux Financiers & Crédits</h1>
+                    <h1 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tight uppercase italic">Flux Financiers & Crédits</h1>
                     <p className="text-slate-500 font-medium">Monitoring de la monnaie interne (₺) et des portefeuilles utilisateurs.</p>
                 </div>
                 <div className="flex bg-slate-100 p-1 rounded-2xl border border-slate-200 shadow-inner">
@@ -66,7 +66,7 @@ export default function AdminFinancePage() {
                             <Landmark size={28} />
                         </div>
                         <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 whitespace-nowrap">Trésorerie Plateforme (TOTALE)</div>
-                        <div className="text-5xl font-black italic tracking-tighter mb-4">
+                        <div className="text-3xl md:text-5xl font-black italic tracking-tighter mb-4">
                             {isLoading ? '...' : stats?.total_credits.toLocaleString()} <span className="text-xl text-blue-400">₺</span>
                         </div>
                         <div className="flex items-center gap-2">
@@ -98,8 +98,8 @@ export default function AdminFinancePage() {
                 </div>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
-                <div className="bg-white rounded-[2.5rem] border border-blue-50 shadow-sm p-10">
+            <div className="grid lg:grid-cols-2 gap-4 md:gap-8">
+                <div className="bg-white rounded-[2.5rem] border border-blue-50 shadow-sm p-4 md:p-10">
                     <h3 className="text-xl font-black text-slate-800 mb-8 flex items-center uppercase italic">
                         <CreditCard className="mr-3 text-blue-600" /> Transactions Récentes (Journal)
                     </h3>
@@ -128,7 +128,7 @@ export default function AdminFinancePage() {
                     </div>
                 </div>
 
-                <div className="bg-white rounded-[2.5rem] border border-blue-50 shadow-sm p-10 relative overflow-hidden group">
+                <div className="bg-white rounded-[2.5rem] border border-blue-50 shadow-sm p-4 md:p-10 relative overflow-hidden group">
                     <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors"></div>
                     <h3 className="text-xl font-black text-slate-800 mb-8 italic uppercase tracking-tighter">Performance financière 💹</h3>
                     <div className="space-y-8">
